@@ -4,33 +4,67 @@
 // Component-specific styling presets
 
 // ------------------------------------------------------------
-// IMPORTANT: DO NOT import lightTheme directly in components!
+// IMPORTANT: DO NOT import lightTheme/ darkTheme directly in components!
 // 
 // Use theme context: const theme = useTheme(); then theme.colors.primary
 // This allows proper theme switching and consistent styling
 // ------------------------------------------------------------
 export const lightTheme = {
   colors: {
+    // Add more colors
     primary: '#3629B7',
     background: '#FFFFFF',
     text: '#343434',
-    // Add more colors
+    surface: '#F5F5F5',
+    border: '#E0E0E0'
   },
   typography: {
     fontSize: {
+      // Add more font sizes
       sm: 12,
       base: 14,
       lg: 16,
-      // Add more sizes
-    },
+      xl: 20,
+      xxl: 24
+    }
   },
   spacing: {
+    // Add more spacing
     xs: 4,
     sm: 8,
     md: 16,
     lg: 24,
-    // Add more spacing
+    xl: 32
+  }
+};
+
+export const darkTheme = {
+  colors: {
+    // Add more colors
+    primary: '#5B4FE8',
+    background: '#121212',
+    text: '#FFFFFF',
+    surface: '#1E1E1E',
+    border: '#333333'
   },
+  typography: {
+    fontSize: {
+      // Add more font sizes
+      sm: 12,
+      base: 14,
+      lg: 16,
+      xl: 20,
+      xxl: 24
+    }
+  },
+  spacing: {
+    // Add more spacing
+    xs: 4,
+    sm: 8,
+    md: 16,
+    lg: 24,
+    xl: 32
+  }
 };
 
 export type Theme = typeof lightTheme;

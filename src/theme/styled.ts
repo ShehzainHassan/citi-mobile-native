@@ -2,6 +2,8 @@
 // Use this for creating styled components that access theme
 // Example: const StyledButton = styled.TouchableOpacity`background: ${props => props.theme.colors.primary};`
 
+import { ComponentType } from 'react';
+
 // Note: This file structure is ready for styled-components or emotion
 // Choose your preferred styling solution:
 
@@ -14,13 +16,13 @@
 // export { styled };
 
 // Option 3: Custom styled function with theme access
-export const createStyledComponent = (Component: any) => {
+export const createStyledComponent = <T extends ComponentType<any>>(Component: T): T => {
   // Custom implementation for theme-aware styled components
   // This allows: theme.colors.primary, theme.spacing.md, etc.
   return Component;
 };
 
 // Theme-aware style helpers
-export const getThemeValue = (path: string, theme: any) => {
+export const getThemeValue = (path: string, theme: any): any => {
   return path.split('.').reduce((obj, key) => obj?.[key], theme);
 };

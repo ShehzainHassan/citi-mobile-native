@@ -1,5 +1,15 @@
-import { SymbolView, SymbolViewProps, SymbolWeight } from 'expo-symbols';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { StyleProp, ViewStyle } from 'react-native';
+
+// Temporary fallback to MaterialIcons for iOS as well
+const MAPPING = {
+  'house.fill': 'home',
+  'paperplane.fill': 'send',
+  'chevron.left.forwardslash.chevron.right': 'code',
+  'chevron.right': 'chevron-right',
+} as const;
+
+type IconSymbolName = keyof typeof MAPPING;
 
 export function IconSymbol({
   name,
@@ -8,25 +18,18 @@ export function IconSymbol({
   style,
   weight = 'regular',
 }: {
-  name: SymbolViewProps['name'];
+    name: IconSymbolName;
   size?: number;
   color: string;
   style?: StyleProp<ViewStyle>;
-  weight?: SymbolWeight;
+    weight?: string;
 }) {
   return (
-    <SymbolView
-      weight={weight}
-      tintColor={color}
-      resizeMode="scaleAspectFit"
-      name={name}
-      style={[
-        {
-          width: size,
-          height: size,
-        },
-        style,
-      ]}
+    <MaterialIcons
+      color={color}
+      size={size}
+      name={MAPPING[name]}
+      style={style}
     />
   );
 }

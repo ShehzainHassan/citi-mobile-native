@@ -3,7 +3,7 @@
 // Handles theme switching (light/dark mode)
 
 import React, { createContext, ReactNode, useContext, useState } from 'react';
-import { lightTheme, Theme } from './index';
+import { darkTheme, lightTheme, Theme } from './index';
 
 interface ThemeContextType {
   theme: Theme;
@@ -28,9 +28,9 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
 
   const toggleTheme = () => {
     // Toggle between light and dark themes
-    setIsDark(!isDark);
-    // Set actual theme here when darkTheme is implemented
-    // setTheme(isDark ? lightTheme : darkTheme);
+    const newIsDark = !isDark;
+    setIsDark(newIsDark);
+    setTheme(newIsDark ? darkTheme : lightTheme);
   };
 
   const value = {
