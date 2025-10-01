@@ -16,6 +16,7 @@ export const createHomeScreenCardStyles = (theme: Theme) =>
       shadowRadius: 6,
       elevation: 3,
       width: 100,
+      height: 100,
       borderRadius: 15,
     },
     cardImg: {

@@ -8,6 +8,8 @@ import { createTabStyles } from "@/styles/tabs.styles";
 import { useMemo } from "react";
 import { createGlobalStyles } from "../styles/global.styles";
 import { useTheme } from "../theme";
+import { createAccountCardStyles } from "@/styles/accountCard.styles";
+import { createAccountScreenStyles } from "@/styles/account.styles";
 
 /**
  * Custom hook for accessing themed styles
@@ -33,6 +35,14 @@ export const useStyles = () => {
     [theme]
   );
   const tabStyles = useMemo(() => createTabStyles(theme), [theme]);
+  const accountCardStyles = useMemo(
+    () => createAccountCardStyles(theme),
+    [theme]
+  );
+  const accountScreenStyles = useMemo(
+    () => createAccountScreenStyles(theme),
+    [theme]
+  );
   return {
     theme,
     globalStyles,
@@ -43,6 +53,8 @@ export const useStyles = () => {
     homeCardStyles,
     homeScreenStyles,
     tabStyles,
+    accountScreenStyles,
+    accountCardStyles,
     isDark,
     toggleTheme,
   };

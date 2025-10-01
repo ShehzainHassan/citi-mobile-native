@@ -14,6 +14,7 @@ export const Images = {
   beneficiary: require("./contacts.png"),
   cards: require("./cards.png"),
   visaCard: require("./visa-card.png"),
+  masterCard: require("./master-card.png"),
   home: require("../icons/home.svg"),
   message: require("../icons/message.svg"),
   search: require("../icons/search.svg"),

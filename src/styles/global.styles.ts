@@ -77,6 +77,12 @@ export const createGlobalStyles = (theme: Theme) =>
       fontWeight: "600",
       color: theme.colors.primary,
     },
+    title2: {
+      fontSize: theme.typography.fontSize.xl,
+      lineHeight: theme.spacing.lgx,
+      fontWeight: "600",
+      color: theme.colors.neutral1,
+    },
     title3: {
       fontSize: theme.typography.fontSize.lg,
       lineHeight: theme.spacing.lg,

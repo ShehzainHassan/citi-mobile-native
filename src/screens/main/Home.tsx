@@ -1,10 +1,15 @@
 import { Images } from "@/assets/images";
 import { HomeScreenCard, Tabs } from "@/components";
 import { useStyles } from "@/hooks/useStyles";
+import { MainTabParamList } from "@/navigation/types";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Image, Text, View } from "react-native";
 
 export const HomeScreen = () => {
   const { globalStyles, homeScreenStyles } = useStyles();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<MainTabParamList>>();
 
   return (
     <View style={[homeScreenStyles.mainContainer]}>
@@ -30,6 +35,7 @@ export const HomeScreen = () => {
               <HomeScreenCard
                 image={Images.accountAndCard}
                 label="Account and Card"
+                onPress={() => navigation.navigate("Accounts")}
               />
               <HomeScreenCard image={Images.transfer} label="Transfer" />
               <HomeScreenCard image={Images.withdraw} label="Withdraw" />
