@@ -1,13 +1,13 @@
 import { Images } from "@/assets/images";
+import { Button } from "@/components";
 import { useStyles } from "@/hooks/useStyles";
 import { AuthStackParamList } from "@/navigation/types";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Image, Text, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import { Button } from "../ui";
-import { useTranslation } from "react-i18next";
 
 export const ForgotPassword = () => {
   const { globalStyles, forgotPasswordStyles } = useStyles();
@@ -64,14 +64,24 @@ export const ForgotPassword = () => {
                 <Text>{t("typePhone")}</Text>
                 <TextInput
                   placeholder={t("phonePlaceholder")}
-                  style={globalStyles.input}
+                  style={[
+                    globalStyles.input,
+                    globalStyles.body3,
+                    forgotPasswordStyles.passwordChangedText,
+                  ]}
                   value={phone}
                   onChangeText={setPhone}
                   keyboardType="phone-pad"
                 />
               </View>
               <View style={forgotPasswordStyles.sendContainer}>
-                <Text style={[globalStyles.bodyText]}>{t("sentCodeInfo")}</Text>
+                <Text
+                  style={[
+                    globalStyles.body3,
+                    forgotPasswordStyles.passwordChangedText,
+                  ]}>
+                  {t("sentCodeInfo")}
+                </Text>
                 <Button
                   title={t("sendCode")}
                   disabled={!phone.trim()}
@@ -88,7 +98,7 @@ export const ForgotPassword = () => {
                 <View style={forgotPasswordStyles.codeContainer}>
                   <TextInput
                     placeholder={t("codePlaceholder")}
-                    style={globalStyles.input}
+                    style={[globalStyles.input, globalStyles.body3]}
                     value={code}
                     onChangeText={setCode}
                     keyboardType="number-pad"
@@ -97,19 +107,13 @@ export const ForgotPassword = () => {
                 </View>
               </View>
               <View style={forgotPasswordStyles.sendContainer}>
-                <View>
+                <View style={forgotPasswordStyles.textInfoContainer}>
                   <Text
-                    style={[
-                      globalStyles.bodyText,
-                      forgotPasswordStyles.textInfo,
-                    ]}>
+                    style={[globalStyles.body3, forgotPasswordStyles.textInfo]}>
                     {t("verifyInfo", { phone })}
                   </Text>
                   <Text
-                    style={[
-                      globalStyles.bodyText,
-                      forgotPasswordStyles.textInfo,
-                    ]}>
+                    style={[globalStyles.body3, forgotPasswordStyles.textInfo]}>
                     {t("expireInfo")}
                   </Text>
                 </View>
@@ -132,7 +136,7 @@ export const ForgotPassword = () => {
                 <Text>{t("newPassword")}</Text>
                 <TextInput
                   placeholder={t("newPasswordPlaceholder")}
-                  style={globalStyles.input}
+                  style={[globalStyles.input, globalStyles.body3]}
                   value={password}
                   onChangeText={setPassword}
                   secureTextEntry
@@ -146,7 +150,7 @@ export const ForgotPassword = () => {
                 <Text>{t("confirmPassword")}</Text>
                 <TextInput
                   placeholder={t("confirmPasswordPlaceholder")}
-                  style={globalStyles.input}
+                  style={[globalStyles.input, globalStyles.body3]}
                   value={confirmPassword}
                   onChangeText={setConfirmPassword}
                   secureTextEntry
@@ -183,7 +187,11 @@ export const ForgotPassword = () => {
           />
           <View style={forgotPasswordStyles.changePasswordContainer}>
             <Text style={globalStyles.title3}>{t("passwordChangedTitle")}</Text>
-            <Text style={globalStyles.bodyText}>
+            <Text
+              style={[
+                globalStyles.body3,
+                forgotPasswordStyles.passwordChangedText,
+              ]}>
               {t("passwordChangedText")}
             </Text>
           </View>

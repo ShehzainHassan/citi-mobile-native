@@ -1,12 +1,13 @@
-import { createAuthStyles } from "@/theme/authStyles";
-import { createForgotPasswordStyles } from "@/theme/forgotPassword.styles";
-import { createLoginStyles } from "@/theme/loginScreen.styles";
+import { createAuthStyles } from "@/styles/auth.styles";
+import { createButtonStyles } from "@/styles/button.styles";
+import { createCheckboxStyles } from "@/styles/checkbox.styles";
+import { createForgotPasswordStyles } from "@/styles/forgotPassword.styles";
+import { createHomeScreenStyles } from "@/styles/homeScreen.styles";
+import { createHomeScreenCardStyles } from "@/styles/homeScreenCard.styles";
+import { createTabStyles } from "@/styles/tabs.styles";
 import { useMemo } from "react";
+import { createGlobalStyles } from "../styles/global.styles";
 import { useTheme } from "../theme";
-import { createGlobalStyles } from "../theme/globalStyles";
-import { createSignUpStyles } from "@/theme/signUpScreen.styles";
-import { createButtonStyles } from "@/theme/button.styles";
-import { createCheckboxStyles } from "@/theme/checkboxStyles";
 
 /**
  * Custom hook for accessing themed styles
@@ -16,8 +17,6 @@ export const useStyles = () => {
   const { theme, isDark, toggleTheme } = useTheme();
 
   const globalStyles = useMemo(() => createGlobalStyles(theme), [theme]);
-  const loginStyles = useMemo(() => createLoginStyles(theme), [theme]);
-  const signUpStyles = useMemo(() => createSignUpStyles(theme), [theme]);
   const buttonStyles = useMemo(() => createButtonStyles(theme), [theme]);
   const checkboxStyles = useMemo(() => createCheckboxStyles(theme), [theme]);
   const forgotPasswordStyles = useMemo(
@@ -25,15 +24,25 @@ export const useStyles = () => {
     [theme]
   );
   const authStyles = useMemo(() => createAuthStyles(theme), [theme]);
+  const homeCardStyles = useMemo(
+    () => createHomeScreenCardStyles(theme),
+    [theme]
+  );
+  const homeScreenStyles = useMemo(
+    () => createHomeScreenStyles(theme),
+    [theme]
+  );
+  const tabStyles = useMemo(() => createTabStyles(theme), [theme]);
   return {
     theme,
     globalStyles,
-    loginStyles,
-    signUpStyles,
     forgotPasswordStyles,
     buttonStyles,
     checkboxStyles,
     authStyles,
+    homeCardStyles,
+    homeScreenStyles,
+    tabStyles,
     isDark,
     toggleTheme,
   };

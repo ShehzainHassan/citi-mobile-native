@@ -2,8 +2,8 @@
 // Provides theme context to all components
 // Handles theme switching (light/dark mode)
 
-import React, { createContext, ReactNode, useContext, useState } from 'react';
-import { darkTheme, lightTheme, Theme } from './index';
+import React, { createContext, ReactNode, useContext, useState } from "react";
+import { darkTheme, lightTheme, Theme } from "../theme/index";
 
 interface ThemeContextType {
   theme: Theme;
@@ -19,9 +19,9 @@ interface ThemeProviderProps {
   initialTheme?: Theme;
 }
 
-export const ThemeProvider: React.FC<ThemeProviderProps> = ({ 
-  children, 
-  initialTheme = lightTheme 
+export const ThemeProvider: React.FC<ThemeProviderProps> = ({
+  children,
+  initialTheme = lightTheme,
 }) => {
   const [theme, setTheme] = useState<Theme>(initialTheme);
   const [isDark, setIsDark] = useState(false);
@@ -41,9 +41,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   };
 
   return (
-    <ThemeContext.Provider value={value}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 };
 
@@ -53,7 +51,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
 export const useTheme = (): ThemeContextType => {
   const context = useContext(ThemeContext);
   if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
+    throw new Error("useTheme must be used within a ThemeProvider");
   }
   return context;
 };

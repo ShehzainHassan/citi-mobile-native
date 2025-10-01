@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { Theme } from ".";
+import { Theme } from "../theme";
 
 export const createForgotPasswordStyles = (theme: Theme) =>
   StyleSheet.create({
@@ -13,7 +13,7 @@ export const createForgotPasswordStyles = (theme: Theme) =>
       padding: 0,
     },
     headerText: {
-      color: theme.colors.text,
+      color: theme.colors.neutral1,
     },
     subContainer: {
       padding: theme.spacing.md,
@@ -34,6 +34,10 @@ export const createForgotPasswordStyles = (theme: Theme) =>
       gap: theme.spacing.sm,
       marginBottom: theme.spacing.lg,
     },
+    textInfoContainer: {
+      flexDirection: "column",
+      gap: theme.spacing.ms - 2,
+    },
     textInfo: {
       color: theme.colors.neutral2,
     },
@@ -51,5 +55,8 @@ export const createForgotPasswordStyles = (theme: Theme) =>
       alignItems: "center",
       justifyContent: "center",
       marginBottom: theme.spacing.xl,
+    },
+    passwordChangedText: {
+      color: theme.colors.neutral1,
     },
   });

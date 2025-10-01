@@ -1,10 +1,9 @@
 import { StyleSheet } from "react-native";
-import { Theme } from "./index";
+import { Theme } from "../theme/index";
 
 export const createGlobalStyles = (theme: Theme) =>
   StyleSheet.create({
     // Layout patterns
-
     container: {
       display: "flex",
       flex: 1,
@@ -53,12 +52,12 @@ export const createGlobalStyles = (theme: Theme) =>
     heading1: {
       fontSize: theme.typography.fontSize.xxl,
       fontWeight: "bold",
-      color: theme.colors.text,
+      color: theme.colors.neutral1,
     },
     heading2: {
       fontSize: theme.typography.fontSize.xl,
       fontWeight: "600",
-      color: theme.colors.text,
+      color: theme.colors.neutral1,
     },
     heading3: {
       fontSize: theme.typography.fontSize.base,
@@ -84,18 +83,36 @@ export const createGlobalStyles = (theme: Theme) =>
       fontWeight: "600",
       color: theme.colors.primary,
     },
+    body1: {
+      fontWeight: "500",
+      fontSize: theme.typography.fontSize.lg,
+      color: theme.colors.background,
+      lineHeight: theme.spacing.md,
+    },
+    body3: {
+      fontWeight: "500",
+      fontSize: theme.typography.fontSize.base,
+      color: theme.colors.neutral4,
+      lineHeight: theme.spacing.md,
+    },
     bodyText: {
       fontWeight: "500",
       fontSize: theme.typography.fontSize.base,
-      color: theme.colors.text,
+      color: theme.colors.neutral1,
       lineHeight: theme.spacing.ml,
     },
 
-    caption: {
+    caption1: {
+      fontSize: theme.typography.fontSize.sm,
+      fontWeight: "600",
+      lineHeight: theme.spacing.md,
+      color: theme.colors.primary,
+    },
+    caption2: {
       fontSize: theme.typography.fontSize.sm,
       fontWeight: "500",
       lineHeight: theme.spacing.md,
-      color: theme.colors.text,
+      color: theme.colors.neutral1,
     },
 
     // Card patterns
@@ -126,9 +143,6 @@ export const createGlobalStyles = (theme: Theme) =>
       borderColor: theme.colors.border,
       borderRadius: theme.spacing.md,
       padding: theme.spacing.ms,
-      fontSize: theme.typography.fontSize.base,
-      fontWeight: "500",
-      color: theme.colors.text,
       backgroundColor: theme.colors.background,
     },
     inputFocused: {
@@ -165,7 +179,7 @@ export const createGlobalStyles = (theme: Theme) =>
     },
 
     authLogo: {
-      width: 213,
+      width: "100%",
       height: 165,
       marginVertical: theme.spacing.xl,
     },

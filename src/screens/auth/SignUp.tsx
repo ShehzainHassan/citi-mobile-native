@@ -1,14 +1,14 @@
 import { Images } from "@/assets/images";
+import { Button, Checkbox } from "@/components";
 import { useStyles } from "@/hooks/useStyles";
 import { AuthStackParamList } from "@/navigation/types";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useTranslation } from "react-i18next";
 import { Image, Text, TextInput, View } from "react-native";
-import { Button, Checkbox } from "../ui";
 
 export const SignUp = () => {
-  const { globalStyles, authStyles, signUpStyles } = useStyles();
+  const { globalStyles, authStyles } = useStyles();
   const { t } = useTranslation("auth");
   const navigation =
     useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
@@ -22,7 +22,9 @@ export const SignUp = () => {
       <View style={globalStyles.roundedContainer}>
         <View style={globalStyles.titleContainer}>
           <Text style={globalStyles.title1}>{t("welcomeTitle")}</Text>
-          <Text style={globalStyles.caption}>{t("welcomeSubtitleSignUp")}</Text>
+          <Text style={globalStyles.caption2}>
+            {t("welcomeSubtitleSignUp")}
+          </Text>
         </View>
         <View style={globalStyles.centerContainer}>
           <Image
@@ -34,20 +36,20 @@ export const SignUp = () => {
         <View style={globalStyles.inputContainer}>
           <TextInput
             placeholder={t("namePlaceholder")}
-            style={[globalStyles.input]}
+            style={[globalStyles.input, globalStyles.body3]}
           />
           <TextInput
             placeholder={t("textInputPlaceholder")}
-            style={[globalStyles.input]}
+            style={[globalStyles.input, globalStyles.body3]}
           />
           <TextInput
             placeholder={t("passwordPlaceholder")}
-            style={[globalStyles.input]}
+            style={[globalStyles.input, globalStyles.body3]}
             secureTextEntry
           />
-          <View style={signUpStyles.checkboxContainer}>
+          <View style={authStyles.checkboxContainer}>
             <Checkbox />
-            <Text style={signUpStyles.text}>
+            <Text style={authStyles.text}>
               {t("termsAgreement")}{" "}
               <Text style={globalStyles.heading3}>
                 {t("termsAndConditions")}
@@ -56,12 +58,12 @@ export const SignUp = () => {
           </View>
         </View>
 
-        <Button title={t("signUpButton")} style={signUpStyles.signUpButton} />
+        <Button title={t("signUpButton")} style={authStyles.signUpButton} />
 
         <View style={authStyles.footerContainer}>
-          <Text style={globalStyles.caption}>{t("haveAccount")}</Text>
+          <Text style={globalStyles.caption2}>{t("haveAccount")}</Text>
           <Text
-            style={globalStyles.heading3}
+            style={globalStyles.caption1}
             onPress={() => navigation.navigate("SignIn")}>
             {t("signIn")}
           </Text>
