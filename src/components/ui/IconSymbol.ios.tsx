@@ -1,12 +1,12 @@
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { StyleProp, ViewStyle } from 'react-native';
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { StyleProp, ViewStyle } from "react-native";
 
 // Temporary fallback to MaterialIcons for iOS as well
 const MAPPING = {
-  'house.fill': 'home',
-  'paperplane.fill': 'send',
-  'chevron.left.forwardslash.chevron.right': 'code',
-  'chevron.right': 'chevron-right',
+  "house.fill": "home",
+  "paperplane.fill": "send",
+  "chevron.left.forwardslash.chevron.right": "code",
+  "chevron.right": "chevron-right",
 } as const;
 
 type IconSymbolName = keyof typeof MAPPING;
@@ -16,13 +16,13 @@ export function IconSymbol({
   size = 24,
   color,
   style,
-  weight = 'regular',
+  weight = "regular",
 }: {
-    name: IconSymbolName;
+  name: IconSymbolName;
   size?: number;
   color: string;
   style?: StyleProp<ViewStyle>;
-    weight?: string;
+  weight?: string;
 }) {
   return (
     <MaterialIcons

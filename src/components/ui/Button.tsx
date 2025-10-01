@@ -1,62 +1,39 @@
-// Example themed button component
-// Shows how to use theme context instead of importing lightTheme directly
+import { useStyles } from "@/hooks/useStyles";
+import React from "react";
+import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
 
-import { useTheme } from '@/theme/ThemeProvider';
-import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-
-interface ButtonProps {
+interface ButtonProps extends TouchableOpacityProps {
   title: string;
-  onPress: () => void;
-  variant?: 'primary' | 'secondary';
+  variant?: "primary" | "secondary";
+  disabled?: boolean;
 }
 
-export const Button: React.FC<ButtonProps> = ({ 
-  title, 
-  onPress, 
-  variant = 'primary' 
+export const Button: React.FC<ButtonProps> = ({
+  title,
+  variant = "primary",
+  disabled = false,
+  style,
+  ...props
 }) => {
-  // Use theme context
-  // Don't import lightTheme directly
-  const { theme } = useTheme();
-  
-  const buttonStyle = [
-    styles.button,
-    {
-      backgroundColor: variant === 'primary' 
-        ? theme.colors.primary 
-        : theme.colors.background,
-      borderColor: theme.colors.primary,
-    }
-  ];
-
-  const textStyle = [
-    styles.text,
-    {
-      color: variant === 'primary' 
-        ? '#FFFFFF' 
-        : theme.colors.primary,
-      fontSize: theme.typography.fontSize.base,
-    }
-  ];
+  const { buttonStyles } = useStyles();
 
   return (
-    <TouchableOpacity style={buttonStyle} onPress={onPress}>
-      <Text style={textStyle}>{title}</Text>
+    <TouchableOpacity
+      style={[
+        buttonStyles.container,
+        buttonStyles[variant],
+        disabled && buttonStyles.disabled,
+        style,
+      ]}
+      disabled={disabled}
+      {...props}>
+      <Text
+        style={[
+          buttonStyles.text,
+          variant === "secondary" && buttonStyles.textSecondary,
+        ]}>
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    paddingHorizontal: 24,
-    paddingVertical: 12,
-    borderRadius: 8,
-    borderWidth: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontWeight: '600',
-  },
-});
