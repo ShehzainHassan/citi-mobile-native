@@ -7,12 +7,14 @@ import { useEffect, useState } from "react";
 import { Image, Text, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { Button } from "../ui";
+import { useTranslation } from "react-i18next";
 
 export const ForgotPassword = () => {
   const { globalStyles, forgotPasswordStyles } = useStyles();
+  const { t } = useTranslation("auth");
 
   const [step, setStep] = useState<number>(1);
-  const [pageTitle, setPageTitle] = useState<string>("Forgot Password");
+  const [pageTitle, setPageTitle] = useState<string>(t("forgotPasswordTitle"));
   const [phone, setPhone] = useState("");
   const [code, setCode] = useState("");
   const [password, setPassword] = useState("");
@@ -22,13 +24,13 @@ export const ForgotPassword = () => {
 
   useEffect(() => {
     if (step === 1 || step === 2) {
-      setPageTitle("Forgot Password");
+      setPageTitle(t("forgotPasswordTitle"));
     } else if (step === 3) {
-      setPageTitle("Change Password");
+      setPageTitle(t("changePasswordTitle"));
     } else if (step === 4) {
       setPageTitle("");
     }
-  }, [step]);
+  }, [step, t]);
 
   return (
     <View style={forgotPasswordStyles.container}>
@@ -59,9 +61,9 @@ export const ForgotPassword = () => {
           {step === 1 && (
             <View>
               <View style={forgotPasswordStyles.phoneContainer}>
-                <Text>Type your phone number</Text>
+                <Text>{t("typePhone")}</Text>
                 <TextInput
-                  placeholder="(+84)"
+                  placeholder={t("phonePlaceholder")}
                   style={globalStyles.input}
                   value={phone}
                   onChangeText={setPhone}
@@ -69,11 +71,9 @@ export const ForgotPassword = () => {
                 />
               </View>
               <View style={forgotPasswordStyles.sendContainer}>
-                <Text style={[globalStyles.bodyText]}>
-                  We texted you a code to verify your phone number
-                </Text>
+                <Text style={[globalStyles.bodyText]}>{t("sentCodeInfo")}</Text>
                 <Button
-                  title="Send"
+                  title={t("sendCode")}
                   disabled={!phone.trim()}
                   onPress={() => setStep(2)}
                 />
@@ -84,16 +84,16 @@ export const ForgotPassword = () => {
           {step === 2 && (
             <View>
               <View style={forgotPasswordStyles.phoneContainer}>
-                <Text>Type a code</Text>
+                <Text>{t("typeCode")}</Text>
                 <View style={forgotPasswordStyles.codeContainer}>
                   <TextInput
-                    placeholder="Code"
+                    placeholder={t("codePlaceholder")}
                     style={globalStyles.input}
                     value={code}
                     onChangeText={setCode}
                     keyboardType="number-pad"
                   />
-                  <Button title="Resend" />
+                  <Button title={t("resend")} />
                 </View>
               </View>
               <View style={forgotPasswordStyles.sendContainer}>
@@ -103,20 +103,18 @@ export const ForgotPassword = () => {
                       globalStyles.bodyText,
                       forgotPasswordStyles.textInfo,
                     ]}>
-                    We texted you a code to verify your phone number{" "}
-                    <Text style={globalStyles.heading3}>{phone}</Text>
+                    {t("verifyInfo", { phone })}
                   </Text>
                   <Text
                     style={[
                       globalStyles.bodyText,
                       forgotPasswordStyles.textInfo,
                     ]}>
-                    This code will expire 10 minutes after this message. If you
-                    don't get a message.
+                    {t("expireInfo")}
                   </Text>
                 </View>
                 <Button
-                  title="Change Password"
+                  title={t("changePasswordTitle")}
                   disabled={!code.trim()}
                   onPress={() => setStep(3)}
                 />
@@ -131,9 +129,9 @@ export const ForgotPassword = () => {
                   forgotPasswordStyles.phoneContainer,
                   forgotPasswordStyles.passwordContainer,
                 ]}>
-                <Text>Type your new password</Text>
+                <Text>{t("newPassword")}</Text>
                 <TextInput
-                  placeholder="New Password"
+                  placeholder={t("newPasswordPlaceholder")}
                   style={globalStyles.input}
                   value={password}
                   onChangeText={setPassword}
@@ -145,9 +143,9 @@ export const ForgotPassword = () => {
                   forgotPasswordStyles.phoneContainer,
                   forgotPasswordStyles.passwordContainer,
                 ]}>
-                <Text>Confirm your password</Text>
+                <Text>{t("confirmPassword")}</Text>
                 <TextInput
-                  placeholder="Confirm Password"
+                  placeholder={t("confirmPasswordPlaceholder")}
                   style={globalStyles.input}
                   value={confirmPassword}
                   onChangeText={setConfirmPassword}
@@ -155,7 +153,7 @@ export const ForgotPassword = () => {
                 />
               </View>
               <Button
-                title="Change password"
+                title={t("changePasswordButton")}
                 disabled={!password.trim() || password !== confirmPassword}
                 onPress={() => setStep(4)}
               />
@@ -172,7 +170,7 @@ export const ForgotPassword = () => {
             forgotPasswordStyles.changePhoneNo,
           ]}
           onPress={() => setStep(1)}>
-          Change your phone number
+          {t("changePhone")}
         </Text>
       )}
 
@@ -184,15 +182,15 @@ export const ForgotPassword = () => {
             resizeMode="contain"
           />
           <View style={forgotPasswordStyles.changePasswordContainer}>
-            <Text style={globalStyles.title3}>
-              Change password successfully
-            </Text>
+            <Text style={globalStyles.title3}>{t("passwordChangedTitle")}</Text>
             <Text style={globalStyles.bodyText}>
-              You have successfully changed your password. Please use the new
-              password when signing in.
+              {t("passwordChangedText")}
             </Text>
           </View>
-          <Button title="Ok" onPress={() => navigation.navigate("SignIn")} />
+          <Button
+            title={t("ok")}
+            onPress={() => navigation.navigate("SignIn")}
+          />
         </View>
       )}
     </View>
