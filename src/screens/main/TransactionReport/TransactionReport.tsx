@@ -2,6 +2,9 @@ import { Images } from "@/assets/images";
 import { Header, MonthlyBalanceChart, TransactionRowCard } from "@/components";
 import { transactions } from "@/constants";
 import { useStyles } from "@/hooks/useStyles";
+import { MainTabParamList } from "@/navigation/types";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useTranslation } from "react-i18next";
 import { Image, ScrollView, View } from "react-native";
 
@@ -9,11 +12,15 @@ export const TransactionReport = () => {
   const { t } = useTranslation();
   const { transactionReportStyles, homeScreenStyles, globalStyles } =
     useStyles();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<MainTabParamList>>();
+
   return (
     <View style={[transactionReportStyles.container]}>
       <Header
         title="Transaction report"
         variant="secondary"
+        onPress={() => navigation.navigate("Home")}
         style={[transactionReportStyles.headerContainer]}
       />
 
