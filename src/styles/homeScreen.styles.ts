@@ -6,7 +6,7 @@ export const createHomeScreenStyles = (theme: Theme) =>
     mainContainer: {
       flex: 1,
       flexDirection: "column",
-      backgroundColor: theme.colors.primary,
+      backgroundColor: theme.colors.primary1,
     },
     subContainer: {
       flex: 1,
@@ -31,7 +31,6 @@ export const createHomeScreenStyles = (theme: Theme) =>
     cardsImg: {
       width: "100%",
       height: 200,
-      resizeMode: "cover",
     },
     columnContainer: {
       flexDirection: "column",

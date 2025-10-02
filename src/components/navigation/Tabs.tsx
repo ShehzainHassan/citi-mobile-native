@@ -1,52 +1,38 @@
-import { Images } from "@/assets/images";
 import { useStyles } from "@/hooks/useStyles";
 import { useState } from "react";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
+import { useTranslation } from "react-i18next";
+import { HomeIcon, MessageIcon, SearchIcon, SettingsIcon } from "../ui";
 
-const tabs = [
-  {
-    key: "home",
-    label: "Home",
-    icon: Images.home,
-    selectedIcon: Images.homeSelected,
-  },
-  {
-    key: "search",
-    label: "Search",
-    icon: Images.search,
-    selectedIcon: Images.searchSelected,
-  },
-  {
-    key: "message",
-    label: "Messages",
-    icon: Images.message,
-    selectedIcon: Images.messageSelected,
-  },
-  {
-    key: "settings",
-    label: "Settings",
-    icon: Images.settings,
-    selectedIcon: Images.settingsSelected,
-  },
+type TabKey = "home" | "search" | "message" | "settings";
+
+const tabConfig: {
+  key: TabKey;
+  icon: React.FC<{ selected: boolean }>;
+}[] = [
+  { key: "home", icon: HomeIcon },
+  { key: "search", icon: SearchIcon },
+  { key: "message", icon: MessageIcon },
+  { key: "settings", icon: SettingsIcon },
 ];
 
 export const Tabs = () => {
   const { tabStyles } = useStyles();
-  const [selectedTab, setSelectedTab] = useState("home");
+  const [selectedTab, setSelectedTab] = useState<TabKey>("home");
+  const { t } = useTranslation("tabs");
+
   return (
-    <View style={[tabStyles.container]}>
-      {tabs.map((tab) => {
-        const isSelected = tab.key === selectedTab;
+    <View style={tabStyles.container}>
+      {tabConfig.map(({ key, icon: Icon }) => {
+        const isSelected = key === selectedTab;
         return (
           <TouchableOpacity
-            key={tab.key}
-            onPress={() => setSelectedTab(tab.key)}
-            style={[tabStyles.tab, isSelected && tabStyles.tabSelected]}>
-            <Image
-              source={isSelected ? tab.selectedIcon : tab.icon}
-              style={tabStyles.icon}
-            />
-            {isSelected && <Text style={tabStyles.label}>{tab.label}</Text>}
+            key={key}
+            onPress={() => setSelectedTab(key)}
+            style={[tabStyles.tab, isSelected && tabStyles.tabSelected]}
+            accessibilityLabel={t(key)}>
+            <Icon selected={isSelected} />
+            {isSelected && <Text style={tabStyles.label}>{t(key)}</Text>}
           </TouchableOpacity>
         );
       })}

@@ -17,8 +17,8 @@ export const createForgotPasswordStyles = (theme: Theme) =>
     },
     subContainer: {
       padding: theme.spacing.md,
-      borderRadius: theme.spacing.md,
-      backgroundColor: theme.colors.background,
+      borderRadius: theme.radius.md,
+      backgroundColor: theme.colors.neutral6,
       marginVertical: theme.spacing.lg,
     },
     phoneContainer: {
@@ -42,9 +42,9 @@ export const createForgotPasswordStyles = (theme: Theme) =>
       color: theme.colors.neutral2,
     },
     codeContainer: {
-      display: "flex",
       flexDirection: "row",
       gap: theme.spacing.ms,
+      height: 44,
     },
     changePhoneNo: {
       backgroundColor: "transparent",

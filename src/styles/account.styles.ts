@@ -6,12 +6,10 @@ export const createAccountScreenStyles = (theme: Theme) =>
     container: {
       flex: 1,
       padding: theme.spacing.lg,
-      backgroundColor: theme.colors.background,
+      backgroundColor: theme.colors.neutral6,
     },
     headerContainer: {
-      flexDirection: "row",
-      alignItems: "center",
-      gap: theme.spacing.md,
+      padding: 0,
     },
     previous: {
       color: theme.colors.neutral1,
@@ -51,7 +49,24 @@ export const createAccountScreenStyles = (theme: Theme) =>
     cardSection: {
       gap: theme.spacing.xl * 2,
     },
+    textContainer: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      paddingBottom: theme.spacing.ms,
+      borderBottomWidth: 1,
+      borderColor: theme.colors.line1,
+    },
+    label: {
+      color: theme.colors.neutral2,
+    },
     cardsContainer: {
       gap: theme.spacing.lg,
+    },
+    deleteCard: {
+      width: "100%",
+      textAlign: "center",
+      color: theme.colors.semantic1,
+      padding: theme.spacing.sml,
     },
   });

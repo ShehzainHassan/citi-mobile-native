@@ -47,7 +47,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
 
 // Custom hook to use theme
 // Usage in components: const { theme } = useTheme();
-// Then use: theme.colors.primary, theme.spacing.md, etc.
+// Then use: theme.colors.primary1, theme.spacing.md, etc.
 export const useTheme = (): ThemeContextType => {
   const context = useContext(ThemeContext);
   if (context === undefined) {

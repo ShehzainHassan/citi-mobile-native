@@ -6,7 +6,7 @@
 // ------------------------------------------------------------
 // IMPORTANT: DO NOT import lightTheme/ darkTheme directly in components!
 //
-// Use theme context: const theme = useTheme(); then theme.colors.primary
+// Use theme context: const theme = useTheme(); then theme.colors.primary1
 // This allows proper theme switching and consistent styling
 // ------------------------------------------------------------
 import { darkTheme } from "./dark";

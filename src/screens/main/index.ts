@@ -1,2 +1,2 @@
-export { HomeScreen } from "./Home";
-export { Accounts } from "./Accounts";
+export { HomeScreen } from "./Home/Home";
+export { Accounts } from "./Accounts/Accounts";

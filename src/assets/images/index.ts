@@ -1,6 +1,7 @@
 export const Images = {
   authIcon: require("./auth-icon.png"),
   signUp: require("./register.png"),
+  back: require("../icons/back.svg"),
   passwordChanged: require("./password-changed.png"),
   fingerprint: require("./fingerprint.png"),
   accountAndCard: require("./account-and-card.png"),
@@ -19,10 +20,6 @@ export const Images = {
   message: require("../icons/message.svg"),
   search: require("../icons/search.svg"),
   settings: require("../icons/settings.svg"),
-  homeSelected: require("../icons/home-selected.svg"),
-  messageSelected: require("../icons/message-selected.svg"),
-  searchSelected: require("../icons/search-selected.svg"),
-  settingsSelected: require("../icons/settings-selected.svg"),
   profilePic: require("./profile-pic.png"),
   notification: require("./notification.png"),
 };

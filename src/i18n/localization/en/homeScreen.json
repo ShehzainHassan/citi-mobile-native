@@ -1,0 +1,15 @@
+{
+    "greeting": "Hi, {{name}}",
+    "accountAndCard": "Account and Card",
+    "transfer": "Transfer",
+    "withdraw": "Withdraw",
+    "mobilePrepaid": "Mobile prepaid",
+    "payBill": "Pay the bill",
+    "saveOnline": "Save online",
+    "creditCard": "Credit card",
+    "transactionReport": "Transaction report",
+    "beneficiary": "Beneficiary",
+    "notificationAlt": "Notification bell icon",
+    "cardsAlt": "Cards illustration",
+    "profilePicAlt": "User profile picture"
+}

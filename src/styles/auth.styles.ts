@@ -6,7 +6,7 @@ export const createAuthStyles = (theme: Theme) =>
     container: {
       display: "flex",
       flex: 1,
-      backgroundColor: theme.colors.primary,
+      backgroundColor: theme.colors.primary1,
       paddingTop: theme.spacing.lg,
     },
     biometricButton: {
@@ -21,13 +21,6 @@ export const createAuthStyles = (theme: Theme) =>
       fontWeight: "500",
       lineHeight: theme.spacing.md,
       marginBottom: theme.spacing.ml * 2,
-    },
-    footerContainer: {
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: theme.spacing.ms,
     },
     checkboxContainer: {
       display: "flex",

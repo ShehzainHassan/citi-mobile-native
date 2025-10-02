@@ -1,0 +1,19 @@
+{
+    "titleDefault": "Account and card",
+    "titleCard": "Card",
+    "tabAccount": "Account",
+    "tabCard": "Card",
+    "profileName": "John Smith",
+    "profilePicAlt": "Profile picture",
+    "selectCardAlt": "Select {{type}} card",
+    "cardImageAlt": "{{type}} card image",
+    "addCard": "Add card",
+    "deleteCard": "Delete card",
+    "cardDetails": {
+        "name": "Name",
+        "cardNumber": "Card number",
+        "validFrom": "Valid from",
+        "goodThru": "Good thru",
+        "availableBalance": "Available balance"
+    }
+}

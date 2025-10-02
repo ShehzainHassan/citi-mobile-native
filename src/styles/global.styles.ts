@@ -7,25 +7,25 @@ export const createGlobalStyles = (theme: Theme) =>
     container: {
       display: "flex",
       flex: 1,
-      backgroundColor: theme.colors.primary,
+      backgroundColor: theme.colors.primary1,
       paddingTop: theme.spacing.lg,
     },
     centerContainer: {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: theme.colors.background,
+      backgroundColor: theme.colors.neutral6,
     },
     paddedContainer: {
       flex: 1,
       padding: theme.spacing.lg,
-      backgroundColor: theme.colors.background,
+      backgroundColor: theme.colors.neutral6,
     },
     roundedContainer: {
       display: "flex",
       flex: 1,
       padding: theme.spacing.lg,
-      backgroundColor: theme.colors.background,
+      backgroundColor: theme.colors.neutral6,
       borderTopLeftRadius: 30,
       borderTopRightRadius: 30,
     },
@@ -33,7 +33,7 @@ export const createGlobalStyles = (theme: Theme) =>
       fontWeight: "600",
       fontSize: theme.typography.fontSize.xl,
       lineHeight: theme.spacing.lgx,
-      color: theme.colors.background,
+      color: theme.colors.neutral6,
     },
     headerContainer: {
       display: "flex",
@@ -43,9 +43,9 @@ export const createGlobalStyles = (theme: Theme) =>
       padding: theme.spacing.md,
     },
     previous: {
-      fontSize: theme.typography.fontSize.xxl,
-      fontWeight: "600",
-      color: theme.colors.background,
+      width: 16,
+      height: 16,
+      resizeMode: "contain",
     },
 
     // Typography patterns
@@ -63,7 +63,7 @@ export const createGlobalStyles = (theme: Theme) =>
       fontSize: theme.typography.fontSize.base,
       lineHeight: theme.spacing.md,
       fontWeight: "600",
-      color: theme.colors.primary,
+      color: theme.colors.primary1,
     },
 
     titleContainer: {
@@ -75,7 +75,7 @@ export const createGlobalStyles = (theme: Theme) =>
       fontSize: theme.typography.fontSize.xxl,
       lineHeight: theme.spacing.lgx,
       fontWeight: "600",
-      color: theme.colors.primary,
+      color: theme.colors.primary1,
     },
     title2: {
       fontSize: theme.typography.fontSize.xl,
@@ -87,12 +87,12 @@ export const createGlobalStyles = (theme: Theme) =>
       fontSize: theme.typography.fontSize.lg,
       lineHeight: theme.spacing.lg,
       fontWeight: "600",
-      color: theme.colors.primary,
+      color: theme.colors.primary1,
     },
     body1: {
       fontWeight: "500",
       fontSize: theme.typography.fontSize.lg,
-      color: theme.colors.background,
+      color: theme.colors.neutral6,
       lineHeight: theme.spacing.md,
     },
     body3: {
@@ -112,7 +112,7 @@ export const createGlobalStyles = (theme: Theme) =>
       fontSize: theme.typography.fontSize.sm,
       fontWeight: "600",
       lineHeight: theme.spacing.md,
-      color: theme.colors.primary,
+      color: theme.colors.primary1,
     },
     caption2: {
       fontSize: theme.typography.fontSize.sm,
@@ -124,7 +124,7 @@ export const createGlobalStyles = (theme: Theme) =>
     // Card patterns
     card: {
       backgroundColor: theme.colors.surface,
-      borderRadius: 12,
+      borderRadius: theme.radius.ms,
       padding: theme.spacing.md,
       marginVertical: theme.spacing.xs,
       shadowColor: "#000",
@@ -138,25 +138,6 @@ export const createGlobalStyles = (theme: Theme) =>
     },
 
     // Form patterns
-    inputContainer: {
-      display: "flex",
-      flexDirection: "column",
-      gap: theme.spacing.ml,
-      marginBottom: theme.spacing.ms,
-    },
-    input: {
-      borderWidth: 1,
-      borderColor: theme.colors.border,
-      borderRadius: theme.spacing.md,
-      padding: theme.spacing.ms,
-      backgroundColor: theme.colors.background,
-    },
-    inputFocused: {
-      borderColor: theme.colors.primary,
-    },
-    inputError: {
-      borderColor: "#FF3B30",
-    },
     errorText: {
       color: "#FF3B30",
       fontSize: theme.typography.fontSize.sm,
@@ -165,8 +146,8 @@ export const createGlobalStyles = (theme: Theme) =>
 
     // Banking specific patterns
     balanceCard: {
-      backgroundColor: theme.colors.primary,
-      borderRadius: 16,
+      backgroundColor: theme.colors.primary1,
+      borderRadius: theme.radius.md,
       padding: theme.spacing.lg,
       marginVertical: theme.spacing.md,
     },
@@ -187,6 +168,7 @@ export const createGlobalStyles = (theme: Theme) =>
     authLogo: {
       width: "100%",
       height: 165,
+      resizeMode: "contain",
       marginVertical: theme.spacing.xl,
     },
   });
