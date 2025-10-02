@@ -1,7 +1,7 @@
 import { useStyles } from "@/hooks/useStyles";
 import { useTheme } from "@/theme";
 import { Image, Pressable, Text } from "react-native";
-import { createHomeScreenCardStyles } from "./homeScreenCard.styles";
+import { createHomeScreenCardStyles } from "./HomeScreenCard.styles";
 import { HomeScreenCardProps } from "./HomeScreenCard.types";
 
 export const HomeScreenCard = ({

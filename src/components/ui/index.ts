@@ -2,6 +2,7 @@
 // All reusable UI components that use theme context
 
 export { Button } from "./Button/Button";
+export { CardDetailRow, CardDetails, TransactionRowCard } from "./Cards";
 export { Checkbox } from "./Checkbox/Checkbox";
 export {
   BackIcon,
@@ -11,7 +12,7 @@ export {
   SettingsIcon,
 } from "./Icons";
 export { Input } from "./Input/Input";
-export { CardDetailRow, CardDetails } from "./Cards";
+export { MonthlyBalanceChart } from "./MonthlyBalanceChart";
 // Add more UI components as they're created:
 // export { Input } from './Input';
 // export { Card } from './Card';

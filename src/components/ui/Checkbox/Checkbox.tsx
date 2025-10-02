@@ -1,3 +1,4 @@
+import { Images } from "@/assets/images";
 import { useTheme } from "@/theme";
 import React, { useState } from "react";
 import { Image, Pressable, View } from "react-native";
@@ -32,7 +33,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
         ]}>
         {checked && (
           <Image
-            source={require("../../assets/icons/tick.svg")}
+            source={Images.tickIcon}
             style={checkboxStyles.checked}
             resizeMode="contain"
           />

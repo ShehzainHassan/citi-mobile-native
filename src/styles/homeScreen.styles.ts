@@ -30,7 +30,8 @@ export const createHomeScreenStyles = (theme: Theme) =>
     },
     cardsImg: {
       width: "100%",
-      height: 200,
+      height: 220,
+      resizeMode: "contain",
     },
     columnContainer: {
       flexDirection: "column",

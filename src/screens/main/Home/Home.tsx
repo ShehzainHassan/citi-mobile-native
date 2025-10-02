@@ -30,7 +30,11 @@ export const HomeScreen = () => {
     ],
     [
       { image: Images.creditCard, label: t("creditCard") },
-      { image: Images.transactionReport, label: t("transactionReport") },
+      {
+        image: Images.transactionReport,
+        label: t("transactionReport"),
+        route: "TransactionReport",
+      },
       { image: Images.beneficiary, label: t("beneficiary") },
     ],
   ];

@@ -2,6 +2,7 @@ export const Images = {
   authIcon: require("./auth-icon.png"),
   signUp: require("./register.png"),
   back: require("../icons/back.svg"),
+  tickIcon: require("../icons/tick.svg"),
   passwordChanged: require("./password-changed.png"),
   fingerprint: require("./fingerprint.png"),
   accountAndCard: require("./account-and-card.png"),
@@ -22,4 +23,5 @@ export const Images = {
   settings: require("../icons/settings.svg"),
   profilePic: require("./profile-pic.png"),
   notification: require("./notification.png"),
+  waterBill: require("../icons/water.svg"),
 };

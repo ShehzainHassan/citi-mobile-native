@@ -4,4 +4,5 @@ export const radius = {
   ms: 12,
   md: 15,
   ml: 20,
+  lg: 30,
 };
