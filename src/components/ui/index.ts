@@ -7,6 +7,7 @@ export {
   CardDetails,
   CreditCard,
   TransactionRowCard,
+  SearchScreenCard,
 } from "./Cards";
 export { Checkbox } from "./Checkbox/Checkbox";
 export {
@@ -21,4 +22,4 @@ export { MonthlyBalanceChart } from "./MonthlyBalanceChart";
 // Add more UI components as they're created:
 // export { Input } from './Input';
 // export { Card } from './Card';
-// export { Modal } from './Modal';
+export { SelectCurrencyModal } from "./Modal";

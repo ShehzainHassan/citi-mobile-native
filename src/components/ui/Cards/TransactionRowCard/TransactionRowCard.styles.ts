@@ -10,9 +10,6 @@ export const createTransactionRowCardStyles = (theme: Theme) =>
     dayText: {
       color: theme.colors.textdefault,
     },
-    title: {
-      color: theme.colors.neutral1,
-    },
     subTitle: {
       color: theme.colors.neutral3,
     },

@@ -10,6 +10,7 @@ export const lightColors = {
   neutral4: "#CACACA",
   neutral6: "#FFFFFF",
   line1: "#ECECEC",
+  line2: "#BFBFBF",
   semantic1: "#FF4267",
 };
 

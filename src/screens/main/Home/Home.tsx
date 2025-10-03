@@ -59,7 +59,7 @@ export const HomeScreen = () => {
         />
       </View>
 
-      <View style={homeScreenStyles.subContainer}>
+      <View style={globalStyles.verticalSpread}>
         <View
           style={[globalStyles.roundedContainer, homeScreenStyles.container]}>
           <CreditCard

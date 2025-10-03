@@ -24,4 +24,9 @@ export const Images = {
   profilePic: require("./profile-pic.png"),
   notification: require("./notification.png"),
   waterBill: require("../icons/water.svg"),
+  branch: require("./branch.png"),
+  interestRate: require("./interest-rate.png"),
+  exchangeRate: require("./exchange-rate.png"),
+  exchange: require("./exchange.png"),
+  exchangeRateLogo: require("./exchange-rate-logo.png"),
 };

@@ -24,7 +24,9 @@ export const TransactionRowCard: React.FC<TransactionRowCardProps> = ({
             <Image source={icon} style={styles.iconImg} />
           </View>
           <View>
-            <Text style={[globalStyles.body1, styles.title]}>{title}</Text>
+            <Text style={[globalStyles.body1, globalStyles.neutral1]}>
+              {title}
+            </Text>
             {typeof subtitle === "string" && subtitle.trim() !== "" && (
               <Text style={[globalStyles.caption1, styles.subTitle]}>
                 {subtitle}

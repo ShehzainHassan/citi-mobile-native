@@ -8,12 +8,6 @@ export const createAccountScreenStyles = (theme: Theme) =>
       padding: theme.spacing.lg,
       backgroundColor: theme.colors.neutral6,
     },
-    headerContainer: {
-      padding: 0,
-    },
-    previous: {
-      color: theme.colors.neutral1,
-    },
     buttonsContainer: {
       flexDirection: "row",
       gap: theme.spacing.md,
@@ -36,9 +30,6 @@ export const createAccountScreenStyles = (theme: Theme) =>
       width: 100,
       height: 100,
       resizeMode: "contain",
-    },
-    accountCardContainer: {
-      gap: theme.spacing.ml,
     },
     card: {
       width: "100%",

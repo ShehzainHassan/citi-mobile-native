@@ -68,7 +68,7 @@ export const Accounts = () => {
       <Header
         title={title}
         onPress={handleHeaderPress}
-        style={accountScreenStyles.headerContainer}
+        style={globalStyles.headerContainer}
       />
 
       {!selectedCardType && (
@@ -95,7 +95,7 @@ export const Accounts = () => {
             />
             <Text style={globalStyles.title3}>{t("profileName")}</Text>
           </View>
-          <View style={accountScreenStyles.accountCardContainer}>
+          <View style={globalStyles.spacedColumn}>
             {Array.from({ length: 3 }).map((_, idx) => (
               <AccountCard key={idx} />
             ))}
@@ -118,11 +118,6 @@ export const Accounts = () => {
                   amount="$3.469.52"
                   backgroundImage={image}
                 />
-                {/* <Image
-                  source={image}
-                  style={accountScreenStyles.card}
-                  accessibilityLabel={t("cardImageAlt", { type })}
-                /> */}
               </TouchableOpacity>
             ))}
           </View>

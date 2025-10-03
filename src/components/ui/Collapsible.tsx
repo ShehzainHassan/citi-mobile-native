@@ -5,11 +5,11 @@ import {
   TouchableOpacityProps,
 } from "react-native";
 
-import { IconSymbol } from "@/components/ui/icons/IconSymbol";
 import { Colors } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { ThemedText } from "./ThemedText";
 import { ThemedView } from "./ThemedView";
+import { IconSymbol } from "./Icons";
 
 interface CollapsibleProps extends PropsWithChildren, TouchableOpacityProps {
   title: string;

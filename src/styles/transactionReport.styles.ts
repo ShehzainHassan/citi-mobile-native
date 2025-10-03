@@ -1,16 +1,18 @@
 import { Theme } from "@/theme";
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
+
+const { height: screenHeight } = Dimensions.get("window");
 
 export const createTransactionReportStyles = (theme: Theme) =>
   StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: theme.colors.primary1,
+      overflowY: "hidden",
     },
     headerContainer: {
-      padding: theme.spacing.lg,
       backgroundColor: theme.colors.primary1,
-      paddingBottom: theme.spacing.lg * 3,
+      paddingBottom: theme.spacing.lg * 2,
     },
     subContainer: {
       borderTopLeftRadius: theme.radius.lg,
@@ -22,15 +24,14 @@ export const createTransactionReportStyles = (theme: Theme) =>
     },
     graphContainer: {
       width: "100%",
-      height: 290,
+      height: screenHeight * 0.35,
       backgroundColor: theme.colors.line1,
       borderRadius: theme.radius.lg,
     },
     cardChartContainer: {
       gap: theme.spacing.xl,
     },
-
     scrollable: {
-      maxHeight: 475,
+      maxHeight: screenHeight * 0.55,
     },
   });

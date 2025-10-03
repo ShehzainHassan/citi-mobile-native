@@ -3,6 +3,7 @@ import React from "react";
 import { Text, TouchableOpacity } from "react-native";
 import { ButtonProps } from "./Button.types";
 import { createButtonStyles } from "./Button.styles";
+import { useStyles } from "@/hooks/useStyles";
 
 export const Button: React.FC<ButtonProps> = ({
   title,
@@ -12,6 +13,7 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const { theme } = useTheme();
+  const { globalStyles } = useStyles();
   const buttonStyles = createButtonStyles(theme);
   return (
     <TouchableOpacity
@@ -26,7 +28,7 @@ export const Button: React.FC<ButtonProps> = ({
       <Text
         style={[
           buttonStyles.text,
-          variant === "secondary" && buttonStyles.textSecondary,
+          variant === "secondary" && globalStyles.neutral1,
         ]}>
         {title}
       </Text>

@@ -22,7 +22,11 @@ export const SignIn = () => {
 
   return (
     <View style={globalStyles.container}>
-      <Header title={t("signIn")} variant="secondary" />
+      <Header
+        title={t("signIn")}
+        variant="secondary"
+        style={[authStyles.headerContainer]}
+      />
       <View style={globalStyles.roundedContainer}>
         <AuthHeader title={t("welcomeTitle")} subTitle={t("welcomeSubtitle")} />
         <AuthImageBlock source={Images.authIcon} />

@@ -18,3 +18,7 @@ export const formatPhoneNumber = (input: string) => {
 
   return `(+${countryCode}) ${rest}`;
 };
+
+export const getFlagUrl = (countryCode: string, size: number = 40) => {
+  return `https://flagcdn.com/w${size}/${countryCode.toLowerCase()}.png`;
+};

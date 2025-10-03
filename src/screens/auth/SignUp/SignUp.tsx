@@ -23,7 +23,11 @@ export const SignUp = () => {
 
   return (
     <View style={globalStyles.container}>
-      <Header title={t("signUp")} variant="secondary" />
+      <Header
+        title={t("signUp")}
+        variant="secondary"
+        style={[authStyles.headerContainer]}
+      />
       <View style={globalStyles.roundedContainer}>
         <AuthHeader
           title={t("welcomeTitle")}

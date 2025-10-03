@@ -37,11 +37,7 @@ export const createGlobalStyles = (theme: Theme) =>
       color: theme.colors.neutral6,
     },
     headerContainer: {
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
-      gap: theme.spacing.md,
-      padding: theme.spacing.md,
+      paddingHorizontal: 0,
     },
     previous: {
       width: 16,
@@ -134,6 +130,29 @@ export const createGlobalStyles = (theme: Theme) =>
       color: theme.colors.neutral1,
     },
 
+    paddedColumn: {
+      flex: 1,
+      gap: theme.spacing.sm,
+      padding: theme.spacing.lg,
+    },
+    spacedColumn: {
+      gap: theme.spacing.ml,
+    },
+    verticalSpread: {
+      flex: 1,
+      flexDirection: "column",
+      justifyContent: "space-between",
+      backgroundColor: theme.colors.neutral6,
+    },
+    primary1: {
+      color: theme.colors.primary1,
+    },
+    neutral1: {
+      color: theme.colors.neutral1,
+    },
+    neutral3: {
+      color: theme.colors.neutral3,
+    },
     // Card patterns
     card: {
       backgroundColor: theme.colors.surface,
@@ -183,5 +202,11 @@ export const createGlobalStyles = (theme: Theme) =>
       height: 165,
       resizeMode: "contain",
       marginVertical: theme.spacing.xl,
+    },
+    flag: {
+      width: 40,
+      height: 30,
+      marginRight: 8,
+      borderRadius: 2,
     },
   });

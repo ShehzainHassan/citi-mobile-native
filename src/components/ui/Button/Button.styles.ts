@@ -21,9 +21,7 @@ export const createButtonStyles = (theme: Theme) =>
       fontWeight: "600",
       color: theme.colors.neutral6,
     },
-    textSecondary: {
-      color: theme.colors.neutral1,
-    },
+
     disabled: {
       opacity: 0.6,
     },

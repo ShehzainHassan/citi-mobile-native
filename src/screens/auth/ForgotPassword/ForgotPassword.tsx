@@ -59,8 +59,7 @@ export const ForgotPassword = () => {
                 />
               </View>
               <View style={authStyles.sendContainer}>
-                <Text
-                  style={[globalStyles.body3, authStyles.passwordChangedText]}>
+                <Text style={[globalStyles.body3, globalStyles.neutral1]}>
                   {t("sentCodeInfo")}
                 </Text>
                 <Button
@@ -166,7 +165,7 @@ export const ForgotPassword = () => {
           />
           <View style={authStyles.changePasswordContainer}>
             <Text style={globalStyles.title3}>{t("passwordChangedTitle")}</Text>
-            <Text style={[globalStyles.body3, authStyles.passwordChangedText]}>
+            <Text style={[globalStyles.body3, globalStyles.neutral1]}>
               {t("passwordChangedText")}
             </Text>
           </View>

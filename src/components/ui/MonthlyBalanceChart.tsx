@@ -1,27 +1,32 @@
 import { barData } from "@/constants";
+import { useStyles } from "@/hooks/useStyles";
 import { StyleSheet, Text, View } from "react-native";
 import { BarChart } from "react-native-gifted-charts";
 
 export const MonthlyBalanceChart = () => {
+  const { globalStyles } = useStyles();
+
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Balance</Text>
+      <Text style={[globalStyles.caption1, styles.balance]}>Balance</Text>
       <Text style={styles.balanceText}>
-        1000 <Text style={styles.currency}>USD</Text>
+        1000 <Text style={[globalStyles.caption1, styles.currency]}>USD</Text>
       </Text>
       <BarChart
         stackData={barData}
         barWidth={6}
         spacing={35}
-        barBorderRadius={6}
         yAxisThickness={0}
         hideRules={true}
-        showValuesAsTopLabel={true}
+        showValuesAsTopLabel={false}
         hideYAxisText={true}
         xAxisThickness={0}
         xAxisLabelTextStyle={{
           fontSize: 12,
+          fontWeight: "600",
+          lineHeight: 16,
           marginLeft: -10,
+          color: "#CACACA",
         }}
         initialSpacing={5}
       />
@@ -41,15 +46,15 @@ const styles = StyleSheet.create({
     shadowRadius: 30,
     elevation: 5,
   },
-  heading: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 10,
+  balance: {
+    marginBottom: 8,
+    color: "#343434",
   },
   balanceText: {
-    fontSize: 24,
+    fontWeight: "500",
+    fontSize: 32,
+    lineHeight: 28,
     color: "#3629B7",
-    marginBottom: 20,
   },
   currency: {
     fontSize: 12,

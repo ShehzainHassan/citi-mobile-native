@@ -9,6 +9,9 @@ export const createAuthStyles = (theme: Theme) =>
       backgroundColor: theme.colors.primary1,
       paddingTop: theme.spacing.lg,
     },
+    headerContainer: {
+      paddingBottom: theme.radius.md,
+    },
     biometricButton: {
       width: 64,
       height: 64,
@@ -71,6 +74,7 @@ export const createAuthStyles = (theme: Theme) =>
     },
     codeContainer: {
       flexDirection: "row",
+      justifyContent: "space-between",
       gap: theme.spacing.ms,
       height: 44,
     },
@@ -83,8 +87,5 @@ export const createAuthStyles = (theme: Theme) =>
       alignItems: "center",
       justifyContent: "center",
       marginBottom: theme.spacing.xl,
-    },
-    passwordChangedText: {
-      color: theme.colors.neutral1,
     },
   });

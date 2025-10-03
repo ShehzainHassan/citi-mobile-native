@@ -16,10 +16,10 @@ export const AccountCard = ({
   return (
     <View style={styles.container}>
       <View style={styles.subContainer}>
-        <Text style={[globalStyles.title3, styles.titleText]}>
+        <Text style={[globalStyles.title3, globalStyles.neutral1]}>
           {accountName}
         </Text>
-        <Text style={[globalStyles.title3, styles.titleText]}>
+        <Text style={[globalStyles.title3, globalStyles.neutral1]}>
           {accountNumber}
         </Text>
       </View>

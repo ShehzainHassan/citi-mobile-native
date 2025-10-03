@@ -8,11 +8,6 @@ export const createHomeScreenStyles = (theme: Theme) =>
       flexDirection: "column",
       backgroundColor: theme.colors.primary1,
     },
-    subContainer: {
-      flex: 1,
-      flexDirection: "column",
-      justifyContent: "space-between",
-    },
     container: {
       flexDirection: "column",
       gap: theme.spacing.xl,

@@ -29,7 +29,4 @@ export const createAccountCardStyles = (theme: Theme) =>
     accountSummaryContainer: {
       gap: theme.spacing.sm,
     },
-    titleText: {
-      color: theme.colors.neutral1,
-    },
   });

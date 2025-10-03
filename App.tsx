@@ -3,6 +3,7 @@ import {
   Accounts,
   ForgotPassword,
   HomeScreen,
+  Search,
   SignIn,
   SignUp,
   TransactionReport,
@@ -19,7 +20,7 @@ function AppContent() {
     <I18nextProvider i18n={i18n}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="SignIn"
+          initialRouteName="Home"
           screenOptions={{ headerShown: false }}>
           <Stack.Screen name="SignIn" component={SignIn} />
           <Stack.Screen name="SignUp" component={SignUp} />
@@ -30,6 +31,7 @@ function AppContent() {
             name="TransactionReport"
             component={TransactionReport}
           />
+          <Stack.Screen name="Search" component={Search} />
         </Stack.Navigator>
       </NavigationContainer>
     </I18nextProvider>

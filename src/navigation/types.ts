@@ -20,6 +20,9 @@ export type MainTabParamList = {
   Transfers: undefined;
   Bills: undefined;
   TransactionReport: undefined;
+  Search: undefined;
+  Message: undefined;
+  Settings: undefined;
 };
 
 // Add more navigation types as needed...

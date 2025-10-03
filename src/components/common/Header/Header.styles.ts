@@ -14,6 +14,7 @@ export const createHeaderStyles = (theme: Theme) =>
       flexDirection: "row",
       alignItems: "center",
       gap: theme.spacing.md,
-      padding: theme.spacing.md,
+      padding: theme.spacing.lg,
+      paddingBottom: 0,
     },
   });
