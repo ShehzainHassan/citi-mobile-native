@@ -20,6 +20,7 @@ export const createInputStyles = (theme: Theme) =>
       color: theme.colors.textdefault,
     },
     inputFocused: {
+      outlineColor: theme.colors.primary1,
       borderColor: theme.colors.primary1,
     },
     inputError: {

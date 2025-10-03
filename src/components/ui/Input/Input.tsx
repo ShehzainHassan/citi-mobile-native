@@ -1,6 +1,6 @@
 import { useStyles } from "@/hooks/useStyles";
 import { useTheme } from "@/theme";
-import React from "react";
+import React, { useState } from "react";
 import { Text, TextInput, View } from "react-native";
 import { createInputStyles } from "./Input.styles";
 import { InputProps } from "./Input.types";
@@ -15,6 +15,8 @@ export const Input: React.FC<InputProps> = ({
   const { globalStyles } = useStyles();
   const inputStyles = createInputStyles(theme);
 
+  const [isFocused, setIsFocused] = useState(false);
+
   return (
     <View style={[inputStyles.inputContainer]}>
       {label && (
@@ -24,14 +26,18 @@ export const Input: React.FC<InputProps> = ({
       )}
       <TextInput
         {...props}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
         style={[
           inputStyles.input,
           globalStyles.body3,
           style,
-          error ? inputStyles.inputError : {},
+          { color: theme.colors.neutral1 },
+          isFocused ? inputStyles.inputFocused : null,
+          error ? inputStyles.inputError : null,
         ]}
+        placeholderTextColor={theme.colors.neutral4}
       />
-
       {error && <Text style={globalStyles.errorText}>{error}</Text>}
     </View>
   );

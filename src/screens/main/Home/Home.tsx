@@ -1,5 +1,5 @@
 import { Images } from "@/assets/images";
-import { HomeScreenCard, Tabs } from "@/components";
+import { CreditCard, HomeScreenCard, Tabs } from "@/components";
 import { useStyles } from "@/hooks/useStyles";
 import { MainTabParamList } from "@/navigation/types";
 import { useNavigation } from "@react-navigation/native";
@@ -62,10 +62,12 @@ export const HomeScreen = () => {
       <View style={homeScreenStyles.subContainer}>
         <View
           style={[globalStyles.roundedContainer, homeScreenStyles.container]}>
-          <Image
-            source={Images.cards}
-            style={homeScreenStyles.cardsImg}
-            accessibilityLabel={t("cardsAlt")}
+          <CreditCard
+            name="John Smith"
+            cardType="Amazon Platinium"
+            cardNumber="475612349018"
+            amount="$3.469.52"
+            backgroundImage={Images.cards}
           />
           <View style={homeScreenStyles.columnContainer}>
             {cardData.map((row, rowIndex) => (

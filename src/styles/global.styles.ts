@@ -1,3 +1,4 @@
+import { Fonts } from "@/constants/theme";
 import { StyleSheet } from "react-native";
 import { Theme } from "../theme/index";
 
@@ -51,8 +52,8 @@ export const createGlobalStyles = (theme: Theme) =>
     // Typography patterns
     heading1: {
       fontSize: theme.typography.fontSize.xxl,
-      fontWeight: "bold",
-      color: theme.colors.neutral1,
+      fontWeight: "400",
+      color: theme.colors.neutral6,
     },
     heading2: {
       fontSize: theme.typography.fontSize.xl,
@@ -72,6 +73,7 @@ export const createGlobalStyles = (theme: Theme) =>
     },
 
     title1: {
+      fontFamily: Fonts.sans,
       fontSize: theme.typography.fontSize.xxl,
       lineHeight: theme.spacing.lgx,
       fontWeight: "600",
@@ -95,6 +97,12 @@ export const createGlobalStyles = (theme: Theme) =>
       color: theme.colors.neutral6,
       lineHeight: theme.spacing.md,
     },
+    body2: {
+      fontWeight: "400",
+      fontSize: theme.typography.fontSize.lg,
+      color: theme.colors.neutral6,
+      lineHeight: theme.spacing.lg,
+    },
     body3: {
       fontWeight: "500",
       fontSize: theme.typography.fontSize.base,
@@ -107,7 +115,12 @@ export const createGlobalStyles = (theme: Theme) =>
       color: theme.colors.neutral1,
       lineHeight: theme.spacing.ml,
     },
-
+    sublineMedium14: {
+      fontWeight: "500",
+      fontSize: theme.typography.fontSize.base,
+      color: theme.colors.neutral6,
+      lineHeight: theme.spacing.md,
+    },
     caption1: {
       fontSize: theme.typography.fontSize.sm,
       fontWeight: "600",

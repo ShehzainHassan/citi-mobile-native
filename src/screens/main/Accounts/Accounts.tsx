@@ -4,6 +4,7 @@ import {
   Button,
   CardDetailRow,
   CardDetails,
+  CreditCard,
   Header,
 } from "@/components";
 import { useStyles } from "@/hooks/useStyles";
@@ -110,11 +111,18 @@ export const Accounts = () => {
                 key={type}
                 onPress={() => handleCardSelect(type as CardType)}
                 accessibilityLabel={t("selectCardAlt", { type })}>
-                <Image
+                <CreditCard
+                  name="John Smith"
+                  cardType="Amazon Platinium"
+                  cardNumber="475612349018"
+                  amount="$3.469.52"
+                  backgroundImage={image}
+                />
+                {/* <Image
                   source={image}
                   style={accountScreenStyles.card}
                   accessibilityLabel={t("cardImageAlt", { type })}
-                />
+                /> */}
               </TouchableOpacity>
             ))}
           </View>

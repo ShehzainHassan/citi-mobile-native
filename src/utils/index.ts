@@ -5,3 +5,16 @@
 // Common utility functions
 // Security helpers and data formatting
 // Reusable business logic
+
+export const formatPhoneNumber = (input: string) => {
+  const digits = input.replace(/\D/g, "");
+
+  if (digits.length <= 2) {
+    return `(+${digits})`;
+  }
+
+  const countryCode = digits.slice(0, 2);
+  const rest = digits.slice(2);
+
+  return `(+${countryCode}) ${rest}`;
+};

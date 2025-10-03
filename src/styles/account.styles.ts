@@ -61,6 +61,7 @@ export const createAccountScreenStyles = (theme: Theme) =>
       color: theme.colors.neutral2,
     },
     cardsContainer: {
+      marginTop: theme.spacing.lg,
       gap: theme.spacing.lg,
     },
     deleteCard: {

@@ -1,17 +1,19 @@
 import { Images } from "@/assets/images";
-import { Header, MonthlyBalanceChart, TransactionRowCard } from "@/components";
+import {
+  CreditCard,
+  Header,
+  MonthlyBalanceChart,
+  TransactionRowCard,
+} from "@/components";
 import { transactions } from "@/constants";
 import { useStyles } from "@/hooks/useStyles";
 import { MainTabParamList } from "@/navigation/types";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useTranslation } from "react-i18next";
-import { Image, ScrollView, View } from "react-native";
+import { ScrollView, View } from "react-native";
 
 export const TransactionReport = () => {
-  const { t } = useTranslation();
-  const { transactionReportStyles, homeScreenStyles, globalStyles } =
-    useStyles();
+  const { transactionReportStyles, globalStyles } = useStyles();
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
 
@@ -31,10 +33,12 @@ export const TransactionReport = () => {
         ]}>
         <View style={[transactionReportStyles.transactionContainer]}>
           <View style={[transactionReportStyles.cardChartContainer]}>
-            <Image
-              source={Images.cards}
-              style={[homeScreenStyles.cardsImg]}
-              accessibilityLabel={t("cardsAlt")}
+            <CreditCard
+              name="John Smith"
+              cardType="Amazon Platinium"
+              cardNumber="475612349018"
+              amount="$3.469.52"
+              backgroundImage={Images.cards}
             />
             <ScrollView
               style={transactionReportStyles.scrollable}

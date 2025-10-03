@@ -18,10 +18,7 @@ export const createTransactionReportStyles = (theme: Theme) =>
     },
     transactionContainer: {
       position: "relative",
-      top: -100,
-    },
-    card: {
-      position: "relative",
+      top: -50,
     },
     graphContainer: {
       width: "100%",
@@ -32,6 +29,7 @@ export const createTransactionReportStyles = (theme: Theme) =>
     cardChartContainer: {
       gap: theme.spacing.xl,
     },
+
     scrollable: {
       maxHeight: 475,
     },

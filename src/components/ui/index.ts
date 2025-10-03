@@ -2,7 +2,12 @@
 // All reusable UI components that use theme context
 
 export { Button } from "./Button/Button";
-export { CardDetailRow, CardDetails, TransactionRowCard } from "./Cards";
+export {
+  CardDetailRow,
+  CardDetails,
+  CreditCard,
+  TransactionRowCard,
+} from "./Cards";
 export { Checkbox } from "./Checkbox/Checkbox";
 export {
   BackIcon,

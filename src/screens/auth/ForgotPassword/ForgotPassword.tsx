@@ -2,6 +2,7 @@ import { Images } from "@/assets/images";
 import { Button, Header, Input } from "@/components";
 import { useStyles } from "@/hooks/useStyles";
 import { AuthStackParamList } from "@/navigation/types";
+import { formatPhoneNumber } from "@/utils";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useEffect, useState } from "react";
@@ -53,7 +54,7 @@ export const ForgotPassword = () => {
                   label={t("typePhone")}
                   placeholder={t("phonePlaceholder")}
                   value={phone}
-                  onChangeText={setPhone}
+                  onChangeText={(text) => setPhone(formatPhoneNumber(text))}
                   keyboardType="phone-pad"
                 />
               </View>
