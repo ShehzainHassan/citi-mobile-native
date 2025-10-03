@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 import { Image, Text, View } from "react-native";
 
 export const ForgotPassword = () => {
-  const { globalStyles, forgotPasswordStyles, inputStyles } = useStyles();
+  const { globalStyles, authStyles, inputStyles } = useStyles();
   const { t } = useTranslation("auth");
 
   const [step, setStep] = useState<number>(1);
@@ -33,10 +33,10 @@ export const ForgotPassword = () => {
   }, [step, t]);
 
   return (
-    <View style={forgotPasswordStyles.container}>
+    <View style={authStyles.forgotPasswordContainer}>
       <Header
         title={pageTitle}
-        style={[forgotPasswordStyles.forgotPasswordContainer]}
+        style={[authStyles.noPadding]}
         onPress={() => {
           if (step === 1) {
             navigation.navigate("SignIn");
@@ -46,10 +46,10 @@ export const ForgotPassword = () => {
         }}
       />
       {step !== 4 && (
-        <View style={forgotPasswordStyles.subContainer}>
+        <View style={authStyles.subContainer}>
           {step === 1 && (
             <View>
-              <View style={forgotPasswordStyles.phoneContainer}>
+              <View style={authStyles.phoneContainer}>
                 <Input
                   label={t("typePhone")}
                   placeholder={t("phonePlaceholder")}
@@ -58,12 +58,9 @@ export const ForgotPassword = () => {
                   keyboardType="phone-pad"
                 />
               </View>
-              <View style={forgotPasswordStyles.sendContainer}>
+              <View style={authStyles.sendContainer}>
                 <Text
-                  style={[
-                    globalStyles.body3,
-                    forgotPasswordStyles.passwordChangedText,
-                  ]}>
+                  style={[globalStyles.body3, authStyles.passwordChangedText]}>
                   {t("sentCodeInfo")}
                 </Text>
                 <Button
@@ -77,11 +74,11 @@ export const ForgotPassword = () => {
 
           {step === 2 && (
             <View>
-              <View style={forgotPasswordStyles.phoneContainer}>
+              <View style={authStyles.phoneContainer}>
                 <Text style={[globalStyles.caption1, inputStyles.inputLabel]}>
                   {t("typeCode")}
                 </Text>
-                <View style={forgotPasswordStyles.codeContainer}>
+                <View style={authStyles.codeContainer}>
                   <Input
                     placeholder={t("codePlaceholder")}
                     value={code}
@@ -92,14 +89,12 @@ export const ForgotPassword = () => {
                 </View>
               </View>
 
-              <View style={forgotPasswordStyles.sendContainer}>
-                <View style={forgotPasswordStyles.textInfoContainer}>
-                  <Text
-                    style={[globalStyles.body3, forgotPasswordStyles.textInfo]}>
+              <View style={authStyles.sendContainer}>
+                <View style={authStyles.textInfoContainer}>
+                  <Text style={[globalStyles.body3, authStyles.textInfo]}>
                     {t("verifyInfo", { phone })}
                   </Text>
-                  <Text
-                    style={[globalStyles.body3, forgotPasswordStyles.textInfo]}>
+                  <Text style={[globalStyles.body3, authStyles.textInfo]}>
                     {t("expireInfo")}
                   </Text>
                 </View>
@@ -116,8 +111,8 @@ export const ForgotPassword = () => {
             <View>
               <View
                 style={[
-                  forgotPasswordStyles.phoneContainer,
-                  forgotPasswordStyles.passwordContainer,
+                  authStyles.phoneContainer,
+                  authStyles.passwordContainer,
                 ]}>
                 <Input
                   label={t("newPassword")}
@@ -129,8 +124,8 @@ export const ForgotPassword = () => {
               </View>
               <View
                 style={[
-                  forgotPasswordStyles.phoneContainer,
-                  forgotPasswordStyles.passwordContainer,
+                  authStyles.phoneContainer,
+                  authStyles.passwordContainer,
                 ]}>
                 <Input
                   label={t("confirmPassword")}
@@ -155,7 +150,7 @@ export const ForgotPassword = () => {
           style={[
             globalStyles.heading3,
             globalStyles.centerContainer,
-            forgotPasswordStyles.changePhoneNo,
+            authStyles.changePhoneNo,
           ]}
           onPress={() => setStep(1)}>
           {t("changePhone")}
@@ -169,13 +164,9 @@ export const ForgotPassword = () => {
             style={globalStyles.authLogo}
             resizeMode="contain"
           />
-          <View style={forgotPasswordStyles.changePasswordContainer}>
+          <View style={authStyles.changePasswordContainer}>
             <Text style={globalStyles.title3}>{t("passwordChangedTitle")}</Text>
-            <Text
-              style={[
-                globalStyles.body3,
-                forgotPasswordStyles.passwordChangedText,
-              ]}>
+            <Text style={[globalStyles.body3, authStyles.passwordChangedText]}>
               {t("passwordChangedText")}
             </Text>
           </View>
