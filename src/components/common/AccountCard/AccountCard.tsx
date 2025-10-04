@@ -13,6 +13,9 @@ export const AccountCard = ({
   const { globalStyles } = useStyles();
   const { theme } = useTheme();
   const styles = createAccountCardStyles(theme);
+
+  console.log("ACCOUNT NAME:", accountName)
+
   return (
     <View style={styles.container}>
       <View style={styles.subContainer}>
