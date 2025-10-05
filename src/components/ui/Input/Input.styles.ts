@@ -14,7 +14,7 @@ export const createInputStyles = (theme: Theme) =>
       borderColor: theme.colors.border,
       borderRadius: theme.radius.md,
       padding: theme.spacing.ms,
-      paddingRight: 60, // <-- add extra padding so text doesn’t overlap right content
+      paddingRight: 60,
       backgroundColor: theme.colors.neutral6,
     },
     inputLabel: {

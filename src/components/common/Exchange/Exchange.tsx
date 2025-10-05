@@ -3,13 +3,10 @@ import { Button, Input } from "@/components/ui";
 import { SelectCurrencyModal } from "@/components/ui/Modal/SelectCurrencyModal";
 import { useStyles } from "@/hooks/useStyles";
 import { useTheme } from "@/theme";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
+import { MaterialIcons } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
 import { Image, Text, View } from "react-native";
 import { createExchangeStyles } from "./Exchange.styles";
-
 export const Exchange = () => {
   const { theme } = useTheme();
   const { globalStyles } = useStyles();
@@ -80,12 +77,18 @@ export const Exchange = () => {
             setActiveField("from");
             setModalVisible(true);
           }}
-          rightIcon={<UnfoldMoreIcon sx={{ color: theme.colors.neutral2 }} />}
+          rightIcon={
+            <MaterialIcons
+              name="unfold-more"
+              size={20}
+              color={theme.colors.neutral2}
+            />
+          }
         />
 
         <View style={[styles.arrowContainer]}>
-          <ArrowDownwardIcon sx={{ color: "red", width: 24, height: 24 }} />
-          <ArrowUpwardIcon sx={{ color: "green", width: 24, height: 24 }} />
+          <MaterialIcons name="arrow-downward" size={24} color="red" />
+          <MaterialIcons name="arrow-upward" size={24} color="green" />
         </View>
 
         <View style={[styles.bottomContainer]}>
@@ -103,7 +106,11 @@ export const Exchange = () => {
                   setModalVisible(true);
                 }}
                 rightIcon={
-                  <UnfoldMoreIcon sx={{ color: theme.colors.neutral2 }} />
+                  <MaterialIcons
+                    name="unfold-more"
+                    size={20}
+                    color={theme.colors.neutral2}
+                  />
                 }
               />
               <View style={[styles.currencyContainer]}>
@@ -128,7 +135,11 @@ export const Exchange = () => {
                 setModalVisible(true);
               }}
               rightIcon={
-                <UnfoldMoreIcon sx={{ color: theme.colors.neutral2 }} />
+                <MaterialIcons
+                  name="unfold-more"
+                  size={20}
+                  color={theme.colors.neutral2}
+                />
               }
             />
           )}

@@ -3,7 +3,9 @@ import {
   Accounts,
   ForgotPassword,
   HomeScreen,
+  Messages,
   Search,
+  Settings,
   SignIn,
   SignUp,
   TransactionReport,
@@ -27,6 +29,8 @@ function AppContent() {
           <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Accounts" component={Accounts} />
+          <Stack.Screen name="Messages" component={Messages} />
+          <Stack.Screen name="Settings" component={Settings} />
           <Stack.Screen
             name="TransactionReport"
             component={TransactionReport}

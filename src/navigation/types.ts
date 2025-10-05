@@ -21,8 +21,10 @@ export type MainTabParamList = {
   Bills: undefined;
   TransactionReport: undefined;
   Search: undefined;
-  Message: undefined;
+  Messages: undefined;
   Settings: undefined;
 };
+
+export type CombinedParamList = AuthStackParamList & MainTabParamList;
 
 // Add more navigation types as needed...

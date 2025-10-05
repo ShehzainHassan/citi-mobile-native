@@ -20,6 +20,7 @@ export const createTabStyles = (theme: Theme) =>
       flexDirection: "row",
       alignItems: "center",
       gap: 8,
+      padding: theme.spacing.md,
     },
     tabSelected: {
       backgroundColor: theme.colors.primary1,

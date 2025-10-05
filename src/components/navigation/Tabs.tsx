@@ -1,10 +1,10 @@
 import { useStyles } from "@/hooks/useStyles";
-import { Text, TouchableOpacity, View } from "react-native";
-import { useTranslation } from "react-i18next";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { HomeIcon, MessageIcon, SearchIcon, SettingsIcon } from "../ui";
 import { MainTabParamList } from "@/navigation/types";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useTranslation } from "react-i18next";
+import { Text, TouchableOpacity, View } from "react-native";
+import { HomeIcon, MessageIcon, SearchIcon, SettingsIcon } from "../ui";
 
 type TabKey = keyof MainTabParamList;
 const tabConfig: {
@@ -13,7 +13,7 @@ const tabConfig: {
 }[] = [
   { key: "Home", icon: HomeIcon },
   { key: "Search", icon: SearchIcon },
-  { key: "Message", icon: MessageIcon },
+  { key: "Messages", icon: MessageIcon },
   { key: "Settings", icon: SettingsIcon },
 ];
 
