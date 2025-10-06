@@ -8,7 +8,7 @@ import {
   Input,
 } from "@/components";
 import { useStyles } from "@/hooks/useStyles";
-import { CombinedParamList } from "@/navigation/types";
+import { MainTabWithAuthParamList } from "@/navigation/types";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useTranslation } from "react-i18next";
@@ -18,7 +18,7 @@ export const SignIn = () => {
   const { globalStyles, authStyles, inputStyles } = useStyles();
   const { t } = useTranslation("auth");
   const navigation =
-    useNavigation<NativeStackNavigationProp<CombinedParamList>>();
+    useNavigation<NativeStackNavigationProp<MainTabWithAuthParamList>>();
 
   return (
     <View style={globalStyles.container}>

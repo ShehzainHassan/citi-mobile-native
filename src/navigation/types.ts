@@ -12,6 +12,7 @@ export type AuthStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
   ForgotPassword: undefined;
+  ChangePassword: { from?: "ForgotPassword" | "Settings" };
 };
 
 export type MainTabParamList = {
@@ -25,6 +26,23 @@ export type MainTabParamList = {
   Settings: undefined;
 };
 
-export type CombinedParamList = AuthStackParamList & MainTabParamList;
+export type SearchParamList = {
+  SearchForBranch: undefined;
+  InterestRate: undefined;
+  ExchangeRate: undefined;
+  Exchange: undefined;
+};
+
+export type SettingsParamList = {
+  AppInformation: undefined;
+  Language: undefined;
+};
+
+export type MainTabWithAuthParamList = AuthStackParamList & MainTabParamList;
+export type MainTabWithSearchParamList = MainTabParamList & SearchParamList;
+export type MainTabWithSettingsParamList = MainTabParamList & SettingsParamList;
+export type MainTabWithAuthAndSettingsParamList = AuthStackParamList &
+  MainTabParamList &
+  SettingsParamList;
 
 // Add more navigation types as needed...

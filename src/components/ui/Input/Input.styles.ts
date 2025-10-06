@@ -9,22 +9,26 @@ export const createInputStyles = (theme: Theme) =>
       marginBottom: theme.spacing.ms,
     },
     input: {
-      flex: 1,
       borderWidth: 1,
-      borderColor: theme.colors.border,
+      borderColor: theme.colors.line2,
       borderRadius: theme.radius.md,
       padding: theme.spacing.ms,
-      paddingRight: 60,
       backgroundColor: theme.colors.neutral6,
+      minHeight: 48,
     },
     inputLabel: {
       color: theme.colors.textdefault,
     },
     inputFocused: {
       outlineColor: theme.colors.primary1,
+      borderColor: theme.colors.primary1,
     },
     inputError: {
       borderColor: "#FF3B30",
+    },
+    inputReadOnly: {
+      outlineColor: theme.colors.line2,
+      borderColor: theme.colors.line2,
     },
     inputWrapper: {
       position: "relative",

@@ -1,8 +1,14 @@
 import { i18n } from "@/i18n";
 import {
   Accounts,
+  AppInformation,
+  ChangePassword,
+  Exchange,
+  ExchangeRate,
   ForgotPassword,
   HomeScreen,
+  InterestRate,
+  Language,
   Messages,
   Search,
   Settings,
@@ -36,6 +42,12 @@ function AppContent() {
             component={TransactionReport}
           />
           <Stack.Screen name="Search" component={Search} />
+          <Stack.Screen name="InterestRate" component={InterestRate} />
+          <Stack.Screen name="ExchangeRate" component={ExchangeRate} />
+          <Stack.Screen name="Exchange" component={Exchange} />
+          <Stack.Screen name="AppInformation" component={AppInformation} />
+          <Stack.Screen name="ChangePassword" component={ChangePassword} />
+          <Stack.Screen name="Language" component={Language} />
         </Stack.Navigator>
       </NavigationContainer>
     </I18nextProvider>

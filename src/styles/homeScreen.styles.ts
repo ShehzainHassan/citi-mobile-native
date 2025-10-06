@@ -1,8 +1,8 @@
 import { Theme } from "@/theme";
 import { StyleSheet } from "react-native";
 
-export const createHomeScreenStyles = (theme: Theme) =>
-  StyleSheet.create({
+export const createHomeScreenStyles = (theme: Theme) => {
+  return StyleSheet.create({
     mainContainer: {
       flex: 1,
       flexDirection: "column",
@@ -11,22 +11,19 @@ export const createHomeScreenStyles = (theme: Theme) =>
     container: {
       flexDirection: "column",
       gap: theme.spacing.xl,
+      overflowY: "auto",
     },
     headerContainer: {
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
       padding: theme.spacing.lg,
+      backgroundColor: theme.colors.primary1,
     },
     profilePicContainer: {
       flexDirection: "row",
       alignItems: "center",
       gap: theme.spacing.mlg,
-    },
-    cardsImg: {
-      width: "100%",
-      height: 220,
-      resizeMode: "contain",
     },
     columnContainer: {
       flexDirection: "column",
@@ -35,6 +32,8 @@ export const createHomeScreenStyles = (theme: Theme) =>
       gap: theme.spacing.ms,
     },
     rowContainer: {
+      maxWidth: 500,
+      width: "100%",
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
@@ -49,3 +48,4 @@ export const createHomeScreenStyles = (theme: Theme) =>
       height: 28,
     },
   });
+};

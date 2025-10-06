@@ -1,5 +1,5 @@
 import { Fonts } from "@/constants/theme";
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { Theme } from "../theme/index";
 
 export const createGlobalStyles = (theme: Theme) =>
@@ -129,7 +129,6 @@ export const createGlobalStyles = (theme: Theme) =>
       lineHeight: theme.spacing.md,
       color: theme.colors.neutral1,
     },
-
     paddedColumn: {
       flex: 1,
       gap: theme.spacing.sm,
@@ -141,7 +140,6 @@ export const createGlobalStyles = (theme: Theme) =>
     verticalSpread: {
       flex: 1,
       flexDirection: "column",
-      justifyContent: "space-between",
       backgroundColor: theme.colors.neutral6,
     },
     primary1: {
@@ -153,20 +151,28 @@ export const createGlobalStyles = (theme: Theme) =>
     neutral3: {
       color: theme.colors.neutral3,
     },
+    neutral6: {
+      color: theme.colors.neutral6,
+    },
+
     // Card patterns
-    card: {
-      backgroundColor: theme.colors.surface,
-      borderRadius: theme.radius.ms,
+    cardContainer: {
+      gap: 12,
       padding: theme.spacing.md,
-      marginVertical: theme.spacing.xs,
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      elevation: 3,
+      borderRadius: theme.radius.md,
+      backgroundColor: theme.colors.neutral6,
+      ...Platform.select({
+        web: {
+          boxShadow: "0px 4px 30px rgba(54, 41, 183, 0.07)",
+        },
+        default: {
+          shadowColor: theme.colors.primary1,
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.07,
+          shadowRadius: 30,
+          elevation: 6,
+        },
+      }),
     },
 
     // Form patterns

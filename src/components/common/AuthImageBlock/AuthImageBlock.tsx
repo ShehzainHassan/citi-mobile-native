@@ -8,9 +8,12 @@ export const AuthImageBlock = ({ source }: AuthImageBlockProps) => {
   const { globalStyles } = useStyles();
   const { theme } = useTheme();
   const styles = createAuthImageStyles(theme);
+
+  const imageSource = typeof source === "string" ? { uri: source } : source;
+
   return (
     <View style={globalStyles.centerContainer}>
-      <Image source={{ uri: source }} style={styles.authLogo} />
+      <Image source={imageSource} style={styles.authLogo} />
     </View>
   );
 };

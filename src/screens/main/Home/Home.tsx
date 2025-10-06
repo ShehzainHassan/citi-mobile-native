@@ -38,7 +38,6 @@ export const HomeScreen = () => {
       { image: Images.beneficiary, label: t("beneficiary") },
     ],
   ];
-
   return (
     <View style={homeScreenStyles.mainContainer}>
       <View style={homeScreenStyles.headerContainer}>
@@ -59,40 +58,35 @@ export const HomeScreen = () => {
         />
       </View>
 
-      <View style={globalStyles.verticalSpread}>
-        <View
-          style={[globalStyles.roundedContainer, homeScreenStyles.container]}>
-          <CreditCard
-            name="John Smith"
-            cardType="Amazon Platinium"
-            cardNumber="475612349018"
-            amount="$3.469.52"
-            backgroundImage={Images.cards}
-          />
-          <View style={homeScreenStyles.columnContainer}>
-            {cardData.map((row, rowIndex) => (
-              <View
-                key={`row-${rowIndex}`}
-                style={homeScreenStyles.rowContainer}>
-                {row.map(({ image, label, route }) => (
-                  <HomeScreenCard
-                    key={label}
-                    image={image}
-                    label={label}
-                    onPress={
-                      route
-                        ? () =>
-                            navigation.navigate(route as keyof MainTabParamList)
-                        : () => {}
-                    }
-                  />
-                ))}
-              </View>
-            ))}
-          </View>
+      <View style={[globalStyles.roundedContainer, homeScreenStyles.container]}>
+        <CreditCard
+          name="John Smith"
+          cardType="Amazon Platinium"
+          cardNumber="475612349018"
+          amount="$3.469.52"
+          backgroundImage={Images.cards}
+        />
+        <View style={homeScreenStyles.columnContainer}>
+          {cardData.map((row, rowIndex) => (
+            <View key={`row-${rowIndex}`} style={homeScreenStyles.rowContainer}>
+              {row.map(({ image, label, route }) => (
+                <HomeScreenCard
+                  key={label}
+                  image={image}
+                  label={label}
+                  onPress={
+                    route
+                      ? () =>
+                          navigation.navigate(route as keyof MainTabParamList)
+                      : () => {}
+                  }
+                />
+              ))}
+            </View>
+          ))}
         </View>
-        <Tabs />
       </View>
+      <Tabs />
     </View>
   );
 };

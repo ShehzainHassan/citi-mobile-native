@@ -8,6 +8,7 @@ export const lightColors = {
   neutral2: "#898989",
   neutral3: "#989898",
   neutral4: "#CACACA",
+  neutral5: "#E0E0E0",
   neutral6: "#FFFFFF",
   line1: "#ECECEC",
   line2: "#BFBFBF",

@@ -1,51 +1,39 @@
-import { Images } from "@/assets/images";
 import { Button, Header, Input } from "@/components";
 import { useStyles } from "@/hooks/useStyles";
 import { AuthStackParamList } from "@/navigation/types";
 import { formatPhoneNumber } from "@/utils";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Image, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
 export const ForgotPassword = () => {
   const { globalStyles, authStyles, inputStyles } = useStyles();
   const { t } = useTranslation("auth");
 
   const [step, setStep] = useState<number>(1);
-  const [pageTitle, setPageTitle] = useState<string>(t("forgotPasswordTitle"));
   const [phone, setPhone] = useState("");
   const [code, setCode] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const navigation =
     useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
 
-  useEffect(() => {
-    if (step === 1 || step === 2) {
-      setPageTitle(t("forgotPasswordTitle"));
-    } else if (step === 3) {
-      setPageTitle(t("changePasswordTitle"));
-    } else if (step === 4) {
-      setPageTitle("");
+  const handleBack = () => {
+    if (step === 1) {
+      navigation.navigate("SignIn");
+    } else {
+      setStep(step - 1);
     }
-  }, [step, t]);
+  };
 
   return (
     <View style={authStyles.forgotPasswordContainer}>
-      <Header
-        title={pageTitle}
-        style={[authStyles.noPadding]}
-        onPress={() => {
-          if (step === 1) {
-            navigation.navigate("SignIn");
-          } else {
-            setStep(step - 1);
-          }
-        }}
-      />
-      {step !== 4 && (
+      <View>
+        <Header
+          title={t("forgotPasswordTitle")}
+          style={[authStyles.noPadding]}
+          onPress={handleBack}
+        />
         <View style={authStyles.subContainer}>
           {step === 1 && (
             <View>
@@ -58,6 +46,7 @@ export const ForgotPassword = () => {
                   keyboardType="phone-pad"
                 />
               </View>
+
               <View style={authStyles.sendContainer}>
                 <Text style={[globalStyles.body3, globalStyles.neutral1]}>
                   {t("sentCodeInfo")}
@@ -100,50 +89,17 @@ export const ForgotPassword = () => {
                 <Button
                   title={t("changePasswordTitle")}
                   disabled={!code.trim()}
-                  onPress={() => setStep(3)}
+                  onPress={() =>
+                    navigation.navigate("ChangePassword", {
+                      from: "ForgotPassword",
+                    })
+                  }
                 />
               </View>
-            </View>
-          )}
-
-          {step === 3 && (
-            <View>
-              <View
-                style={[
-                  authStyles.phoneContainer,
-                  authStyles.passwordContainer,
-                ]}>
-                <Input
-                  label={t("newPassword")}
-                  placeholder={t("newPasswordPlaceholder")}
-                  value={password}
-                  onChangeText={setPassword}
-                  secureTextEntry
-                />
-              </View>
-              <View
-                style={[
-                  authStyles.phoneContainer,
-                  authStyles.passwordContainer,
-                ]}>
-                <Input
-                  label={t("confirmPassword")}
-                  placeholder={t("confirmPasswordPlaceholder")}
-                  value={confirmPassword}
-                  onChangeText={setConfirmPassword}
-                  secureTextEntry
-                />
-              </View>
-              <Button
-                title={t("changePasswordButton")}
-                disabled={!password.trim() || password !== confirmPassword}
-                onPress={() => setStep(4)}
-              />
             </View>
           )}
         </View>
-      )}
-
+      </View>
       {step === 2 && (
         <Text
           style={[
@@ -154,26 +110,6 @@ export const ForgotPassword = () => {
           onPress={() => setStep(1)}>
           {t("changePhone")}
         </Text>
-      )}
-
-      {step === 4 && (
-        <View>
-          <Image
-            source={Images.passwordChanged}
-            style={globalStyles.authLogo}
-            resizeMode="contain"
-          />
-          <View style={authStyles.changePasswordContainer}>
-            <Text style={globalStyles.title3}>{t("passwordChangedTitle")}</Text>
-            <Text style={[globalStyles.body3, globalStyles.neutral1]}>
-              {t("passwordChangedText")}
-            </Text>
-          </View>
-          <Button
-            title={t("ok")}
-            onPress={() => navigation.navigate("SignIn")}
-          />
-        </View>
       )}
     </View>
   );

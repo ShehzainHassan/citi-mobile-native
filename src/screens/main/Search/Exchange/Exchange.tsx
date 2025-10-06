@@ -1,22 +1,24 @@
 import { Images } from "@/assets/images";
+import { Header } from "@/components";
 import { Button, Input } from "@/components/ui";
 import { SelectCurrencyModal } from "@/components/ui/Modal/SelectCurrencyModal";
 import { useStyles } from "@/hooks/useStyles";
-import { useTheme } from "@/theme";
+import { MainTabParamList } from "@/navigation/types";
+import { Theme, useTheme } from "@/theme";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useEffect, useState } from "react";
-import { Image, Text, View } from "react-native";
-import { createExchangeStyles } from "./Exchange.styles";
+import { Image, StyleSheet, Text, View } from "react-native";
 export const Exchange = () => {
   const { theme } = useTheme();
   const { globalStyles } = useStyles();
-  const styles = createExchangeStyles(theme);
+  const styles = createStyles(theme);
+
   const [fromAmount, setFromAmount] = useState("");
   const [toAmount, setToAmount] = useState("");
-
   const [fromCurrency, setFromCurrency] = useState("");
   const [toCurrency, setToCurrency] = useState("");
-
   const [isModalVisible, setModalVisible] = useState(false);
   const [activeField, setActiveField] = useState<"from" | "to">("from");
 
@@ -48,23 +50,36 @@ export const Exchange = () => {
           const rate = data?.rates?.[toCurrency];
           if (rate) {
             setExchangeRate(rate);
+            if (fromAmount.trim() !== "") {
+              const converted = (parseFloat(fromAmount) * rate).toFixed(2);
+              setToAmount(converted);
+            }
           } else {
             setExchangeRate(null);
+            setToAmount("");
           }
         } catch (error) {
           console.error("Failed to fetch exchange rate:", error);
           setExchangeRate(null);
+          setToAmount("");
         }
       }
     };
 
     fetchRate();
-  }, [fromCurrency, toCurrency]);
+  }, [fromCurrency, toCurrency, fromAmount]);
+
+  const navigation =
+    useNavigation<NativeStackNavigationProp<MainTabParamList>>();
 
   return (
-    <View style={[globalStyles.paddedColumn]}>
+    <View style={[styles.container]}>
+      <Header
+        title="Exchange"
+        onPress={() => navigation.navigate("Search")}
+        style={[styles.headerContainer]}
+      />
       <Image source={Images.exchangeRateLogo} style={[styles.logo]} />
-
       <View style={[styles.exchangeContainer]}>
         <Input
           label="From"
@@ -134,6 +149,7 @@ export const Exchange = () => {
                 setActiveField("to");
                 setModalVisible(true);
               }}
+              readOnly={true}
               rightIcon={
                 <MaterialIcons
                   name="unfold-more"
@@ -143,7 +159,6 @@ export const Exchange = () => {
               }
             />
           )}
-
           <Button title="Exchange" disabled={!isExchangeEnabled} />
         </View>
       </View>
@@ -157,3 +172,42 @@ export const Exchange = () => {
     </View>
   );
 };
+const createStyles = (theme: Theme) =>
+  StyleSheet.create({
+    logo: {
+      width: "100%",
+      aspectRatio: 2,
+      resizeMode: "contain",
+    },
+    container: {
+      flex: 1,
+      padding: theme.spacing.md,
+      gap: theme.spacing.lg,
+    },
+    headerContainer: {
+      paddingHorizontal: 0,
+    },
+    exchangeContainer: {
+      padding: theme.spacing.md,
+      backgroundColor: theme.colors.neutral6,
+      borderRadius: theme.radius.lg,
+      shadowColor: theme.colors.primary1,
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.07,
+      shadowRadius: theme.radius.lg,
+      elevation: 4,
+    },
+    arrowContainer: {
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    bottomContainer: {
+      gap: theme.spacing.xl * 2,
+    },
+    currencyContainer: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      marginTop: theme.spacing.ms,
+    },
+  });

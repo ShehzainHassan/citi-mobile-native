@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { Text, TextInput, View, TouchableOpacity } from "react-native";
 import { useStyles } from "@/hooks/useStyles";
 import { useTheme } from "@/theme";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import React, { useState } from "react";
+import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { createInputStyles } from "./Input.styles";
 import { InputProps } from "./Input.types";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 export const Input: React.FC<InputProps> = ({
   label,
@@ -14,6 +14,7 @@ export const Input: React.FC<InputProps> = ({
   rightText,
   rightPlaceholder,
   rightIcon,
+  readOnly = false,
   ...props
 }) => {
   const { theme } = useTheme();
@@ -25,6 +26,19 @@ export const Input: React.FC<InputProps> = ({
 
   const isPasswordField = !!secureTextEntry;
 
+  const inputStyle = [
+    inputStyles.input,
+    globalStyles.body3,
+    style,
+    { color: theme.colors.neutral1 },
+    error ? inputStyles.inputError : null,
+    readOnly
+      ? inputStyles.inputReadOnly
+      : isFocused
+        ? inputStyles.inputFocused
+        : null,
+  ];
+
   return (
     <View style={inputStyles.inputContainer}>
       {label && (
@@ -35,17 +49,11 @@ export const Input: React.FC<InputProps> = ({
       <View style={inputStyles.inputWrapper}>
         <TextInput
           {...props}
+          editable={!readOnly}
           secureTextEntry={isPasswordField && !isPasswordVisible}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          style={[
-            inputStyles.input,
-            globalStyles.body3,
-            style,
-            { color: theme.colors.neutral1 },
-            isFocused ? inputStyles.inputFocused : null,
-            error ? inputStyles.inputError : null,
-          ]}
+          onFocus={() => !readOnly && setIsFocused(true)}
+          onBlur={() => !readOnly && setIsFocused(false)}
+          style={inputStyle}
           placeholderTextColor={theme.colors.neutral4}
         />
 
@@ -70,7 +78,7 @@ export const Input: React.FC<InputProps> = ({
           </TouchableOpacity>
         )}
 
-        {isPasswordField && (
+        {isPasswordField && !readOnly && (
           <TouchableOpacity
             onPress={() => setIsPasswordVisible((prev) => !prev)}
             style={inputStyles.iconContainer}>

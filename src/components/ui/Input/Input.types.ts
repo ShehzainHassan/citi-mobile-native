@@ -8,4 +8,5 @@ export interface InputProps extends TextInputProps {
   rightPlaceholder?: string | undefined;
   rightIcon?: React.ReactNode;
   onRightPress?: () => void;
+  readOnly?: Boolean;
 }
