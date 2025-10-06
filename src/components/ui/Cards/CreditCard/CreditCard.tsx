@@ -36,7 +36,7 @@ export const CreditCard: React.FC<CreditCardProps> = ({
         imageStyle={[
           imageStyle,
           {
-            resizeMode: "cover",
+            resizeMode: "stretch",
           },
         ]}>
         <View style={styles.titleContainer}>

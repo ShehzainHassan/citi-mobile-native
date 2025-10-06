@@ -17,21 +17,23 @@ export const createCreditCardStyles = (theme: Theme, width: number) => {
       width: "100%",
       maxWidth: MAX_CARD_WIDTH,
       aspectRatio: 1.6,
-      borderRadius: theme.radius.lg,
       overflow: "hidden",
       justifyContent: "space-between",
-      paddingVertical: isWideScreen ? FIXED_VERTICAL_PADDING : width * 0.08,
-      paddingHorizontal: isWideScreen ? FIXED_HORIZONTAL_PADDING : width * 0.1,
     },
     titleContainer: {
       flex: 1,
       justifyContent: "space-between",
       gap: theme.spacing.lg,
+      paddingVertical: isWideScreen ? FIXED_VERTICAL_PADDING : width * 0.08,
+      paddingLeft: isWideScreen ? FIXED_HORIZONTAL_PADDING : width * 0.1,
     },
     subContainer: {
       gap: theme.spacing.sm,
     },
     amount: {
+      paddingVertical: isWideScreen ? FIXED_VERTICAL_PADDING : width * 0.08,
+      paddingLeft: isWideScreen ? FIXED_HORIZONTAL_PADDING : width * 0.1,
+
       color: theme.colors.neutral6,
     },
     cardNumberContainer: {
