@@ -16,12 +16,12 @@ export const Language = () => {
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
 
   return (
-    <SafeAreaView style={[globalStyles.verticalSpread]}>
+    <SafeAreaView style={globalStyles.verticalSpread}>
       <Header
         title="Language"
         onPress={() => navigation.navigate("Settings")}
       />
-      <ScrollView style={[globalStyles.paddedColumn]}>
+      <ScrollView style={globalStyles.paddedColumn}>
         <CardDetails>
           {LANGUAGES.map((lang) => {
             const isSelected = lang.code === selectedLang;
@@ -38,7 +38,7 @@ export const Language = () => {
                     }}>
                     <Image
                       source={{ uri: getFlagUrl(lang.code) }}
-                      style={[globalStyles.flag]}
+                      style={globalStyles.flag}
                       resizeMode="contain"
                     />
                     <Text

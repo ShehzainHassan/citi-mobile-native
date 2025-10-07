@@ -18,12 +18,12 @@ export const TransactionReport = () => {
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
 
   return (
-    <View style={[transactionReportStyles.container]}>
+    <View style={transactionReportStyles.container}>
       <Header
         title="Transaction report"
         variant="secondary"
         onPress={() => navigation.navigate("Home")}
-        style={[transactionReportStyles.headerContainer]}
+        style={transactionReportStyles.headerContainer}
       />
 
       <View
@@ -31,8 +31,8 @@ export const TransactionReport = () => {
           globalStyles.roundedContainer,
           transactionReportStyles.subContainer,
         ]}>
-        <View style={[transactionReportStyles.transactionContainer]}>
-          <View style={[transactionReportStyles.cardChartContainer]}>
+        <View style={transactionReportStyles.transactionContainer}>
+          <View style={transactionReportStyles.cardChartContainer}>
             <CreditCard
               name="John Smith"
               cardType="Amazon Platinium"

@@ -42,15 +42,15 @@ export const ChangePassword = () => {
     : !password.trim() || password !== confirmPassword;
 
   return (
-    <View style={[globalStyles.verticalSpread]}>
+    <View style={globalStyles.verticalSpread}>
       <Header
         title={passwordChanged ? "" : t("changePasswordTitle")}
         onPress={() => navigation.goBack()}
         style={authStyles.headerContainer}
       />
-      <View style={[globalStyles.paddedColumn]}>
+      <View style={globalStyles.paddedColumn}>
         {!passwordChanged ? (
-          <View style={[globalStyles.cardContainer]}>
+          <View style={globalStyles.cardContainer}>
             {isFromSettings && (
               <View
                 style={[
@@ -93,7 +93,7 @@ export const ChangePassword = () => {
             />
           </View>
         ) : (
-          <View style={[globalStyles.paddedColumn]}>
+          <View style={globalStyles.paddedColumn}>
             <Image
               source={Images.passwordChanged}
               style={globalStyles.authLogo}

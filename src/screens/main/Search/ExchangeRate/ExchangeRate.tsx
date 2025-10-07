@@ -12,7 +12,7 @@ export const ExchangeRate = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
   return (
-    <View style={[globalStyles.verticalSpread]}>
+    <View style={globalStyles.verticalSpread}>
       <Header
         title="Exchange rate"
         onPress={() => navigation.navigate("Search")}
@@ -23,7 +23,7 @@ export const ExchangeRate = () => {
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Image
               source={{ uri: getFlagUrl(row.countryCode) }}
-              style={[globalStyles.flag]}
+              style={globalStyles.flag}
               resizeMode="contain"
             />
             <Text style={[globalStyles.body1, globalStyles.neutral1]}>

@@ -13,7 +13,7 @@ export const AuthFooter: React.FC<AuthFooterProps> = ({
   const { theme } = useTheme();
   const styles = createAuthFooterStyles(theme);
   return (
-    <View style={[styles.footerContainer]}>
+    <View style={styles.footerContainer}>
       <Text style={globalStyles.caption2}>{label}</Text>
       {onActionPress ? (
         <TouchableOpacity onPress={onActionPress}>

@@ -3,10 +3,10 @@ import { StyleSheet } from "react-native";
 
 export const createAuthFooterStyles = (theme:Theme)=> StyleSheet.create({
   footerContainer: {
+    alignItems: "center",
     display: "flex",
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
     gap: theme.spacing.ms,
+    justifyContent: "center",
   },
 });

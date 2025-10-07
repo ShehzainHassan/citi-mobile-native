@@ -9,48 +9,48 @@ export const createCreditCardStyles = (theme: Theme, width: number) => {
   const isWideScreen = width >= MAX_CARD_WIDTH;
 
   return StyleSheet.create({
-    wrapper: {
-      alignItems: "center",
-      width: "100%",
-    },
-    container: {
-      width: "100%",
-      maxWidth: MAX_CARD_WIDTH,
-      aspectRatio: 1.6,
-      overflow: "hidden",
-      justifyContent: "space-between",
-    },
-    titleContainer: {
-      flex: 1,
-      justifyContent: "space-between",
-      gap: theme.spacing.lg,
-      paddingVertical: isWideScreen ? FIXED_VERTICAL_PADDING : width * 0.08,
-      paddingLeft: isWideScreen ? FIXED_HORIZONTAL_PADDING : width * 0.1,
-    },
-    subContainer: {
-      gap: theme.spacing.sm,
-    },
     amount: {
-      paddingVertical: isWideScreen ? FIXED_VERTICAL_PADDING : width * 0.08,
+      color: theme.colors.neutral6,
       paddingLeft: isWideScreen ? FIXED_HORIZONTAL_PADDING : width * 0.1,
 
-      color: theme.colors.neutral6,
+      paddingVertical: isWideScreen ? FIXED_VERTICAL_PADDING : width * 0.08,
     },
     cardNumberContainer: {
-      flexDirection: "row",
       alignItems: "center",
-      gap: theme.spacing.sm,
+      flexDirection: "row",
       flexWrap: "nowrap",
+      gap: theme.spacing.sm,
+    },
+    container: {
+      aspectRatio: 1.6,
+      justifyContent: "space-between",
+      maxWidth: MAX_CARD_WIDTH,
+      overflow: "hidden",
+      width: "100%",
+    },
+    dot: {
+      backgroundColor: theme.colors.neutral6,
+      borderRadius: theme.radius.xs,
+      height: 5,
+      width: 5,
     },
     dotsContainer: {
       flexDirection: "row",
       gap: theme.spacing.xs,
     },
-    dot: {
-      width: 5,
-      height: 5,
-      borderRadius: theme.radius.xs,
-      backgroundColor: theme.colors.neutral6,
+    subContainer: {
+      gap: theme.spacing.sm,
+    },
+    titleContainer: {
+      flex: 1,
+      gap: theme.spacing.lg,
+      justifyContent: "space-between",
+      paddingLeft: isWideScreen ? FIXED_HORIZONTAL_PADDING : width * 0.1,
+      paddingVertical: isWideScreen ? FIXED_VERTICAL_PADDING : width * 0.08,
+    },
+    wrapper: {
+      alignItems: "center",
+      width: "100%",
     },
   });
 };

@@ -12,12 +12,12 @@ export const AppInformation = () => {
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
 
   return (
-    <View style={[globalStyles.verticalSpread]}>
+    <View style={globalStyles.verticalSpread}>
       <Header
         title="App information"
         onPress={() => navigation.navigate("Settings")}
       />
-      <View style={[globalStyles.paddedColumn]}>
+      <View style={globalStyles.paddedColumn}>
         <Text style={[globalStyles.title2, globalStyles.centerContainer]}>
           Citibank E-mobile Banking
         </Text>

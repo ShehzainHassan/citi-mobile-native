@@ -3,11 +3,14 @@ import { Platform, StyleSheet } from "react-native";
 
 export const createAccountCardStyles = (theme: Theme) =>
   StyleSheet.create({
+    accountSummaryContainer: {
+      gap: theme.spacing.sm
+    },
     container: {
+      backgroundColor: theme.colors.neutral6,
+      borderRadius: theme.radius.md,
       gap: 12,
       padding: theme.spacing.md,
-      borderRadius: theme.radius.md,
-      backgroundColor: theme.colors.neutral6,
       ...Platform.select({
         web: {
           boxShadow: '0px 4px 30px rgba(54, 41, 183, 0.07)'
@@ -24,8 +27,5 @@ export const createAccountCardStyles = (theme: Theme) =>
     subContainer: {
       flexDirection: 'row',
       justifyContent: 'space-between'
-    },
-    accountSummaryContainer: {
-      gap: theme.spacing.sm
     }
   });

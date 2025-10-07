@@ -3,54 +3,61 @@ import { Theme } from "../theme";
 
 export const createAuthStyles = (theme: Theme) =>
   StyleSheet.create({
-    container: {
-      display: "flex",
-      flex: 1,
-      backgroundColor: theme.colors.primary1,
-      paddingTop: theme.spacing.lg,
-    },
-    headerContainer: {
-      paddingBottom: theme.radius.md,
-    },
     biometricButton: {
-      width: 64,
       height: 64,
       marginVertical: theme.spacing.md,
+      width: 64,
     },
-    forgotPassword: {
-      color: theme.colors.neutral4,
-      fontSize: theme.typography.fontSize.sm,
-      textAlign: "right",
-      fontWeight: "500",
-      lineHeight: theme.spacing.md,
-      marginBottom: theme.spacing.ml * 2,
+    changePasswordContainer: {
+      alignItems: "center",
+      display: "flex",
+      gap: theme.spacing.lg,
+      justifyContent: "center",
+      marginBottom: theme.spacing.xl,
+    },
+    changePhoneNo: {
+      backgroundColor: "transparent",
     },
     checkboxContainer: {
       display: "flex",
       flexDirection: "row",
       gap: theme.spacing.ms,
     },
-    text: {
-      fontSize: theme.typography.fontSize.base,
-      lineHeight: theme.spacing.md,
+    codeContainer: {
+      flexDirection: "row",
+      gap: theme.spacing.ms,
+      height: 44,
+      justifyContent: "space-between",
     },
-    signUpButton: {
-      marginVertical: theme.spacing.xl,
-    },
-    forgotPasswordContainer: {
+    container: {
+      backgroundColor: theme.colors.primary1,
       display: "flex",
       flex: 1,
+      paddingTop: theme.spacing.lg,
+    },
+    forgotPassword: {
+      color: theme.colors.neutral4,
+      fontSize: theme.typography.fontSize.sm,
+      fontWeight: "500",
+      lineHeight: theme.spacing.md,
+      marginBottom: theme.spacing.ml * 2,
+      textAlign: "right",
+    },
+    forgotPasswordContainer: {
       backgroundColor: theme.colors.surface,
+      display: "flex",
+      flex: 1,
       padding: theme.spacing.lg,
+    },
+    headerContainer: {
+      paddingBottom: theme.radius.md,
     },
     noPadding: {
       padding: 0,
     },
-    subContainer: {
-      padding: theme.spacing.md,
-      borderRadius: theme.radius.md,
-      backgroundColor: theme.colors.neutral6,
-      marginVertical: theme.spacing.lg,
+    passwordContainer: {
+      gap: theme.spacing.sm,
+      marginBottom: theme.spacing.lg,
     },
     phoneContainer: {
       display: "flex",
@@ -61,31 +68,24 @@ export const createAuthStyles = (theme: Theme) =>
       gap: theme.spacing.lg,
       marginTop: theme.spacing.lg,
     },
-    passwordContainer: {
-      gap: theme.spacing.sm,
-      marginBottom: theme.spacing.lg,
+    signUpButton: {
+      marginVertical: theme.spacing.xl,
     },
-    textInfoContainer: {
-      flexDirection: "column",
-      gap: theme.spacing.ms - 2,
+    subContainer: {
+      backgroundColor: theme.colors.neutral6,
+      borderRadius: theme.radius.md,
+      marginVertical: theme.spacing.lg,
+      padding: theme.spacing.md,
+    },
+    text: {
+      fontSize: theme.typography.fontSize.base,
+      lineHeight: theme.spacing.md,
     },
     textInfo: {
       color: theme.colors.neutral2,
     },
-    codeContainer: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      gap: theme.spacing.ms,
-      height: 44,
-    },
-    changePhoneNo: {
-      backgroundColor: "transparent",
-    },
-    changePasswordContainer: {
-      display: "flex",
-      gap: theme.spacing.lg,
-      alignItems: "center",
-      justifyContent: "center",
-      marginBottom: theme.spacing.xl,
+    textInfoContainer: {
+      flexDirection: "column",
+      gap: theme.spacing.ms - 2,
     },
   });

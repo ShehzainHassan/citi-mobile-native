@@ -73,14 +73,14 @@ export const Exchange = () => {
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
 
   return (
-    <View style={[styles.container]}>
+    <View style={styles.container}>
       <Header
         title="Exchange"
         onPress={() => navigation.navigate("Search")}
-        style={[styles.headerContainer]}
+        style={styles.headerContainer}
       />
-      <Image source={Images.exchangeRateLogo} style={[styles.logo]} />
-      <View style={[styles.exchangeContainer]}>
+      <Image source={Images.exchangeRateLogo} style={styles.logo} />
+      <View style={styles.exchangeContainer}>
         <Input
           label="From"
           placeholder="Amount"
@@ -101,12 +101,12 @@ export const Exchange = () => {
           }
         />
 
-        <View style={[styles.arrowContainer]}>
+        <View style={styles.arrowContainer}>
           <MaterialIcons name="arrow-downward" size={24} color="red" />
           <MaterialIcons name="arrow-upward" size={24} color="green" />
         </View>
 
-        <View style={[styles.bottomContainer]}>
+        <View style={styles.bottomContainer}>
           {isExchangeEnabled && exchangeRate ? (
             <View>
               <Input
@@ -128,7 +128,7 @@ export const Exchange = () => {
                   />
                 }
               />
-              <View style={[styles.currencyContainer]}>
+              <View style={styles.currencyContainer}>
                 <Text style={[globalStyles.body3, globalStyles.primary1]}>
                   Currency rate
                 </Text>
@@ -174,40 +174,40 @@ export const Exchange = () => {
 };
 const createStyles = (theme: Theme) =>
   StyleSheet.create({
-    logo: {
-      width: "100%",
-      aspectRatio: 2,
-      resizeMode: "contain",
-    },
-    container: {
-      flex: 1,
-      padding: theme.spacing.md,
-      gap: theme.spacing.lg,
-    },
-    headerContainer: {
-      paddingHorizontal: 0,
-    },
-    exchangeContainer: {
-      padding: theme.spacing.md,
-      backgroundColor: theme.colors.neutral6,
-      borderRadius: theme.radius.lg,
-      shadowColor: theme.colors.primary1,
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.07,
-      shadowRadius: theme.radius.lg,
-      elevation: 4,
-    },
     arrowContainer: {
+      alignItems: "center",
       flexDirection: "row",
       justifyContent: "center",
-      alignItems: "center",
     },
     bottomContainer: {
       gap: theme.spacing.xl * 2,
+    },
+    container: {
+      flex: 1,
+      gap: theme.spacing.lg,
+      padding: theme.spacing.md,
     },
     currencyContainer: {
       flexDirection: "row",
       justifyContent: "space-between",
       marginTop: theme.spacing.ms,
+    },
+    exchangeContainer: {
+      backgroundColor: theme.colors.neutral6,
+      borderRadius: theme.radius.lg,
+      elevation: 4,
+      padding: theme.spacing.md,
+      shadowColor: theme.colors.primary1,
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.07,
+      shadowRadius: theme.radius.lg,
+    },
+    headerContainer: {
+      paddingHorizontal: 0,
+    },
+    logo: {
+      aspectRatio: 2,
+      resizeMode: "contain",
+      width: "100%",
     },
   });

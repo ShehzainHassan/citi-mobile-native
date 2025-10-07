@@ -13,7 +13,7 @@ export const InterestRate = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
   return (
-    <View style={[globalStyles.verticalSpread]}>
+    <View style={globalStyles.verticalSpread}>
       <Header
         title="Interest rate"
         onPress={() => navigation.navigate("Search")}

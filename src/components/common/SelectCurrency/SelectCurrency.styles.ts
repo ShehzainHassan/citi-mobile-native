@@ -8,28 +8,28 @@ export const createSelectCurrencyStyles = (theme: Theme) =>
       padding: theme.spacing.md,
     },
     header: {
+      alignItems: "center",
       flexDirection: "row",
       justifyContent: "space-between",
-      alignItems: "center",
       marginBottom: theme.spacing.ms,
     },
     headerText: {
+      color: "#111",
       fontSize: 16,
       fontWeight: "600",
-      color: "#111",
     },
     row: {
+      alignItems: "center",
       flexDirection: "row",
       justifyContent: "space-between",
-      alignItems: "center",
       paddingVertical: 12,
-    },
-    text: {
-      fontSize: 14,
-      color: "#666",
     },
     selectedText: {
       color: "#4B3EFF",
       fontWeight: "600",
+    },
+    text: {
+      color: "#666",
+      fontSize: 14,
     },
   });

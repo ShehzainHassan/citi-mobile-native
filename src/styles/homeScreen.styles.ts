@@ -3,10 +3,11 @@ import { StyleSheet } from "react-native";
 
 export const createHomeScreenStyles = (theme: Theme) => {
   return StyleSheet.create({
-    mainContainer: {
-      flex: 1,
+    columnContainer: {
+      alignItems: "center",
       flexDirection: "column",
-      backgroundColor: theme.colors.primary1,
+      gap: theme.spacing.ms,
+      justifyContent: "center",
     },
     container: {
       flexDirection: "column",
@@ -14,38 +15,37 @@ export const createHomeScreenStyles = (theme: Theme) => {
       overflowY: "auto",
     },
     headerContainer: {
+      alignItems: "center",
+      backgroundColor: theme.colors.primary1,
       flexDirection: "row",
       justifyContent: "space-between",
-      alignItems: "center",
       padding: theme.spacing.lg,
+    },
+    mainContainer: {
       backgroundColor: theme.colors.primary1,
-    },
-    profilePicContainer: {
-      flexDirection: "row",
-      alignItems: "center",
-      gap: theme.spacing.mlg,
-    },
-    columnContainer: {
+      flex: 1,
       flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: theme.spacing.ms,
-    },
-    rowContainer: {
-      maxWidth: 500,
-      width: "100%",
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: theme.spacing.ms,
-    },
-    profilePic: {
-      width: 50,
-      height: 50,
     },
     notificationBell: {
-      width: 26,
       height: 28,
+      width: 26,
+    },
+    profilePic: {
+      height: 50,
+      width: 50,
+    },
+    profilePicContainer: {
+      alignItems: "center",
+      flexDirection: "row",
+      gap: theme.spacing.mlg,
+    },
+    rowContainer: {
+      alignItems: "center",
+      flexDirection: "row",
+      gap: theme.spacing.ms,
+      justifyContent: "center",
+      maxWidth: 500,
+      width: "100%",
     },
   });
 };

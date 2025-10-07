@@ -12,9 +12,9 @@ export const Search = () => {
     useNavigation<NativeStackNavigationProp<MainTabWithSearchParamList>>();
 
   return (
-    <View style={[globalStyles.verticalSpread]}>
+    <View style={globalStyles.verticalSpread}>
       <Header title="Search" onPress={() => navigation.navigate("Home")} />
-      <View style={[globalStyles.verticalSpread]}>
+      <View style={globalStyles.verticalSpread}>
         <View style={[globalStyles.paddedColumn, globalStyles.spacedColumn]}>
           <SearchScreenCard
             title="Branch"

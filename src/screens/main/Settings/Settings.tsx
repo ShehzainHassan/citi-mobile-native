@@ -17,12 +17,12 @@ export const Settings = () => {
   const { globalStyles, authStyles, homeScreenStyles } = useStyles();
 
   return (
-    <View style={[authStyles.container]}>
+    <View style={authStyles.container}>
       <Header
         title="Settings"
         variant="secondary"
         onPress={() => navigation.navigate("Home")}
-        style={[authStyles.headerContainer]}
+        style={authStyles.headerContainer}
       />
 
       <View style={[globalStyles.roundedContainer, styles.roundedContainer]}>
@@ -104,23 +104,23 @@ export const Settings = () => {
 };
 
 const styles = StyleSheet.create({
-  roundedContainer: {
-    position: "relative",
-    paddingTop: 50,
-  },
   imgWrapper: {
     alignItems: "center",
     justifyContent: "flex-start",
   },
+  nameText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginTop: 15,
+  },
   profilePic: {
+    height: 100,
     position: "absolute",
     top: -100,
     width: 100,
-    height: 100,
   },
-  nameText: {
-    marginTop: 15,
-    fontSize: 18,
-    fontWeight: "bold",
+  roundedContainer: {
+    paddingTop: 50,
+    position: "relative",
   },
 });

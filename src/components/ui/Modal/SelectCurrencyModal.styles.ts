@@ -6,27 +6,27 @@ export const createSelectCurrencyModalStyles = (
   screenWidth: number
 ) =>
   StyleSheet.create({
-    modalOverlay: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      backgroundColor: "rgba(0,0,0,0.3)",
-    },
-    modalContent: {
-      width: screenWidth,
-      height: modalHeight,
-      backgroundColor: theme.colors.neutral6,
-      borderRadius: theme.spacing.md,
-      overflow: "hidden",
-    },
     header: {
-      padding: theme.spacing.md,
       borderBottomWidth: 1,
       borderColor: "#eee",
+      padding: theme.spacing.md,
     },
     listContainer: {
       flex: 1,
-      paddingHorizontal: theme.spacing.md,
       paddingBottom: theme.spacing.md,
+      paddingHorizontal: theme.spacing.md,
+    },
+    modalContent: {
+      backgroundColor: theme.colors.neutral6,
+      borderRadius: theme.spacing.md,
+      height: modalHeight,
+      overflow: "hidden",
+      width: screenWidth,
+    },
+    modalOverlay: {
+      alignItems: "center",
+      backgroundColor: "rgba(0,0,0,0.3)",
+      flex: 1,
+      justifyContent: "center",
     },
   });

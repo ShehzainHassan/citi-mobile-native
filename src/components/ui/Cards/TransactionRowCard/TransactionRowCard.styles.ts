@@ -3,41 +3,41 @@ import { StyleSheet } from "react-native";
 
 export const createTransactionRowCardStyles = (theme: Theme) =>
   StyleSheet.create({
+    cardContainer: {
+      borderBottomWidth: 1,
+      borderColor: theme.colors.line1,
+      flexDirection: "row",
+      justifyContent: "space-between",
+      paddingBottom: theme.spacing.ms,
+    },
     container: {
-      marginTop: theme.spacing.lg,
       gap: theme.spacing.md,
+      marginTop: theme.spacing.lg,
     },
     dayText: {
       color: theme.colors.textdefault,
     },
-    subTitle: {
-      color: theme.colors.neutral3,
-    },
-    cardContainer: {
+    iconContainer: {
+      alignItems: "center",
       flexDirection: "row",
-      justifyContent: "space-between",
-      paddingBottom: theme.spacing.ms,
-      borderBottomWidth: 1,
-      borderColor: theme.colors.line1,
+      gap: theme.spacing.ms,
+    },
+    iconImg: {
+      height: 16,
+      width: 16,
     },
     iconImgContainer: {
       alignItems: "center",
-      justifyContent: "center",
-      width: 40,
-      height: 40,
       backgroundColor: theme.colors.primary1,
       borderRadius: theme.spacing.sml,
-    },
-    iconImg: {
-      width: 16,
-      height: 16,
-    },
-    iconContainer: {
-      flexDirection: "row",
-      alignItems: "center",
-      gap: theme.spacing.ms,
+      height: 40,
+      justifyContent: "center",
+      width: 40,
     },
     negative: {
       color: theme.colors.semantic1,
+    },
+    subTitle: {
+      color: theme.colors.neutral3,
     },
   });

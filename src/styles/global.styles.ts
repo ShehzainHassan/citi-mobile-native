@@ -6,61 +6,61 @@ export const createGlobalStyles = (theme: Theme) =>
   StyleSheet.create({
     // Layout patterns
     container: {
+      backgroundColor: theme.colors.primary1,
       display: "flex",
       flex: 1,
-      backgroundColor: theme.colors.primary1,
       paddingTop: theme.spacing.lg,
     },
     centerContainer: {
-      display: "flex",
-      justifyContent: "center",
       alignItems: "center",
       backgroundColor: theme.colors.neutral6,
+      display: "flex",
+      justifyContent: "center",
     },
     paddedContainer: {
+      backgroundColor: theme.colors.neutral6,
       flex: 1,
       padding: theme.spacing.lg,
-      backgroundColor: theme.colors.neutral6,
     },
     roundedContainer: {
-      display: "flex",
-      flex: 1,
-      padding: theme.spacing.lg,
       backgroundColor: theme.colors.neutral6,
       borderTopLeftRadius: 30,
       borderTopRightRadius: 30,
+      display: "flex",
+      flex: 1,
+      padding: theme.spacing.lg,
     },
     header: {
-      fontWeight: "600",
-      fontSize: theme.typography.fontSize.xl,
-      lineHeight: theme.spacing.lgx,
       color: theme.colors.neutral6,
+      fontSize: theme.typography.fontSize.xl,
+      fontWeight: "600",
+      lineHeight: theme.spacing.lgx,
     },
     headerContainer: {
       paddingHorizontal: 0,
     },
     previous: {
-      width: 16,
       height: 16,
       resizeMode: "contain",
+      width: 16,
     },
 
     // Typography patterns
     heading1: {
+      color: theme.colors.neutral6,
       fontSize: theme.typography.fontSize.xxl,
       fontWeight: "400",
-      color: theme.colors.neutral6,
     },
     heading2: {
+      color: theme.colors.neutral1,
       fontSize: theme.typography.fontSize.xl,
       fontWeight: "600",
-      color: theme.colors.neutral1,
     },
     heading3: {
-      fontSize: theme.typography.fontSize.base,
-      lineHeight: theme.spacing.md,
-      fontWeight: "600",
       color: theme.colors.primary1,
+      fontSize: theme.typography.fontSize.base,
+      fontWeight: "600",
+      lineHeight: theme.spacing.md,
     },
 
     titleContainer: {
@@ -69,65 +69,65 @@ export const createGlobalStyles = (theme: Theme) =>
     },
 
     title1: {
+      color: theme.colors.primary1,
       fontFamily: Fonts.sans,
       fontSize: theme.typography.fontSize.xxl,
-      lineHeight: theme.spacing.lgx,
       fontWeight: "600",
-      color: theme.colors.primary1,
+      lineHeight: theme.spacing.lgx,
     },
     title2: {
-      fontSize: theme.typography.fontSize.xl,
-      lineHeight: theme.spacing.lgx,
-      fontWeight: "600",
       color: theme.colors.neutral1,
+      fontSize: theme.typography.fontSize.xl,
+      fontWeight: "600",
+      lineHeight: theme.spacing.lgx,
     },
     title3: {
-      fontSize: theme.typography.fontSize.lg,
-      lineHeight: theme.spacing.lg,
-      fontWeight: "600",
       color: theme.colors.primary1,
+      fontSize: theme.typography.fontSize.lg,
+      fontWeight: "600",
+      lineHeight: theme.spacing.lg,
     },
     body1: {
-      fontWeight: "500",
-      fontSize: theme.typography.fontSize.lg,
       color: theme.colors.neutral6,
+      fontSize: theme.typography.fontSize.lg,
+      fontWeight: "500",
       lineHeight: theme.spacing.md,
     },
     body2: {
-      fontWeight: "400",
-      fontSize: theme.typography.fontSize.lg,
       color: theme.colors.neutral6,
+      fontSize: theme.typography.fontSize.lg,
+      fontWeight: "400",
       lineHeight: theme.spacing.lg,
     },
     body3: {
-      fontWeight: "500",
-      fontSize: theme.typography.fontSize.base,
       color: theme.colors.neutral4,
+      fontSize: theme.typography.fontSize.base,
+      fontWeight: "500",
       lineHeight: theme.spacing.md,
     },
     bodyText: {
-      fontWeight: "500",
-      fontSize: theme.typography.fontSize.base,
       color: theme.colors.neutral1,
+      fontSize: theme.typography.fontSize.base,
+      fontWeight: "500",
       lineHeight: theme.spacing.ml,
     },
     sublineMedium14: {
-      fontWeight: "500",
-      fontSize: theme.typography.fontSize.base,
       color: theme.colors.neutral6,
+      fontSize: theme.typography.fontSize.base,
+      fontWeight: "500",
       lineHeight: theme.spacing.md,
     },
     caption1: {
+      color: theme.colors.primary1,
       fontSize: theme.typography.fontSize.sm,
       fontWeight: "600",
       lineHeight: theme.spacing.md,
-      color: theme.colors.primary1,
     },
     caption2: {
+      color: theme.colors.neutral1,
       fontSize: theme.typography.fontSize.sm,
       fontWeight: "500",
       lineHeight: theme.spacing.md,
-      color: theme.colors.neutral1,
     },
     paddedColumn: {
       flex: 1,
@@ -157,10 +157,10 @@ export const createGlobalStyles = (theme: Theme) =>
 
     // Card patterns
     cardContainer: {
+      backgroundColor: theme.colors.neutral6,
+      borderRadius: theme.radius.md,
       gap: 12,
       padding: theme.spacing.md,
-      borderRadius: theme.radius.md,
-      backgroundColor: theme.colors.neutral6,
       ...Platform.select({
         web: {
           boxShadow: "0px 4px 30px rgba(54, 41, 183, 0.07)",
@@ -186,33 +186,33 @@ export const createGlobalStyles = (theme: Theme) =>
     balanceCard: {
       backgroundColor: theme.colors.primary1,
       borderRadius: theme.radius.md,
-      padding: theme.spacing.lg,
       marginVertical: theme.spacing.md,
+      padding: theme.spacing.lg,
     },
     balanceAmount: {
+      color: "#FFFFFF",
       fontSize: 32,
       fontWeight: "bold",
-      color: "#FFFFFF",
     },
     transactionRow: {
+      alignItems: "center",
+      borderBottomColor: theme.colors.border,
+      borderBottomWidth: 1,
       flexDirection: "row",
       justifyContent: "space-between",
-      alignItems: "center",
       paddingVertical: theme.spacing.md,
-      borderBottomWidth: 1,
-      borderBottomColor: theme.colors.border,
     },
 
     authLogo: {
-      width: "100%",
       height: 165,
-      resizeMode: "contain",
       marginVertical: theme.spacing.xl,
+      resizeMode: "contain",
+      width: "100%",
     },
     flag: {
-      width: 40,
+      borderRadius: 2,
       height: 30,
       marginRight: 8,
-      borderRadius: 2,
+      width: 40,
     },
   });

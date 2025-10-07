@@ -3,10 +3,9 @@ import { StyleSheet } from "react-native";
 
 export const createAccountScreenStyles = (theme: Theme) =>
   StyleSheet.create({
-    container: {
+    accountSection: {},
+    button: {
       flex: 1,
-      padding: theme.spacing.lg,
-      backgroundColor: theme.colors.neutral6,
     },
     buttonsContainer: {
       flexDirection: "row",
@@ -15,50 +14,51 @@ export const createAccountScreenStyles = (theme: Theme) =>
       marginTop: theme.spacing.lg,
       width: "100%",
     },
-    button: {
-      flex: 1,
-    },
 
-    profilePicContainer: {
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: theme.spacing.sm,
-      marginVertical: theme.spacing.lg,
-    },
-    profilePic: {
-      width: 100,
-      height: 100,
-      resizeMode: "contain",
-    },
     card: {
-      width: "100%",
       height: 204,
       resizeMode: "contain",
+      width: "100%",
     },
-    accountSection: {},
     cardSection: {
       gap: theme.spacing.xl * 2,
     },
-    textContainer: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
-      paddingBottom: theme.spacing.ms,
-      borderBottomWidth: 1,
-      borderColor: theme.colors.line1,
+    cardsContainer: {
+      gap: theme.spacing.lg,
+      marginTop: theme.spacing.lg,
+    },
+    container: {
+      backgroundColor: theme.colors.neutral6,
+      flex: 1,
+      padding: theme.spacing.lg,
+    },
+    deleteCard: {
+      color: theme.colors.semantic1,
+      padding: theme.spacing.sml,
+      textAlign: "center",
+      width: "100%",
     },
     label: {
       color: theme.colors.neutral2,
     },
-    cardsContainer: {
-      marginTop: theme.spacing.lg,
-      gap: theme.spacing.lg,
+    profilePic: {
+      height: 100,
+      resizeMode: "contain",
+      width: 100,
     },
-    deleteCard: {
-      width: "100%",
-      textAlign: "center",
-      color: theme.colors.semantic1,
-      padding: theme.spacing.sml,
+    profilePicContainer: {
+      alignItems: "center",
+      flexDirection: "column",
+      gap: theme.spacing.sm,
+      justifyContent: "center",
+      marginVertical: theme.spacing.lg,
+    },
+    textContainer: {
+      alignItems: "center",
+      borderBottomWidth: 1,
+      borderColor: theme.colors.line1,
+      flexDirection: "row",
+      justifyContent: "space-between",
+      paddingBottom: theme.spacing.ms,
     },
   });

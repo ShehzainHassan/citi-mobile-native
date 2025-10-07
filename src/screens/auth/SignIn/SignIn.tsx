@@ -26,7 +26,7 @@ export const SignIn = () => {
         title={t("signIn")}
         variant="secondary"
         onPress={() => navigation.navigate("Home")}
-        style={[authStyles.headerContainer]}
+        style={authStyles.headerContainer}
       />
       <View style={globalStyles.roundedContainer}>
         <AuthHeader title={t("welcomeTitle")} subTitle={t("welcomeSubtitle")} />

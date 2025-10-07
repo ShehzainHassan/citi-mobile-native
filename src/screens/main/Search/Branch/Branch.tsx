@@ -128,49 +128,49 @@ export const SearchForBranch: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  nativeMap: {
-    width: 500,
-    height: 500,
-  },
-  sheetContent: {
-    padding: 16,
-    backgroundColor: "#fff",
-    flex: 1,
-  },
-  searchInput: {
-    height: 40,
-    borderColor: "#ccc",
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 12,
-    marginBottom: 12,
+  bankDistance: {
+    color: "#666",
+    fontSize: 14,
   },
   bankItem: {
-    paddingVertical: 10,
     borderBottomColor: "#eee",
     borderBottomWidth: 1,
+    paddingVertical: 10,
   },
   bankName: {
     fontSize: 16,
     fontWeight: "600",
   },
-  bankDistance: {
-    fontSize: 14,
-    color: "#666",
+  container: {
+    flex: 1,
+  },
+  nativeMap: {
+    height: 500,
+    width: 500,
+  },
+  searchInput: {
+    borderColor: "#ccc",
+    borderRadius: 8,
+    borderWidth: 1,
+    height: 40,
+    marginBottom: 12,
+    paddingHorizontal: 12,
+  },
+  sheetContent: {
+    backgroundColor: "#fff",
+    flex: 1,
+    padding: 16,
   },
   webFallback: {
+    alignItems: "center",
+    backgroundColor: "#f9f9f9",
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
     padding: 24,
-    backgroundColor: "#f9f9f9",
   },
   webMessage: {
-    fontSize: 16,
     color: "#333",
+    fontSize: 16,
     textAlign: "center",
   },
 });

@@ -31,7 +31,7 @@ export const ForgotPassword = () => {
       <View>
         <Header
           title={t("forgotPasswordTitle")}
-          style={[authStyles.noPadding]}
+          style={authStyles.noPadding}
           onPress={handleBack}
         />
         <View style={authStyles.subContainer}>
