@@ -20,7 +20,7 @@ export function ThemedText({
       ...(lightColor !== undefined ? { light: lightColor } : {}),
       ...(darkColor !== undefined ? { dark: darkColor } : {}),
     },
-    "text"
+    "text",
   );
 
   return (

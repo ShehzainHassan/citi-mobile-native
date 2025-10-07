@@ -44,7 +44,7 @@ export const Exchange = () => {
       if (fromCurrency && toCurrency) {
         try {
           const response = await fetch(
-            `https://open.er-api.com/v6/latest/${fromCurrency}`
+            `https://open.er-api.com/v6/latest/${fromCurrency}`,
           );
           const data = await response.json();
           const rate = data?.rates?.[toCurrency];

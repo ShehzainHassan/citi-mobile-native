@@ -1,19 +1,19 @@
 {
-    "titleDefault": "Compte et carte",
-    "titleCard": "Carte",
-    "tabAccount": "Compte",
-    "tabCard": "Carte",
-    "profileName": "John Smith",
-    "profilePicAlt": "Photo de profil",
-    "selectCardAlt": "Sélectionner la carte {{type}}",
-    "cardImageAlt": "Image de la carte {{type}}",
-    "addCard": "Ajouter une carte",
-    "deleteCard": "Supprimer la carte",
-    "cardDetails": {
-        "name": "Nom",
-        "cardNumber": "Numéro de carte",
-        "validFrom": "Valide à partir de",
-        "goodThru": "Valide jusqu'au",
-        "availableBalance": "Solde disponible"
-    }
+  "titleDefault": "Compte et carte",
+  "titleCard": "Carte",
+  "tabAccount": "Compte",
+  "tabCard": "Carte",
+  "profileName": "John Smith",
+  "profilePicAlt": "Photo de profil",
+  "selectCardAlt": "Sélectionner la carte {{type}}",
+  "cardImageAlt": "Image de la carte {{type}}",
+  "addCard": "Ajouter une carte",
+  "deleteCard": "Supprimer la carte",
+  "cardDetails": {
+    "name": "Nom",
+    "cardNumber": "Numéro de carte",
+    "validFrom": "Valide à partir de",
+    "goodThru": "Valide jusqu'au",
+    "availableBalance": "Solde disponible"
+  }
 }

@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const createSelectCurrencyModalStyles = (
   theme: Theme,
   modalHeight: number,
-  screenWidth: number
+  screenWidth: number,
 ) =>
   StyleSheet.create({
     header: {

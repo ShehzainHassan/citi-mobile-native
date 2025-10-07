@@ -1,15 +1,15 @@
 {
-    "greeting": "Salut, {{name}}",
-    "accountAndCard": "Compte et carte",
-    "transfer": "Transférer",
-    "withdraw": "Retirer",
-    "mobilePrepaid": "Prépayé mobile",
-    "payBill": "Payer la facture",
-    "saveOnline": "Économiser en ligne",
-    "creditCard": "Carte de crédit",
-    "transactionReport": "Rapport de transaction",
-    "beneficiary": "Bénéficiaire",
-    "notificationAlt": "Icône de cloche de notification",
-    "cardsAlt": "Illustration des cartes",
-    "profilePicAlt": "Photo de profil de l'utilisateur"
+  "greeting": "Salut, {{name}}",
+  "accountAndCard": "Compte et carte",
+  "transfer": "Transférer",
+  "withdraw": "Retirer",
+  "mobilePrepaid": "Prépayé mobile",
+  "payBill": "Payer la facture",
+  "saveOnline": "Économiser en ligne",
+  "creditCard": "Carte de crédit",
+  "transactionReport": "Rapport de transaction",
+  "beneficiary": "Bénéficiaire",
+  "notificationAlt": "Icône de cloche de notification",
+  "cardsAlt": "Illustration des cartes",
+  "profilePicAlt": "Photo de profil de l'utilisateur"
 }

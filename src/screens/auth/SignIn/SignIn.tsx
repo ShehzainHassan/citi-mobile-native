@@ -38,7 +38,8 @@ export const SignIn = () => {
 
         <Text
           style={authStyles.forgotPassword}
-          onPress={() => navigation.navigate("ForgotPassword")}>
+          onPress={() => navigation.navigate("ForgotPassword")}
+        >
           {t("forgotPassword")}
         </Text>
         <Button title={t("signInButton")} />

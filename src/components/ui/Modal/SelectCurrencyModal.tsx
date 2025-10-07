@@ -23,14 +23,15 @@ export const SelectCurrencyModal: React.FC<SelectCurrencyModalProps> = ({
   const styles = createSelectCurrencyModalStyles(
     theme,
     modalHeight,
-    screenWidth
+    screenWidth,
   );
   return (
     <Modal
       visible={visible}
       animationType="slide"
       transparent={true}
-      onRequestClose={onClose}>
+      onRequestClose={onClose}
+    >
       <TouchableWithoutFeedback onPress={onClose}>
         <View style={styles.modalOverlay}>
           <TouchableWithoutFeedback>

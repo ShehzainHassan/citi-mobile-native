@@ -17,7 +17,7 @@ import { ComponentType } from "react";
 
 // Option 3: Custom styled function with theme access
 export const createStyledComponent = <T extends ComponentType<any>>(
-  Component: T
+  Component: T,
 ): T => {
   // Custom implementation for theme-aware styled components
   // This allows: theme.colors.primary1, theme.spacing.md, etc.

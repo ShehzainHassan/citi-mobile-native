@@ -24,12 +24,14 @@ export const Button: React.FC<ButtonProps> = ({
         style,
       ]}
       disabled={disabled}
-      {...props}>
+      {...props}
+    >
       <Text
         style={[
           buttonStyles.text,
           variant === "secondary" && globalStyles.neutral1,
-        ]}>
+        ]}
+      >
         {title}
       </Text>
     </TouchableOpacity>

@@ -20,7 +20,10 @@ export const ExchangeRate = () => {
       <DataTable
         columns={EXCHANGE_RATE_TABLE.columns}
         rows={EXCHANGE_RATE_TABLE.rows.map((row) => [
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View
+            key={row.countryCode}
+            style={{ flexDirection: "row", alignItems: "center" }}
+          >
             <Image
               source={{ uri: getFlagUrl(row.countryCode) }}
               style={globalStyles.flag}

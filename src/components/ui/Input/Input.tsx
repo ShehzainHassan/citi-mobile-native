@@ -61,7 +61,8 @@ export const Input: React.FC<InputProps> = ({
           <TouchableOpacity
             onPress={props.onRightPress}
             style={inputStyles.rightContainer}
-            activeOpacity={0.7}>
+            activeOpacity={0.7}
+          >
             <Text
               style={[
                 globalStyles.body3,
@@ -71,7 +72,8 @@ export const Input: React.FC<InputProps> = ({
                     ? theme.colors.neutral1
                     : theme.colors.neutral4,
                 },
-              ]}>
+              ]}
+            >
               {rightText || rightPlaceholder}
             </Text>
             {rightIcon}
@@ -81,7 +83,8 @@ export const Input: React.FC<InputProps> = ({
         {isPasswordField && !readOnly && (
           <TouchableOpacity
             onPress={() => setIsPasswordVisible((prev) => !prev)}
-            style={inputStyles.iconContainer}>
+            style={inputStyles.iconContainer}
+          >
             <MaterialIcons
               name={isPasswordVisible ? "visibility-off" : "visibility"}
               size={20}

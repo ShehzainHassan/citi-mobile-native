@@ -35,7 +35,8 @@ export const Language = () => {
                       flexDirection: "row",
                       alignItems: "center",
                       gap: 12,
-                    }}>
+                    }}
+                  >
                     <Image
                       source={{ uri: getFlagUrl(lang.code) }}
                       style={globalStyles.flag}
@@ -47,7 +48,8 @@ export const Language = () => {
                         isSelected
                           ? globalStyles.neutral1
                           : globalStyles.neutral3,
-                      ]}>
+                      ]}
+                    >
                       {lang.name}
                     </Text>
                   </View>

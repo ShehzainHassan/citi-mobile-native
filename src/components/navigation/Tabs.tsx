@@ -33,7 +33,8 @@ export const Tabs = () => {
             key={key}
             onPress={() => navigation.navigate(key)}
             style={[tabStyles.tab, isSelected && tabStyles.tabSelected]}
-            accessibilityLabel={t(key.toLowerCase())}>
+            accessibilityLabel={t(key.toLowerCase())}
+          >
             <Icon selected={isSelected} />
             {isSelected && (
               <Text style={tabStyles.label}>{t(key.toLowerCase())}</Text>

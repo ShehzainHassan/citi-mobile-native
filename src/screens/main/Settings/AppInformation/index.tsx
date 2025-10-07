@@ -1,1 +1,1 @@
-export { AppInformation} from "./AppInformation"
+export { AppInformation } from "./AppInformation";

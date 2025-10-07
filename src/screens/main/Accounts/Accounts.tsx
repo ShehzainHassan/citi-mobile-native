@@ -49,7 +49,7 @@ export const Accounts = () => {
       { type: "Visa", image: Images.visaCard },
       { type: "MasterCard", image: Images.masterCard },
     ],
-    []
+    [],
   );
 
   const cardDetails = useMemo(
@@ -60,7 +60,7 @@ export const Accounts = () => {
       { label: t("cardDetails.goodThru"), value: "10/20" },
       { label: t("cardDetails.availableBalance"), value: "$10,000" },
     ],
-    [t]
+    [t],
   );
 
   return (
@@ -110,7 +110,8 @@ export const Accounts = () => {
               <TouchableOpacity
                 key={type}
                 onPress={() => handleCardSelect(type as CardType)}
-                accessibilityLabel={t("selectCardAlt", { type })}>
+                accessibilityLabel={t("selectCardAlt", { type })}
+              >
                 <CreditCard
                   name="John Smith"
                   cardType="Amazon Platinium"

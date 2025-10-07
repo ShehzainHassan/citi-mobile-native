@@ -14,7 +14,8 @@ export const Messages = () => {
         flexDirection: "column",
         flex: 1,
         justifyContent: "space-between",
-      }}>
+      }}
+    >
       <Header title="Messages" onPress={() => navigation.navigate("Home")} />
       <Tabs />
     </View>

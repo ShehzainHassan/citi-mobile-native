@@ -23,14 +23,16 @@ export const Checkbox: React.FC<CheckboxProps> = ({
     <Pressable
       onPress={toggleCheckbox}
       style={checkboxStyles.container}
-      android_ripple={null}>
+      android_ripple={null}
+    >
       <View
         style={[
           checkboxStyles.box,
           {
             borderColor: checked ? theme.colors.primary1 : theme.colors.border,
           },
-        ]}>
+        ]}
+      >
         {checked && (
           <Image
             source={Images.tickIcon}

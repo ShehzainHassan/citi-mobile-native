@@ -30,7 +30,8 @@ export const Collapsible: React.FC<CollapsibleProps> = ({
         style={[styles.heading, style]}
         onPress={() => setIsOpen((value) => !value)}
         activeOpacity={0.8}
-        {...props}>
+        {...props}
+      >
         <IconSymbol
           name="chevron.right"
           size={18}

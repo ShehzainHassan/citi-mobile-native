@@ -1,4 +1,4 @@
-import { Text } from 'react-native';
+import { Text } from "react-native";
 
 export function HelloWave() {
   return (
@@ -7,7 +7,8 @@ export function HelloWave() {
         fontSize: 28,
         lineHeight: 32,
         marginTop: -6,
-      }}>
+      }}
+    >
       👋
     </Text>
   );
