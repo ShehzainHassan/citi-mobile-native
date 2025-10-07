@@ -1,43 +1,14 @@
 import { Images } from "@/assets/images";
 import { CreditCard, HomeScreenCard, Tabs } from "@/components";
-import { useStyles } from "@/hooks/useStyles";
-import { MainTabParamList } from "@/navigation/types";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useHomeScreen, useStyles } from "@/hooks";
 import { useTranslation } from "react-i18next";
 import { Image, Text, View } from "react-native";
 
 export const HomeScreen = () => {
   const { globalStyles, homeScreenStyles } = useStyles();
-  const navigation =
-    useNavigation<NativeStackNavigationProp<MainTabParamList>>();
   const { t } = useTranslation("homeScreen");
+  const { cardGrid, handleCardPress } = useHomeScreen();
 
-  const cardData = [
-    [
-      {
-        image: Images.accountAndCard,
-        label: t("accountAndCard"),
-        route: "Accounts",
-      },
-      { image: Images.transfer, label: t("transfer") },
-      { image: Images.withdraw, label: t("withdraw") },
-    ],
-    [
-      { image: Images.prepaid, label: t("mobilePrepaid") },
-      { image: Images.bill, label: t("payBill") },
-      { image: Images.saveOnline, label: t("saveOnline") },
-    ],
-    [
-      { image: Images.creditCard, label: t("creditCard") },
-      {
-        image: Images.transactionReport,
-        label: t("transactionReport"),
-        route: "TransactionReport",
-      },
-      { image: Images.beneficiary, label: t("beneficiary") },
-    ],
-  ];
   return (
     <View style={homeScreenStyles.mainContainer}>
       <View style={homeScreenStyles.headerContainer}>
@@ -66,20 +37,16 @@ export const HomeScreen = () => {
           amount="$3.469.52"
           backgroundImage={Images.cards}
         />
+
         <View style={homeScreenStyles.columnContainer}>
-          {cardData.map((row, rowIndex) => (
+          {cardGrid.map((row, rowIndex) => (
             <View key={`row-${rowIndex}`} style={homeScreenStyles.rowContainer}>
-              {row.map(({ image, label, route }) => (
+              {row.map((card) => (
                 <HomeScreenCard
-                  key={label}
-                  image={image}
-                  label={label}
-                  onPress={
-                    route
-                      ? () =>
-                          navigation.navigate(route as keyof MainTabParamList)
-                      : () => {}
-                  }
+                  key={card.id}
+                  image={card.image}
+                  label={card.label}
+                  onPress={() => handleCardPress(card)}
                 />
               ))}
             </View>
@@ -90,3 +57,5 @@ export const HomeScreen = () => {
     </View>
   );
 };
+
+export default HomeScreen;

@@ -1,2 +1,2 @@
-export * from "./SettingsRow";
-export * from "./SettingsRow.types";
+export { SettingsRow } from "./SettingsRow";
+export type { SettingsRowProps } from "./SettingsRow.types";

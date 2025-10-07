@@ -5,3 +5,5 @@
 // Environment-specific configurations
 // Feature toggles and app settings
 // Security and API configurations
+
+export * from "./homeScreenConfig";
