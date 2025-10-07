@@ -1,20 +1,44 @@
 import { Images } from "@/assets/images";
-import { CardDetailRow, CardDetails, Header, Tabs } from "@/components";
+import { CardDetails, Header, SettingsRow, Tabs } from "@/components";
 import { useStyles } from "@/hooks/useStyles";
 import { MainTabWithAuthAndSettingsParamList } from "@/navigation/types";
-import { useTheme } from "@/theme";
-import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Image, StyleSheet, Text, View } from "react-native";
 
 export const Settings = () => {
-  const { theme } = useTheme();
   const navigation =
     useNavigation<
       NativeStackNavigationProp<MainTabWithAuthAndSettingsParamList>
     >();
   const { globalStyles, authStyles, homeScreenStyles } = useStyles();
+
+  const settingsOptions = [
+    {
+      id: "password",
+      label: "Password",
+      onPress: () =>
+        navigation.navigate("ChangePassword", { from: "Settings" }),
+    },
+    {
+      id: "touchId",
+      label: "Touch ID",
+    },
+    {
+      id: "languages",
+      label: "Languages",
+      onPress: () => navigation.navigate("Language"),
+    },
+    {
+      id: "appInfo",
+      label: "App information",
+      onPress: () => navigation.navigate("AppInformation"),
+    },
+    {
+      id: "customerCare",
+      label: "Customer care",
+    },
+  ];
 
   return (
     <View style={authStyles.container}>
@@ -33,71 +57,18 @@ export const Settings = () => {
           />
           <Text style={styles.nameText}>John Smith</Text>
         </View>
+
         <CardDetails>
-          <CardDetailRow
-            label="Password"
-            labelStyle={globalStyles.neutral1}
-            value={
-              <MaterialIcons
-                name="chevron-right"
-                size={24}
-                color={theme.colors.neutral5}
-              />
-            }
-            onPress={() =>
-              navigation.navigate("ChangePassword", {
-                from: "Settings",
-              })
-            }
-          />
-          <CardDetailRow
-            label="Touch ID"
-            labelStyle={globalStyles.neutral1}
-            value={
-              <MaterialIcons
-                name="chevron-right"
-                size={24}
-                color={theme.colors.neutral5}
-              />
-            }
-          />
-          <CardDetailRow
-            label="Languages"
-            labelStyle={globalStyles.neutral1}
-            value={
-              <MaterialIcons
-                name="chevron-right"
-                size={24}
-                color={theme.colors.neutral5}
-              />
-            }
-            onPress={() => navigation.navigate("Language")}
-          />
-          <CardDetailRow
-            label="App information"
-            labelStyle={globalStyles.neutral1}
-            value={
-              <MaterialIcons
-                name="chevron-right"
-                size={24}
-                color={theme.colors.neutral5}
-              />
-            }
-            onPress={() => navigation.navigate("AppInformation")}
-          />
-          <CardDetailRow
-            label="Customer care"
-            labelStyle={globalStyles.neutral1}
-            value={
-              <MaterialIcons
-                name="chevron-right"
-                size={24}
-                color={theme.colors.neutral5}
-              />
-            }
-          />
+          {settingsOptions.map((option) => (
+            <SettingsRow
+              key={option.id}
+              label={option.label}
+              onPress={option.onPress ?? (() => {})}
+            />
+          ))}
         </CardDetails>
       </View>
+
       <Tabs />
     </View>
   );
@@ -124,3 +95,5 @@ const styles = StyleSheet.create({
     position: "relative",
   },
 });
+
+export default Settings;

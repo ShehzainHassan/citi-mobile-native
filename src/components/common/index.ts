@@ -9,3 +9,5 @@ export {
   SelectCurrencyHeader,
   SelectCurrencyList,
 } from "./SelectCurrency/SelectCurrency";
+
+export * from "./SettingsRow";
