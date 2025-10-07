@@ -1,6 +1,6 @@
 import { DataTable, Header } from "@/components";
-import { INTEREST_RATE_TABLE } from "@/constants";
 import { useStyles } from "@/hooks/useStyles";
+import { interestRateTable } from "@/mocks";
 import { MainTabParamList } from "@/navigation/types";
 import { useTheme } from "@/theme";
 import { useNavigation } from "@react-navigation/native";
@@ -19,8 +19,8 @@ export const InterestRate = () => {
         onPress={() => navigation.navigate("Search")}
       />
       <DataTable
-        columns={INTEREST_RATE_TABLE.columns}
-        rows={INTEREST_RATE_TABLE.rows}
+        columns={interestRateTable.columns}
+        rows={interestRateTable.rows}
         highlightColumnIndex={2}
         highlightStyle={{ color: theme.colors.primary1 }}
       />

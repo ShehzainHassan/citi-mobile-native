@@ -1,5 +1,5 @@
-import { barData } from "@/constants";
 import { useStyles } from "@/hooks/useStyles";
+import { barData } from "@/mocks";
 import { StyleSheet, Text, View } from "react-native";
 import { BarChart } from "react-native-gifted-charts";
 

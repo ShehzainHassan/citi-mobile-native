@@ -38,7 +38,12 @@ module.exports = {
   },
   rules: {
     // Prettier integration
-    "prettier/prettier": "warn",
+    "prettier/prettier": [
+      "warn",
+      {
+        endOfLine: "auto",
+      },
+    ],
 
     // TypeScript rules
     "@typescript-eslint/no-unused-vars": [
@@ -58,7 +63,7 @@ module.exports = {
     "react-hooks/exhaustive-deps": "warn",
 
     // React Native specific
-    "react-native/no-inline-styles": "warn",
+    "react-native/no-inline-styles": "off",
     "react-native/no-unused-styles": "warn",
     "react-native/split-platform-components": "warn",
     "react-native/no-raw-text": "off", // Can be too strict

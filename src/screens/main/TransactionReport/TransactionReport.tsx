@@ -5,8 +5,8 @@ import {
   MonthlyBalanceChart,
   TransactionRowCard,
 } from "@/components";
-import { transactions } from "@/constants";
 import { useStyles } from "@/hooks/useStyles";
+import { transactions } from "@/mocks";
 import { MainTabParamList } from "@/navigation/types";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";

@@ -7,7 +7,14 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useState } from "react";
-import { Image, SafeAreaView, ScrollView, Text, View } from "react-native";
+import {
+  Image,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 export const Language = () => {
   const { globalStyles, theme } = useStyles();
@@ -30,13 +37,7 @@ export const Language = () => {
                 key={lang.code}
                 onPress={() => setSelectedLang(lang.code)}
                 label={
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      gap: 12,
-                    }}
-                  >
+                  <View style={styles.rowContainer}>
                     <Image
                       source={{ uri: getFlagUrl(lang.code) }}
                       style={globalStyles.flag}
@@ -73,3 +74,10 @@ export const Language = () => {
     </SafeAreaView>
   );
 };
+const styles = StyleSheet.create({
+  rowContainer: {
+    alignItems: "center",
+    flexDirection: "row",
+    gap: 12,
+  },
+});

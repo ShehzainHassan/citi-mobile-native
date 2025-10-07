@@ -1,11 +1,11 @@
 import { DataTable, Header } from "@/components";
-import { EXCHANGE_RATE_TABLE } from "@/constants";
 import { useStyles } from "@/hooks/useStyles";
+import { exchangeRateTable } from "@/mocks";
 import { MainTabParamList } from "@/navigation/types";
 import { getFlagUrl } from "@/utils";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Image, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 
 export const ExchangeRate = () => {
   const { globalStyles } = useStyles();
@@ -18,12 +18,9 @@ export const ExchangeRate = () => {
         onPress={() => navigation.navigate("Search")}
       />
       <DataTable
-        columns={EXCHANGE_RATE_TABLE.columns}
-        rows={EXCHANGE_RATE_TABLE.rows.map((row) => [
-          <View
-            key={row.countryCode}
-            style={{ flexDirection: "row", alignItems: "center" }}
-          >
+        columns={exchangeRateTable.columns}
+        rows={exchangeRateTable.rows.map((row) => [
+          <View key={row.countryCode} style={styles.rowContainer}>
             <Image
               source={{ uri: getFlagUrl(row.countryCode) }}
               style={globalStyles.flag}
@@ -40,3 +37,10 @@ export const ExchangeRate = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  rowContainer: {
+    alignItems: "center",
+    flexDirection: "row",
+  },
+});

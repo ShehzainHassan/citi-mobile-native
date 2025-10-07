@@ -1,0 +1,56 @@
+export const interestRateTable = {
+  columns: ["Interest kind", "Deposit", "Rate"],
+  rows: [
+    ["Individual customers", "1m", "4.50%"],
+    ["Corporate customers", "2m", "5.50%"],
+    ["Individual customers", "12m", "5.90%"],
+    ["Individual customers", "1m", "4.50%"],
+    ["Corporate customers", "2m", "5.50%"],
+    ["Individual customers", "12m", "5.90%"],
+    ["Individual customers", "1m", "4.50%"],
+    ["Corporate customers", "2m", "5.50%"],
+    ["Individual customers", "12m", "5.90%"],
+    ["Individual customers", "1m", "4.50%"],
+    ["Corporate customers", "2m", "5.50%"],
+    ["Individual customers", "12m", "5.90%"],
+    ["Individual customers", "1m", "4.50%"],
+    ["Corporate customers", "2m", "5.50%"],
+    ["Individual customers", "12m", "5.90%"],
+    ["Corporate customers", "2m", "5.50%"],
+    ["Individual customers", "12m", "5.90%"],
+    ["Corporate customers", "2m", "5.50%"],
+    ["Individual customers", "12m", "5.90%"],
+  ],
+};
+
+export const exchangeRateTable = {
+  columns: ["Country", "Buy", "Sell"],
+  rows: [
+    { countryCode: "VN", countryName: "Vietnam", buy: "1.403", sell: "1.746" },
+    {
+      countryCode: "NI",
+      countryName: "Nicaragua",
+      buy: "9.123",
+      sell: "12.09",
+    },
+    { countryCode: "KR", countryName: "Korea", buy: "3.704", sell: "5.151" },
+    { countryCode: "RU", countryName: "Russia", buy: "116.0", sell: "144.4" },
+    { countryCode: "CN", countryName: "China", buy: "1.725", sell: "2.234" },
+    { countryCode: "PT", countryName: "Portugal", buy: "1.403", sell: "1.746" },
+    { countryCode: "KR", countryName: "Korea", buy: "3.704", sell: "5.151" },
+    { countryCode: "FR", countryName: "France", buy: "116.0", sell: "144.4" },
+    {
+      countryCode: "NI",
+      countryName: "Nicaragua",
+      buy: "9.123",
+      sell: "12.09",
+    },
+    { countryCode: "CN", countryName: "China", buy: "1.725", sell: "2.234" },
+    { countryCode: "VN", countryName: "Vietnam", buy: "1.403", sell: "1.746" },
+    { countryCode: "RU", countryName: "Russia", buy: "116.0", sell: "144.4" },
+
+    { countryCode: "PT", countryName: "Portugal", buy: "1.403", sell: "1.746" },
+    { countryCode: "KR", countryName: "Korea", buy: "3.704", sell: "5.151" },
+    { countryCode: "FR", countryName: "France", buy: "116.0", sell: "144.4" },
+  ],
+};
