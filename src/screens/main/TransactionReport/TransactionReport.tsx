@@ -5,7 +5,7 @@ import {
   MonthlyBalanceChart,
   TransactionRowCard,
 } from "@/components";
-import { useStyles } from "@/hooks/useStyles";
+import { useGlobalStyles, useTransactionReportStyles } from "@/hooks";
 import { transactions } from "@/mocks";
 import { MainTabParamList } from "@/navigation/types";
 import { useNavigation } from "@react-navigation/native";
@@ -13,7 +13,8 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { ScrollView, View } from "react-native";
 
 export const TransactionReport = () => {
-  const { transactionReportStyles, globalStyles } = useStyles();
+  const globalStyles = useGlobalStyles();
+  const transactionReportStyles = useTransactionReportStyles();
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
 
@@ -30,8 +31,7 @@ export const TransactionReport = () => {
         style={[
           globalStyles.roundedContainer,
           transactionReportStyles.subContainer,
-        ]}
-      >
+        ]}>
         <View style={transactionReportStyles.transactionContainer}>
           <View style={transactionReportStyles.cardChartContainer}>
             <CreditCard
@@ -43,8 +43,7 @@ export const TransactionReport = () => {
             />
             <ScrollView
               style={transactionReportStyles.scrollable}
-              showsVerticalScrollIndicator={false}
-            >
+              showsVerticalScrollIndicator={false}>
               <MonthlyBalanceChart />
               {transactions.map((t) => (
                 <TransactionRowCard

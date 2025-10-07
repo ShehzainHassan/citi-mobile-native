@@ -21,21 +21,21 @@ export const useStyles = () => {
   const authStyles = useMemo(() => createAuthStyles(theme), [theme]);
   const homeScreenStyles = useMemo(
     () => createHomeScreenStyles(theme),
-    [theme],
+    [theme]
   );
   const tabStyles = useMemo(() => createTabStyles(theme), [theme]);
   const accountScreenStyles = useMemo(
     () => createAccountScreenStyles(theme),
-    [theme],
+    [theme]
   );
   const cardDetailStyles = useMemo(
     () => createCardDetailsStyles(theme),
-    [theme],
+    [theme]
   );
   const inputStyles = useMemo(() => createInputStyles(theme), [theme]);
   const transactionReportStyles = useMemo(
     () => createTransactionReportStyles(theme),
-    [theme],
+    [theme]
   );
 
   return {

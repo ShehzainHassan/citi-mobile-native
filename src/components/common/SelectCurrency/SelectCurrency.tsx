@@ -1,8 +1,8 @@
-import React from "react";
-import { FlatList, Text, TouchableOpacity, View } from "react-native";
+import { useTheme } from "@/theme";
 import { MaterialIcons } from "@expo/vector-icons";
 import currencyCodes from "currency-codes";
-import { useTheme } from "@/theme";
+import React from "react";
+import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { createSelectCurrencyStyles } from "./SelectCurrency.styles";
 import {
   Currency,
@@ -55,13 +55,16 @@ export const SelectCurrencyList: React.FC<SelectCurrencyListProps> = ({
             onPress={() => {
               onSelect(item.code);
               onClose();
-            }}
-          >
+            }}>
             <Text style={[styles.text, isSelected && styles.selectedText]}>
               {item.code} ({item.name})
             </Text>
             {isSelected && (
-              <MaterialIcons name="check" size={18} color="#4B3EFF" />
+              <MaterialIcons
+                name="check"
+                size={18}
+                color={theme.colors.primary1}
+              />
             )}
           </TouchableOpacity>
         );

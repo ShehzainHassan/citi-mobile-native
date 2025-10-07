@@ -1,4 +1,4 @@
-import { useStyles } from "@/hooks/useStyles";
+import { useGlobalStyles } from "@/hooks";
 import { useTheme } from "@/theme";
 import { Text, View } from "react-native";
 import { createAccountCardStyles } from "./AccountCard.styles";
@@ -10,7 +10,7 @@ export const AccountCard = ({
   availableBalance = "$20,000",
   branch = "New York",
 }: AccountCardProps) => {
-  const { globalStyles } = useStyles();
+  const globalStyles = useGlobalStyles();
   const { theme } = useTheme();
   const styles = createAccountCardStyles(theme);
 

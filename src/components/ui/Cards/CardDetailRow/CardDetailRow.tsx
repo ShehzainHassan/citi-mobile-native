@@ -1,4 +1,4 @@
-import { useStyles } from "@/hooks/useStyles";
+import { useGlobalStyles } from "@/hooks";
 import { useTheme } from "@/theme";
 import { Text, TouchableOpacity } from "react-native";
 import { createCardDetailRowStyles } from "./CardDetailRow.styles";
@@ -11,7 +11,7 @@ export const CardDetailRow = ({
   valueStyle,
   onPress,
 }: CardDetailRowProps) => {
-  const { globalStyles } = useStyles();
+  const globalStyles = useGlobalStyles();
   const { theme } = useTheme();
   const styles = createCardDetailRowStyles(theme);
   return (

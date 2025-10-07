@@ -7,7 +7,11 @@ import {
   CreditCard,
   Header,
 } from "@/components";
-import { useStyles } from "@/hooks/useStyles";
+import {
+  useAccountScreenStyles,
+  useCardDetailStyles,
+  useGlobalStyles,
+} from "@/hooks";
 import { MainTabParamList } from "@/navigation/types";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -19,7 +23,10 @@ type TabType = "Account" | "Card";
 type CardType = "Visa" | "MasterCard" | null;
 
 export const Accounts = () => {
-  const { globalStyles, accountScreenStyles, cardDetailStyles } = useStyles();
+  const globalStyles = useGlobalStyles();
+  const accountScreenStyles = useAccountScreenStyles();
+  const cardDetailStyles = useCardDetailStyles();
+
   const [selectedTab, setSelectedTab] = useState<TabType>("Account");
   const [selectedCardType, setSelectedCardType] = useState<CardType>(null);
   const navigation =
@@ -49,7 +56,7 @@ export const Accounts = () => {
       { type: "Visa", image: Images.visaCard },
       { type: "MasterCard", image: Images.masterCard },
     ],
-    [],
+    []
   );
 
   const cardDetails = useMemo(
@@ -60,7 +67,7 @@ export const Accounts = () => {
       { label: t("cardDetails.goodThru"), value: "10/20" },
       { label: t("cardDetails.availableBalance"), value: "$10,000" },
     ],
-    [t],
+    [t]
   );
 
   return (
@@ -110,8 +117,7 @@ export const Accounts = () => {
               <TouchableOpacity
                 key={type}
                 onPress={() => handleCardSelect(type as CardType)}
-                accessibilityLabel={t("selectCardAlt", { type })}
-              >
+                accessibilityLabel={t("selectCardAlt", { type })}>
                 <CreditCard
                   name="John Smith"
                   cardType="Amazon Platinium"

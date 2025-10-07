@@ -1,4 +1,4 @@
-import { useStyles } from "@/hooks/useStyles";
+import { useGlobalStyles } from "@/hooks";
 import { useTheme } from "@/theme";
 import React from "react";
 import { ScrollView, Text, View } from "react-native";
@@ -15,7 +15,7 @@ export const DataTable: React.FC<DataTableProps> = ({
   highlightStyle,
 }) => {
   const { theme } = useTheme();
-  const { globalStyles } = useStyles();
+  const globalStyles = useGlobalStyles();
   const styles = createDataTableStyles(theme);
   return (
     <View style={[styles.tableContainer, containerStyle]}>
@@ -27,11 +27,9 @@ export const DataTable: React.FC<DataTableProps> = ({
               styles.cellWrapper,
               index === 0 ? styles.flex2 : styles.flex1,
               index !== 0 && styles.centerAlign,
-            ]}
-          >
+            ]}>
             <Text
-              style={[globalStyles.title3, globalStyles.neutral3, headerStyle]}
-            >
+              style={[globalStyles.title3, globalStyles.neutral3, headerStyle]}>
               {col}
             </Text>
           </View>
@@ -41,8 +39,7 @@ export const DataTable: React.FC<DataTableProps> = ({
       <ScrollView
         style={styles.scrollContainer}
         contentContainerStyle={{ flexGrow: 1 }}
-        showsVerticalScrollIndicator={false}
-      >
+        showsVerticalScrollIndicator={false}>
         {rows.map((row, rowIndex) => (
           <View key={rowIndex} style={styles.dataRow}>
             {row.map((cell, cellIndex) => (
@@ -52,8 +49,7 @@ export const DataTable: React.FC<DataTableProps> = ({
                   styles.cellWrapper,
                   cellIndex === 0 ? styles.flex2 : styles.flex1,
                   cellIndex !== 0 && styles.centerAlign,
-                ]}
-              >
+                ]}>
                 {typeof cell === "string" || typeof cell === "number" ? (
                   <Text
                     style={[
@@ -61,8 +57,7 @@ export const DataTable: React.FC<DataTableProps> = ({
                       globalStyles.neutral1,
                       cellStyle,
                       highlightColumnIndex === cellIndex && highlightStyle,
-                    ]}
-                  >
+                    ]}>
                     {cell}
                   </Text>
                 ) : (

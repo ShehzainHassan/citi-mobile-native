@@ -1,11 +1,11 @@
-import { useStyles } from "@/hooks/useStyles";
+import { useGlobalStyles } from "@/hooks";
 import { useTheme } from "@/theme";
 import { Image, View } from "react-native";
 import { createAuthImageStyles } from "./AuthImageBlock.styles";
 import { AuthImageBlockProps } from "./AuthImageBlock.types";
 
 export const AuthImageBlock = ({ source }: AuthImageBlockProps) => {
-  const { globalStyles } = useStyles();
+  const globalStyles = useGlobalStyles();
   const { theme } = useTheme();
   const styles = createAuthImageStyles(theme);
 

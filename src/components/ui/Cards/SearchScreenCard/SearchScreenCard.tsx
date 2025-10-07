@@ -1,7 +1,7 @@
-import { useStyles } from "@/hooks/useStyles";
+import { useGlobalStyles } from "@/hooks";
 import { useTheme } from "@/theme";
 import React from "react";
-import { Image, Text, View, TouchableOpacity } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import { createSearchScreenCardStyles } from "./SearchScreenCard.styles";
 import { SearchScreenCardProps } from "./SearchScreenCard.types";
 
@@ -12,7 +12,7 @@ export const SearchScreenCard: React.FC<SearchScreenCardProps> = ({
   onPress,
 }) => {
   const { theme } = useTheme();
-  const { globalStyles } = useStyles();
+  const globalStyles = useGlobalStyles();
   const styles = createSearchScreenCardStyles(theme);
 
   return (

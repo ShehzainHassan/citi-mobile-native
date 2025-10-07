@@ -1,7 +1,8 @@
 import { CardDetailRow, CardDetails, Header } from "@/components";
 import { LANGUAGES } from "@/constants";
-import { useStyles } from "@/hooks/useStyles";
+import { useGlobalStyles } from "@/hooks";
 import { MainTabParamList } from "@/navigation/types";
+import { useTheme } from "@/theme";
 import { getFlagUrl } from "@/utils";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -17,7 +18,8 @@ import {
 } from "react-native";
 
 export const Language = () => {
-  const { globalStyles, theme } = useStyles();
+  const globalStyles = useGlobalStyles();
+  const { theme } = useTheme();
   const [selectedLang, setSelectedLang] = useState("us");
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
@@ -49,8 +51,7 @@ export const Language = () => {
                         isSelected
                           ? globalStyles.neutral1
                           : globalStyles.neutral3,
-                      ]}
-                    >
+                      ]}>
                       {lang.name}
                     </Text>
                   </View>

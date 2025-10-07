@@ -1,11 +1,13 @@
 import { Images } from "@/assets/images";
 import { CreditCard, HomeScreenCard, Tabs } from "@/components";
-import { useHomeScreen, useStyles } from "@/hooks";
+import { useGlobalStyles, useHomeScreen, useHomeScreenStyles } from "@/hooks";
 import { useTranslation } from "react-i18next";
 import { Image, Text, View } from "react-native";
 
 export const HomeScreen = () => {
-  const { globalStyles, homeScreenStyles } = useStyles();
+  const globalStyles = useGlobalStyles();
+  const homeScreenStyles = useHomeScreenStyles();
+
   const { t } = useTranslation("homeScreen");
   const { cardGrid, handleCardPress } = useHomeScreen();
 

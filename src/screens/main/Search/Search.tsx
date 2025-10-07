@@ -1,13 +1,13 @@
 import { Images } from "@/assets/images";
 import { Header, SearchScreenCard, Tabs } from "@/components";
-import { useStyles } from "@/hooks/useStyles";
+import { useGlobalStyles } from "@/hooks";
 import { MainTabWithSearchParamList } from "@/navigation/types";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { View } from "react-native";
 
 export const Search = () => {
-  const { globalStyles } = useStyles();
+  const globalStyles = useGlobalStyles();
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabWithSearchParamList>>();
 

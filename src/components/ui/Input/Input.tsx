@@ -1,4 +1,4 @@
-import { useStyles } from "@/hooks/useStyles";
+import { useGlobalStyles } from "@/hooks";
 import { useTheme } from "@/theme";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import * as Haptics from "expo-haptics";
@@ -27,7 +27,7 @@ export const Input: React.FC<InputProps> = ({
   ...props
 }) => {
   const { theme } = useTheme();
-  const { globalStyles } = useStyles();
+  const globalStyles = useGlobalStyles();
   const inputStyles = createInputStyles(theme);
 
   const [isFocused, setIsFocused] = useState(false);

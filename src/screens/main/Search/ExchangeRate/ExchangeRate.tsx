@@ -1,5 +1,5 @@
 import { DataTable, Header } from "@/components";
-import { useStyles } from "@/hooks/useStyles";
+import { useGlobalStyles } from "@/hooks";
 import { exchangeRateTable } from "@/mocks";
 import { MainTabParamList } from "@/navigation/types";
 import { getFlagUrl } from "@/utils";
@@ -8,7 +8,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Image, StyleSheet, Text, View } from "react-native";
 
 export const ExchangeRate = () => {
-  const { globalStyles } = useStyles();
+  const globalStyles = useGlobalStyles();
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
   return (

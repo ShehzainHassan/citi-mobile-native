@@ -1,4 +1,4 @@
-import { useStyles } from "@/hooks/useStyles";
+import { useTabStyles } from "@/hooks";
 import { MainTabParamList } from "@/navigation/types";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -21,7 +21,7 @@ const tabConfig: {
 
 const Tab = React.memo(
   ({ tabKey, Icon, isSelected, label, onPress }: TabProps) => {
-    const { tabStyles } = useStyles();
+    const tabStyles = useTabStyles();
 
     const handlePress = useCallback(() => {
       if (!isSelected) {
@@ -47,7 +47,7 @@ const Tab = React.memo(
 Tab.displayName = "Tab";
 
 export const Tabs = React.memo(() => {
-  const { tabStyles } = useStyles();
+  const tabStyles = useTabStyles();
   const { t } = useTranslation("tabs");
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();

@@ -1,5 +1,5 @@
 import { Button, Header, Input } from "@/components";
-import { useStyles } from "@/hooks/useStyles";
+import { useAuthStyles, useGlobalStyles, useInputStyles } from "@/hooks";
 import { AuthStackParamList } from "@/navigation/types";
 import { formatPhoneNumber } from "@/utils";
 import { useNavigation } from "@react-navigation/native";
@@ -9,7 +9,9 @@ import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 
 export const ForgotPassword = () => {
-  const { globalStyles, authStyles, inputStyles } = useStyles();
+  const globalStyles = useGlobalStyles();
+  const authStyles = useAuthStyles();
+  const inputStyles = useInputStyles();
   const { t } = useTranslation("auth");
 
   const [step, setStep] = useState<number>(1);

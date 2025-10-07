@@ -8,7 +8,7 @@ import {
   Header,
   Input,
 } from "@/components";
-import { useStyles } from "@/hooks/useStyles";
+import { useAuthStyles, useGlobalStyles, useInputStyles } from "@/hooks";
 import { AuthStackParamList } from "@/navigation/types";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -16,7 +16,9 @@ import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 
 export const SignUp = () => {
-  const { globalStyles, authStyles, inputStyles } = useStyles();
+  const globalStyles = useGlobalStyles();
+  const authStyles = useAuthStyles();
+  const inputStyles = useInputStyles();
   const { t } = useTranslation("auth");
   const navigation =
     useNavigation<NativeStackNavigationProp<AuthStackParamList>>();

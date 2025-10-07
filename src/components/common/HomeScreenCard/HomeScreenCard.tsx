@@ -1,4 +1,4 @@
-import { useStyles } from "@/hooks/useStyles";
+import { useGlobalStyles } from "@/hooks";
 import { useTheme } from "@/theme";
 import { Image, Text, TouchableOpacity } from "react-native";
 import { createHomeScreenCardStyles } from "./HomeScreenCard.styles";
@@ -10,15 +10,14 @@ export const HomeScreenCard = ({
   onPress,
 }: HomeScreenCardProps) => {
   const { theme } = useTheme();
-  const { globalStyles } = useStyles();
+  const globalStyles = useGlobalStyles();
   const styles = createHomeScreenCardStyles(theme);
   return (
     <TouchableOpacity
       style={styles.container}
       onPress={onPress}
       accessibilityLabel={label}
-      accessibilityRole="button"
-    >
+      accessibilityRole="button">
       <Image source={image} style={styles.cardImg} resizeMode="contain" />
       <Text style={[globalStyles.caption2, styles.cardText]}>{label}</Text>
     </TouchableOpacity>

@@ -1,4 +1,4 @@
-import { useStyles } from "@/hooks/useStyles";
+import { useGlobalStyles } from "@/hooks";
 import { useTheme } from "@/theme";
 import { Text, TouchableOpacity, View } from "react-native";
 import { createAuthFooterStyles } from "./AuthFooter.styles";
@@ -9,7 +9,7 @@ export const AuthFooter: React.FC<AuthFooterProps> = ({
   actionText,
   onActionPress,
 }) => {
-  const { globalStyles } = useStyles();
+  const globalStyles = useGlobalStyles();
   const { theme } = useTheme();
   const styles = createAuthFooterStyles(theme);
   return (

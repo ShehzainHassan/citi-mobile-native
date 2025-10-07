@@ -1,10 +1,10 @@
-import { useStyles } from "@/hooks/useStyles";
+import { useGlobalStyles } from "@/hooks";
 import { barData } from "@/mocks";
 import { StyleSheet, Text, View } from "react-native";
 import { BarChart } from "react-native-gifted-charts";
 
 export const MonthlyBalanceChart = () => {
-  const { globalStyles } = useStyles();
+  const globalStyles = useGlobalStyles();
 
   return (
     <View style={styles.container}>

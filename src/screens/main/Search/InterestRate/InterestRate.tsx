@@ -1,5 +1,5 @@
 import { DataTable, Header } from "@/components";
-import { useStyles } from "@/hooks/useStyles";
+import { useGlobalStyles } from "@/hooks";
 import { interestRateTable } from "@/mocks";
 import { MainTabParamList } from "@/navigation/types";
 import { useTheme } from "@/theme";
@@ -9,7 +9,7 @@ import { View } from "react-native";
 
 export const InterestRate = () => {
   const { theme } = useTheme();
-  const { globalStyles } = useStyles();
+  const globalStyles = useGlobalStyles();
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
   return (

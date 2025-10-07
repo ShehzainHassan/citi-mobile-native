@@ -1,11 +1,11 @@
-import { useStyles } from "@/hooks/useStyles";
+import { useGlobalStyles } from "@/hooks";
 import { useTheme } from "@/theme";
 import { Text, View } from "react-native";
 import { createAuthHeaderStyles } from "./AuthHeader.styles";
 import { AuthHeaderProps } from "./AuthHeader.types";
 
 export const AuthHeader = ({ title, subTitle }: AuthHeaderProps) => {
-  const { globalStyles } = useStyles();
+  const globalStyles = useGlobalStyles();
   const { theme } = useTheme();
   const styles = createAuthHeaderStyles(theme);
   return (

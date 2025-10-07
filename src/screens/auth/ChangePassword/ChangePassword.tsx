@@ -1,6 +1,6 @@
 import { Images } from "@/assets/images";
 import { Button, Header, Input } from "@/components";
-import { useStyles } from "@/hooks/useStyles";
+import { useAuthStyles, useGlobalStyles } from "@/hooks";
 import {
   AuthStackParamList,
   MainTabWithAuthParamList,
@@ -14,7 +14,8 @@ import { Image, Text, View } from "react-native";
 type ChangePasswordRouteProp = RouteProp<AuthStackParamList, "ChangePassword">;
 
 export const ChangePassword = () => {
-  const { globalStyles, authStyles } = useStyles();
+  const globalStyles = useGlobalStyles();
+  const authStyles = useAuthStyles();
   const { t } = useTranslation("auth");
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabWithAuthParamList>>();

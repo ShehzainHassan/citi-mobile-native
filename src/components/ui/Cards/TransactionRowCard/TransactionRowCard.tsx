@@ -1,4 +1,4 @@
-import { useStyles } from "@/hooks/useStyles";
+import { useGlobalStyles } from "@/hooks";
 import { useTheme } from "@/theme";
 import { Image, Text, View } from "react-native";
 import { createTransactionRowCardStyles } from "./TransactionRowCard.styles";
@@ -12,7 +12,7 @@ export const TransactionRowCard: React.FC<TransactionRowCardProps> = ({
   icon,
 }) => {
   const { theme } = useTheme();
-  const { globalStyles } = useStyles();
+  const globalStyles = useGlobalStyles();
   const styles = createTransactionRowCardStyles(theme);
   const isNegative = String(price).trim().startsWith("-");
   return (

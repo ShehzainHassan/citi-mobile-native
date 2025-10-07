@@ -1,5 +1,5 @@
 import { CardDetailRow, CardDetails, Header } from "@/components";
-import { useStyles } from "@/hooks/useStyles";
+import { useGlobalStyles } from "@/hooks";
 import { MainTabParamList } from "@/navigation/types";
 import { useNavigation } from "@react-navigation/native";
 
@@ -7,7 +7,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Text, View } from "react-native";
 
 export const AppInformation = () => {
-  const { globalStyles } = useStyles();
+  const globalStyles = useGlobalStyles();
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
 

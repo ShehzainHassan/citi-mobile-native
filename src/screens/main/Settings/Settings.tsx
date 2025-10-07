@@ -1,6 +1,6 @@
 import { Images } from "@/assets/images";
 import { CardDetails, Header, SettingsRow, Tabs } from "@/components";
-import { useStyles } from "@/hooks/useStyles";
+import { useAuthStyles, useGlobalStyles, useHomeScreenStyles } from "@/hooks";
 import { MainTabWithAuthAndSettingsParamList } from "@/navigation/types";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -11,7 +11,9 @@ export const Settings = () => {
     useNavigation<
       NativeStackNavigationProp<MainTabWithAuthAndSettingsParamList>
     >();
-  const { globalStyles, authStyles, homeScreenStyles } = useStyles();
+  const globalStyles = useGlobalStyles();
+  const authStyles = useAuthStyles();
+  const homeScreenStyles = useHomeScreenStyles();
 
   const settingsOptions = [
     {

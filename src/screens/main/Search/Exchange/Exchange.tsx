@@ -2,7 +2,7 @@ import { Images } from "@/assets/images";
 import { Header } from "@/components";
 import { Button, Input } from "@/components/ui";
 import { SelectCurrencyModal } from "@/components/ui/Modal/SelectCurrencyModal";
-import { useStyles } from "@/hooks/useStyles";
+import { useGlobalStyles } from "@/hooks";
 import { MainTabParamList } from "@/navigation/types";
 import { Theme, useTheme } from "@/theme";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 export const Exchange = () => {
   const { theme } = useTheme();
-  const { globalStyles } = useStyles();
+  const globalStyles = useGlobalStyles();
   const styles = createStyles(theme);
 
   const [fromAmount, setFromAmount] = useState("");

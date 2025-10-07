@@ -7,7 +7,7 @@ import {
   Header,
   Input,
 } from "@/components";
-import { useStyles } from "@/hooks/useStyles";
+import { useAuthStyles, useGlobalStyles, useInputStyles } from "@/hooks";
 import { MainTabWithAuthParamList } from "@/navigation/types";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -15,7 +15,9 @@ import { useTranslation } from "react-i18next";
 import { Image, Text, View } from "react-native";
 
 export const SignIn = () => {
-  const { globalStyles, authStyles, inputStyles } = useStyles();
+  const globalStyles = useGlobalStyles();
+  const authStyles = useAuthStyles();
+  const inputStyles = useInputStyles();
   const { t } = useTranslation("auth");
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabWithAuthParamList>>();
@@ -38,8 +40,7 @@ export const SignIn = () => {
 
         <Text
           style={authStyles.forgotPassword}
-          onPress={() => navigation.navigate("ForgotPassword")}
-        >
+          onPress={() => navigation.navigate("ForgotPassword")}>
           {t("forgotPassword")}
         </Text>
         <Button title={t("signInButton")} />
