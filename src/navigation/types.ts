@@ -36,6 +36,7 @@ export type SearchParamList = {
 export type SettingsParamList = {
   AppInformation: undefined;
   Language: undefined;
+  ThemeSelector: undefined;
 };
 
 export type MainTabWithAuthParamList = AuthStackParamList & MainTabParamList;

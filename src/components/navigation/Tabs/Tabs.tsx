@@ -1,4 +1,5 @@
 import { useTabStyles } from "@/hooks";
+import { TranslationKeys } from "@/i18n";
 import { MainTabParamList } from "@/navigation/types";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -12,11 +13,20 @@ import { TabKey, TabProps } from "./Tabs.types";
 const tabConfig: {
   key: TabKey;
   icon: React.FC<{ selected: boolean }>;
+  labelKey: string;
 }[] = [
-  { key: "Home", icon: HomeIcon },
-  { key: "Search", icon: SearchIcon },
-  { key: "Messages", icon: MessageIcon },
-  { key: "Settings", icon: SettingsIcon },
+  { key: "Home", icon: HomeIcon, labelKey: TranslationKeys.tabs.home },
+  { key: "Search", icon: SearchIcon, labelKey: TranslationKeys.tabs.search },
+  {
+    key: "Messages",
+    icon: MessageIcon,
+    labelKey: TranslationKeys.tabs.messages,
+  },
+  {
+    key: "Settings",
+    icon: SettingsIcon,
+    labelKey: TranslationKeys.tabs.settings,
+  },
 ];
 
 const Tab = React.memo(
@@ -50,7 +60,7 @@ Tab.displayName = "Tab";
 
 export const Tabs = React.memo(() => {
   const tabStyles = useTabStyles();
-  const { t } = useTranslation("tabs");
+  const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
   const route = useRoute();
@@ -64,13 +74,13 @@ export const Tabs = React.memo(() => {
 
   const tabs = useMemo(
     () =>
-      tabConfig.map(({ key, icon: Icon }) => (
+      tabConfig.map(({ key, icon: Icon, labelKey }) => (
         <Tab
           key={key}
           tabKey={key}
           Icon={Icon}
           isSelected={route.name === key}
-          label={t(key.toLowerCase())}
+          label={t(labelKey)}
           onPress={handleTabPress}
         />
       )),

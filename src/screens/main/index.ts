@@ -1,12 +1,12 @@
-export { HomeScreen } from "./Home";
 export { Accounts } from "./Accounts";
-export { TransactionReport } from "./TransactionReport";
+export { HomeScreen } from "./Home";
+export { Messages } from "./Messages";
 export {
-  Search,
-  InterestRate,
-  ExchangeRate,
   Exchange,
+  ExchangeRate,
+  InterestRate,
+  Search,
   SearchForBranch,
 } from "./Search";
-export { Messages } from "./Messages";
-export { Settings, AppInformation, Language } from "./Settings";
+export { AppInformation, Language, Settings, ThemeSelector } from "./Settings";
+export { TransactionReport } from "./TransactionReport";

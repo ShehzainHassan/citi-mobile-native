@@ -5,17 +5,19 @@ import { Theme } from "../theme/index";
 export const createGlobalStyles = (theme: Theme) =>
   StyleSheet.create({
     // Layout patterns
-    container: {
-      backgroundColor: theme.colors.primary1,
-      display: "flex",
-      flex: 1,
-      paddingTop: theme.spacing.lg,
-    },
     centerContainer: {
       alignItems: "center",
       backgroundColor: theme.colors.neutral6,
       display: "flex",
       justifyContent: "center",
+      marginVertical: theme.spacing.xl,
+    },
+
+    container: {
+      backgroundColor: theme.colors.primary1,
+      display: "flex",
+      flex: 1,
+      paddingTop: theme.spacing.lg,
     },
     paddedContainer: {
       backgroundColor: theme.colors.neutral6,
@@ -140,9 +142,9 @@ export const createGlobalStyles = (theme: Theme) =>
       gap: theme.spacing.ml,
     },
     verticalSpread: {
+      backgroundColor: theme.colors.neutral6,
       flex: 1,
-      // flexDirection: "column",
-      // backgroundColor: theme.colors.neutral6,
+      flexDirection: "column",
     },
     primary1: {
       color: theme.colors.primary1,

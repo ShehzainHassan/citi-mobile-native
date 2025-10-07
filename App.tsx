@@ -11,10 +11,10 @@ import {
   Language,
   Messages,
   Search,
-  SearchForBranch,
   Settings,
   SignIn,
   SignUp,
+  ThemeSelector,
   TransactionReport,
 } from "@/screens";
 import { NavigationContainer } from "@react-navigation/native";
@@ -51,6 +51,7 @@ function AppContent() {
           <Stack.Screen name="ChangePassword" component={ChangePassword} />
           <Stack.Screen name="Language" component={Language} />
           {/* <Stack.Screen name="SearchForBranch" component={SearchForBranch} /> */}
+          <Stack.Screen name="ThemeSelector" component={ThemeSelector} />
         </Stack.Navigator>
       </NavigationContainer>
     </I18nextProvider>

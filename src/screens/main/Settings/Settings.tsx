@@ -40,6 +40,11 @@ export const Settings = () => {
       id: "customerCare",
       label: "Customer care",
     },
+    {
+      id: "theme",
+      label: "Theme",
+      onPress: () => navigation.navigate("ThemeSelector"),
+    },
   ];
 
   return (
