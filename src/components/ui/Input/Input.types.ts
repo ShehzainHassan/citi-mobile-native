@@ -4,9 +4,10 @@ export interface InputProps extends TextInputProps {
   label?: string;
   error?: string;
   style?: StyleProp<TextStyle>;
-  rightText?: string | undefined;
-  rightPlaceholder?: string | undefined;
+  rightText?: string;
+  rightPlaceholder?: string;
   rightIcon?: React.ReactNode;
   onRightPress?: () => void;
   readOnly?: boolean;
+  required?: boolean;
 }

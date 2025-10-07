@@ -30,9 +30,8 @@ function AppContent() {
     <I18nextProvider i18n={i18n}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Home"
-          screenOptions={{ headerShown: false }}
-        >
+          initialRouteName="SignIn"
+          screenOptions={{ headerShown: false }}>
           <Stack.Screen name="SignIn" component={SignIn} />
           <Stack.Screen name="SignUp" component={SignUp} />
           <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
@@ -51,7 +50,7 @@ function AppContent() {
           <Stack.Screen name="AppInformation" component={AppInformation} />
           <Stack.Screen name="ChangePassword" component={ChangePassword} />
           <Stack.Screen name="Language" component={Language} />
-          <Stack.Screen name="SearchForBranch" component={SearchForBranch} />
+          {/* <Stack.Screen name="SearchForBranch" component={SearchForBranch} /> */}
         </Stack.Navigator>
       </NavigationContainer>
     </I18nextProvider>

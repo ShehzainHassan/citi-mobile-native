@@ -44,7 +44,7 @@ export const Exchange = () => {
       if (fromCurrency && toCurrency) {
         try {
           const response = await fetch(
-            `https://open.er-api.com/v6/latest/${fromCurrency}`,
+            `https://open.er-api.com/v6/latest/${fromCurrency}`
           );
           const data = await response.json();
           const rate = data?.rates?.[toCurrency];
@@ -120,6 +120,7 @@ export const Exchange = () => {
                   setActiveField("to");
                   setModalVisible(true);
                 }}
+                required={false}
                 rightIcon={
                   <MaterialIcons
                     name="unfold-more"
@@ -144,6 +145,7 @@ export const Exchange = () => {
               value={toAmount}
               onChangeText={setToAmount}
               rightText={toCurrency}
+              required={false}
               rightPlaceholder="USD"
               onRightPress={() => {
                 setActiveField("to");

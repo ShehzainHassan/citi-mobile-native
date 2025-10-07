@@ -107,8 +107,7 @@ export const ForgotPassword = () => {
             globalStyles.centerContainer,
             authStyles.changePhoneNo,
           ]}
-          onPress={() => setStep(1)}
-        >
+          onPress={() => setStep(1)}>
           {t("changePhone")}
         </Text>
       )}

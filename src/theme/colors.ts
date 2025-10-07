@@ -13,6 +13,7 @@ export const lightColors = {
   line1: "#ECECEC",
   line2: "#BFBFBF",
   semantic1: "#FF4267",
+  error: "#FF3B30",
 };
 
 export const darkColors = {
