@@ -5,7 +5,7 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import * as Haptics from "expo-haptics";
 import React, { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Platform, Text, TouchableOpacity, View } from "react-native";
 import { HomeIcon, MessageIcon, SearchIcon, SettingsIcon } from "../../ui";
 import { TabKey, TabProps } from "./Tabs.types";
 
@@ -25,7 +25,9 @@ const Tab = React.memo(
 
     const handlePress = useCallback(() => {
       if (!isSelected) {
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        if (Platform.OS !== "web") {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        }
         onPress(tabKey);
       }
     }, [tabKey, isSelected, onPress]);
