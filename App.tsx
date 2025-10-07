@@ -11,6 +11,7 @@ import {
   Language,
   Messages,
   Search,
+  SearchForBranch,
   Settings,
   SignIn,
   SignUp,
@@ -19,6 +20,7 @@ import {
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { I18nextProvider } from "react-i18next";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ThemeProvider } from "./src/styles/ThemeProvider";
 
 const Stack = createNativeStackNavigator();
@@ -48,6 +50,7 @@ function AppContent() {
           <Stack.Screen name="AppInformation" component={AppInformation} />
           <Stack.Screen name="ChangePassword" component={ChangePassword} />
           <Stack.Screen name="Language" component={Language} />
+          <Stack.Screen name="SearchForBranch" component={SearchForBranch} />
         </Stack.Navigator>
       </NavigationContainer>
     </I18nextProvider>
@@ -57,7 +60,9 @@ function AppContent() {
 export default function App() {
   return (
     <ThemeProvider>
-      <AppContent />
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <AppContent />
+      </GestureHandlerRootView>
     </ThemeProvider>
   );
 }

@@ -20,6 +20,7 @@ export const Search = () => {
             title="Branch"
             subtitle="Search for branch"
             imageSource={Images.branch}
+            onPress={() => navigation.navigate("SearchForBranch")}
           />
           <SearchScreenCard
             title="Interest rate"

@@ -7,7 +7,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useState } from "react";
-import { Image, ScrollView, Text, View } from "react-native";
+import { Image, SafeAreaView, ScrollView, Text, View } from "react-native";
 
 export const Language = () => {
   const { globalStyles, theme } = useStyles();
@@ -16,7 +16,7 @@ export const Language = () => {
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
 
   return (
-    <View style={[globalStyles.verticalSpread]}>
+    <SafeAreaView style={[globalStyles.verticalSpread]}>
       <Header
         title="Language"
         onPress={() => navigation.navigate("Settings")}
@@ -68,6 +68,6 @@ export const Language = () => {
           })}
         </CardDetails>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };

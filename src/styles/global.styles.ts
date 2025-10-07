@@ -139,8 +139,8 @@ export const createGlobalStyles = (theme: Theme) =>
     },
     verticalSpread: {
       flex: 1,
-      flexDirection: "column",
-      backgroundColor: theme.colors.neutral6,
+      // flexDirection: "column",
+      // backgroundColor: theme.colors.neutral6,
     },
     primary1: {
       color: theme.colors.primary1,

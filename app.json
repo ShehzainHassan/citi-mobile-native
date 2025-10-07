@@ -12,7 +12,10 @@
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.planto.citiMobileBanking"
+      "bundleIdentifier": "com.planto.citiMobileBanking",
+      "config": {
+        "googleMapsApiKey": "AIzaSyA7eUtYTSpwxxXthAuqba0fppZ9AMGWYZo"
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -20,6 +23,11 @@
         "foregroundImage": "./src/assets/images/android-icon-foreground.png",
         "backgroundImage": "./src/assets/images/android-icon-background.png",
         "monochromeImage": "./src/assets/images/android-icon-monochrome.png"
+      },
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyA7eUtYTSpwxxXthAuqba0fppZ9AMGWYZo"
+        }
       },
       "package": "com.planto.citiMobileBanking"
     },
