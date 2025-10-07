@@ -67,7 +67,9 @@ export const createGlobalStyles = (theme: Theme) =>
       display: "flex",
       gap: theme.spacing.xs,
     },
-
+    transparentBackground: {
+      backgroundColor: "transparent",
+    },
     title1: {
       color: theme.colors.primary1,
       fontFamily: Fonts.sans,

@@ -18,7 +18,12 @@ export const AppInformation = () => {
         onPress={() => navigation.navigate("Settings")}
       />
       <View style={globalStyles.paddedColumn}>
-        <Text style={[globalStyles.title2, globalStyles.centerContainer]}>
+        <Text
+          style={[
+            globalStyles.title2,
+            globalStyles.centerContainer,
+            globalStyles.transparentBackground,
+          ]}>
           Citibank E-mobile Banking
         </Text>
         <CardDetails>

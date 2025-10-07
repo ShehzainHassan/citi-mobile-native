@@ -25,8 +25,6 @@ export const useHomeScreen = () => {
     (card: HomeCardConfig) => {
       if (card.route) {
         navigation.navigate(card.route);
-      } else {
-        // Optional: show toast, modal, or log for disabled/coming soon cards
       }
     },
     [navigation]
