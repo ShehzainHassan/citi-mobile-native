@@ -1,6 +1,7 @@
 import { Images } from "@/assets/images";
 import { Button, Header, ImageWithFallback, Input } from "@/components";
 import { useAuthStyles, useGlobalStyles } from "@/hooks";
+import { TranslationKeys } from "@/i18n";
 import {
   AuthStackParamList,
   MainTabWithAuthParamList,
@@ -45,7 +46,9 @@ export const ChangePassword = () => {
   return (
     <View style={globalStyles.verticalSpread}>
       <Header
-        title={passwordChanged ? "" : t("changePasswordTitle")}
+        title={
+          passwordChanged ? "" : t(TranslationKeys.auth.changePasswordTitle)
+        }
         onPress={() => navigation.goBack()}
         style={authStyles.headerContainer}
       />
@@ -59,8 +62,10 @@ export const ChangePassword = () => {
                   authStyles.passwordContainer,
                 ]}>
                 <Input
-                  label={t("recentPassword")}
-                  placeholder={t("recentPasswordPlaceholder")}
+                  label={t(TranslationKeys.auth.recentPassword)}
+                  placeholder={t(
+                    TranslationKeys.auth.recentPasswordPlaceholder
+                  )}
                   value={recentPassword}
                   onChangeText={setRecentPassword}
                   secureTextEntry
@@ -71,8 +76,8 @@ export const ChangePassword = () => {
             <View
               style={[authStyles.phoneContainer, authStyles.passwordContainer]}>
               <Input
-                label={t("newPassword")}
-                placeholder={t("newPasswordPlaceholder")}
+                label={t(TranslationKeys.auth.newPassword)}
+                placeholder={t(TranslationKeys.auth.newPasswordPlaceholder)}
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry
@@ -81,15 +86,15 @@ export const ChangePassword = () => {
             <View
               style={[authStyles.phoneContainer, authStyles.passwordContainer]}>
               <Input
-                label={t("confirmPassword")}
-                placeholder={t("confirmPasswordPlaceholder")}
+                label={t(TranslationKeys.auth.confirmPassword)}
+                placeholder={t(TranslationKeys.auth.confirmPasswordPlaceholder)}
                 value={confirmPassword}
                 onChangeText={setConfirmPassword}
                 secureTextEntry
               />
             </View>
             <Button
-              title={t("changePasswordButton")}
+              title={t(TranslationKeys.auth.changePasswordButton)}
               disabled={isButtonDisabled}
               onPress={() => setPasswordChanged(true)}
             />
@@ -103,13 +108,16 @@ export const ChangePassword = () => {
             />
             <View style={authStyles.changePasswordContainer}>
               <Text style={globalStyles.title3}>
-                {t("passwordChangedTitle")}
+                {t(TranslationKeys.auth.passwordChangedTitle)}
               </Text>
               <Text style={[globalStyles.body3, globalStyles.neutral1]}>
-                {t("passwordChangedText")}
+                {t(TranslationKeys.auth.passwordChangedText)}
               </Text>
             </View>
-            <Button title={t("ok")} onPress={handleSuccess} />
+            <Button
+              title={t(TranslationKeys.auth.ok)}
+              onPress={handleSuccess}
+            />
           </View>
         )}
       </View>

@@ -1,4 +1,5 @@
 import { Images } from "@/assets/images";
+import { TranslationKeys } from "@/i18n";
 import { MainTabParamList } from "@/navigation/types";
 import { ImageSourcePropType } from "react-native";
 
@@ -15,53 +16,53 @@ export const HOME_CARD_GRID: HomeCardConfig[][] = [
     {
       id: "accounts",
       image: Images.accountAndCard,
-      labelKey: "accountAndCard",
+      labelKey: TranslationKeys.homeScreen.accountAndCard,
       route: "Accounts",
     },
     {
       id: "transfer",
       image: Images.transfer,
-      labelKey: "transfer",
+      labelKey: TranslationKeys.homeScreen.transfer,
     },
     {
       id: "withdraw",
       image: Images.withdraw,
-      labelKey: "withdraw",
+      labelKey: TranslationKeys.homeScreen.withdraw,
     },
   ],
   [
     {
       id: "prepaid",
       image: Images.prepaid,
-      labelKey: "mobilePrepaid",
+      labelKey: TranslationKeys.homeScreen.mobilePrepaid,
     },
     {
       id: "bill",
       image: Images.bill,
-      labelKey: "payBill",
+      labelKey: TranslationKeys.homeScreen.payBill,
     },
     {
       id: "saveOnline",
       image: Images.saveOnline,
-      labelKey: "saveOnline",
+      labelKey: TranslationKeys.homeScreen.saveOnline,
     },
   ],
   [
     {
       id: "creditCard",
       image: Images.creditCard,
-      labelKey: "creditCard",
+      labelKey: TranslationKeys.homeScreen.creditCard,
     },
     {
       id: "transactionReport",
       image: Images.transactionReport,
-      labelKey: "transactionReport",
+      labelKey: TranslationKeys.homeScreen.transactionReport,
       route: "TransactionReport",
     },
     {
       id: "beneficiary",
       image: Images.beneficiary,
-      labelKey: "beneficiary",
+      labelKey: TranslationKeys.homeScreen.beneficiary,
     },
   ],
 ];

@@ -1,5 +1,6 @@
 import { Button, Header, Input } from "@/components";
 import { useAuthStyles, useGlobalStyles, useInputStyles } from "@/hooks";
+import { TranslationKeys } from "@/i18n";
 import { AuthStackParamList } from "@/navigation/types";
 import { formatPhoneNumber } from "@/utils";
 import { useNavigation } from "@react-navigation/native";
@@ -32,7 +33,7 @@ export const ForgotPassword = () => {
     <View style={authStyles.forgotPasswordContainer}>
       <View>
         <Header
-          title={t("forgotPasswordTitle")}
+          title={t(TranslationKeys.auth.forgotPasswordTitle)}
           style={authStyles.noPadding}
           onPress={handleBack}
         />
@@ -41,8 +42,8 @@ export const ForgotPassword = () => {
             <View>
               <View style={authStyles.phoneContainer}>
                 <Input
-                  label={t("typePhone")}
-                  placeholder={t("phonePlaceholder")}
+                  label={t(TranslationKeys.auth.typePhone)}
+                  placeholder={t(TranslationKeys.auth.phonePlaceholder)}
                   value={phone}
                   onChangeText={(text) => setPhone(formatPhoneNumber(text))}
                   keyboardType="phone-pad"
@@ -51,10 +52,10 @@ export const ForgotPassword = () => {
 
               <View style={authStyles.sendContainer}>
                 <Text style={[globalStyles.body3, globalStyles.neutral1]}>
-                  {t("sentCodeInfo")}
+                  {t(TranslationKeys.auth.sentCodeInfo)}
                 </Text>
                 <Button
-                  title={t("sendCode")}
+                  title={t(TranslationKeys.auth.sendCode)}
                   disabled={!phone.trim()}
                   onPress={() => setStep(2)}
                 />
@@ -66,30 +67,30 @@ export const ForgotPassword = () => {
             <View>
               <View style={authStyles.phoneContainer}>
                 <Text style={[globalStyles.caption1, inputStyles.inputLabel]}>
-                  {t("typeCode")}
+                  {t(TranslationKeys.auth.typeCode)}
                 </Text>
                 <View style={authStyles.codeContainer}>
                   <Input
-                    placeholder={t("codePlaceholder")}
+                    placeholder={t(TranslationKeys.auth.codePlaceholder)}
                     value={code}
                     onChangeText={setCode}
                     keyboardType="number-pad"
                   />
-                  <Button title={t("resend")} />
+                  <Button title={t(TranslationKeys.auth.resend)} />
                 </View>
               </View>
 
               <View style={authStyles.sendContainer}>
                 <View style={authStyles.textInfoContainer}>
                   <Text style={[globalStyles.body3, authStyles.textInfo]}>
-                    {t("verifyInfo", { phone })}
+                    {t(TranslationKeys.auth.verifyInfo, { phone })}
                   </Text>
                   <Text style={[globalStyles.body3, authStyles.textInfo]}>
-                    {t("expireInfo")}
+                    {t(TranslationKeys.auth.expireInfo)}
                   </Text>
                 </View>
                 <Button
-                  title={t("changePasswordTitle")}
+                  title={t(TranslationKeys.auth.changePasswordTitle)}
                   disabled={!code.trim()}
                   onPress={() =>
                     navigation.navigate("ChangePassword", {
@@ -109,9 +110,8 @@ export const ForgotPassword = () => {
             globalStyles.centerContainer,
             authStyles.changePhoneNo,
           ]}
-          onPress={() => setStep(1)}
-        >
-          {t("changePhone")}
+          onPress={() => setStep(1)}>
+          {t(TranslationKeys.auth.changePhone)}
         </Text>
       )}
     </View>

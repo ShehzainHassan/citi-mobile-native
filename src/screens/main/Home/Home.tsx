@@ -6,6 +6,7 @@ import {
   Tabs,
 } from "@/components";
 import { useGlobalStyles, useHomeScreen, useHomeScreenStyles } from "@/hooks";
+import { TranslationKeys } from "@/i18n";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 
@@ -13,7 +14,7 @@ export const HomeScreen = () => {
   const globalStyles = useGlobalStyles();
   const homeScreenStyles = useHomeScreenStyles();
 
-  const { t } = useTranslation("homeScreen");
+  const { t } = useTranslation();
   const { cardGrid, handleCardPress } = useHomeScreen();
 
   return (
@@ -23,16 +24,16 @@ export const HomeScreen = () => {
           <ImageWithFallback
             source={Images.profilePic}
             style={homeScreenStyles.profilePic}
-            accessibilityLabel={t("profilePicAlt")}
+            accessibilityLabel={t(TranslationKeys.homeScreen.profilePicAlt)}
           />
           <Text style={globalStyles.body1}>
-            {t("greeting", { name: "John" })}
+            {t(TranslationKeys.homeScreen.greeting, { name: "John" })}
           </Text>
         </View>
         <ImageWithFallback
           source={Images.notification}
           style={homeScreenStyles.notificationBell}
-          accessibilityLabel={t("notificationAlt")}
+          accessibilityLabel={t(TranslationKeys.homeScreen.notificationAlt)}
         />
       </View>
 

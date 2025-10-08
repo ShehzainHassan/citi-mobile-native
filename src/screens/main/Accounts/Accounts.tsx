@@ -13,6 +13,7 @@ import {
   useCardDetailStyles,
   useGlobalStyles,
 } from "@/hooks";
+import { TranslationKeys } from "@/i18n";
 import { MainTabParamList } from "@/navigation/types";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -32,9 +33,11 @@ export const Accounts = () => {
   const [selectedCardType, setSelectedCardType] = useState<CardType>(null);
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
-  const { t } = useTranslation("accounts");
+  const { t } = useTranslation();
 
-  const title = selectedCardType ? t("titleCard") : t("titleDefault");
+  const title = selectedCardType
+    ? t(TranslationKeys.accounts.titleCard)
+    : t(TranslationKeys.accounts.titleDefault);
 
   const handleHeaderPress = useCallback(() => {
     if (!selectedCardType) {
@@ -62,11 +65,26 @@ export const Accounts = () => {
 
   const cardDetails = useMemo(
     () => [
-      { label: t("cardDetails.name"), value: t("profileName") },
-      { label: t("cardDetails.cardNumber"), value: "**** **** 9018" },
-      { label: t("cardDetails.validFrom"), value: "10/15" },
-      { label: t("cardDetails.goodThru"), value: "10/20" },
-      { label: t("cardDetails.availableBalance"), value: "$10,000" },
+      {
+        label: t(TranslationKeys.accounts.cardDetails.name),
+        value: t(TranslationKeys.accounts.profileName),
+      },
+      {
+        label: t(TranslationKeys.accounts.cardDetails.cardNumber),
+        value: "**** **** 9018",
+      },
+      {
+        label: t(TranslationKeys.accounts.cardDetails.validFrom),
+        value: "10/15",
+      },
+      {
+        label: t(TranslationKeys.accounts.cardDetails.goodThru),
+        value: "10/20",
+      },
+      {
+        label: t(TranslationKeys.accounts.cardDetails.availableBalance),
+        value: "$10,000",
+      },
     ],
     [t]
   );
@@ -84,7 +102,11 @@ export const Accounts = () => {
           {(["Account", "Card"] as TabType[]).map((tab) => (
             <Button
               key={tab}
-              title={t(`tab${tab}`)}
+              title={
+                tab === "Account"
+                  ? t(TranslationKeys.accounts.tabAccount)
+                  : t(TranslationKeys.accounts.tabCard)
+              }
               variant={selectedTab === tab ? "primary" : "secondary"}
               style={accountScreenStyles.button}
               onPress={() => handleTabPress(tab)}
@@ -99,9 +121,11 @@ export const Accounts = () => {
             <ImageWithFallback
               source={Images.profilePic}
               style={accountScreenStyles.profilePic}
-              accessibilityLabel={t("profilePicAlt")}
+              accessibilityLabel={t(TranslationKeys.accounts.profilePicAlt)}
             />
-            <Text style={globalStyles.title3}>{t("profileName")}</Text>
+            <Text style={globalStyles.title3}>
+              {t(TranslationKeys.accounts.profileName)}
+            </Text>
           </View>
           <View style={globalStyles.spacedColumn}>
             {Array.from({ length: 3 }).map((_, idx) => (
@@ -118,7 +142,9 @@ export const Accounts = () => {
               <TouchableOpacity
                 key={type}
                 onPress={() => handleCardSelect(type as CardType)}
-                accessibilityLabel={t("selectCardAlt", { type })}>
+                accessibilityLabel={t(TranslationKeys.accounts.selectCardAlt, {
+                  type,
+                })}>
                 <CreditCard
                   name="John Smith"
                   cardType="Amazon Platinium"
@@ -129,7 +155,7 @@ export const Accounts = () => {
               </TouchableOpacity>
             ))}
           </View>
-          <Button title={t("addCard")} />
+          <Button title={t(TranslationKeys.accounts.addCard)} />
         </View>
       )}
 
@@ -141,7 +167,7 @@ export const Accounts = () => {
             ))}
           </CardDetails>
           <Text style={[globalStyles.body1, accountScreenStyles.deleteCard]}>
-            {t("deleteCard")}
+            {t(TranslationKeys.accounts.deleteCard)}
           </Text>
         </View>
       )}
