@@ -12,15 +12,15 @@ export type AuthStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
   ForgotPassword: undefined;
-  ChangePassword: { from?: "ForgotPassword" | "Settings" };
+  ChangePassword: { from?: "Security" | "Settings" };
 };
 
 export type MainTabParamList = {
   Home: undefined;
-  Accounts: undefined;
+  Accounts: { accountId?: string };
   Transfers: undefined;
   Bills: undefined;
-  TransactionReport: undefined;
+  TransactionReport: { accountId?: string; fromDate?: string };
   Search: undefined;
   Messages: undefined;
   Settings: undefined;
@@ -29,8 +29,8 @@ export type MainTabParamList = {
 export type SearchParamList = {
   SearchForBranch: undefined;
   InterestRate: undefined;
-  ExchangeRate: undefined;
-  Exchange: undefined;
+  ExchangeRate: { baseCurrency?: string };
+  Exchange: { fromCurrency?: string; toCurrency?: string };
 };
 
 export type SettingsParamList = {
@@ -46,4 +46,10 @@ export type MainTabWithAuthAndSettingsParamList = AuthStackParamList &
   MainTabParamList &
   SettingsParamList;
 
+// Enable global type checking
+declare global {
+  namespace ReactNavigation {
+    interface RootParamList extends RootStackParamList {}
+  }
+}
 // Add more navigation types as needed...

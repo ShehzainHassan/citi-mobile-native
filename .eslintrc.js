@@ -55,6 +55,7 @@ module.exports = {
     ],
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/no-namespace": "off",
 
     // React rules
     "react/react-in-jsx-scope": "off", // Not needed in React 18+

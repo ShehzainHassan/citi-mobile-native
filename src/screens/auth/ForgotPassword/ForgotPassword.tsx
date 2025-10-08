@@ -94,7 +94,7 @@ export const ForgotPassword = () => {
                   disabled={!code.trim()}
                   onPress={() =>
                     navigation.navigate("ChangePassword", {
-                      from: "ForgotPassword",
+                      from: "Security",
                     })
                   }
                 />
