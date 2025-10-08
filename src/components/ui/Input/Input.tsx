@@ -1,7 +1,6 @@
 import { useGlobalStyles } from "@/hooks";
 import { useTheme } from "@/theme";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import * as Haptics from "expo-haptics";
+// import * as Haptics from "expo-haptics";
 import React, { useEffect, useMemo, useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import Animated, {
@@ -12,6 +11,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { createInputStyles } from "./Input.styles";
 import { InputProps } from "./Input.types";
+import MaterialIcons from "@react-native-vector-icons/material-icons";
 
 export const Input: React.FC<InputProps> = ({
   label,
@@ -38,13 +38,14 @@ export const Input: React.FC<InputProps> = ({
 
   useEffect(() => {
     if (error) {
-      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+      // TODO: Use react native for haptics
+      // Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
       shakeValue.value = withSequence(
         withTiming(-8, { duration: 50 }),
         withTiming(8, { duration: 50 }),
         withTiming(-8, { duration: 50 }),
         withTiming(8, { duration: 50 }),
-        withTiming(0, { duration: 50 }),
+        withTiming(0, { duration: 50 })
       );
     }
   }, [error]);
@@ -54,7 +55,8 @@ export const Input: React.FC<InputProps> = ({
   }));
 
   const handlePasswordToggle = () => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    // TODO: Use react native for haptics
+    // Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     setIsPasswordVisible((prev) => !prev);
   };
 
@@ -79,7 +81,7 @@ export const Input: React.FC<InputProps> = ({
       error,
       readOnly,
       isFocused,
-    ],
+    ]
   );
 
   return (
@@ -87,8 +89,7 @@ export const Input: React.FC<InputProps> = ({
       {label && (
         <Text
           style={[globalStyles.caption1, inputStyles.inputLabel]}
-          accessibilityRole="text"
-        >
+          accessibilityRole="text">
           {label}
           {required && <Text style={{ color: theme.colors.error }}> *</Text>}
         </Text>
@@ -118,8 +119,9 @@ export const Input: React.FC<InputProps> = ({
             style={inputStyles.rightContainer}
             activeOpacity={0.7}
             accessibilityRole="button"
-            accessibilityLabel={rightText || rightPlaceholder || "Right action"}
-          >
+            accessibilityLabel={
+              rightText || rightPlaceholder || "Right action"
+            }>
             <Text
               style={[
                 globalStyles.body3,
@@ -129,8 +131,7 @@ export const Input: React.FC<InputProps> = ({
                     ? theme.colors.neutral1
                     : theme.colors.neutral4,
                 },
-              ]}
-            >
+              ]}>
               {rightText || rightPlaceholder}
             </Text>
             {rightIcon}
@@ -145,8 +146,7 @@ export const Input: React.FC<InputProps> = ({
             accessibilityLabel={
               isPasswordVisible ? "Hide password" : "Show password"
             }
-            accessibilityHint="Toggles password visibility"
-          >
+            accessibilityHint="Toggles password visibility">
             <MaterialIcons
               name={isPasswordVisible ? "visibility-off" : "visibility"}
               size={20}
@@ -160,8 +160,7 @@ export const Input: React.FC<InputProps> = ({
         <View
           accessibilityLiveRegion="polite"
           accessibilityRole="alert"
-          style={{ marginTop: 4 }}
-        >
+          style={{ marginTop: 4 }}>
           <Text style={globalStyles.errorText}>{error}</Text>
         </View>
       )}

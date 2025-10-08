@@ -1,5 +1,4 @@
 import { useTheme } from "@/theme";
-import { MaterialIcons } from "@expo/vector-icons";
 import currencyCodes from "currency-codes";
 import React from "react";
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
@@ -9,6 +8,7 @@ import {
   SelectCurrencyHeaderProps,
   SelectCurrencyListProps,
 } from "./SelectCurrency.types";
+import MaterialIcons from "@react-native-vector-icons/material-icons";
 
 const currencies: Currency[] = currencyCodes
   .codes()
@@ -55,8 +55,7 @@ export const SelectCurrencyList: React.FC<SelectCurrencyListProps> = ({
             onPress={() => {
               onSelect(item.code);
               onClose();
-            }}
-          >
+            }}>
             <Text style={[styles.text, isSelected && styles.selectedText]}>
               {item.code} ({item.name})
             </Text>

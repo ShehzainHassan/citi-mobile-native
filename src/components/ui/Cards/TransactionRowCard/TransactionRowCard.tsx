@@ -22,7 +22,7 @@ export const TransactionRowCard: React.FC<TransactionRowCardProps> = ({
       <View style={styles.cardContainer}>
         <View style={styles.iconContainer}>
           <View style={styles.iconImgContainer}>
-            <ImageWithFallback source={icon} style={styles.iconImg} />
+          <ImageWithFallback source={icon} style={styles.iconImg} />
           </View>
           <View>
             <Text style={[globalStyles.body1, globalStyles.neutral1]}>

@@ -10,5 +10,5 @@ export {
   SelectCurrencyList,
 } from "./SelectCurrency/SelectCurrency";
 
-export { ImageWithFallback } from "./ImageWithFallback/ImageWithFallback";
+export { ImageWithFallback } from "./ImageWithFallback";
 export { SettingsRow } from "./SettingsRow";

@@ -5,7 +5,7 @@ import { SelectCurrencyModal } from "@/components/ui/Modal/SelectCurrencyModal";
 import { useGlobalStyles } from "@/hooks";
 import { MainTabParamList } from "@/navigation/types";
 import { Theme, useTheme } from "@/theme";
-import { MaterialIcons } from "@expo/vector-icons";
+import MaterialIcons from "@react-native-vector-icons/material-icons";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useEffect, useState } from "react";

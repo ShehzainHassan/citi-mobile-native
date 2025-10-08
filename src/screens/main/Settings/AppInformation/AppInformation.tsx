@@ -23,8 +23,7 @@ export const AppInformation = () => {
             globalStyles.title2,
             globalStyles.centerContainer,
             globalStyles.transparentBackground,
-          ]}
-        >
+          ]}>
           Citibank E-mobile Banking
         </Text>
         <CardDetails>

@@ -1,4 +1,13 @@
+import React from "react";
+import { StatusBar, useColorScheme } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { I18nextProvider } from "react-i18next";
 import { i18n } from "@/i18n";
+
 import {
   Accounts,
   AppInformation,
@@ -18,22 +27,16 @@ import {
   ThemeSelector,
   TransactionReport,
 } from "@/screens";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { I18nextProvider } from "react-i18next";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { ThemeProvider } from "./src/styles/ThemeProvider";
+import { ThemeProvider } from "@/styles/ThemeProvider";
+import type { RootStackParamList } from "@/navigation/types";
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function AppContent() {
   return (
     <I18nextProvider i18n={i18n}>
       <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="SignIn"
-          screenOptions={{ headerShown: false }}
-        >
+        <Stack.Navigator initialRouteName="SignIn" screenOptions={{ headerShown: false }}>
           <Stack.Screen name="SignIn" component={SignIn} />
           <Stack.Screen name="SignUp" component={SignUp} />
           <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
@@ -41,10 +44,7 @@ function AppContent() {
           <Stack.Screen name="Accounts" component={Accounts} />
           <Stack.Screen name="Messages" component={Messages} />
           <Stack.Screen name="Settings" component={Settings} />
-          <Stack.Screen
-            name="TransactionReport"
-            component={TransactionReport}
-          />
+          <Stack.Screen name="TransactionReport" component={TransactionReport} />
           <Stack.Screen name="Search" component={Search} />
           <Stack.Screen name="InterestRate" component={InterestRate} />
           <Stack.Screen name="ExchangeRate" component={ExchangeRate} />
@@ -61,10 +61,15 @@ function AppContent() {
 }
 
 export default function App() {
+  const isDarkMode = useColorScheme() === "dark";
+
   return (
     <ThemeProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <AppContent />
+        <SafeAreaProvider>
+          <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
+          <AppContent />
+        </SafeAreaProvider>
       </GestureHandlerRootView>
     </ThemeProvider>
   );

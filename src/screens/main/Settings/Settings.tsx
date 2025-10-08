@@ -1,11 +1,5 @@
 import { Images } from "@/assets/images";
-import {
-  CardDetails,
-  Header,
-  ImageWithFallback,
-  SettingsRow,
-  Tabs,
-} from "@/components";
+import { CardDetails, Header, ImageWithFallback, SettingsRow, Tabs } from "@/components";
 import { useAuthStyles, useGlobalStyles, useHomeScreenStyles } from "@/hooks";
 import { MainTabWithAuthAndSettingsParamList } from "@/navigation/types";
 import { useNavigation } from "@react-navigation/native";
@@ -64,7 +58,7 @@ export const Settings = () => {
 
       <View style={[globalStyles.roundedContainer, styles.roundedContainer]}>
         <View style={styles.imgWrapper}>
-          <ImageWithFallback
+        <ImageWithFallback
             source={Images.profilePic}
             style={[homeScreenStyles.profilePic, styles.profilePic]}
           />

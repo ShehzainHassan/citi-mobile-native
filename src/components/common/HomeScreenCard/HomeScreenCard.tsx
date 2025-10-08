@@ -18,9 +18,8 @@ export const HomeScreenCard = ({
       style={styles.container}
       onPress={onPress}
       accessibilityLabel={label}
-      accessibilityRole="button"
-    >
-      <ImageWithFallback source={image} style={styles.cardImg} />
+      accessibilityRole="button">
+      <ImageWithFallback source={image} style={styles.cardImg} resizeMode="contain" />
       <Text style={[globalStyles.caption2, styles.cardText]}>{label}</Text>
     </TouchableOpacity>
   );

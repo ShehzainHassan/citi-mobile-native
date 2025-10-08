@@ -1,4 +1,4 @@
-import { ImageWithFallback } from "@/components";
+import { ImageWithFallback } from "@/components/common";
 import { useGlobalStyles } from "@/hooks";
 import { useTheme } from "@/theme";
 import React from "react";

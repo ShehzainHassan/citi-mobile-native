@@ -1,4 +1,4 @@
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import MaterialIcons from "@react-native-vector-icons/material-icons";
 import { StyleProp, ViewStyle } from "react-native";
 
 // Temporary fallback to MaterialIcons for iOS as well

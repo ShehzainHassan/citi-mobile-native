@@ -1,8 +1,19 @@
-import { ImageSource } from "expo-image";
-import { ImageSourcePropType, StyleProp, ViewStyle } from "react-native";
+import { ImageProps, ImageSourcePropType, ImageStyle, StyleProp, ViewStyle } from "react-native";
 
-export interface FallbackImageProps {
-  source: ImageSource | ImageSourcePropType;
+export type ImageSource = 
+  | ImageSourcePropType 
+  | string 
+  | number 
+  | ImageSourcePropType[] 
+  | React.ComponentType<any>;
+
+export type ContentFit = 'contain' | 'cover' | 'fill' | 'scale-down' | 'none';
+
+export interface FallbackImageProps extends Omit<ImageProps, 'source' | 'style'> {
+  source: ImageSource;
+  fallbackSource?: ImageSource;
   style?: StyleProp<ViewStyle>;
-  [key: string]: unknown;
+  resizeMode?: ImageStyle['resizeMode'];
+  contentFit?: ContentFit;
+  transition?: number;
 }
