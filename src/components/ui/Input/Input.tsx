@@ -44,7 +44,7 @@ export const Input: React.FC<InputProps> = ({
         withTiming(8, { duration: 50 }),
         withTiming(-8, { duration: 50 }),
         withTiming(8, { duration: 50 }),
-        withTiming(0, { duration: 50 })
+        withTiming(0, { duration: 50 }),
       );
     }
   }, [error]);
@@ -79,7 +79,7 @@ export const Input: React.FC<InputProps> = ({
       error,
       readOnly,
       isFocused,
-    ]
+    ],
   );
 
   return (
@@ -87,7 +87,8 @@ export const Input: React.FC<InputProps> = ({
       {label && (
         <Text
           style={[globalStyles.caption1, inputStyles.inputLabel]}
-          accessibilityRole="text">
+          accessibilityRole="text"
+        >
           {label}
           {required && <Text style={{ color: theme.colors.error }}> *</Text>}
         </Text>
@@ -117,9 +118,8 @@ export const Input: React.FC<InputProps> = ({
             style={inputStyles.rightContainer}
             activeOpacity={0.7}
             accessibilityRole="button"
-            accessibilityLabel={
-              rightText || rightPlaceholder || "Right action"
-            }>
+            accessibilityLabel={rightText || rightPlaceholder || "Right action"}
+          >
             <Text
               style={[
                 globalStyles.body3,
@@ -129,7 +129,8 @@ export const Input: React.FC<InputProps> = ({
                     ? theme.colors.neutral1
                     : theme.colors.neutral4,
                 },
-              ]}>
+              ]}
+            >
               {rightText || rightPlaceholder}
             </Text>
             {rightIcon}
@@ -144,7 +145,8 @@ export const Input: React.FC<InputProps> = ({
             accessibilityLabel={
               isPasswordVisible ? "Hide password" : "Show password"
             }
-            accessibilityHint="Toggles password visibility">
+            accessibilityHint="Toggles password visibility"
+          >
             <MaterialIcons
               name={isPasswordVisible ? "visibility-off" : "visibility"}
               size={20}
@@ -158,7 +160,8 @@ export const Input: React.FC<InputProps> = ({
         <View
           accessibilityLiveRegion="polite"
           accessibilityRole="alert"
-          style={{ marginTop: 4 }}>
+          style={{ marginTop: 4 }}
+        >
           <Text style={globalStyles.errorText}>{error}</Text>
         </View>
       )}

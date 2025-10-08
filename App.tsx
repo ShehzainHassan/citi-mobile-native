@@ -31,7 +31,8 @@ function AppContent() {
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName="SignIn"
-          screenOptions={{ headerShown: false }}>
+          screenOptions={{ headerShown: false }}
+        >
           <Stack.Screen name="SignIn" component={SignIn} />
           <Stack.Screen name="SignUp" component={SignUp} />
           <Stack.Screen name="ForgotPassword" component={ForgotPassword} />

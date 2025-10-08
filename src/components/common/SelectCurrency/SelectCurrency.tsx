@@ -55,7 +55,8 @@ export const SelectCurrencyList: React.FC<SelectCurrencyListProps> = ({
             onPress={() => {
               onSelect(item.code);
               onClose();
-            }}>
+            }}
+          >
             <Text style={[styles.text, isSelected && styles.selectedText]}>
               {item.code} ({item.name})
             </Text>

@@ -1,6 +1,7 @@
+import { ImageWithFallback } from "@/components/common";
 import { useGlobalStyles } from "@/hooks";
 import { useTheme } from "@/theme";
-import { Image, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { createTransactionRowCardStyles } from "./TransactionRowCard.styles";
 import { TransactionRowCardProps } from "./TransactionRowCard.types";
 
@@ -21,7 +22,7 @@ export const TransactionRowCard: React.FC<TransactionRowCardProps> = ({
       <View style={styles.cardContainer}>
         <View style={styles.iconContainer}>
           <View style={styles.iconImgContainer}>
-            <Image source={icon} style={styles.iconImg} />
+            <ImageWithFallback source={icon} style={styles.iconImg} />
           </View>
           <View>
             <Text style={[globalStyles.body1, globalStyles.neutral1]}>

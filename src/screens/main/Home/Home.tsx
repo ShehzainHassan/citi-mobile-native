@@ -1,8 +1,13 @@
 import { Images } from "@/assets/images";
-import { CreditCard, HomeScreenCard, Tabs } from "@/components";
+import {
+  CreditCard,
+  HomeScreenCard,
+  ImageWithFallback,
+  Tabs,
+} from "@/components";
 import { useGlobalStyles, useHomeScreen, useHomeScreenStyles } from "@/hooks";
 import { useTranslation } from "react-i18next";
-import { Image, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
 export const HomeScreen = () => {
   const globalStyles = useGlobalStyles();
@@ -15,7 +20,7 @@ export const HomeScreen = () => {
     <View style={homeScreenStyles.mainContainer}>
       <View style={homeScreenStyles.headerContainer}>
         <View style={homeScreenStyles.profilePicContainer}>
-          <Image
+          <ImageWithFallback
             source={Images.profilePic}
             style={homeScreenStyles.profilePic}
             accessibilityLabel={t("profilePicAlt")}
@@ -24,7 +29,7 @@ export const HomeScreen = () => {
             {t("greeting", { name: "John" })}
           </Text>
         </View>
-        <Image
+        <ImageWithFallback
           source={Images.notification}
           style={homeScreenStyles.notificationBell}
           accessibilityLabel={t("notificationAlt")}

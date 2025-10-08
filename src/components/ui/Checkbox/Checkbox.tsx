@@ -1,7 +1,8 @@
 import { Images } from "@/assets/images";
+import { ImageWithFallback } from "@/components";
 import { useTheme } from "@/theme";
 import React, { useState } from "react";
-import { Image, Pressable, View } from "react-native";
+import { Pressable, View } from "react-native";
 import { createCheckboxStyles } from "./Checkbox.styles";
 import { CheckboxProps } from "./Checkbox.types";
 
@@ -23,18 +24,16 @@ export const Checkbox: React.FC<CheckboxProps> = ({
     <Pressable
       onPress={toggleCheckbox}
       style={checkboxStyles.container}
-      android_ripple={null}
-    >
+      android_ripple={null}>
       <View
         style={[
           checkboxStyles.box,
           {
             borderColor: checked ? theme.colors.primary1 : theme.colors.border,
           },
-        ]}
-      >
+        ]}>
         {checked && (
-          <Image
+          <ImageWithFallback
             source={Images.tickIcon}
             style={checkboxStyles.checked}
             resizeMode="contain"

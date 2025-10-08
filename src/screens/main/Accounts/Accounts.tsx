@@ -6,6 +6,7 @@ import {
   CardDetails,
   CreditCard,
   Header,
+  ImageWithFallback,
 } from "@/components";
 import {
   useAccountScreenStyles,
@@ -17,7 +18,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 
 type TabType = "Account" | "Card";
 type CardType = "Visa" | "MasterCard" | null;
@@ -95,7 +96,7 @@ export const Accounts = () => {
       {selectedTab === "Account" && !selectedCardType && (
         <View style={accountScreenStyles.accountSection}>
           <View style={accountScreenStyles.profilePicContainer}>
-            <Image
+            <ImageWithFallback
               source={Images.profilePic}
               style={accountScreenStyles.profilePic}
               accessibilityLabel={t("profilePicAlt")}

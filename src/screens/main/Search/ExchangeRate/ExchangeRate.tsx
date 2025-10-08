@@ -1,11 +1,11 @@
-import { DataTable, Header } from "@/components";
+import { DataTable, Header, ImageWithFallback } from "@/components";
 import { useGlobalStyles } from "@/hooks";
 import { exchangeRateTable } from "@/mocks";
 import { MainTabParamList } from "@/navigation/types";
 import { getFlagUrl } from "@/utils";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 export const ExchangeRate = () => {
   const globalStyles = useGlobalStyles();
@@ -21,7 +21,7 @@ export const ExchangeRate = () => {
         columns={exchangeRateTable.columns}
         rows={exchangeRateTable.rows.map((row) => [
           <View key={row.countryCode} style={styles.rowContainer}>
-            <Image
+            <ImageWithFallback
               source={{ uri: getFlagUrl(row.countryCode) }}
               style={globalStyles.flag}
               resizeMode="contain"

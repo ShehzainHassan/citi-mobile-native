@@ -65,7 +65,8 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
 
   return (
     <ThemeContext.Provider
-      value={{ theme, isDark, themeMode, toggleTheme, setThemeMode }}>
+      value={{ theme, isDark, themeMode, toggleTheme, setThemeMode }}
+    >
       {children}
     </ThemeContext.Provider>
   );

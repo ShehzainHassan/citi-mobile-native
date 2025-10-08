@@ -31,7 +31,8 @@ export const TransactionReport = () => {
         style={[
           globalStyles.roundedContainer,
           transactionReportStyles.subContainer,
-        ]}>
+        ]}
+      >
         <View style={transactionReportStyles.transactionContainer}>
           <View style={transactionReportStyles.cardChartContainer}>
             <CreditCard
@@ -43,7 +44,8 @@ export const TransactionReport = () => {
             />
             <ScrollView
               style={transactionReportStyles.scrollable}
-              showsVerticalScrollIndicator={false}>
+              showsVerticalScrollIndicator={false}
+            >
               <MonthlyBalanceChart />
               {transactions.map((t) => (
                 <TransactionRowCard

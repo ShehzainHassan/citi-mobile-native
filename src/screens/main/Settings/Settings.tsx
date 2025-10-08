@@ -1,10 +1,16 @@
 import { Images } from "@/assets/images";
-import { CardDetails, Header, SettingsRow, Tabs } from "@/components";
+import {
+  CardDetails,
+  Header,
+  ImageWithFallback,
+  SettingsRow,
+  Tabs,
+} from "@/components";
 import { useAuthStyles, useGlobalStyles, useHomeScreenStyles } from "@/hooks";
 import { MainTabWithAuthAndSettingsParamList } from "@/navigation/types";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 export const Settings = () => {
   const navigation =
@@ -58,7 +64,7 @@ export const Settings = () => {
 
       <View style={[globalStyles.roundedContainer, styles.roundedContainer]}>
         <View style={styles.imgWrapper}>
-          <Image
+          <ImageWithFallback
             source={Images.profilePic}
             style={[homeScreenStyles.profilePic, styles.profilePic]}
           />

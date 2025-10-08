@@ -1,5 +1,5 @@
 import { Images } from "@/assets/images";
-import { Button, Header, Input } from "@/components";
+import { Button, Header, ImageWithFallback, Input } from "@/components";
 import { useAuthStyles, useGlobalStyles } from "@/hooks";
 import {
   AuthStackParamList,
@@ -9,7 +9,7 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Image, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
 type ChangePasswordRouteProp = RouteProp<AuthStackParamList, "ChangePassword">;
 
@@ -96,7 +96,7 @@ export const ChangePassword = () => {
           </View>
         ) : (
           <View style={globalStyles.paddedColumn}>
-            <Image
+            <ImageWithFallback
               source={Images.passwordChanged}
               style={globalStyles.authLogo}
               resizeMode="contain"

@@ -5,6 +5,7 @@ import {
   AuthImageBlock,
   Button,
   Header,
+  ImageWithFallback,
   Input,
 } from "@/components";
 import { useAuthStyles, useGlobalStyles, useInputStyles } from "@/hooks";
@@ -12,7 +13,7 @@ import { MainTabWithAuthParamList } from "@/navigation/types";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useTranslation } from "react-i18next";
-import { Image, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
 export const SignIn = () => {
   const globalStyles = useGlobalStyles();
@@ -45,7 +46,7 @@ export const SignIn = () => {
         </Text>
         <Button title={t("signInButton")} />
         <View style={globalStyles.centerContainer}>
-          <Image
+          <ImageWithFallback
             source={Images.fingerprint}
             style={authStyles.biometricButton}
             resizeMode="contain"

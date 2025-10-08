@@ -1,7 +1,8 @@
+import { ImageWithFallback } from "@/components";
 import { useGlobalStyles } from "@/hooks";
 import { useTheme } from "@/theme";
 import React from "react";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { createSearchScreenCardStyles } from "./SearchScreenCard.styles";
 import { SearchScreenCardProps } from "./SearchScreenCard.types";
 
@@ -24,7 +25,7 @@ export const SearchScreenCard: React.FC<SearchScreenCardProps> = ({
           </Text>
           <Text style={globalStyles.caption2}>{subtitle}</Text>
         </View>
-        <Image source={imageSource} style={styles.img} />
+        <ImageWithFallback source={imageSource} style={styles.img} />
       </View>
     </TouchableOpacity>
   );

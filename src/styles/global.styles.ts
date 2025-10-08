@@ -10,7 +10,6 @@ export const createGlobalStyles = (theme: Theme) =>
       backgroundColor: theme.colors.neutral6,
       display: "flex",
       justifyContent: "center",
-      marginVertical: theme.spacing.xl,
     },
 
     container: {

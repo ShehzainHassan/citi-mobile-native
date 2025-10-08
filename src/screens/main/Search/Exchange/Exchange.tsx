@@ -1,5 +1,5 @@
 import { Images } from "@/assets/images";
-import { Header } from "@/components";
+import { Header, ImageWithFallback } from "@/components";
 import { Button, Input } from "@/components/ui";
 import { SelectCurrencyModal } from "@/components/ui/Modal/SelectCurrencyModal";
 import { useGlobalStyles } from "@/hooks";
@@ -9,7 +9,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useEffect, useState } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 export const Exchange = () => {
   const { theme } = useTheme();
   const globalStyles = useGlobalStyles();
@@ -79,7 +79,7 @@ export const Exchange = () => {
         onPress={() => navigation.navigate("Search")}
         style={styles.headerContainer}
       />
-      <Image source={Images.exchangeRateLogo} style={styles.logo} />
+      <ImageWithFallback source={Images.exchangeRateLogo} style={styles.logo} />
       <View style={styles.exchangeContainer}>
         <Input
           label="From"

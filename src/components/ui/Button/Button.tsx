@@ -50,7 +50,8 @@ export const Button: React.FC<ButtonProps> = ({
       onPress={handlePress}
       accessibilityRole="button"
       accessibilityState={{ disabled: isDisabled, busy: loading }}
-      {...props}>
+      {...props}
+    >
       <View style={buttonStyles.contentContainer}>
         {loading ? (
           <ActivityIndicator size="small" accessibilityLabel="Loading" />
@@ -61,7 +62,8 @@ export const Button: React.FC<ButtonProps> = ({
               style={[
                 buttonStyles[`text_${size}`],
                 variant === "secondary" && buttonStyles.text_secondary,
-              ]}>
+              ]}
+            >
               {title}
             </Text>
 

@@ -1,9 +1,9 @@
 import { useGlobalStyles } from "@/hooks";
 import { useTheme } from "@/theme";
 import { View } from "react-native";
+import { ImageWithFallback } from "../ImageWithFallback";
 import { createAuthImageStyles } from "./AuthImageBlock.styles";
 import { AuthImageBlockProps } from "./AuthImageBlock.types";
-import { ImageWithFallback } from "../ImageWithFallback";
 
 export const AuthImageBlock = ({ source }: AuthImageBlockProps) => {
   const globalStyles = useGlobalStyles();
