@@ -29,7 +29,7 @@ export const ChangePassword = () => {
   const [passwordChanged, setPasswordChanged] = useState(false);
 
   const handleSuccess = () => {
-    if (from === "ForgotPassword") {
+    if (from === "Security") {
       navigation.navigate("SignIn");
     } else if (from === "Settings") {
       navigation.navigate("Settings");

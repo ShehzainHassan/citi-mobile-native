@@ -4,6 +4,7 @@ import React from "react";
 import {
   ActivityIndicator,
   GestureResponderEvent,
+  Platform,
   Text,
   TouchableOpacity,
   View,
@@ -31,7 +32,10 @@ export const Button: React.FC<ButtonProps> = ({
 
   const handlePress = async (e: GestureResponderEvent) => {
     if (!isDisabled && onPress) {
-      await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      if (Platform.OS === "ios" || Platform.OS === "android") {
+        await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      }
+
       onPress(e);
     }
   };
@@ -50,8 +54,7 @@ export const Button: React.FC<ButtonProps> = ({
       onPress={handlePress}
       accessibilityRole="button"
       accessibilityState={{ disabled: isDisabled, busy: loading }}
-      {...props}
-    >
+      {...props}>
       <View style={buttonStyles.contentContainer}>
         {loading ? (
           <ActivityIndicator size="small" accessibilityLabel="Loading" />
@@ -62,8 +65,7 @@ export const Button: React.FC<ButtonProps> = ({
               style={[
                 buttonStyles[`text_${size}`],
                 variant === "secondary" && buttonStyles.text_secondary,
-              ]}
-            >
+              ]}>
               {title}
             </Text>
 

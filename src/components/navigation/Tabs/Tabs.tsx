@@ -48,13 +48,12 @@ const Tab = React.memo(
         style={[tabStyles.tab, isSelected && tabStyles.tabSelected]}
         accessibilityRole="tab"
         accessibilityState={{ selected: isSelected }}
-        accessibilityLabel={label}
-      >
+        accessibilityLabel={label}>
         <Icon selected={isSelected} />
         {isSelected && <Text style={tabStyles.label}>{label}</Text>}
       </TouchableOpacity>
     );
-  },
+  }
 );
 
 Tab.displayName = "Tab";
@@ -70,7 +69,7 @@ export const Tabs = React.memo(() => {
     (key: TabKey) => {
       navigation.navigate(key);
     },
-    [navigation],
+    [navigation]
   );
 
   const tabs = useMemo(
@@ -85,7 +84,7 @@ export const Tabs = React.memo(() => {
           onPress={handleTabPress}
         />
       )),
-    [route.name, t, handleTabPress],
+    [route.name, t, handleTabPress]
   );
 
   return <View style={tabStyles.container}>{tabs}</View>;
