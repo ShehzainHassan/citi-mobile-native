@@ -60,7 +60,7 @@ export const Accounts = () => {
       { type: "Visa", image: Images.visaCard },
       { type: "MasterCard", image: Images.masterCard },
     ],
-    []
+    [],
   );
 
   const cardDetails = useMemo(
@@ -86,7 +86,7 @@ export const Accounts = () => {
         value: "$10,000",
       },
     ],
-    [t]
+    [t],
   );
 
   return (
@@ -144,7 +144,8 @@ export const Accounts = () => {
                 onPress={() => handleCardSelect(type as CardType)}
                 accessibilityLabel={t(TranslationKeys.accounts.selectCardAlt, {
                   type,
-                })}>
+                })}
+              >
                 <CreditCard
                   name="John Smith"
                   cardType="Amazon Platinium"

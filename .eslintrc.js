@@ -37,6 +37,7 @@ module.exports = {
     },
   },
   rules: {
+    "react-native/no-color-literals": "off",
     // Prettier integration
     "prettier/prettier": [
       "warn",

@@ -49,7 +49,8 @@ export const Language = () => {
                         isSelected
                           ? globalStyles.neutral1
                           : globalStyles.neutral3,
-                      ]}>
+                      ]}
+                    >
                       {lang.name}
                     </Text>
                   </View>

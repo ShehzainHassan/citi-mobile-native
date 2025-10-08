@@ -60,11 +60,12 @@ export const ChangePassword = () => {
                 style={[
                   authStyles.phoneContainer,
                   authStyles.passwordContainer,
-                ]}>
+                ]}
+              >
                 <Input
                   label={t(TranslationKeys.auth.recentPassword)}
                   placeholder={t(
-                    TranslationKeys.auth.recentPasswordPlaceholder
+                    TranslationKeys.auth.recentPasswordPlaceholder,
                   )}
                   value={recentPassword}
                   onChangeText={setRecentPassword}
@@ -74,7 +75,8 @@ export const ChangePassword = () => {
               </View>
             )}
             <View
-              style={[authStyles.phoneContainer, authStyles.passwordContainer]}>
+              style={[authStyles.phoneContainer, authStyles.passwordContainer]}
+            >
               <Input
                 label={t(TranslationKeys.auth.newPassword)}
                 placeholder={t(TranslationKeys.auth.newPasswordPlaceholder)}
@@ -84,7 +86,8 @@ export const ChangePassword = () => {
               />
             </View>
             <View
-              style={[authStyles.phoneContainer, authStyles.passwordContainer]}>
+              style={[authStyles.phoneContainer, authStyles.passwordContainer]}
+            >
               <Input
                 label={t(TranslationKeys.auth.confirmPassword)}
                 placeholder={t(TranslationKeys.auth.confirmPasswordPlaceholder)}

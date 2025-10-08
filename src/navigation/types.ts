@@ -52,4 +52,5 @@ declare global {
     interface RootParamList extends RootStackParamList {}
   }
 }
+
 // Add more navigation types as needed...

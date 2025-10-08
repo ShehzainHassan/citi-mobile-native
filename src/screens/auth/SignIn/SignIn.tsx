@@ -48,7 +48,8 @@ export const SignIn = () => {
 
         <Text
           style={authStyles.forgotPassword}
-          onPress={() => navigation.navigate("ForgotPassword")}>
+          onPress={() => navigation.navigate("ForgotPassword")}
+        >
           {t(TranslationKeys.auth.forgotPassword)}
         </Text>
 
