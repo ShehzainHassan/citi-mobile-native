@@ -1,2 +1,1 @@
-export { SelectCurrencyModal } from "./SelectCurrencyModal";
-export type { SelectCurrencyModalProps } from "./SelectCurrencyModal.types";
+export { BaseModal } from "./BaseModal";

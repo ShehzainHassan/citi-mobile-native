@@ -3,12 +3,18 @@ import { StyleSheet } from "react-native";
 
 export const createTransactionRowCardStyles = (theme: Theme) =>
   StyleSheet.create({
+    amountText: {
+      flexShrink: 0,
+      textAlign: "right",
+    },
+
     cardContainer: {
       borderBottomWidth: 1,
       borderColor: theme.colors.line1,
       flexDirection: "row",
       justifyContent: "space-between",
       paddingBottom: theme.spacing.ms,
+      width: "100%",
     },
     container: {
       gap: theme.spacing.md,
@@ -34,10 +40,13 @@ export const createTransactionRowCardStyles = (theme: Theme) =>
       justifyContent: "center",
       width: 40,
     },
-    negative: {
-      color: theme.colors.semantic1,
-    },
     subTitle: {
       color: theme.colors.neutral3,
+      width: 200,
+    },
+    textContainer: {
+      flex: 1,
+      flexShrink: 1,
+      minWidth: 0,
     },
   });

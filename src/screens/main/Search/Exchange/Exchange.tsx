@@ -1,15 +1,17 @@
 import { Images } from "@/assets/images";
 import { Header, ImageWithFallback } from "@/components";
 import { Button, Input } from "@/components/ui";
-import { SelectCurrencyModal } from "@/components/ui/Modal/SelectCurrencyModal";
+import { BaseModal } from "@/components/ui/Modal";
 import { useGlobalStyles } from "@/hooks";
 import { MainTabParamList } from "@/navigation/types";
 import { Theme, useTheme } from "@/theme";
+import { currencies, formatCurrencyLabel } from "@/utils";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+
 export const Exchange = () => {
   const { theme } = useTheme();
   const globalStyles = useGlobalStyles();
@@ -22,52 +24,48 @@ export const Exchange = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [activeField, setActiveField] = useState<"from" | "to">("from");
 
-  const handleSelectCurrency = (code: string) => {
+  const currencyOptions = currencies.map((c) =>
+    formatCurrencyLabel(c.code, c.name),
+  );
+
+  const handleSelectCurrency = (label: string) => {
+    const code = label.split(" ")[0];
     if (activeField === "from") {
-      setFromCurrency(code);
+      setFromCurrency(code ?? "");
     } else {
-      setToCurrency(code);
+      setToCurrency(code ?? "");
     }
     setModalVisible(false);
   };
 
+  const handleExchange = async () => {
+    if (!fromCurrency || !toCurrency || !fromAmount.trim()) return;
+
+    try {
+      const response = await fetch(
+        `https://open.er-api.com/v6/latest/${fromCurrency}`,
+      );
+      const data = await response.json();
+      const rate = data?.rates?.[toCurrency];
+      if (rate) {
+        setExchangeRate(rate);
+        const converted = (parseFloat(fromAmount) * rate).toFixed(2);
+        setToAmount(converted);
+      } else {
+        setExchangeRate(null);
+        setToAmount("");
+      }
+    } catch (error) {
+      console.error("Failed to fetch exchange rate:", error);
+      setExchangeRate(null);
+      setToAmount("");
+    }
+  };
+
   const isExchangeEnabled =
-    fromAmount.trim() !== "" &&
-    toAmount.trim() !== "" &&
-    fromCurrency &&
-    toCurrency;
+    fromAmount.trim() !== "" && fromCurrency && toCurrency;
 
   const [exchangeRate, setExchangeRate] = useState<number | null>(null);
-
-  useEffect(() => {
-    const fetchRate = async () => {
-      if (fromCurrency && toCurrency) {
-        try {
-          const response = await fetch(
-            `https://open.er-api.com/v6/latest/${fromCurrency}`,
-          );
-          const data = await response.json();
-          const rate = data?.rates?.[toCurrency];
-          if (rate) {
-            setExchangeRate(rate);
-            if (fromAmount.trim() !== "") {
-              const converted = (parseFloat(fromAmount) * rate).toFixed(2);
-              setToAmount(converted);
-            }
-          } else {
-            setExchangeRate(null);
-            setToAmount("");
-          }
-        } catch (error) {
-          console.error("Failed to fetch exchange rate:", error);
-          setExchangeRate(null);
-          setToAmount("");
-        }
-      }
-    };
-
-    fetchRate();
-  }, [fromCurrency, toCurrency, fromAmount]);
 
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
@@ -79,7 +77,10 @@ export const Exchange = () => {
         onPress={() => navigation.navigate("Search")}
         style={styles.headerContainer}
       />
-      <ImageWithFallback source={Images.exchangeRateLogo} style={styles.logo} />
+      <ImageWithFallback
+        source={Images.exchangeRateLogo}
+        style={globalStyles.imgLogo}
+      />
       <View style={styles.exchangeContainer}>
         <Input
           label="From"
@@ -161,25 +162,48 @@ export const Exchange = () => {
               }
             />
           )}
-          <Button title="Exchange" disabled={!isExchangeEnabled} />
+          <Button
+            title="Exchange"
+            disabled={!isExchangeEnabled}
+            onPress={handleExchange}
+          />
         </View>
       </View>
 
-      <SelectCurrencyModal
+      <BaseModal
         visible={isModalVisible}
         onClose={() => setModalVisible(false)}
+        header="Select Currency"
+        contents={currencyOptions}
+        selectedItem={
+          activeField === "from"
+            ? currencies.find((c) => c.code === fromCurrency)
+              ? formatCurrencyLabel(
+                  fromCurrency,
+                  currencies.find((c) => c.code === fromCurrency)!.name,
+                )
+              : null
+            : currencies.find((c) => c.code === toCurrency)
+              ? formatCurrencyLabel(
+                  toCurrency,
+                  currencies.find((c) => c.code === toCurrency)!.name,
+                )
+              : null
+        }
         onSelect={handleSelectCurrency}
-        selected={activeField === "from" ? fromCurrency : toCurrency}
       />
     </View>
   );
 };
+
 const createStyles = (theme: Theme) =>
   StyleSheet.create({
     arrowContainer: {
       alignItems: "center",
       flexDirection: "row",
       justifyContent: "center",
+      marginBottom: theme.spacing.sm,
+      marginTop: theme.spacing.lg,
     },
     bottomContainer: {
       gap: theme.spacing.xl * 2,
@@ -206,10 +230,5 @@ const createStyles = (theme: Theme) =>
     },
     headerContainer: {
       paddingHorizontal: 0,
-    },
-    logo: {
-      aspectRatio: 2,
-      resizeMode: "contain",
-      width: "100%",
     },
   });

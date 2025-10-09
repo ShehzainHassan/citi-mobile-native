@@ -28,6 +28,7 @@ export const HOME_CARD_GRID: HomeCardConfig[][] = [
       id: "withdraw",
       image: Images.withdraw,
       labelKey: TranslationKeys.homeScreen.withdraw,
+      route: "Withdraw",
     },
   ],
   [

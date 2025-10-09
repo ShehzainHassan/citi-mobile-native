@@ -23,7 +23,9 @@ export type MainTabParamList = {
   TransactionReport: { accountId?: string; fromDate?: string };
   Search: undefined;
   Messages: undefined;
+  MessagesDetails: { headerText: string };
   Settings: undefined;
+  Withdraw: undefined;
 };
 
 export type SearchParamList = {

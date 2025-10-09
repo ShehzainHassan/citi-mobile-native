@@ -1,4 +1,4 @@
-import { TouchableOpacityProps } from "react-native";
+import { StyleProp, TextStyle, TouchableOpacityProps } from "react-native";
 
 export interface ButtonProps extends TouchableOpacityProps {
   title: string;
@@ -9,4 +9,5 @@ export interface ButtonProps extends TouchableOpacityProps {
   iconPosition?: "left" | "right";
   size?: "small" | "medium" | "large";
   fullWidth?: boolean;
+  textStyle?: StyleProp<TextStyle>;
 }

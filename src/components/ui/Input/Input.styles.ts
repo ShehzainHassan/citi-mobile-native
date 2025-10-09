@@ -13,13 +13,13 @@ export const createInputStyles = (theme: Theme) =>
       borderColor: theme.colors.line2,
       borderRadius: theme.radius.md,
       borderWidth: 1,
+      flex: 1,
       minHeight: 48,
       padding: theme.spacing.ms,
     },
     inputContainer: {
       flexDirection: "column",
       gap: theme.spacing.md,
-      marginBottom: theme.spacing.ms,
     },
     inputError: {
       borderColor: "#FF3B30",
@@ -36,6 +36,7 @@ export const createInputStyles = (theme: Theme) =>
       outlineColor: theme.colors.line2,
     },
     inputWrapper: {
+      flex: 1,
       justifyContent: "center",
       position: "relative",
     },

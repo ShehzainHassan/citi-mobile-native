@@ -1,2 +1,1 @@
 export { MessageDetails } from "./MessageDetails";
-export { Messages } from "./Messages";

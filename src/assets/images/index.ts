@@ -29,4 +29,10 @@ export const Images = {
   exchangeRate: require("./exchange-rate.png"),
   exchange: require("./exchange.png"),
   exchangeRateLogo: require("./exchange-rate-logo.png"),
+  citiBank: require("../icons/citibank.svg"),
+  account: require("../icons/account.svg"),
+  alert: require("../icons/alert.svg"),
+  paypal: require("../icons/paypal.svg"),
+  withdrawIcon: require("../icons/withdraw.svg"),
+  withdrawBanner: require("./withdraw-banner.png"),
 };

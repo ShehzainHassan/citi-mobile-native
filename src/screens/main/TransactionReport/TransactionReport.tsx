@@ -2,8 +2,8 @@ import { Images } from "@/assets/images";
 import {
   CreditCard,
   Header,
+  InfoRowCard,
   MonthlyBalanceChart,
-  TransactionRowCard,
 } from "@/components";
 import { useGlobalStyles, useTransactionReportStyles } from "@/hooks";
 import { transactions } from "@/mocks";
@@ -47,16 +47,24 @@ export const TransactionReport = () => {
               showsVerticalScrollIndicator={false}
             >
               <MonthlyBalanceChart />
-              {transactions.map((t) => (
-                <TransactionRowCard
-                  key={t.title}
-                  day={t.day}
-                  title={t.title}
-                  subtitle={t.subtitle}
-                  icon={t.icon}
-                  price={t.price}
-                />
-              ))}
+              {transactions.map((t) => {
+                const isNegative =
+                  typeof t.price === "string" && t.price.trim().startsWith("-");
+
+                return (
+                  <InfoRowCard
+                    key={t.title}
+                    label={t.day}
+                    title={t.title}
+                    subtitle={t.subtitle}
+                    icon={t.icon}
+                    amount={t.price}
+                    amountStyle={
+                      isNegative ? globalStyles.negativePrice : undefined
+                    }
+                  />
+                );
+              })}
             </ScrollView>
           </View>
         </View>

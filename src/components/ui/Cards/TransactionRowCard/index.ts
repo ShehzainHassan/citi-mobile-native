@@ -1,2 +1,2 @@
-export { TransactionRowCard } from "./TransactionRowCard";
-export type { TransactionRowCardProps } from "./TransactionRowCard.types";
+export { InfoRowCard } from "./InfoRowCard";
+export type { InfoRowCardProps } from "./InfoRowCard.types";

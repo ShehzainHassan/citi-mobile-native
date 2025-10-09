@@ -66,7 +66,7 @@ module.exports = {
 
     // React Native specific
     "react-native/no-inline-styles": "off",
-    "react-native/no-unused-styles": "warn",
+    "react-native/no-unused-styles": "off",
     "react-native/split-platform-components": "warn",
     "react-native/no-raw-text": "off", // Can be too strict
 

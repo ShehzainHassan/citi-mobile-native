@@ -1,14 +1,10 @@
-export { AccountCard } from "./AccountCard/AccountCard";
-export { AuthFooter } from "./AuthFooter/AuthFooter";
-export { AuthHeader } from "./AuthHeader/AuthHeader";
-export { AuthImageBlock } from "./AuthImageBlock/AuthImageBlock";
+export { AccountCard } from "./AccountCard";
+export { AuthFooter } from "./AuthFooter";
+export { AuthHeader } from "./AuthHeader";
+export { AuthImageBlock } from "./AuthImageBlock";
 export { DataTable } from "./DataTable";
-export { Header } from "./Header/Header";
-export { HomeScreenCard } from "./HomeScreenCard/HomeScreenCard";
-export {
-  SelectCurrencyHeader,
-  SelectCurrencyList,
-} from "./SelectCurrency/SelectCurrency";
-
+export { Header } from "./Header";
+export { HomeScreenCard } from "./HomeScreenCard";
 export { ImageWithFallback } from "./ImageWithFallback/ImageWithFallback";
+export { Message } from "./Message";
 export { SettingsRow } from "./SettingsRow";

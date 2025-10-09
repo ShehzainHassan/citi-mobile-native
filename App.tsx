@@ -9,6 +9,7 @@ import {
   HomeScreen,
   InterestRate,
   Language,
+  MessageDetails,
   Messages,
   Search,
   SearchForBranch,
@@ -17,6 +18,7 @@ import {
   SignUp,
   ThemeSelector,
   TransactionReport,
+  Withdraw,
 } from "@/screens";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -31,7 +33,7 @@ function AppContent() {
     <I18nextProvider i18n={i18n}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="SignIn"
+          initialRouteName="Withdraw"
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="SignIn" component={SignIn} />
@@ -39,7 +41,9 @@ function AppContent() {
           <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Accounts" component={Accounts} />
+          <Stack.Screen name="Withdraw" component={Withdraw} />
           <Stack.Screen name="Messages" component={Messages} />
+          <Stack.Screen name="MessagesDetails" component={MessageDetails} />
           <Stack.Screen name="Settings" component={Settings} />
           <Stack.Screen
             name="TransactionReport"

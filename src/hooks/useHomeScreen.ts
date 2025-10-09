@@ -20,7 +20,6 @@ export const useHomeScreen = () => {
         })),
     );
   }, [t]);
-
   const handleCardPress = useCallback(
     (card: HomeCardConfig) => {
       if (card.route) {

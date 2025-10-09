@@ -45,6 +45,9 @@ export const createGlobalStyles = (theme: Theme) =>
       resizeMode: "contain",
       width: 16,
     },
+    negativePrice: {
+      color: theme.colors.semantic1,
+    },
 
     // Typography patterns
     heading1: {
@@ -63,7 +66,11 @@ export const createGlobalStyles = (theme: Theme) =>
       fontWeight: "600",
       lineHeight: theme.spacing.md,
     },
-
+    imgLogo: {
+      aspectRatio: 2,
+      resizeMode: "contain",
+      width: "100%",
+    },
     titleContainer: {
       display: "flex",
       gap: theme.spacing.xs,
@@ -156,6 +163,9 @@ export const createGlobalStyles = (theme: Theme) =>
     },
     neutral6: {
       color: theme.colors.neutral6,
+    },
+    textDefault: {
+      color: theme.colors.textdefault,
     },
 
     // Card patterns

@@ -22,6 +22,7 @@ export const Button: React.FC<ButtonProps> = ({
   iconPosition = "left",
   fullWidth = false,
   style,
+  textStyle,
   onPress,
   ...props
 }) => {
@@ -66,11 +67,11 @@ export const Button: React.FC<ButtonProps> = ({
               style={[
                 buttonStyles[`text_${size}`],
                 variant === "secondary" && buttonStyles.text_secondary,
+                textStyle,
               ]}
             >
               {title}
             </Text>
-
             {icon && iconPosition === "right" && <View>{icon}</View>}
           </>
         )}

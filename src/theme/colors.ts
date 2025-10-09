@@ -13,6 +13,9 @@ export const lightColors = {
   line1: "#ECECEC",
   line2: "#BFBFBF",
   semantic1: "#FF4267",
+  semantic2: "#0890FE",
+  semantic3: "#FFAF2A",
+  semantic4: "#52D5BA",
   error: "#FF3B30",
 };
 

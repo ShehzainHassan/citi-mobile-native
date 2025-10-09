@@ -5,6 +5,7 @@
 // Common utility functions
 // Security helpers and data formatting
 // Reusable business logic
+import currencyCodes from "currency-codes";
 
 export const formatPhoneNumber = (input: string) => {
   const digits = input.replace(/\D/g, "");
@@ -21,4 +22,24 @@ export const formatPhoneNumber = (input: string) => {
 
 export const getFlagUrl = (countryCode: string, size: number = 40) => {
   return `https://flagcdn.com/w${size}/${countryCode.toLowerCase()}.png`;
+};
+
+interface Currency {
+  code: string;
+  name: string;
+}
+export const currencies: Currency[] = currencyCodes
+  .codes()
+  .map((code) => currencyCodes.code(code))
+  .filter((currency): currency is NonNullable<typeof currency> => !!currency)
+  .map((currency) => ({
+    code: currency.code,
+    name: currency.currency,
+  }));
+
+export const formatCurrencyLabel = (code: string, name: string) => {
+  return `${code} (${name})`;
+};
+export const formatCards = (cards: string[]) => {
+  return cards.map((card) => card.replace(/(\d{4})(?=\d)/g, "$1 ").trim());
 };
