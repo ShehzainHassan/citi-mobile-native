@@ -1,4 +1,13 @@
-import { i18n } from "@/i18n";
+import React from 'react';
+import { StatusBar, useColorScheme } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { I18nextProvider } from 'react-i18next';
+import { i18n } from '@/i18n';
+
 import {
   Accounts,
   AppInformation,
@@ -19,14 +28,11 @@ import {
   ThemeSelector,
   TransactionReport,
   Withdraw,
-} from "@/screens";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { I18nextProvider } from "react-i18next";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { ThemeProvider } from "./src/styles/ThemeProvider";
+} from '@/screens';
+import { ThemeProvider } from '@/styles/ThemeProvider';
+import type { RootStackParamList } from '@/navigation/types';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function AppContent() {
   return (
@@ -65,10 +71,15 @@ function AppContent() {
 }
 
 export default function App() {
+  const isDarkMode = useColorScheme() === 'dark';
+
   return (
     <ThemeProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <AppContent />
+        <SafeAreaProvider>
+          <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+          <AppContent />
+        </SafeAreaProvider>
       </GestureHandlerRootView>
     </ThemeProvider>
   );

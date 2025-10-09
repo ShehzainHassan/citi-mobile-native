@@ -1,5 +1,5 @@
 import { useTheme } from "@/theme";
-import * as Haptics from "expo-haptics";
+// import * as Haptics from "expo-haptics";
 import React from "react";
 import {
   ActivityIndicator,
@@ -33,10 +33,10 @@ export const Button: React.FC<ButtonProps> = ({
 
   const handlePress = async (e: GestureResponderEvent) => {
     if (!isDisabled && onPress) {
-      if (Platform.OS === "ios" || Platform.OS === "android") {
-        await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      if (Platform.OS === 'ios' || Platform.OS === 'android') {
+        // TODO: Use react native for haptics
+        // await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
       }
-
       onPress(e);
     }
   };

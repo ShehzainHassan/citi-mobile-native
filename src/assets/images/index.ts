@@ -1,8 +1,16 @@
+import BackIcon from "../icons/back.svg";
+import TickIcon from "../icons/tick.svg";
+import HomeIconSvg from "../icons/home.svg";
+import MessageIconSvg from "../icons/message.svg";
+import SearchIconSvg from "../icons/search.svg";
+import SettingsIconSvg from "../icons/settings.svg";
+import WaterBillIcon from "../icons/water.svg";
+
 export const Images = {
   authIcon: require("./auth-icon.png"),
   signUp: require("./register.png"),
-  back: require("../icons/back.svg"),
-  tickIcon: require("../icons/tick.svg"),
+  back: BackIcon,
+  tickIcon: TickIcon,
   passwordChanged: require("./password-changed.png"),
   fingerprint: require("./fingerprint.png"),
   accountAndCard: require("./account-and-card.png"),
@@ -17,13 +25,13 @@ export const Images = {
   cards: require("./cards.png"),
   visaCard: require("./visa-card.png"),
   masterCard: require("./master-card.png"),
-  home: require("../icons/home.svg"),
-  message: require("../icons/message.svg"),
-  search: require("../icons/search.svg"),
-  settings: require("../icons/settings.svg"),
+  home: HomeIconSvg,
+  message: MessageIconSvg,
+  search: SearchIconSvg,
+  settings: SettingsIconSvg,
   profilePic: require("./profile-pic.png"),
   notification: require("./notification.png"),
-  waterBill: require("../icons/water.svg"),
+  waterBill: WaterBillIcon,
   branch: require("./branch.png"),
   interestRate: require("./interest-rate.png"),
   exchangeRate: require("./exchange-rate.png"),

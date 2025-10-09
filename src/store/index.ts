@@ -1,7 +1,24 @@
-// Redux store configuration with Redux Toolkit
-// Combine reducers, configure persistence
-// Export store, persistor, and typed hooks
+import { configureStore } from "@reduxjs/toolkit";
+// Import your slices/reducers
+import userReducer from "@/store/slices/user/userSlice";
+import settingsReducer from "@/store/slices/settings/settingsSlice";
+import authReducer from "@/store/slices/authSlice/authSlice";
 
-// Configure store with middleware
-// Set up Redux Persist for offline storage
-// Export RootState and AppDispatch types
+// Create the store
+export const store = configureStore({
+  reducer: {
+    auth: authReducer,
+    user: userReducer,
+    settings: settingsReducer,
+  },
+  // Optional: middleware or devtools
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+  devTools: process.env.NODE_ENV !== "production",
+});
+
+// Infer types for dispatch and state
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

@@ -1,39 +1,39 @@
-import { Images } from "@/assets/images";
-import { Header, ImageWithFallback } from "@/components";
-import { Button, Input } from "@/components/ui";
-import { BaseModal } from "@/components/ui/Modal";
-import { useGlobalStyles } from "@/hooks";
-import { MainTabParamList } from "@/navigation/types";
-import { Theme, useTheme } from "@/theme";
-import { currencies, formatCurrencyLabel } from "@/utils";
-import { MaterialIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Images } from '@/assets/images';
+import { Header, ImageWithFallback } from '@/components';
+import { Button, Input } from '@/components/ui';
+import { BaseModal } from '@/components/ui/Modal';
+import { useGlobalStyles } from '@/hooks';
+import { MainTabParamList } from '@/navigation/types';
+import { Theme, useTheme } from '@/theme';
+import { currencies, formatCurrencyLabel } from '@/utils';
+import MaterialIcons from '@react-native-vector-icons/material-icons';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
 export const Exchange = () => {
   const { theme } = useTheme();
   const globalStyles = useGlobalStyles();
   const styles = createStyles(theme);
 
-  const [fromAmount, setFromAmount] = useState("");
-  const [toAmount, setToAmount] = useState("");
-  const [fromCurrency, setFromCurrency] = useState("");
-  const [toCurrency, setToCurrency] = useState("");
+  const [fromAmount, setFromAmount] = useState('');
+  const [toAmount, setToAmount] = useState('');
+  const [fromCurrency, setFromCurrency] = useState('');
+  const [toCurrency, setToCurrency] = useState('');
   const [isModalVisible, setModalVisible] = useState(false);
-  const [activeField, setActiveField] = useState<"from" | "to">("from");
+  const [activeField, setActiveField] = useState<'from' | 'to'>('from');
 
-  const currencyOptions = currencies.map((c) =>
+  const currencyOptions = currencies.map(c =>
     formatCurrencyLabel(c.code, c.name),
   );
 
   const handleSelectCurrency = (label: string) => {
-    const code = label.split(" ")[0];
-    if (activeField === "from") {
-      setFromCurrency(code ?? "");
+    const code = label.split(' ')[0];
+    if (activeField === 'from') {
+      setFromCurrency(code ?? '');
     } else {
-      setToCurrency(code ?? "");
+      setToCurrency(code ?? '');
     }
     setModalVisible(false);
   };
@@ -53,17 +53,17 @@ export const Exchange = () => {
         setToAmount(converted);
       } else {
         setExchangeRate(null);
-        setToAmount("");
+        setToAmount('');
       }
     } catch (error) {
-      console.error("Failed to fetch exchange rate:", error);
+      console.error('Failed to fetch exchange rate:', error);
       setExchangeRate(null);
-      setToAmount("");
+      setToAmount('');
     }
   };
 
   const isExchangeEnabled =
-    fromAmount.trim() !== "" && fromCurrency && toCurrency;
+    fromAmount.trim() !== '' && fromCurrency && toCurrency;
 
   const [exchangeRate, setExchangeRate] = useState<number | null>(null);
 
@@ -74,7 +74,7 @@ export const Exchange = () => {
     <View style={styles.container}>
       <Header
         title="Exchange"
-        onPress={() => navigation.navigate("Search")}
+        onPress={() => navigation.navigate('Search')}
         style={styles.headerContainer}
       />
       <ImageWithFallback
@@ -90,7 +90,7 @@ export const Exchange = () => {
           rightText={fromCurrency}
           rightPlaceholder="USD"
           onRightPress={() => {
-            setActiveField("from");
+            setActiveField('from');
             setModalVisible(true);
           }}
           rightIcon={
@@ -118,7 +118,7 @@ export const Exchange = () => {
                 rightText={toCurrency}
                 rightPlaceholder="USD"
                 onRightPress={() => {
-                  setActiveField("to");
+                  setActiveField('to');
                   setModalVisible(true);
                 }}
                 required={false}
@@ -149,7 +149,7 @@ export const Exchange = () => {
               required={false}
               rightPlaceholder="USD"
               onRightPress={() => {
-                setActiveField("to");
+                setActiveField('to');
                 setModalVisible(true);
               }}
               readOnly={true}
@@ -176,17 +176,17 @@ export const Exchange = () => {
         header="Select Currency"
         contents={currencyOptions}
         selectedItem={
-          activeField === "from"
-            ? currencies.find((c) => c.code === fromCurrency)
+          activeField === 'from'
+            ? currencies.find(c => c.code === fromCurrency)
               ? formatCurrencyLabel(
                   fromCurrency,
-                  currencies.find((c) => c.code === fromCurrency)!.name,
+                  currencies.find(c => c.code === fromCurrency)!.name,
                 )
               : null
-            : currencies.find((c) => c.code === toCurrency)
+            : currencies.find(c => c.code === toCurrency)
               ? formatCurrencyLabel(
                   toCurrency,
-                  currencies.find((c) => c.code === toCurrency)!.name,
+                  currencies.find(c => c.code === toCurrency)!.name,
                 )
               : null
         }
@@ -199,9 +199,9 @@ export const Exchange = () => {
 const createStyles = (theme: Theme) =>
   StyleSheet.create({
     arrowContainer: {
-      alignItems: "center",
-      flexDirection: "row",
-      justifyContent: "center",
+      alignItems: 'center',
+      flexDirection: 'row',
+      justifyContent: 'center',
       marginBottom: theme.spacing.sm,
       marginTop: theme.spacing.lg,
     },
@@ -214,8 +214,8 @@ const createStyles = (theme: Theme) =>
       padding: theme.spacing.md,
     },
     currencyContainer: {
-      flexDirection: "row",
-      justifyContent: "space-between",
+      flexDirection: 'row',
+      justifyContent: 'space-between',
       marginTop: theme.spacing.ms,
     },
     exchangeContainer: {

@@ -17,7 +17,7 @@ export const useHomeScreen = () => {
         .map((card) => ({
           ...card,
           label: t(card.labelKey),
-        })),
+        }))
     );
   }, [t]);
   const handleCardPress = useCallback(
@@ -26,7 +26,7 @@ export const useHomeScreen = () => {
         navigation.navigate(card.route);
       }
     },
-    [navigation],
+    [navigation]
   );
 
   return { cardGrid, handleCardPress };

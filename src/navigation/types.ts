@@ -6,6 +6,25 @@ export type RootStackParamList = {
   Auth: undefined;
   Main: undefined;
   Onboarding: undefined;
+  SignIn: undefined;
+  SignUp: undefined;
+  ForgotPassword: undefined;
+  ChangePassword: { from?: "Security" | "Settings" };
+  Home: undefined;
+  Accounts: { accountId?: string };
+  Transfers: undefined;
+  Bills: undefined;
+  TransactionReport: { accountId?: string; fromDate?: string };
+  Search: undefined;
+  SearchForBranch: undefined;
+  InterestRate: undefined;
+  ExchangeRate: { baseCurrency?: string };
+  Exchange: { fromCurrency?: string; toCurrency?: string };
+  Messages: undefined;
+  Settings: undefined;
+  AppInformation: undefined;
+  Language: undefined;
+  ThemeSelector: undefined;
 };
 
 export type AuthStackParamList = {

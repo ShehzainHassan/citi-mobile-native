@@ -3,7 +3,7 @@ import { TranslationKeys } from "@/i18n";
 import { MainTabParamList } from "@/navigation/types";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import * as Haptics from "expo-haptics";
+// import * as Haptics from "expo-haptics";
 import React, { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Platform, Text, TouchableOpacity, View } from "react-native";
@@ -36,7 +36,8 @@ const Tab = React.memo(
     const handlePress = useCallback(() => {
       if (!isSelected) {
         if (Platform.OS !== "web") {
-          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          // TODO: Use react native for haptics
+          // Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
         }
         onPress(tabKey);
       }

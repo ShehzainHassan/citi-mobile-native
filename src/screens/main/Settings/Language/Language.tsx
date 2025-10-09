@@ -1,19 +1,20 @@
-import {
-  CardDetailRow,
-  CardDetails,
-  Header,
-  ImageWithFallback,
-} from "@/components";
+import { CardDetailRow, CardDetails, Header, ImageWithFallback } from "@/components";
 import { LANGUAGES } from "@/constants";
 import { useGlobalStyles } from "@/hooks";
 import { MainTabParamList } from "@/navigation/types";
 import { useTheme } from "@/theme";
 import { getFlagUrl } from "@/utils";
-import { MaterialIcons } from "@expo/vector-icons";
+import MaterialIcons from "@react-native-vector-icons/material-icons";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useState } from "react";
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View
+} from "react-native";
 
 export const Language = () => {
   const globalStyles = useGlobalStyles();

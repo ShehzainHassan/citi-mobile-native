@@ -1,5 +1,5 @@
 import { Images } from "@/assets/images";
-import { ImageWithFallback } from "@/components";
+import { ImageWithFallback } from "@/components/common";
 import { useTheme } from "@/theme";
 import React, { useState } from "react";
 import { Pressable, View } from "react-native";

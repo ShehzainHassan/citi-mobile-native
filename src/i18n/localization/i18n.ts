@@ -9,7 +9,7 @@ import frAuth from "./fr/auth.json";
 import frHomeScreen from "./fr/homeScreen.json";
 import frTabs from "./fr/tabs.json";
 i18n.use(initReactI18next).init({
-  compatibilityJSON: "v3",
+  compatibilityJSON: "v4",
   lng: "en",
   fallbackLng: "en",
   resources: {

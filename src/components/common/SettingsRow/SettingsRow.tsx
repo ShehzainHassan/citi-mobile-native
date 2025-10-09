@@ -1,8 +1,8 @@
 import React from "react";
-import { MaterialIcons } from "@expo/vector-icons";
 import { useTheme } from "@/theme";
 import { CardDetailRow } from "@/components/ui";
 import { SettingsRowProps } from "./SettingsRow.types";
+import MaterialIcons from "@react-native-vector-icons/material-icons";
 
 export const SettingsRow: React.FC<SettingsRowProps> = ({
   label,
