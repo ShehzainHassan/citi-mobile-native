@@ -1,5 +1,11 @@
 import { Images } from '@/assets/images';
-import { Button, Header, ImageWithFallback, Input } from '@/components';
+import {
+  Button,
+  Header,
+  ImageWithFallback,
+  Input,
+  SuccessScreen,
+} from '@/components';
 import { BaseModal } from '@/components/ui/Modal';
 import { useAuthStyles, useGlobalStyles } from '@/hooks';
 import { cards } from '@/mocks';
@@ -67,43 +73,18 @@ export const Withdraw = () => {
   };
   if (isSuccess) {
     return (
-      <View style={styles.successContainer}>
-        <ImageWithFallback
-          source={Images.withdrawBanner}
-          style={[globalStyles.imgLogo, styles.imageContainer]}
-        />
-        <View style={styles.subContainer}>
-          <Text
-            style={[
-              globalStyles.title3,
-              globalStyles.primary1,
-              styles.centerText,
-            ]}
-          >
-            Successful Withdrawal
-          </Text>
-          <Text
-            style={[
-              globalStyles.body3,
-              globalStyles.neutral1,
-              styles.centerText,
-            ]}
-          >
-            You have successfully withdrawn money! Please check the balance in
-            the card management section.
-          </Text>
-          <Button
-            title="Confirm"
-            onPress={() => {
-              resetForm();
-              navigation.navigate('Home');
-            }}
-          />
-        </View>
-      </View>
+      <SuccessScreen
+        title="Successful Withdrawal"
+        subtitle="You have successfully withdrawn money! Please check the balance in the card management section."
+        btnText="Confirm"
+        source={Images.withdrawBanner}
+        onPress={() => {
+          resetForm();
+          navigation.navigate('Home');
+        }}
+      />
     );
   }
-
   return (
     <View style={globalStyles.verticalSpread}>
       <Header title="Withdraw" onPress={() => navigation.navigate('Home')} />

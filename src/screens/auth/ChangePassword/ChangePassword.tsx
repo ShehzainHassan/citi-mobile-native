@@ -1,44 +1,44 @@
-import { Images } from "@/assets/images";
-import { Button, Header, ImageWithFallback, Input } from "@/components";
-import { useAuthStyles, useGlobalStyles } from "@/hooks";
-import { TranslationKeys } from "@/i18n";
+import { Images } from '@/assets/images';
+import { Button, Header, Input, SuccessScreen } from '@/components';
+import { useAuthStyles, useGlobalStyles } from '@/hooks';
+import { TranslationKeys } from '@/i18n';
 import {
   AuthStackParamList,
   MainTabWithAuthParamList,
-} from "@/navigation/types";
-import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
+} from '@/navigation/types';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { View } from 'react-native';
 
-type ChangePasswordRouteProp = RouteProp<AuthStackParamList, "ChangePassword">;
+type ChangePasswordRouteProp = RouteProp<AuthStackParamList, 'ChangePassword'>;
 
 export const ChangePassword = () => {
   const globalStyles = useGlobalStyles();
   const authStyles = useAuthStyles();
-  const { t } = useTranslation("auth");
+  const { t } = useTranslation('auth');
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabWithAuthParamList>>();
   const route = useRoute<ChangePasswordRouteProp>();
   const from = route.params?.from;
 
-  const [recentPassword, setRecentPassword] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [recentPassword, setRecentPassword] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordChanged, setPasswordChanged] = useState(false);
 
   const handleSuccess = () => {
-    if (from === "Security") {
-      navigation.navigate("SignIn");
-    } else if (from === "Settings") {
-      navigation.navigate("Settings");
+    if (from === 'Security') {
+      navigation.navigate('SignIn');
+    } else if (from === 'Settings') {
+      navigation.navigate('Settings');
     } else {
       navigation.goBack();
     }
   };
 
-  const isFromSettings = from === "Settings";
+  const isFromSettings = from === 'Settings';
   const isButtonDisabled = isFromSettings
     ? !recentPassword.trim() || !password.trim() || password !== confirmPassword
     : !password.trim() || password !== confirmPassword;
@@ -47,7 +47,7 @@ export const ChangePassword = () => {
     <View style={globalStyles.verticalSpread}>
       <Header
         title={
-          passwordChanged ? "" : t(TranslationKeys.auth.changePasswordTitle)
+          passwordChanged ? '' : t(TranslationKeys.auth.changePasswordTitle)
         }
         onPress={() => navigation.goBack()}
         style={authStyles.headerContainer}
@@ -103,25 +103,15 @@ export const ChangePassword = () => {
             />
           </View>
         ) : (
-          <View style={globalStyles.paddedColumn}>
-            <ImageWithFallback
-              source={Images.passwordChanged}
-              style={globalStyles.authLogo}
-              resizeMode="contain"
-            />
-            <View style={authStyles.changePasswordContainer}>
-              <Text style={globalStyles.title3}>
-                {t(TranslationKeys.auth.passwordChangedTitle)}
-              </Text>
-              <Text style={[globalStyles.body3, globalStyles.neutral1]}>
-                {t(TranslationKeys.auth.passwordChangedText)}
-              </Text>
-            </View>
-            <Button
-              title={t(TranslationKeys.auth.ok)}
-              onPress={handleSuccess}
-            />
-          </View>
+          <SuccessScreen
+            headerText=""
+            onBack={() => navigation.goBack()}
+            title={t(TranslationKeys.auth.passwordChangedTitle)}
+            subtitle={t(TranslationKeys.auth.passwordChangedText)}
+            btnText={t(TranslationKeys.auth.ok)}
+            source={Images.passwordChanged}
+            onPress={handleSuccess}
+          />
         )}
       </View>
     </View>
