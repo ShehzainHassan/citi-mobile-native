@@ -1,7 +1,6 @@
-import { useGlobalStyles } from "@/hooks";
-import { useTheme } from "@/theme";
-import { MaterialIcons } from "@expo/vector-icons";
-import React from "react";
+import { useGlobalStyles } from '@/hooks';
+import { useTheme } from '@/theme';
+import React from 'react';
 import {
   Dimensions,
   Modal,
@@ -10,11 +9,12 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
-} from "react-native";
-import { createBaseModalStyles } from "./BaseModal.styles";
-import { BaseModalProps } from "./BaseModal.types";
+} from 'react-native';
+import { createBaseModalStyles } from './BaseModal.styles';
+import { BaseModalProps } from './BaseModal.types';
+import MaterialIcons from '@react-native-vector-icons/material-icons';
 
-const { height: screenHeight, width: screenWidth } = Dimensions.get("window");
+const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 
 export const BaseModal: React.FC<BaseModalProps> = ({
   visible,
@@ -58,7 +58,7 @@ export const BaseModal: React.FC<BaseModalProps> = ({
               </View>
 
               <ScrollView style={styles.content}>
-                {contents.map((item) => {
+                {contents.map(item => {
                   const isSelected = item === selectedItem;
                   return (
                     <TouchableOpacity

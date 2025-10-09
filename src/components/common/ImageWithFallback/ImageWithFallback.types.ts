@@ -1,19 +1,24 @@
-import { ImageProps, ImageSourcePropType, ImageStyle, StyleProp, ViewStyle } from "react-native";
+import {
+  ImageProps,
+  ImageSourcePropType,
+  StyleProp,
+  ImageStyle,
+} from 'react-native';
 
-export type ImageSource = 
-  | ImageSourcePropType 
-  | string 
-  | number 
-  | ImageSourcePropType[] 
-  | React.ComponentType<any>;
+export type ContentFit = 'cover' | 'contain' | 'fill' | 'scale-down' | 'none';
 
-export type ContentFit = 'contain' | 'cover' | 'fill' | 'scale-down' | 'none';
+import { ComponentType } from 'react';
+import { SvgProps } from 'react-native-svg';
 
-export interface FallbackImageProps extends Omit<ImageProps, 'source' | 'style'> {
+export type ImageSource =
+  | ImageSourcePropType
+  | ComponentType<SvgProps>
+  | React.ReactElement;
+
+export interface ImageWithFallbackProps extends Omit<ImageProps, 'source'> {
   source: ImageSource;
-  fallbackSource?: ImageSource;
-  style?: StyleProp<ViewStyle>;
-  resizeMode?: ImageStyle['resizeMode'];
+  fallbackSource?: ImageSourcePropType;
+  style?: StyleProp<ImageStyle>;
   contentFit?: ContentFit;
   transition?: number;
 }

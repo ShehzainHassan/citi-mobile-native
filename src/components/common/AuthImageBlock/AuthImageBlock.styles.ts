@@ -1,14 +1,16 @@
-import { Theme } from "@/theme";
-import { Dimensions, StyleSheet } from "react-native";
+import { Theme } from '@/theme';
+import { Dimensions, StyleSheet } from 'react-native';
 
-const { width } = Dimensions.get("window");
+const { width } = Dimensions.get('window');
 
 export const createAuthImageStyles = (theme: Theme) =>
   StyleSheet.create({
     authLogo: {
-      height: width * 0.4,
+      width: width * 0.5,
+      height: width * 0.5,
+      maxWidth: 300,
+      maxHeight: 300,
       marginVertical: theme.spacing.xl,
-      resizeMode: "contain",
-      width: "100%",
+      resizeMode: 'contain',
     },
   });

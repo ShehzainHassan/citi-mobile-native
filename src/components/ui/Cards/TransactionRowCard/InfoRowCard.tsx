@@ -1,10 +1,10 @@
-import { ImageWithFallback } from "@/components/common";
-import { useGlobalStyles } from "@/hooks";
-import { useTheme } from "@/theme";
-import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
-import { createTransactionRowCardStyles } from "./InfoRowCard.styles";
-import { InfoRowCardProps } from "./InfoRowCard.types";
+import { ImageWithFallback } from '@/components/common';
+import { useGlobalStyles } from '@/hooks';
+import { useTheme } from '@/theme';
+import React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { createTransactionRowCardStyles } from './InfoRowCard.styles';
+import { InfoRowCardProps } from './InfoRowCard.types';
 
 export const InfoRowCard: React.FC<InfoRowCardProps> = ({
   label,
@@ -38,7 +38,7 @@ export const InfoRowCard: React.FC<InfoRowCardProps> = ({
           <Text style={[globalStyles.body1, globalStyles.neutral1]}>
             {title}
           </Text>
-          {typeof subtitle === "string" && subtitle.trim() !== "" && (
+          {typeof subtitle === 'string' && subtitle.trim() !== '' && (
             <Text
               numberOfLines={1}
               ellipsizeMode="tail"

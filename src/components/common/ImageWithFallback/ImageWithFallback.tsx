@@ -1,74 +1,37 @@
-import React, { useRef, useState } from "react";
+import React, { ComponentType, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Animated,
   ImageSourcePropType,
   Platform,
   StyleSheet,
-  View
-} from "react-native";
-import { ContentFit, FallbackImageProps, ImageSource } from "./ImageWithFallback.types";
+  View,
+} from 'react-native';
+import { SvgProps } from 'react-native-svg';
+import { ImageWithFallbackProps } from './ImageWithFallback.types';
 
-const contentFitToResizeMode = (contentFit?: ContentFit): 'cover' | 'contain' | 'stretch' | 'repeat' | 'center' => {
-  switch (contentFit) {
-    case 'contain':
-      return 'contain';
-    case 'cover':
-      return 'cover';
-    case 'fill':
-      return 'stretch';
-    case 'scale-down':
-      return 'contain';
-    case 'none':
-      return 'center';
-    default:
-      return 'cover';
-  }
-};
-
-const normalizeSource = (source: ImageSource): ImageSourcePropType => {
-  if (typeof source === "number") {
-    return source;
-  } else if (typeof source === "string") {
-    return { uri: source };
-  } else if (Array.isArray(source)) {
-    return source[0] || { uri: '' };
-  } else if (typeof source === 'function') {
-    return { uri: '' };
-  } else {
-    return source as ImageSourcePropType;
-  }
-};
-
-export const ImageWithFallback: React.FC<FallbackImageProps> = ({
+export const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
   source,
   fallbackSource,
   style,
-  resizeMode,
-  contentFit,
+  contentFit = 'cover',
   transition = 200,
-  ...props
 }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
-  const isComponent = typeof source === 'function';
-  
-  const imageSource = error && fallbackSource ? fallbackSource : source;
-  
-  const finalResizeMode = resizeMode || contentFitToResizeMode(contentFit);
+  const isSvgElement = React.isValidElement(source);
+  const isSvgComponent = typeof source === 'function';
 
-  if (isComponent) {
-    const SvgComponent = imageSource as React.ComponentType<any>;
-    return (
-      <View style={style}>
-        <SvgComponent width="100%" height="100%" {...props} />
-      </View>
-    );
-  }
-
-  const normalizedSource = normalizeSource(imageSource);
+  const finalResizeMode =
+    contentFit === 'contain'
+      ? 'contain'
+      : contentFit === 'fill'
+      ? 'stretch'
+      : contentFit === 'none'
+      ? 'center'
+      : 'cover';
 
   const handleLoadEnd = () => {
     setLoading(false);
@@ -81,30 +44,53 @@ export const ImageWithFallback: React.FC<FallbackImageProps> = ({
     }
   };
 
+  if (isSvgElement) return <View style={style}>{source}</View>;
+
+  if (isSvgComponent) {
+    const SvgComponent = source as ComponentType<SvgProps>;
+    return (
+      <View style={[style, styles.container]}>
+        <SvgComponent width={24} height={24} />
+      </View>
+    );
+  }
+
+  const imageSource =
+    error && fallbackSource ? fallbackSource : (source as ImageSourcePropType);
+
   return (
-    <View style={style}>
-      {loading && !error && <ActivityIndicator style={StyleSheet.absoluteFill} />}
+    <View style={[style, styles.container]}>
+      {loading && !error && (
+        <ActivityIndicator style={StyleSheet.absoluteFill} />
+      )}
       <Animated.Image
-        source={normalizedSource}
+        source={imageSource}
         style={[
-          StyleSheet.absoluteFill,
-          transition && Platform.OS !== 'web' ? { opacity: fadeAnim } : undefined
+          style,
+          transition && Platform.OS !== 'web'
+            ? { opacity: fadeAnim }
+            : undefined,
         ]}
         resizeMode={finalResizeMode}
         onLoadStart={() => {
           setLoading(true);
           setError(false);
-          if (transition && Platform.OS !== 'web') {
-            fadeAnim.setValue(0);
-          }
+          if (transition && Platform.OS !== 'web') fadeAnim.setValue(0);
         }}
         onLoadEnd={handleLoadEnd}
         onError={() => {
           setLoading(false);
           setError(true);
         }}
-        {...props}
       />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
+  },
+});

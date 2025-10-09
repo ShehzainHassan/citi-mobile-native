@@ -39,7 +39,7 @@ function AppContent() {
     <I18nextProvider i18n={i18n}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Withdraw"
+          initialRouteName="SignIn"
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="SignIn" component={SignIn} />

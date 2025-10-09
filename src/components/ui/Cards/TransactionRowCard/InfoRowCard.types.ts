@@ -3,14 +3,19 @@ import {
   StyleProp,
   TextStyle,
   ViewStyle,
-} from "react-native";
+} from 'react-native';
+
+import { ComponentType } from 'react';
+import { SvgProps } from 'react-native-svg';
+
+export type IconSource = ImageSourcePropType | ComponentType<SvgProps>;
 
 export interface InfoRowCardProps {
   label?: string;
   title: string;
   subtitle?: string;
   amount: string;
-  icon: ImageSourcePropType;
+  icon: IconSource;
   style?: StyleProp<ViewStyle>;
   amountStyle?: StyleProp<TextStyle>;
   onPress?: () => void;

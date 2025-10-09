@@ -1,4 +1,4 @@
-import { Images } from "@/assets/images";
+import { Images } from '@/assets/images';
 import {
   AuthFooter,
   AuthHeader,
@@ -7,19 +7,18 @@ import {
   Checkbox,
   Header,
   Input,
-} from "@/components";
-import { useAuthStyles, useGlobalStyles, useInputStyles } from "@/hooks";
-import { TranslationKeys } from "@/i18n";
-import { AuthStackParamList } from "@/navigation/types";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
+} from '@/components';
+import { useAuthStyles, useGlobalStyles } from '@/hooks';
+import { TranslationKeys } from '@/i18n';
+import { AuthStackParamList } from '@/navigation/types';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useTranslation } from 'react-i18next';
+import { Text, View } from 'react-native';
 
 export const SignUp = () => {
   const globalStyles = useGlobalStyles();
   const authStyles = useAuthStyles();
-  const inputStyles = useInputStyles();
   const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
@@ -29,7 +28,7 @@ export const SignUp = () => {
       <Header
         title={t(TranslationKeys.auth.signUp)}
         variant="secondary"
-        onPress={() => navigation.navigate("SignIn")}
+        onPress={() => navigation.navigate('SignIn')}
         style={authStyles.headerContainer}
       />
       <View style={globalStyles.roundedContainer}>
@@ -38,7 +37,7 @@ export const SignUp = () => {
           subTitle={t(TranslationKeys.auth.welcomeSubtitleSignUp)}
         />
         <AuthImageBlock source={Images.signUp} />
-        <View style={inputStyles.inputContainer}>
+        <View style={authStyles.inputContainer}>
           <Input placeholder={t(TranslationKeys.auth.namePlaceholder)} />
           <Input placeholder={t(TranslationKeys.auth.textInputPlaceholder)} />
           <Input
@@ -48,7 +47,7 @@ export const SignUp = () => {
           <View style={authStyles.checkboxContainer}>
             <Checkbox />
             <Text style={authStyles.text}>
-              {t(TranslationKeys.auth.termsAgreement)}{" "}
+              {t(TranslationKeys.auth.termsAgreement)}{' '}
               <Text style={globalStyles.heading3}>
                 {t(TranslationKeys.auth.termsAndConditions)}
               </Text>
@@ -63,7 +62,7 @@ export const SignUp = () => {
         <AuthFooter
           label={t(TranslationKeys.auth.haveAccount)}
           actionText={t(TranslationKeys.auth.signIn)}
-          onActionPress={() => navigation.navigate("SignIn")}
+          onActionPress={() => navigation.navigate('SignIn')}
         />
       </View>
     </View>

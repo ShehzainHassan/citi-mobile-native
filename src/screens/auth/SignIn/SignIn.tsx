@@ -1,4 +1,4 @@
-import { Images } from "@/assets/images";
+import { Images } from '@/assets/images';
 import {
   AuthFooter,
   AuthHeader,
@@ -7,19 +7,18 @@ import {
   Header,
   ImageWithFallback,
   Input,
-} from "@/components";
-import { useAuthStyles, useGlobalStyles, useInputStyles } from "@/hooks";
-import { TranslationKeys } from "@/i18n";
-import { MainTabWithAuthParamList } from "@/navigation/types";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
+} from '@/components';
+import { useAuthStyles, useGlobalStyles } from '@/hooks';
+import { TranslationKeys } from '@/i18n';
+import { MainTabWithAuthParamList } from '@/navigation/types';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useTranslation } from 'react-i18next';
+import { Text, View } from 'react-native';
 
 export const SignIn = () => {
   const globalStyles = useGlobalStyles();
   const authStyles = useAuthStyles();
-  const inputStyles = useInputStyles();
   const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabWithAuthParamList>>();
@@ -29,7 +28,7 @@ export const SignIn = () => {
       <Header
         title={t(TranslationKeys.auth.signIn)}
         variant="secondary"
-        onPress={() => navigation.navigate("Home")}
+        onPress={() => navigation.navigate('Home')}
         style={authStyles.headerContainer}
       />
       <View style={globalStyles.roundedContainer}>
@@ -38,7 +37,7 @@ export const SignIn = () => {
           subTitle={t(TranslationKeys.auth.welcomeSubtitle)}
         />
         <AuthImageBlock source={Images.authIcon} />
-        <View style={inputStyles.inputContainer}>
+        <View style={authStyles.inputContainer}>
           <Input placeholder={t(TranslationKeys.auth.emailPlaceholder)} />
           <Input
             placeholder={t(TranslationKeys.auth.passwordPlaceholder)}
@@ -48,7 +47,7 @@ export const SignIn = () => {
 
         <Text
           style={authStyles.forgotPassword}
-          onPress={() => navigation.navigate("ForgotPassword")}
+          onPress={() => navigation.navigate('ForgotPassword')}
         >
           {t(TranslationKeys.auth.forgotPassword)}
         </Text>
@@ -65,7 +64,7 @@ export const SignIn = () => {
         <AuthFooter
           label={t(TranslationKeys.auth.noAccount)}
           actionText={t(TranslationKeys.auth.signUp)}
-          onActionPress={() => navigation.navigate("SignUp")}
+          onActionPress={() => navigation.navigate('SignUp')}
         />
       </View>
     </View>

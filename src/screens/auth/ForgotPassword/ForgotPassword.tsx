@@ -1,29 +1,29 @@
-import { Button, Header, Input } from "@/components";
-import { useAuthStyles, useGlobalStyles, useInputStyles } from "@/hooks";
-import { TranslationKeys } from "@/i18n";
-import { AuthStackParamList } from "@/navigation/types";
-import { formatPhoneNumber } from "@/utils";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
+import { Button, Header, Input } from '@/components';
+import { useAuthStyles, useGlobalStyles, useInputStyles } from '@/hooks';
+import { TranslationKeys } from '@/i18n';
+import { AuthStackParamList } from '@/navigation/types';
+import { formatPhoneNumber } from '@/utils';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Text, View } from 'react-native';
 
 export const ForgotPassword = () => {
   const globalStyles = useGlobalStyles();
   const authStyles = useAuthStyles();
   const inputStyles = useInputStyles();
-  const { t } = useTranslation("auth");
+  const { t } = useTranslation('auth');
 
   const [step, setStep] = useState<number>(1);
-  const [phone, setPhone] = useState("");
-  const [code, setCode] = useState("");
+  const [phone, setPhone] = useState('');
+  const [code, setCode] = useState('');
   const navigation =
     useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
 
   const handleBack = () => {
     if (step === 1) {
-      navigation.navigate("SignIn");
+      navigation.navigate('SignIn');
     } else {
       setStep(step - 1);
     }
@@ -45,7 +45,7 @@ export const ForgotPassword = () => {
                   label={t(TranslationKeys.auth.typePhone)}
                   placeholder={t(TranslationKeys.auth.phonePlaceholder)}
                   value={phone}
-                  onChangeText={(text) => setPhone(formatPhoneNumber(text))}
+                  onChangeText={text => setPhone(formatPhoneNumber(text))}
                   keyboardType="phone-pad"
                 />
               </View>
@@ -70,12 +70,14 @@ export const ForgotPassword = () => {
                   {t(TranslationKeys.auth.typeCode)}
                 </Text>
                 <View style={authStyles.codeContainer}>
-                  <Input
-                    placeholder={t(TranslationKeys.auth.codePlaceholder)}
-                    value={code}
-                    onChangeText={setCode}
-                    keyboardType="number-pad"
-                  />
+                  <View style={authStyles.inputWrapper}>
+                    <Input
+                      placeholder={t(TranslationKeys.auth.codePlaceholder)}
+                      value={code}
+                      onChangeText={setCode}
+                      keyboardType="number-pad"
+                    />
+                  </View>
                   <Button title={t(TranslationKeys.auth.resend)} />
                 </View>
               </View>
@@ -93,8 +95,8 @@ export const ForgotPassword = () => {
                   title={t(TranslationKeys.auth.changePasswordTitle)}
                   disabled={!code.trim()}
                   onPress={() =>
-                    navigation.navigate("ChangePassword", {
-                      from: "Security",
+                    navigation.navigate('ChangePassword', {
+                      from: 'Security',
                     })
                   }
                 />

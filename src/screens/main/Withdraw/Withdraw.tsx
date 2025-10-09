@@ -1,30 +1,29 @@
-import { Images } from "@/assets/images";
-import { Button, Header, ImageWithFallback, Input } from "@/components";
-import { BaseModal } from "@/components/ui/Modal";
-import { useGlobalStyles, useInputStyles } from "@/hooks";
-import { cards } from "@/mocks";
-import { MainTabParamList } from "@/navigation/types";
-import { Theme, useTheme } from "@/theme";
-import { formatCards } from "@/utils";
-import { MaterialIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Images } from '@/assets/images';
+import { Button, Header, ImageWithFallback, Input } from '@/components';
+import { BaseModal } from '@/components/ui/Modal';
+import { useAuthStyles, useGlobalStyles } from '@/hooks';
+import { cards } from '@/mocks';
+import { MainTabParamList } from '@/navigation/types';
+import { Theme, useTheme } from '@/theme';
+import { formatCards } from '@/utils';
+import MaterialIcons from '@react-native-vector-icons/material-icons';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useState } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export const Withdraw = () => {
   const globalStyles = useGlobalStyles();
-  const inputStyles = useInputStyles();
   const { theme } = useTheme();
   const styles = createWithdrawStyles(theme);
-
-  const amounts = ["$10", "$50", "$100", "$150", "$200", "Other"];
+  const authStyles = useAuthStyles();
+  const amounts = ['$10', '$50', '$100', '$150', '$200', 'Other'];
 
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const [selectedAmount, setSelectedAmount] = useState<string | null>(null);
-  const [customAmount, setCustomAmount] = useState<string>("$ ");
-  const [phone, setPhone] = useState<string>("");
+  const [customAmount, setCustomAmount] = useState<string>('$ ');
+  const [phone, setPhone] = useState<string>('');
   const [isSuccess, setIsSuccess] = useState(false);
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
@@ -36,25 +35,26 @@ export const Withdraw = () => {
 
   const handleAmountPress = (amt: string) => {
     setSelectedAmount(amt);
-    if (amt !== "Other") setCustomAmount("");
+    if (amt !== 'Other') setCustomAmount('');
   };
 
   const handleCustomAmountChange = (text: string) => {
-    const numericPart = text.replace(/[^0-9]/g, "");
+    const numericPart = text.replace(/[^0-9]/g, '');
     setCustomAmount(`$ ${numericPart}`);
   };
   const resetForm = () => {
     setSelectedCard(null);
     setSelectedAmount(null);
-    setCustomAmount("$ ");
-    setPhone("");
+    setCustomAmount('$ ');
+    setPhone('');
     setIsSuccess(false);
   };
   const isVerifyDisabled =
     !selectedCard ||
-    !phone.trim() ||
+    !phone ||
+    phone === '$ ' ||
     !selectedAmount ||
-    (selectedAmount === "Other" && customAmount === "$ ");
+    (selectedAmount === 'Other' && customAmount === '$ ');
 
   const handleVerify = () => {
     if (!isVerifyDisabled) {
@@ -62,7 +62,7 @@ export const Withdraw = () => {
     }
   };
   const handlePhoneChange = (text: string) => {
-    const numericPart = text.replace(/[^0-9]/g, "");
+    const numericPart = text.replace(/[^0-9]/g, '');
     setPhone(`+${numericPart}`);
   };
   if (isSuccess) {
@@ -77,12 +77,18 @@ export const Withdraw = () => {
             style={[
               globalStyles.title3,
               globalStyles.primary1,
-              globalStyles.centerContainer,
+              styles.centerText,
             ]}
           >
             Successful Withdrawal
           </Text>
-          <Text style={[globalStyles.body3, globalStyles.neutral1]}>
+          <Text
+            style={[
+              globalStyles.body3,
+              globalStyles.neutral1,
+              styles.centerText,
+            ]}
+          >
             You have successfully withdrawn money! Please check the balance in
             the card management section.
           </Text>
@@ -90,7 +96,7 @@ export const Withdraw = () => {
             title="Confirm"
             onPress={() => {
               resetForm();
-              navigation.navigate("Home");
+              navigation.navigate('Home');
             }}
           />
         </View>
@@ -100,19 +106,25 @@ export const Withdraw = () => {
 
   return (
     <View style={globalStyles.verticalSpread}>
-      <Header title="Withdraw" onPress={() => navigation.navigate("Home")} />
+      <Header title="Withdraw" onPress={() => navigation.navigate('Home')} />
       <ImageWithFallback
+        contentFit="contain"
         source={Images.withdrawBanner}
         style={[globalStyles.imgLogo, styles.imageContainer]}
       />
 
       <View style={[globalStyles.paddedContainer, styles.spacedContainer]}>
         <View>
-          <View style={inputStyles.inputContainer}>
-            <TouchableOpacity onPress={() => setModalVisible(true)}>
+          <View style={authStyles.inputContainer}>
+            <TouchableOpacity
+              onPress={() => setModalVisible(true)}
+              activeOpacity={0.7}
+            >
               <Input
                 placeholder="Choose account / card"
-                value={selectedCard || ""}
+                value={selectedCard || ''}
+                readOnly={true}
+                onRightPress={() => setModalVisible(true)}
                 rightIcon={
                   <MaterialIcons
                     name="expand-more"
@@ -120,14 +132,14 @@ export const Withdraw = () => {
                     color={theme.colors.neutral4}
                   />
                 }
-                onRightPress={() => setModalVisible(true)}
               />
-              {selectedCard !== null && (
-                <Text style={[globalStyles.caption1, styles.balance]}>
-                  Available balance: 10,000$
-                </Text>
-              )}
             </TouchableOpacity>
+
+            {selectedCard !== null && (
+              <Text style={[globalStyles.caption1, styles.balance]}>
+                Available balance: 10,000$
+              </Text>
+            )}
             <Input
               placeholder="Phone number"
               keyboardType="phone-pad"
@@ -146,7 +158,7 @@ export const Withdraw = () => {
             Choose amount
           </Text>
 
-          {selectedAmount === "Other" && (
+          {selectedAmount === 'Other' && (
             <Input
               placeholder="Enter amount"
               keyboardType="numeric"
@@ -161,7 +173,7 @@ export const Withdraw = () => {
               <View key={index} style={styles.amountWrapper}>
                 <Button
                   title={amt}
-                  variant={selectedAmount === amt ? "primary" : "secondary"}
+                  variant={selectedAmount === amt ? 'primary' : 'secondary'}
                   onPress={() => handleAmountPress(amt)}
                   style={selectedAmount !== amt && styles.amountBtn}
                   textStyle={selectedAmount !== amt && globalStyles.textDefault}
@@ -198,15 +210,15 @@ const createWithdrawStyles = (theme: Theme) =>
       borderRadius: theme.radius.md,
       elevation: 2,
       padding: theme.spacing.md,
-      shadowColor: "#000",
+      shadowColor: '#000',
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.05,
       shadowRadius: 4,
     },
     amountContainer: {
-      flexDirection: "row",
-      flexWrap: "wrap",
-      justifyContent: "space-between",
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'space-between',
     },
     amountLabel: {
       marginBottom: 16,
@@ -214,7 +226,7 @@ const createWithdrawStyles = (theme: Theme) =>
     },
     amountWrapper: {
       marginBottom: 12,
-      width: "30%",
+      width: '30%',
     },
     balance: {
       marginTop: theme.spacing.sm,
@@ -228,13 +240,16 @@ const createWithdrawStyles = (theme: Theme) =>
       marginBottom: theme.spacing.md,
     },
     spacedContainer: {
-      justifyContent: "space-between",
+      justifyContent: 'space-between',
     },
     subContainer: {
       gap: theme.spacing.lg,
     },
+    centerText: {
+      textAlign: 'center',
+    },
     successContainer: {
-      alignItems: "center",
+      alignItems: 'center',
       backgroundColor: theme.colors.neutral6,
       flex: 1,
       padding: theme.spacing.lg,

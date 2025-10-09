@@ -1,16 +1,16 @@
-import { Images } from "@/assets/images";
+import { Images } from '@/assets/images';
 import {
   CreditCard,
   Header,
   InfoRowCard,
   MonthlyBalanceChart,
-} from "@/components";
-import { useGlobalStyles, useTransactionReportStyles } from "@/hooks";
-import { transactions } from "@/mocks";
-import { MainTabParamList } from "@/navigation/types";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { ScrollView, View } from "react-native";
+} from '@/components';
+import { useGlobalStyles, useTransactionReportStyles } from '@/hooks';
+import { transactions } from '@/mocks';
+import { MainTabParamList } from '@/navigation/types';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { ScrollView, View } from 'react-native';
 
 export const TransactionReport = () => {
   const globalStyles = useGlobalStyles();
@@ -23,7 +23,7 @@ export const TransactionReport = () => {
       <Header
         title="Transaction report"
         variant="secondary"
-        onPress={() => navigation.navigate("Home")}
+        onPress={() => navigation.navigate('Home')}
         style={transactionReportStyles.headerContainer}
       />
 
@@ -31,7 +31,8 @@ export const TransactionReport = () => {
         style={[
           globalStyles.roundedContainer,
           transactionReportStyles.subContainer,
-        ]}>
+        ]}
+      >
         <View style={transactionReportStyles.transactionContainer}>
           <View style={transactionReportStyles.cardChartContainer}>
             <CreditCard
@@ -43,11 +44,12 @@ export const TransactionReport = () => {
             />
             <ScrollView
               style={transactionReportStyles.scrollable}
-              showsVerticalScrollIndicator={false}>
+              showsVerticalScrollIndicator={false}
+            >
               <MonthlyBalanceChart />
-              {transactions.map((t) => {
+              {transactions.map(t => {
                 const isNegative =
-                  typeof t.price === "string" && t.price.trim().startsWith("-");
+                  typeof t.price === 'string' && t.price.trim().startsWith('-');
 
                 return (
                   <InfoRowCard

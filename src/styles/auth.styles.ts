@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { Theme } from "../theme";
+import { StyleSheet } from 'react-native';
+import { Theme } from '../theme';
 
 export const createAuthStyles = (theme: Theme) =>
   StyleSheet.create({
@@ -9,44 +9,52 @@ export const createAuthStyles = (theme: Theme) =>
       width: 64,
     },
     changePasswordContainer: {
-      alignItems: "center",
-      display: "flex",
+      alignItems: 'center',
+      display: 'flex',
       gap: theme.spacing.lg,
-      justifyContent: "center",
+      justifyContent: 'center',
       marginBottom: theme.spacing.xl,
     },
     changePhoneNo: {
-      backgroundColor: "transparent",
+      textAlign: 'center',
+      backgroundColor: 'transparent',
+    },
+    inputContainer: {
+      gap: theme.spacing.md,
     },
     checkboxContainer: {
-      display: "flex",
-      flexDirection: "row",
+      display: 'flex',
+      flexDirection: 'row',
       gap: theme.spacing.ms,
     },
     codeContainer: {
-      flexDirection: "row",
+      flexDirection: 'row',
       gap: theme.spacing.ms,
-      height: 44,
-      justifyContent: "space-between",
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    inputWrapper: {
+      flex: 1,
     },
     container: {
       backgroundColor: theme.colors.primary1,
-      display: "flex",
+      display: 'flex',
       flex: 1,
       paddingTop: theme.spacing.lg,
     },
     forgotPassword: {
       color: theme.colors.neutral4,
       fontSize: theme.typography.fontSize.sm,
-      fontWeight: "500",
+      fontWeight: '500',
       lineHeight: theme.spacing.md,
       marginBottom: theme.spacing.ml * 2,
-      textAlign: "right",
+      textAlign: 'right',
     },
     forgotPasswordContainer: {
       backgroundColor: theme.colors.surface,
-      display: "flex",
+      display: 'flex',
       flex: 1,
+      justifyContent: 'space-between',
       padding: theme.spacing.lg,
     },
     headerContainer: {
@@ -60,11 +68,11 @@ export const createAuthStyles = (theme: Theme) =>
       marginBottom: theme.spacing.lg,
     },
     phoneContainer: {
-      display: "flex",
+      display: 'flex',
       gap: theme.spacing.md,
     },
     sendContainer: {
-      display: "flex",
+      display: 'flex',
       gap: theme.spacing.lg,
       marginTop: theme.spacing.lg,
     },
@@ -85,7 +93,7 @@ export const createAuthStyles = (theme: Theme) =>
       color: theme.colors.neutral2,
     },
     textInfoContainer: {
-      flexDirection: "column",
+      flexDirection: 'column',
       gap: theme.spacing.ms - 2,
     },
   });

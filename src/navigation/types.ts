@@ -2,36 +2,11 @@
 // Stack param lists for all navigation stacks
 // Screen props types for type-safe navigation
 
-export type RootStackParamList = {
-  Auth: undefined;
-  Main: undefined;
-  Onboarding: undefined;
-  SignIn: undefined;
-  SignUp: undefined;
-  ForgotPassword: undefined;
-  ChangePassword: { from?: "Security" | "Settings" };
-  Home: undefined;
-  Accounts: { accountId?: string };
-  Transfers: undefined;
-  Bills: undefined;
-  TransactionReport: { accountId?: string; fromDate?: string };
-  Search: undefined;
-  SearchForBranch: undefined;
-  InterestRate: undefined;
-  ExchangeRate: { baseCurrency?: string };
-  Exchange: { fromCurrency?: string; toCurrency?: string };
-  Messages: undefined;
-  Settings: undefined;
-  AppInformation: undefined;
-  Language: undefined;
-  ThemeSelector: undefined;
-};
-
 export type AuthStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
   ForgotPassword: undefined;
-  ChangePassword: { from?: "Security" | "Settings" };
+  ChangePassword: { from?: 'Security' | 'Settings' };
 };
 
 export type MainTabParamList = {
@@ -59,7 +34,10 @@ export type SettingsParamList = {
   Language: undefined;
   ThemeSelector: undefined;
 };
-
+export type RootStackParamList = AuthStackParamList &
+  MainTabParamList &
+  SearchParamList &
+  SettingsParamList;
 export type MainTabWithAuthParamList = AuthStackParamList & MainTabParamList;
 export type MainTabWithSearchParamList = MainTabParamList & SearchParamList;
 export type MainTabWithSettingsParamList = MainTabParamList & SettingsParamList;

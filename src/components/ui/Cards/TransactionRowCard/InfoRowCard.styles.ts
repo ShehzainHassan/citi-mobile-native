@@ -1,20 +1,20 @@
-import { Theme } from "@/theme";
-import { StyleSheet } from "react-native";
+import { Theme } from '@/theme';
+import { StyleSheet } from 'react-native';
 
 export const createTransactionRowCardStyles = (theme: Theme) =>
   StyleSheet.create({
     amountText: {
       flexShrink: 0,
-      textAlign: "right",
+      textAlign: 'right',
     },
 
     cardContainer: {
       borderBottomWidth: 1,
       borderColor: theme.colors.line1,
-      flexDirection: "row",
-      justifyContent: "space-between",
+      flexDirection: 'row',
+      justifyContent: 'space-between',
       paddingBottom: theme.spacing.ms,
-      width: "100%",
+      width: '100%',
     },
     container: {
       gap: theme.spacing.md,
@@ -24,20 +24,20 @@ export const createTransactionRowCardStyles = (theme: Theme) =>
       color: theme.colors.textdefault,
     },
     iconContainer: {
-      alignItems: "center",
-      flexDirection: "row",
+      alignItems: 'center',
+      flexDirection: 'row',
       gap: theme.spacing.ms,
     },
     iconImg: {
-      height: 16,
-      width: 16,
+      width: '100%',
+      height: 24,
     },
     iconImgContainer: {
-      alignItems: "center",
+      alignItems: 'center',
       backgroundColor: theme.colors.primary1,
       borderRadius: theme.spacing.sml,
       height: 40,
-      justifyContent: "center",
+      justifyContent: 'center',
       width: 40,
     },
     subTitle: {
@@ -45,8 +45,7 @@ export const createTransactionRowCardStyles = (theme: Theme) =>
       width: 200,
     },
     textContainer: {
-      flex: 1,
-      flexShrink: 1,
-      minWidth: 0,
+      gap: theme.spacing.xs,
+      justifyContent: 'space-between',
     },
   });
