@@ -1,11 +1,8 @@
 import { Theme } from '@/theme';
 import { Platform, StyleSheet } from 'react-native';
 
-export const createAccountCardStyles = (theme: Theme) =>
+export const createPaymentHistoryCardStyles = (theme: Theme) =>
   StyleSheet.create({
-    accountSummaryContainer: {
-      gap: theme.spacing.sm,
-    },
     container: {
       backgroundColor: theme.colors.neutral6,
       borderRadius: theme.radius.md,
@@ -25,7 +22,22 @@ export const createAccountCardStyles = (theme: Theme) =>
       }),
     },
     subContainer: {
+      gap: theme.spacing.sm,
+    },
+    statusContainer: {
       flexDirection: 'row',
       justifyContent: 'space-between',
+      gap: theme.spacing.ms,
+    },
+    detailsContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    statusCompanyContainer: {
+      gap: theme.spacing.sm,
+    },
+    amountContainer: {
+      flexDirection: 'row',
+      gap: theme.spacing.ms,
     },
   });

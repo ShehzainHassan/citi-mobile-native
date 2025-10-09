@@ -20,6 +20,10 @@ export type MainTabParamList = {
   MessagesDetails: { headerText: string };
   Settings: undefined;
   Withdraw: undefined;
+  PayBill: undefined;
+  PaymentHistory: {
+    selectedType?: 'Electric' | 'Water' | 'Mobile' | 'Internet';
+  };
 };
 
 export type SearchParamList = {

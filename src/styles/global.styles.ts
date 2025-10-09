@@ -21,7 +21,6 @@ export const createGlobalStyles = (theme: Theme) =>
     },
     paddedContainer: {
       backgroundColor: theme.colors.neutral6,
-      flex: 1,
       padding: theme.spacing.lg,
     },
     roundedContainer: {
@@ -163,6 +162,9 @@ export const createGlobalStyles = (theme: Theme) =>
     },
     neutral6: {
       color: theme.colors.neutral6,
+    },
+    semantic1: {
+      color: theme.colors.semantic1,
     },
     textDefault: {
       color: theme.colors.textdefault,

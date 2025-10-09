@@ -1,13 +1,14 @@
-export { Accounts } from "./Accounts";
-export { HomeScreen } from "./Home";
-export { MessageDetails, Messages } from "./Messages";
+export { Accounts } from './Accounts';
+export { HomeScreen } from './Home';
+export { MessageDetails, Messages } from './Messages';
 export {
   Exchange,
   ExchangeRate,
   InterestRate,
   Search,
   SearchForBranch,
-} from "./Search";
-export { AppInformation, Language, Settings, ThemeSelector } from "./Settings";
-export { TransactionReport } from "./TransactionReport";
-export { Withdraw } from "./Withdraw";
+} from './Search';
+export { AppInformation, Language, Settings, ThemeSelector } from './Settings';
+export { TransactionReport } from './TransactionReport';
+export { Withdraw } from './Withdraw';
+export { PayTheBill, PaymentHistory } from './PayTheBill';

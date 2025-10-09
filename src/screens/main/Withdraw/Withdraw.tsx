@@ -113,7 +113,7 @@ export const Withdraw = () => {
         style={[globalStyles.imgLogo, styles.imageContainer]}
       />
 
-      <View style={[globalStyles.paddedContainer, styles.spacedContainer]}>
+      <View style={[globalStyles.paddedColumn, styles.spacedContainer]}>
         <View>
           <View style={authStyles.inputContainer}>
             <TouchableOpacity

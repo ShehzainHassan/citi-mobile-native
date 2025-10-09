@@ -1,7 +1,7 @@
-import { Images } from "@/assets/images";
-import { TranslationKeys } from "@/i18n";
-import { MainTabParamList } from "@/navigation/types";
-import { ImageSourcePropType } from "react-native";
+import { Images } from '@/assets/images';
+import { TranslationKeys } from '@/i18n';
+import { MainTabParamList } from '@/navigation/types';
+import { ImageSourcePropType } from 'react-native';
 
 export interface HomeCardConfig {
   id: string;
@@ -14,54 +14,55 @@ export interface HomeCardConfig {
 export const HOME_CARD_GRID: HomeCardConfig[][] = [
   [
     {
-      id: "accounts",
+      id: 'accounts',
       image: Images.accountAndCard,
       labelKey: TranslationKeys.homeScreen.accountAndCard,
-      route: "Accounts",
+      route: 'Accounts',
     },
     {
-      id: "transfer",
+      id: 'transfer',
       image: Images.transfer,
       labelKey: TranslationKeys.homeScreen.transfer,
     },
     {
-      id: "withdraw",
+      id: 'withdraw',
       image: Images.withdraw,
       labelKey: TranslationKeys.homeScreen.withdraw,
-      route: "Withdraw",
+      route: 'Withdraw',
     },
   ],
   [
     {
-      id: "prepaid",
+      id: 'prepaid',
       image: Images.prepaid,
       labelKey: TranslationKeys.homeScreen.mobilePrepaid,
     },
     {
-      id: "bill",
+      id: 'bill',
       image: Images.bill,
       labelKey: TranslationKeys.homeScreen.payBill,
+      route: 'PayBill',
     },
     {
-      id: "saveOnline",
+      id: 'saveOnline',
       image: Images.saveOnline,
       labelKey: TranslationKeys.homeScreen.saveOnline,
     },
   ],
   [
     {
-      id: "creditCard",
+      id: 'creditCard',
       image: Images.creditCard,
       labelKey: TranslationKeys.homeScreen.creditCard,
     },
     {
-      id: "transactionReport",
+      id: 'transactionReport',
       image: Images.transactionReport,
       labelKey: TranslationKeys.homeScreen.transactionReport,
-      route: "TransactionReport",
+      route: 'TransactionReport',
     },
     {
-      id: "beneficiary",
+      id: 'beneficiary',
       image: Images.beneficiary,
       labelKey: TranslationKeys.homeScreen.beneficiary,
     },

@@ -1,14 +1,14 @@
-import { useGlobalStyles } from "@/hooks";
-import { useTheme } from "@/theme";
-import { Text, View } from "react-native";
-import { createAccountCardStyles } from "./AccountCard.styles";
-import { AccountCardProps } from "./AccountCard.types";
+import { useGlobalStyles } from '@/hooks';
+import { useTheme } from '@/theme';
+import { Text, View } from 'react-native';
+import { createAccountCardStyles } from './AccountCard.styles';
+import { AccountCardProps } from './AccountCard.types';
 
 export const AccountCard = ({
-  accountName = "Account 1",
-  accountNumber = "1900 8988 1234",
-  availableBalance = "$20,000",
-  branch = "New York",
+  accountName = 'Account 1',
+  accountNumber = '1900 8988 1234',
+  availableBalance = '$20,000',
+  branch = 'New York',
 }: AccountCardProps) => {
   const globalStyles = useGlobalStyles();
   const { theme } = useTheme();
