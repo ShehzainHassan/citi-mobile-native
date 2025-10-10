@@ -21,7 +21,13 @@ export const SuccessScreen = ({
         <ImageWithFallback source={source} style={globalStyles.authLogo} />
         <View style={authStyles.changePasswordContainer}>
           <Text style={globalStyles.title3}>{title}</Text>
-          <Text style={[globalStyles.body3, globalStyles.neutral1]}>
+          <Text
+            style={[
+              globalStyles.body3,
+              globalStyles.neutral1,
+              globalStyles.centerText,
+            ]}
+          >
             {subtitle}
           </Text>
         </View>

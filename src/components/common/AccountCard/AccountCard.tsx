@@ -7,8 +7,14 @@ import { AccountCardProps } from './AccountCard.types';
 export const AccountCard = ({
   accountName = 'Account 1',
   accountNumber = '1900 8988 1234',
-  availableBalance = '$20,000',
-  branch = 'New York',
+  subText1 = 'Available balance',
+  subText1Value = '$20,000',
+  subText2 = 'Branch',
+  subText2Value = 'New York',
+  subText3,
+  subText3Value,
+  subText4,
+  subText4Value,
 }: AccountCardProps) => {
   const globalStyles = useGlobalStyles();
   const { theme } = useTheme();
@@ -25,14 +31,31 @@ export const AccountCard = ({
         </Text>
       </View>
       <View style={styles.accountSummaryContainer}>
-        <View style={styles.subContainer}>
-          <Text style={globalStyles.caption2}>Available balance</Text>
-          <Text style={globalStyles.caption1}>{availableBalance}</Text>
-        </View>
-        <View style={styles.subContainer}>
-          <Text style={globalStyles.caption2}>Branch</Text>
-          <Text style={globalStyles.caption1}>{branch}</Text>
-        </View>
+        {subText1 && (
+          <View style={styles.subContainer}>
+            <Text style={globalStyles.caption2}>{subText1}</Text>
+            <Text style={globalStyles.caption1}>{subText1Value}</Text>
+          </View>
+        )}
+        {subText2 && (
+          <View style={styles.subContainer}>
+            <Text style={globalStyles.caption2}>{subText2}</Text>
+            <Text style={globalStyles.caption1}>{subText2Value}</Text>
+          </View>
+        )}
+        {subText3 && (
+          <View style={styles.subContainer}>
+            <Text style={globalStyles.caption2}>{subText3}</Text>
+            <Text style={globalStyles.caption1}>{subText3Value}</Text>
+          </View>
+        )}
+
+        {subText4 && (
+          <View style={styles.subContainer}>
+            <Text style={globalStyles.caption2}>{subText4}</Text>
+            <Text style={globalStyles.caption1}>{subText4Value}</Text>
+          </View>
+        )}
       </View>
     </View>
   );

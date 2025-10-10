@@ -4,3 +4,5 @@ export * from './tables';
 export * from './transaction';
 export * from './paymentHistory';
 export * from './bills';
+export * from './timeDeposit';
+export * from './accounts';

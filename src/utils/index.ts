@@ -44,3 +44,14 @@ export const formatCurrencyLabel = (code: string, name: string) => {
 export const formatCards = (cards: string[]) => {
   return cards.map(card => card.replace(/(\d{4})(?=\d)/g, '$1 ').trim());
 };
+
+export const prependDollar = (text: string) => {
+  if (!text.startsWith('$ ')) {
+    return '$ ' + text.replace(/^\$?\s*/, '');
+  }
+  return text;
+};
+
+export const sanitizeAmount = (amount: string): number => {
+  return parseFloat(amount.replace(/[^0-9.]/g, '')) || 0;
+};

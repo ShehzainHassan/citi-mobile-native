@@ -47,6 +47,7 @@ export const HOME_CARD_GRID: HomeCardConfig[][] = [
       id: 'saveOnline',
       image: Images.saveOnline,
       labelKey: TranslationKeys.homeScreen.saveOnline,
+      route: 'SaveOnline',
     },
   ],
   [

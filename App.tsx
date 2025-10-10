@@ -10,6 +10,7 @@ import { i18n } from '@/i18n';
 
 import {
   Accounts,
+  Add,
   AppInformation,
   ChangePassword,
   CreditCardDetails,
@@ -20,10 +21,12 @@ import {
   HomeScreen,
   InterestRate,
   Language,
+  Management,
   MessageDetails,
   Messages,
   PaymentHistory,
   PayTheBill,
+  SaveOnline,
   Search,
   SearchForBranch,
   Settings,
@@ -75,6 +78,9 @@ function AppContent() {
             name="CreditCardDetails"
             component={CreditCardDetails}
           />
+          <Stack.Screen name="SaveOnline" component={SaveOnline} />
+          <Stack.Screen name="Add" component={Add} />
+          <Stack.Screen name="Management" component={Management} />
         </Stack.Navigator>
       </NavigationContainer>
     </I18nextProvider>

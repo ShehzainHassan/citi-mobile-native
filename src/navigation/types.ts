@@ -26,6 +26,10 @@ export type MainTabParamList = {
   };
   CreditCard: undefined;
   CreditCardDetails: undefined;
+  SaveOnline: undefined;
+  Add: undefined;
+  ChooseCard: undefined;
+  Management: undefined;
 };
 
 export type SearchParamList = {

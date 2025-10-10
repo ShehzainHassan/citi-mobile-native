@@ -13,3 +13,4 @@ export { TransactionReport } from './TransactionReport';
 export { Withdraw } from './Withdraw';
 export { PayTheBill, PaymentHistory } from './PayTheBill';
 export { CreditCardScreen, CreditCardDetails } from './CreditCard';
+export { SaveOnline, Add, Management } from './SaveOnline';

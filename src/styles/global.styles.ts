@@ -145,6 +145,9 @@ export const createGlobalStyles = (theme: Theme) =>
       fontWeight: '500',
       lineHeight: theme.spacing.md,
     },
+    mediumSpacedContainer: {
+      marginBottom: theme.spacing.md,
+    },
     paddedColumn: {
       flex: 1,
       gap: theme.spacing.sm,
@@ -189,6 +192,9 @@ export const createGlobalStyles = (theme: Theme) =>
       flexDirection: 'row',
       gap: theme.spacing.md,
       padding: theme.spacing.lg,
+    },
+    centerText: {
+      textAlign: 'center',
     },
 
     // Card patterns
