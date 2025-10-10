@@ -21,7 +21,7 @@ export const BaseModal: React.FC<BaseModalProps> = ({
   onClose,
   header,
   contents = [],
-  heightRatio = 0.45,
+  heightRatio = 0.4,
   selectedItem,
   onSelect,
   alignCenter = false,

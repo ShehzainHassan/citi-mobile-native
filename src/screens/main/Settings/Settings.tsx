@@ -1,10 +1,16 @@
-import { Images } from "@/assets/images";
-import { CardDetails, Header, ImageWithFallback, SettingsRow, Tabs } from "@/components";
-import { useAuthStyles, useGlobalStyles, useHomeScreenStyles } from "@/hooks";
-import { MainTabWithAuthAndSettingsParamList } from "@/navigation/types";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { StyleSheet, Text, View } from "react-native";
+import { Images } from '@/assets/images';
+import {
+  CardDetails,
+  Header,
+  ImageWithFallback,
+  SettingsRow,
+  Tabs,
+} from '@/components';
+import { useAuthStyles, useGlobalStyles } from '@/hooks';
+import { MainTabWithAuthAndSettingsParamList } from '@/navigation/types';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StyleSheet, Text, View } from 'react-native';
 
 export const Settings = () => {
   const navigation =
@@ -13,37 +19,36 @@ export const Settings = () => {
     >();
   const globalStyles = useGlobalStyles();
   const authStyles = useAuthStyles();
-  const homeScreenStyles = useHomeScreenStyles();
 
   const settingsOptions = [
     {
-      id: "password",
-      label: "Password",
+      id: 'password',
+      label: 'Password',
       onPress: () =>
-        navigation.navigate("ChangePassword", { from: "Settings" }),
+        navigation.navigate('ChangePassword', { from: 'Settings' }),
     },
     {
-      id: "touchId",
-      label: "Touch ID",
+      id: 'touchId',
+      label: 'Touch ID',
     },
     {
-      id: "languages",
-      label: "Languages",
-      onPress: () => navigation.navigate("Language"),
+      id: 'languages',
+      label: 'Languages',
+      onPress: () => navigation.navigate('Language'),
     },
     {
-      id: "appInfo",
-      label: "App information",
-      onPress: () => navigation.navigate("AppInformation"),
+      id: 'appInfo',
+      label: 'App information',
+      onPress: () => navigation.navigate('AppInformation'),
     },
     {
-      id: "customerCare",
-      label: "Customer care",
+      id: 'customerCare',
+      label: 'Customer care',
     },
     {
-      id: "theme",
-      label: "Theme",
-      onPress: () => navigation.navigate("ThemeSelector"),
+      id: 'theme',
+      label: 'Theme',
+      onPress: () => navigation.navigate('ThemeSelector'),
     },
   ];
 
@@ -52,21 +57,21 @@ export const Settings = () => {
       <Header
         title="Settings"
         variant="secondary"
-        onPress={() => navigation.navigate("Home")}
+        onPress={() => navigation.navigate('Home')}
         style={authStyles.headerContainer}
       />
 
       <View style={[globalStyles.roundedContainer, styles.roundedContainer]}>
         <View style={styles.imgWrapper}>
-        <ImageWithFallback
+          <ImageWithFallback
             source={Images.profilePic}
-            style={[homeScreenStyles.profilePic, styles.profilePic]}
+            style={styles.profilePic}
           />
           <Text style={styles.nameText}>John Smith</Text>
         </View>
 
         <CardDetails>
-          {settingsOptions.map((option) => (
+          {settingsOptions.map(option => (
             <SettingsRow
               key={option.id}
               label={option.label}
@@ -80,26 +85,26 @@ export const Settings = () => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
+  roundedContainer: {
+    position: 'relative',
+  },
   imgWrapper: {
-    alignItems: "center",
-    justifyContent: "flex-start",
+    position: 'absolute',
+    top: '-5%',
+    left: '10%',
+    alignItems: 'center',
+    width: '100%',
   },
   nameText: {
     fontSize: 18,
-    fontWeight: "bold",
-    marginTop: 15,
+    fontWeight: 'bold',
+    marginTop: 10,
+    textAlign: 'center',
   },
   profilePic: {
-    height: 100,
-    position: "absolute",
-    top: -100,
     width: 100,
-  },
-  roundedContainer: {
-    paddingTop: 50,
-    position: "relative",
+    height: 100,
   },
 });
 

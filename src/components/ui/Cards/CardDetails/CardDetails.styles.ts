@@ -1,5 +1,5 @@
-import { Theme } from "@/theme";
-import { StyleSheet } from "react-native";
+import { Theme } from '@/theme';
+import { StyleSheet } from 'react-native';
 
 export const createCardDetailsStyles = (theme: Theme) =>
   StyleSheet.create({
@@ -9,6 +9,5 @@ export const createCardDetailsStyles = (theme: Theme) =>
     },
     selectedCard: {
       flex: 1,
-      justifyContent: "space-between",
     },
   });

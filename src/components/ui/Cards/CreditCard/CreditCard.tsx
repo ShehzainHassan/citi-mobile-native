@@ -1,8 +1,14 @@
-import { useGlobalStyles } from "@/hooks";
-import { useTheme } from "@/theme";
-import { ImageBackground, Text, View, useWindowDimensions } from "react-native";
-import { createCreditCardStyles } from "./CreditCard.styles";
-import { CreditCardProps } from "./CreditCard.types";
+import { useGlobalStyles } from '@/hooks';
+import { useTheme } from '@/theme';
+import {
+  ImageBackground,
+  Text,
+  TouchableOpacity,
+  View,
+  useWindowDimensions,
+} from 'react-native';
+import { createCreditCardStyles } from './CreditCard.styles';
+import { CreditCardProps } from './CreditCard.types';
 
 export const CreditCard: React.FC<CreditCardProps> = ({
   name,
@@ -11,6 +17,7 @@ export const CreditCard: React.FC<CreditCardProps> = ({
   amount,
   backgroundImage,
   style,
+  onPress,
 }) => {
   const { theme } = useTheme();
   const globalStyles = useGlobalStyles();
@@ -28,7 +35,7 @@ export const CreditCard: React.FC<CreditCardProps> = ({
   );
 
   return (
-    <View style={styles.wrapper}>
+    <TouchableOpacity onPress={onPress} style={styles.wrapper}>
       <ImageBackground
         source={backgroundImage}
         style={[styles.container, style]}
@@ -70,6 +77,6 @@ export const CreditCard: React.FC<CreditCardProps> = ({
           {amount}
         </Text>
       </ImageBackground>
-    </View>
+    </TouchableOpacity>
   );
 };

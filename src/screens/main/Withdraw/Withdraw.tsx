@@ -1,22 +1,19 @@
 import { Images } from '@/assets/images';
 import {
   Button,
+  CardSelector,
   Header,
   ImageWithFallback,
   Input,
   SuccessScreen,
 } from '@/components';
-import { BaseModal } from '@/components/ui/Modal';
 import { useAuthStyles, useGlobalStyles } from '@/hooks';
-import { cards } from '@/mocks';
 import { MainTabParamList } from '@/navigation/types';
 import { Theme, useTheme } from '@/theme';
-import { formatCards } from '@/utils';
-import MaterialIcons from '@react-native-vector-icons/material-icons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 export const Withdraw = () => {
   const globalStyles = useGlobalStyles();
@@ -25,7 +22,6 @@ export const Withdraw = () => {
   const authStyles = useAuthStyles();
   const amounts = ['$10', '$50', '$100', '$150', '$200', 'Other'];
 
-  const [isModalVisible, setModalVisible] = useState(false);
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const [selectedAmount, setSelectedAmount] = useState<string | null>(null);
   const [customAmount, setCustomAmount] = useState<string>('$ ');
@@ -33,11 +29,6 @@ export const Withdraw = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
-
-  const handleSelectCard = (code: string) => {
-    setSelectedCard(code);
-    setModalVisible(false);
-  };
 
   const handleAmountPress = (amt: string) => {
     setSelectedAmount(amt);
@@ -97,30 +88,12 @@ export const Withdraw = () => {
       <View style={[globalStyles.paddedColumn, styles.spacedContainer]}>
         <View>
           <View style={authStyles.inputContainer}>
-            <TouchableOpacity
-              onPress={() => setModalVisible(true)}
-              activeOpacity={0.7}
-            >
-              <Input
-                placeholder="Choose account / card"
-                value={selectedCard || ''}
-                readOnly={true}
-                onRightPress={() => setModalVisible(true)}
-                rightIcon={
-                  <MaterialIcons
-                    name="expand-more"
-                    size={24}
-                    color={theme.colors.neutral4}
-                  />
-                }
-              />
-            </TouchableOpacity>
+            <CardSelector
+              value={selectedCard}
+              onChange={setSelectedCard}
+              showBalance={true}
+            />
 
-            {selectedCard !== null && (
-              <Text style={[globalStyles.caption1, styles.balance]}>
-                Available balance: 10,000$
-              </Text>
-            )}
             <Input
               placeholder="Phone number"
               keyboardType="phone-pad"
@@ -170,16 +143,6 @@ export const Withdraw = () => {
           onPress={handleVerify}
         />
       </View>
-
-      <BaseModal
-        visible={isModalVisible}
-        onClose={() => setModalVisible(false)}
-        header="Choose account"
-        contents={formatCards(cards)}
-        selectedItem={selectedCard}
-        onSelect={handleSelectCard}
-        alignCenter={true}
-      />
     </View>
   );
 };

@@ -12,6 +12,8 @@ import {
   Accounts,
   AppInformation,
   ChangePassword,
+  CreditCardDetails,
+  CreditCardScreen,
   Exchange,
   ExchangeRate,
   ForgotPassword,
@@ -41,7 +43,7 @@ function AppContent() {
     <I18nextProvider i18n={i18n}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="SignIn"
+          initialRouteName="Home"
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="SignIn" component={SignIn} />
@@ -68,6 +70,11 @@ function AppContent() {
           <Stack.Screen name="ThemeSelector" component={ThemeSelector} />
           <Stack.Screen name="PayBill" component={PayTheBill} />
           <Stack.Screen name="PaymentHistory" component={PaymentHistory} />
+          <Stack.Screen name="CreditCard" component={CreditCardScreen} />
+          <Stack.Screen
+            name="CreditCardDetails"
+            component={CreditCardDetails}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </I18nextProvider>

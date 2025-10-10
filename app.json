@@ -1,4 +1,9 @@
 {
   "name": "CitiBank",
-  "displayName": "CitiBank"
+  "displayName": "CitiBank",
+  "extra": {
+    "eas": {
+      "projectId": "b72d5a72-c658-428d-a1c8-55c9f849bcad"
+    }
+  }
 }

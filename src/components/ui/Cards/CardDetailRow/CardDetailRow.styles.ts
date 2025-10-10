@@ -1,5 +1,5 @@
-import { Theme } from "@/theme";
-import { StyleSheet } from "react-native";
+import { Theme } from '@/theme';
+import { StyleSheet } from 'react-native';
 
 export const createCardDetailRowStyles = (theme: Theme) =>
   StyleSheet.create({
@@ -7,11 +7,11 @@ export const createCardDetailRowStyles = (theme: Theme) =>
       color: theme.colors.neutral2,
     },
     textContainer: {
-      alignItems: "center",
+      alignItems: 'center',
       borderBottomWidth: 1,
       borderColor: theme.colors.line1,
-      flexDirection: "row",
-      justifyContent: "space-between",
+      flexDirection: 'row',
+      justifyContent: 'space-between',
       paddingBottom: theme.spacing.ms,
     },
   });

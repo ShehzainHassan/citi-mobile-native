@@ -17,12 +17,8 @@ export const SuccessScreen = ({
   return (
     <View style={globalStyles.verticalSpread}>
       {headerText && <Header title={headerText} onPress={onBack} />}
-      <View style={globalStyles.paddedColumn}>
-        <ImageWithFallback
-          source={source}
-          style={globalStyles.authLogo}
-          resizeMode="contain"
-        />
+      <View style={[globalStyles.paddedColumn]}>
+        <ImageWithFallback source={source} style={globalStyles.authLogo} />
         <View style={authStyles.changePasswordContainer}>
           <Text style={globalStyles.title3}>{title}</Text>
           <Text style={[globalStyles.body3, globalStyles.neutral1]}>

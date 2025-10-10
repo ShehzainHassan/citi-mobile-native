@@ -37,9 +37,16 @@ export const createGlobalStyles = (theme: Theme) =>
       fontWeight: '600',
       lineHeight: theme.spacing.lgx,
     },
-    headerContainer: {
+    noHorizontalPadding: {
       paddingHorizontal: 0,
     },
+    noVerticalPadding: {
+      paddingVertical: 0,
+    },
+    noPadding: {
+      padding: 0,
+    },
+
     previous: {
       height: 16,
       resizeMode: 'contain',
@@ -143,6 +150,9 @@ export const createGlobalStyles = (theme: Theme) =>
       gap: theme.spacing.sm,
       padding: theme.spacing.lg,
     },
+    largeSpacedColumn: {
+      gap: theme.spacing.lg,
+    },
     spacedColumn: {
       gap: theme.spacing.ml,
     },
@@ -168,6 +178,17 @@ export const createGlobalStyles = (theme: Theme) =>
     },
     textDefault: {
       color: theme.colors.textdefault,
+    },
+    input: {
+      flex: 1,
+    },
+
+    inputRow: {
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      flexDirection: 'row',
+      gap: theme.spacing.md,
+      padding: theme.spacing.lg,
     },
 
     // Card patterns
@@ -219,9 +240,8 @@ export const createGlobalStyles = (theme: Theme) =>
     },
 
     authLogo: {
-      height: 165,
+      maxHeight: 250,
       marginVertical: theme.spacing.xl,
-      resizeMode: 'contain',
       width: '100%',
     },
     flag: {

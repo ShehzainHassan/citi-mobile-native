@@ -20,4 +20,5 @@ export interface InfoRowCardProps {
   amountStyle?: StyleProp<TextStyle>;
   onPress?: () => void;
   iconBackgroundColor?: string;
+  centeredItems?: boolean;
 }

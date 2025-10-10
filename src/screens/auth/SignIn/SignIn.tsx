@@ -13,13 +13,17 @@ import { TranslationKeys } from '@/i18n';
 import { MainTabWithAuthParamList } from '@/navigation/types';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 
 export const SignIn = () => {
   const globalStyles = useGlobalStyles();
   const authStyles = useAuthStyles();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const { t } = useTranslation();
+  const isDisabled = email.trim() === '' || password.trim() === '';
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabWithAuthParamList>>();
 
@@ -38,10 +42,16 @@ export const SignIn = () => {
         />
         <AuthImageBlock source={Images.authIcon} />
         <View style={authStyles.inputContainer}>
-          <Input placeholder={t(TranslationKeys.auth.emailPlaceholder)} />
+          <Input
+            placeholder={t(TranslationKeys.auth.emailPlaceholder)}
+            value={email}
+            onChangeText={setEmail}
+          />
           <Input
             placeholder={t(TranslationKeys.auth.passwordPlaceholder)}
             secureTextEntry
+            value={password}
+            onChangeText={setPassword}
           />
         </View>
 
@@ -52,7 +62,10 @@ export const SignIn = () => {
           {t(TranslationKeys.auth.forgotPassword)}
         </Text>
 
-        <Button title={t(TranslationKeys.auth.signInButton)} />
+        <Button
+          title={t(TranslationKeys.auth.signInButton)}
+          disabled={isDisabled}
+        />
 
         <View style={globalStyles.centerContainer}>
           <ImageWithFallback

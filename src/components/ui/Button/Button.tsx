@@ -1,6 +1,5 @@
-import { useTheme } from "@/theme";
-// import * as Haptics from "expo-haptics";
-import React from "react";
+import { useTheme } from '@/theme';
+import React from 'react';
 import {
   ActivityIndicator,
   GestureResponderEvent,
@@ -8,18 +7,24 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from "react-native";
-import { createButtonStyles } from "./Button.styles";
-import { ButtonProps } from "./Button.types";
+} from 'react-native';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+import { createButtonStyles } from './Button.styles';
+import { ButtonProps } from './Button.types';
+
+const hapticOptions = {
+  enableVibrateFallback: true,
+  ignoreAndroidSystemSettings: false,
+};
 
 export const Button: React.FC<ButtonProps> = ({
   title,
-  variant = "primary",
-  size = "medium",
+  variant = 'primary',
+  size = 'medium',
   disabled = false,
   loading = false,
   icon,
-  iconPosition = "left",
+  iconPosition = 'left',
   fullWidth = false,
   style,
   textStyle,
@@ -31,11 +36,10 @@ export const Button: React.FC<ButtonProps> = ({
 
   const isDisabled = disabled || loading;
 
-  const handlePress = async (e: GestureResponderEvent) => {
+  const handlePress = (e: GestureResponderEvent) => {
     if (!isDisabled && onPress) {
       if (Platform.OS === 'ios' || Platform.OS === 'android') {
-        // TODO: Use react native for haptics
-        // await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+        ReactNativeHapticFeedback.trigger('selection', hapticOptions);
       }
       onPress(e);
     }
@@ -62,17 +66,17 @@ export const Button: React.FC<ButtonProps> = ({
           <ActivityIndicator size="small" accessibilityLabel="Loading" />
         ) : (
           <>
-            {icon && iconPosition === "left" && <View>{icon}</View>}
+            {icon && iconPosition === 'left' && <View>{icon}</View>}
             <Text
               style={[
                 buttonStyles[`text_${size}`],
-                variant === "secondary" && buttonStyles.text_secondary,
+                variant === 'secondary' && buttonStyles.text_secondary,
                 textStyle,
               ]}
             >
               {title}
             </Text>
-            {icon && iconPosition === "right" && <View>{icon}</View>}
+            {icon && iconPosition === 'right' && <View>{icon}</View>}
           </>
         )}
       </View>

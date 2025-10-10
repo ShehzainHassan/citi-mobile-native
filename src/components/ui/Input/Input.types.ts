@@ -1,4 +1,4 @@
-import { StyleProp, TextInputProps, TextStyle } from "react-native";
+import { StyleProp, TextInputProps, TextStyle } from 'react-native';
 
 export interface InputProps extends TextInputProps {
   label?: string;
@@ -10,4 +10,5 @@ export interface InputProps extends TextInputProps {
   onRightPress?: () => void;
   readOnly?: boolean;
   required?: boolean;
+  showRightBorder?: boolean;
 }

@@ -13,11 +13,16 @@ import { TranslationKeys } from '@/i18n';
 import { AuthStackParamList } from '@/navigation/types';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 
 export const SignUp = () => {
   const globalStyles = useGlobalStyles();
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const isDisabled = !email.trim() || !password.trim() || !name.trim();
   const authStyles = useAuthStyles();
   const { t } = useTranslation();
   const navigation =
@@ -38,11 +43,21 @@ export const SignUp = () => {
         />
         <AuthImageBlock source={Images.signUp} />
         <View style={authStyles.inputContainer}>
-          <Input placeholder={t(TranslationKeys.auth.namePlaceholder)} />
-          <Input placeholder={t(TranslationKeys.auth.textInputPlaceholder)} />
+          <Input
+            placeholder={t(TranslationKeys.auth.namePlaceholder)}
+            value={name}
+            onChangeText={setName}
+          />
+          <Input
+            placeholder={t(TranslationKeys.auth.textInputPlaceholder)}
+            value={email}
+            onChangeText={setEmail}
+          />
           <Input
             placeholder={t(TranslationKeys.auth.passwordPlaceholder)}
             secureTextEntry
+            value={password}
+            onChangeText={setPassword}
           />
           <View style={authStyles.checkboxContainer}>
             <Checkbox />
@@ -58,6 +73,7 @@ export const SignUp = () => {
         <Button
           title={t(TranslationKeys.auth.signUpButton)}
           style={authStyles.signUpButton}
+          disabled={isDisabled}
         />
         <AuthFooter
           label={t(TranslationKeys.auth.haveAccount)}

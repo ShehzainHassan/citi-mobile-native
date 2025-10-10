@@ -16,13 +16,19 @@ export const InfoRowCard: React.FC<InfoRowCardProps> = ({
   amountStyle,
   onPress,
   iconBackgroundColor,
+  centeredItems = false,
 }) => {
   const { theme } = useTheme();
   const globalStyles = useGlobalStyles();
   const styles = createTransactionRowCardStyles(theme);
 
   const CardContent = (
-    <View style={styles.cardContainer}>
+    <View
+      style={[
+        styles.cardContainer,
+        centeredItems ? { alignItems: 'center' } : undefined,
+      ]}
+    >
       <View style={styles.iconContainer}>
         <View
           style={[

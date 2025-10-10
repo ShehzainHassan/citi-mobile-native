@@ -24,6 +24,8 @@ export type MainTabParamList = {
   PaymentHistory: {
     selectedType?: 'Electric' | 'Water' | 'Mobile' | 'Internet';
   };
+  CreditCard: undefined;
+  CreditCardDetails: undefined;
 };
 
 export type SearchParamList = {

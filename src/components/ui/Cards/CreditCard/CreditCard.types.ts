@@ -1,4 +1,4 @@
-import { ImageSourcePropType, StyleProp, ViewStyle } from "react-native";
+import { ImageSourcePropType, StyleProp, ViewStyle } from 'react-native';
 
 export interface CreditCardProps {
   name: string;
@@ -7,4 +7,5 @@ export interface CreditCardProps {
   amount: string;
   backgroundImage: ImageSourcePropType;
   style?: StyleProp<ViewStyle>;
+  onPress?: () => void;
 }

@@ -6,12 +6,17 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
-
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { useGlobalStyles } from '@/hooks';
 import { useTheme } from '@/theme';
 import { createInputStyles } from './Input.styles';
 import { InputProps } from './Input.types';
 import MaterialIcons from '@react-native-vector-icons/material-icons';
+
+const hapticOptions = {
+  enableVibrateFallback: true,
+  ignoreAndroidSystemSettings: false,
+};
 
 export const Input: React.FC<InputProps> = ({
   label,
@@ -24,6 +29,7 @@ export const Input: React.FC<InputProps> = ({
   onRightPress,
   readOnly = false,
   required = true,
+  showRightBorder = true,
   ...props
 }) => {
   const { theme } = useTheme();
@@ -45,6 +51,7 @@ export const Input: React.FC<InputProps> = ({
         withTiming(8, { duration: 50 }),
         withTiming(0, { duration: 50 }),
       );
+      ReactNativeHapticFeedback.trigger('notificationError', hapticOptions);
     }
   }, [error]);
 
@@ -54,6 +61,12 @@ export const Input: React.FC<InputProps> = ({
 
   const handlePasswordToggle = () => {
     setIsPasswordVisible(prev => !prev);
+    ReactNativeHapticFeedback.trigger('selection', hapticOptions);
+  };
+
+  const handleRightPress = () => {
+    onRightPress?.();
+    ReactNativeHapticFeedback.trigger('selection', hapticOptions);
   };
 
   const inputStyle = useMemo(
@@ -83,10 +96,7 @@ export const Input: React.FC<InputProps> = ({
   return (
     <View style={inputStyles.inputContainer}>
       {label && (
-        <Text
-          style={[globalStyles.caption1, inputStyles.inputLabel]}
-          accessibilityRole="text"
-        >
+        <Text style={[globalStyles.caption1, inputStyles.inputLabel]}>
           {label}
           {required && <Text style={{ color: theme.colors.error }}> *</Text>}
         </Text>
@@ -100,7 +110,7 @@ export const Input: React.FC<InputProps> = ({
           secureTextEntry={isPasswordField && !isPasswordVisible}
           onFocus={() => {
             if (readOnly) {
-              onRightPress?.();
+              handleRightPress();
             } else {
               setIsFocused(true);
             }
@@ -108,22 +118,16 @@ export const Input: React.FC<InputProps> = ({
           onBlur={() => !readOnly && setIsFocused(false)}
           style={inputStyle}
           placeholderTextColor={theme.colors.neutral4}
-          accessibilityLabel={label || props.placeholder}
-          accessibilityState={{ disabled: readOnly }}
-          accessibilityHint={
-            error
-              ? `${error}. ${props.accessibilityHint || ''}`
-              : props.accessibilityHint
-          }
         />
 
         {(rightText || rightPlaceholder || rightIcon) && (
           <TouchableOpacity
-            onPress={onRightPress}
-            style={inputStyles.rightContainer}
+            onPress={handleRightPress}
+            style={[
+              inputStyles.rightContainer,
+              !showRightBorder && { borderLeftWidth: 0 },
+            ]}
             activeOpacity={0.7}
-            accessibilityRole="button"
-            accessibilityLabel={rightText || rightPlaceholder || 'Right action'}
           >
             <Text
               style={[
@@ -146,11 +150,7 @@ export const Input: React.FC<InputProps> = ({
           <TouchableOpacity
             onPress={handlePasswordToggle}
             style={inputStyles.iconContainer}
-            accessibilityRole="button"
-            accessibilityLabel={
-              isPasswordVisible ? 'Hide password' : 'Show password'
-            }
-            accessibilityHint="Toggles password visibility"
+            activeOpacity={0.7}
           >
             <MaterialIcons
               name={isPasswordVisible ? 'visibility-off' : 'visibility'}
@@ -162,11 +162,7 @@ export const Input: React.FC<InputProps> = ({
       </Animated.View>
 
       {error && (
-        <View
-          accessibilityLiveRegion="polite"
-          accessibilityRole="alert"
-          style={inputStyles.errorContainer}
-        >
+        <View style={inputStyles.errorContainer}>
           <Text style={globalStyles.errorText}>{error}</Text>
         </View>
       )}

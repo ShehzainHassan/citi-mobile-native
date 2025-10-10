@@ -54,6 +54,7 @@ export const HOME_CARD_GRID: HomeCardConfig[][] = [
       id: 'creditCard',
       image: Images.creditCard,
       labelKey: TranslationKeys.homeScreen.creditCard,
+      route: 'CreditCard',
     },
     {
       id: 'transactionReport',

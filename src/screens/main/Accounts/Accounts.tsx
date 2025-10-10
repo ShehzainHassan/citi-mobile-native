@@ -1,4 +1,4 @@
-import { Images } from "@/assets/images";
+import { Images } from '@/assets/images';
 import {
   AccountCard,
   Button,
@@ -7,29 +7,29 @@ import {
   CreditCard,
   Header,
   ImageWithFallback,
-} from "@/components";
+} from '@/components';
 import {
   useAccountScreenStyles,
   useCardDetailStyles,
   useGlobalStyles,
-} from "@/hooks";
-import { TranslationKeys } from "@/i18n";
-import { MainTabParamList } from "@/navigation/types";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useCallback, useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Text, TouchableOpacity, View } from "react-native";
+} from '@/hooks';
+import { TranslationKeys } from '@/i18n';
+import { MainTabParamList } from '@/navigation/types';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useCallback, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Text, TouchableOpacity, View } from 'react-native';
 
-type TabType = "Account" | "Card";
-type CardType = "Visa" | "MasterCard" | null;
+type TabType = 'Account' | 'Card';
+type CardType = 'Visa' | 'MasterCard' | null;
 
 export const Accounts = () => {
   const globalStyles = useGlobalStyles();
   const accountScreenStyles = useAccountScreenStyles();
   const cardDetailStyles = useCardDetailStyles();
 
-  const [selectedTab, setSelectedTab] = useState<TabType>("Account");
+  const [selectedTab, setSelectedTab] = useState<TabType>('Account');
   const [selectedCardType, setSelectedCardType] = useState<CardType>(null);
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
@@ -41,7 +41,7 @@ export const Accounts = () => {
 
   const handleHeaderPress = useCallback(() => {
     if (!selectedCardType) {
-      navigation.navigate("Home");
+      navigation.navigate('Home');
     } else {
       setSelectedCardType(null);
     }
@@ -57,8 +57,8 @@ export const Accounts = () => {
 
   const cardOptions = useMemo(
     () => [
-      { type: "Visa", image: Images.visaCard },
-      { type: "MasterCard", image: Images.masterCard },
+      { type: 'Visa', image: Images.visaCard },
+      { type: 'MasterCard', image: Images.masterCard },
     ],
     [],
   );
@@ -71,19 +71,19 @@ export const Accounts = () => {
       },
       {
         label: t(TranslationKeys.accounts.cardDetails.cardNumber),
-        value: "**** **** 9018",
+        value: '**** **** 9018',
       },
       {
         label: t(TranslationKeys.accounts.cardDetails.validFrom),
-        value: "10/15",
+        value: '10/15',
       },
       {
         label: t(TranslationKeys.accounts.cardDetails.goodThru),
-        value: "10/20",
+        value: '10/20',
       },
       {
         label: t(TranslationKeys.accounts.cardDetails.availableBalance),
-        value: "$10,000",
+        value: '$10,000',
       },
     ],
     [t],
@@ -94,20 +94,20 @@ export const Accounts = () => {
       <Header
         title={title}
         onPress={handleHeaderPress}
-        style={globalStyles.headerContainer}
+        style={globalStyles.noHorizontalPadding}
       />
 
       {!selectedCardType && (
         <View style={accountScreenStyles.buttonsContainer}>
-          {(["Account", "Card"] as TabType[]).map((tab) => (
+          {(['Account', 'Card'] as TabType[]).map(tab => (
             <Button
               key={tab}
               title={
-                tab === "Account"
+                tab === 'Account'
                   ? t(TranslationKeys.accounts.tabAccount)
                   : t(TranslationKeys.accounts.tabCard)
               }
-              variant={selectedTab === tab ? "primary" : "secondary"}
+              variant={selectedTab === tab ? 'primary' : 'secondary'}
               style={accountScreenStyles.button}
               onPress={() => handleTabPress(tab)}
             />
@@ -115,7 +115,7 @@ export const Accounts = () => {
         </View>
       )}
 
-      {selectedTab === "Account" && !selectedCardType && (
+      {selectedTab === 'Account' && !selectedCardType && (
         <View style={accountScreenStyles.accountSection}>
           <View style={accountScreenStyles.profilePicContainer}>
             <ImageWithFallback
@@ -135,7 +135,7 @@ export const Accounts = () => {
         </View>
       )}
 
-      {selectedTab === "Card" && !selectedCardType && (
+      {selectedTab === 'Card' && !selectedCardType && (
         <View style={accountScreenStyles.cardSection}>
           <View style={accountScreenStyles.cardsContainer}>
             {cardOptions.map(({ type, image }) => (

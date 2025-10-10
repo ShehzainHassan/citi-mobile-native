@@ -80,11 +80,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 24,
     marginVertical: 16,
     gap: 12,
-    maxHeight: 45,
-    height: '100%',
+    height: 50,
   },
   button: {
     minWidth: 100,
     borderRadius: 15,
+    height: 45,
   },
 });
