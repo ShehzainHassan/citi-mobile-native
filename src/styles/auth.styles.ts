@@ -47,6 +47,7 @@ export const createAuthStyles = (theme: Theme) =>
       fontSize: theme.typography.fontSize.sm,
       fontWeight: '500',
       lineHeight: theme.spacing.md,
+      marginTop: theme.spacing.ms,
       marginBottom: theme.spacing.ml * 2,
       textAlign: 'right',
     },

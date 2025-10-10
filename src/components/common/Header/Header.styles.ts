@@ -1,20 +1,29 @@
-import { Theme } from "@/theme";
-import { StyleSheet } from "react-native";
+import { Theme } from '@/theme';
+import { StyleSheet } from 'react-native';
 
-export const createHeaderStyles = (theme: Theme) =>
+export const createHeaderStyles = (
+  theme: Theme,
+  variant: 'primary' | 'secondary',
+) =>
   StyleSheet.create({
-    header: {
-      color: theme.colors.neutral6,
-      fontSize: theme.typography.fontSize.xl,
-      fontWeight: "600",
-      lineHeight: theme.spacing.lgx,
+    safeAreaContainer: {
+      backgroundColor:
+        variant === 'primary' ? theme.colors.neutral6 : theme.colors.primary1,
     },
     headerContainer: {
-      alignItems: "center",
-      display: "flex",
-      flexDirection: "row",
+      flexDirection: 'row',
+      alignItems: 'center',
       gap: theme.spacing.md,
-      padding: theme.spacing.lg,
+      paddingHorizontal: theme.spacing.lg,
+      paddingVertical: theme.spacing.lg,
       paddingBottom: 0,
+    },
+    backButton: {
+      padding: theme.spacing.sml,
+    },
+    headerText: {
+      fontSize: theme.typography.fontSize.xl,
+      fontWeight: '600',
+      lineHeight: theme.spacing.lgx,
     },
   });

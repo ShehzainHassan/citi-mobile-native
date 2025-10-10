@@ -61,7 +61,7 @@ export const Settings = () => {
         style={authStyles.headerContainer}
       />
 
-      <View style={[globalStyles.roundedContainer, styles.roundedContainer]}>
+      <View style={[globalStyles.roundedContainer]}>
         <View style={styles.imgWrapper}>
           <ImageWithFallback
             source={Images.profilePic}
@@ -69,7 +69,6 @@ export const Settings = () => {
           />
           <Text style={styles.nameText}>John Smith</Text>
         </View>
-
         <CardDetails>
           {settingsOptions.map(option => (
             <SettingsRow
@@ -86,15 +85,11 @@ export const Settings = () => {
   );
 };
 const styles = StyleSheet.create({
-  roundedContainer: {
-    position: 'relative',
-  },
   imgWrapper: {
-    position: 'absolute',
-    top: '-5%',
-    left: '10%',
+    position: 'relative',
     alignItems: 'center',
     width: '100%',
+    top: -80,
   },
   nameText: {
     fontSize: 18,

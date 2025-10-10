@@ -1,16 +1,16 @@
-import { useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import MaterialIcons from '@react-native-vector-icons/material-icons';
 import { Input } from '@/components';
 import { BaseModal } from '@/components/ui/Modal';
-import { useTheme } from '@/theme';
-import { cards } from '@/mocks';
-import { formatCards } from '@/utils';
-import { CardSelectorProps } from './CardSelector.types';
-import { createCardSelectorStyles } from './CardSelector.styles';
 import { useGlobalStyles } from '@/hooks';
+import { cardsNumbers } from '@/mocks';
+import { useTheme } from '@/theme';
+import { formatCards } from '@/utils';
+import MaterialIcons from '@react-native-vector-icons/material-icons';
+import { useState } from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { createCardSelectorStyles } from './CardSelectorModal.styles';
+import { CardSelectorProps } from './CardSelectorModal.types';
 
-export const CardSelector = ({
+export const CardSelectorModal = ({
   label,
   value,
   onChange,
@@ -58,7 +58,7 @@ export const CardSelector = ({
         visible={isModalVisible}
         onClose={() => setModalVisible(false)}
         header="Choose account"
-        contents={formatCards(cards)}
+        contents={formatCards(cardsNumbers)}
         selectedItem={value}
         onSelect={handleSelectCard}
         alignCenter

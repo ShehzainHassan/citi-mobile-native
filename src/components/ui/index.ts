@@ -20,6 +20,7 @@ export {
 } from './Icons';
 export { Input } from './Input/Input';
 export { MonthlyBalanceChart } from './MonthlyBalanceChart';
+export { BaseModal, CardSelectorModal } from './Modal';
 // Add more UI components as they're created:
 // export { Input } from './Input';
 // export { Card } from './Card';

@@ -39,6 +39,7 @@ export const createGlobalStyles = (theme: Theme) =>
     },
     noHorizontalPadding: {
       paddingHorizontal: 0,
+      marginHorizontal: 0,
     },
     noVerticalPadding: {
       paddingVertical: 0,

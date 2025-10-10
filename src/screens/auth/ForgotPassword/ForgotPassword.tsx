@@ -30,14 +30,13 @@ export const ForgotPassword = () => {
   };
 
   return (
-    <View style={authStyles.forgotPasswordContainer}>
+    <View style={globalStyles.verticalSpread}>
       <View>
         <Header
           title={t(TranslationKeys.auth.forgotPasswordTitle)}
-          style={authStyles.noPadding}
           onPress={handleBack}
         />
-        <View style={authStyles.subContainer}>
+        <View style={[authStyles.subContainer, globalStyles.paddedColumn]}>
           {step === 1 && (
             <View>
               <View style={authStyles.phoneContainer}>

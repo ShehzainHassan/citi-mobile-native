@@ -10,4 +10,4 @@ export { Message } from './Message';
 export { SettingsRow } from './SettingsRow';
 export { SuccessScreen } from './SuccessScreen';
 export { Bill } from './Bill';
-export { CardSelector } from './CardSelector';
+export { ChooseCard } from './ChooseCard';

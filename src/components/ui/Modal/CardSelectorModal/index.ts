@@ -1,2 +1,1 @@
-export { BaseModal } from './BaseModal';
 export { CardSelectorModal } from './CardSelectorModal';

@@ -15,7 +15,14 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text, View } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  Text,
+  View,
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const SignIn = () => {
   const globalStyles = useGlobalStyles();
@@ -28,58 +35,69 @@ export const SignIn = () => {
     useNavigation<NativeStackNavigationProp<MainTabWithAuthParamList>>();
 
   return (
-    <View style={globalStyles.container}>
-      <Header
-        title={t(TranslationKeys.auth.signIn)}
-        variant="secondary"
-        onPress={() => navigation.navigate('Home')}
-        style={authStyles.headerContainer}
-      />
-      <View style={globalStyles.roundedContainer}>
-        <AuthHeader
-          title={t(TranslationKeys.auth.welcomeTitle)}
-          subTitle={t(TranslationKeys.auth.welcomeSubtitle)}
-        />
-        <AuthImageBlock source={Images.authIcon} />
-        <View style={authStyles.inputContainer}>
-          <Input
-            placeholder={t(TranslationKeys.auth.emailPlaceholder)}
-            value={email}
-            onChangeText={setEmail}
-          />
-          <Input
-            placeholder={t(TranslationKeys.auth.passwordPlaceholder)}
-            secureTextEntry
-            value={password}
-            onChangeText={setPassword}
-          />
-        </View>
-
-        <Text
-          style={authStyles.forgotPassword}
-          onPress={() => navigation.navigate('ForgotPassword')}
+    <SafeAreaView style={globalStyles.container} edges={['bottom']}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={{ flex: 1 }}
+      >
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={{ flexGrow: 1 }}
         >
-          {t(TranslationKeys.auth.forgotPassword)}
-        </Text>
-
-        <Button
-          title={t(TranslationKeys.auth.signInButton)}
-          disabled={isDisabled}
-        />
-
-        <View style={globalStyles.centerContainer}>
-          <ImageWithFallback
-            source={Images.fingerprint}
-            style={authStyles.biometricButton}
+          <Header
+            title={t(TranslationKeys.auth.signIn)}
+            variant="secondary"
+            onPress={() => navigation.navigate('Home')}
+            style={authStyles.headerContainer}
           />
-        </View>
+          <View style={globalStyles.roundedContainer}>
+            <AuthHeader
+              title={t(TranslationKeys.auth.welcomeTitle)}
+              subTitle={t(TranslationKeys.auth.welcomeSubtitle)}
+            />
+            <AuthImageBlock source={Images.authIcon} />
+            <View style={authStyles.inputContainer}>
+              <Input
+                placeholder={t(TranslationKeys.auth.emailPlaceholder)}
+                value={email}
+                onChangeText={setEmail}
+              />
+              <Input
+                placeholder={t(TranslationKeys.auth.passwordPlaceholder)}
+                secureTextEntry
+                value={password}
+                onChangeText={setPassword}
+              />
+            </View>
 
-        <AuthFooter
-          label={t(TranslationKeys.auth.noAccount)}
-          actionText={t(TranslationKeys.auth.signUp)}
-          onActionPress={() => navigation.navigate('SignUp')}
-        />
-      </View>
-    </View>
+            <Text
+              style={authStyles.forgotPassword}
+              onPress={() => navigation.navigate('ForgotPassword')}
+            >
+              {t(TranslationKeys.auth.forgotPassword)}
+            </Text>
+
+            <Button
+              title={t(TranslationKeys.auth.signInButton)}
+              disabled={isDisabled}
+            />
+
+            <View style={globalStyles.centerContainer}>
+              <ImageWithFallback
+                source={Images.fingerprint}
+                style={authStyles.biometricButton}
+              />
+            </View>
+
+            <AuthFooter
+              label={t(TranslationKeys.auth.noAccount)}
+              actionText={t(TranslationKeys.auth.signUp)}
+              onActionPress={() => navigation.navigate('SignUp')}
+            />
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };

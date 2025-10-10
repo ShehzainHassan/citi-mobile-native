@@ -1,7 +1,7 @@
 import { Images } from '@/assets/images';
 import {
   Button,
-  CardSelector,
+  CardSelectorModal,
   Header,
   ImageWithFallback,
   Input,
@@ -88,7 +88,7 @@ export const Withdraw = () => {
       <View style={[globalStyles.paddedColumn, styles.spacedContainer]}>
         <View>
           <View style={authStyles.inputContainer}>
-            <CardSelector
+            <CardSelectorModal
               value={selectedCard}
               onChange={setSelectedCard}
               showBalance={true}

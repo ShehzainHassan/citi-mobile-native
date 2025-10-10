@@ -1,5 +1,5 @@
-import { Theme } from "@/theme";
-import { StyleSheet } from "react-native";
+import { Theme } from '@/theme';
+import { StyleSheet } from 'react-native';
 
 const MAX_CARD_WIDTH = 500;
 const FIXED_VERTICAL_PADDING = 40;
@@ -16,17 +16,17 @@ export const createCreditCardStyles = (theme: Theme, width: number) => {
       paddingVertical: isWideScreen ? FIXED_VERTICAL_PADDING : width * 0.08,
     },
     cardNumberContainer: {
-      alignItems: "center",
-      flexDirection: "row",
-      flexWrap: "nowrap",
+      alignItems: 'center',
+      flexDirection: 'row',
+      flexWrap: 'nowrap',
       gap: theme.spacing.sm,
     },
     container: {
       aspectRatio: 1.6,
-      justifyContent: "space-between",
+      justifyContent: 'space-between',
       maxWidth: MAX_CARD_WIDTH,
-      overflow: "hidden",
-      width: "100%",
+      overflow: 'hidden',
+      width: '100%',
     },
     dot: {
       backgroundColor: theme.colors.neutral6,
@@ -35,7 +35,7 @@ export const createCreditCardStyles = (theme: Theme, width: number) => {
       width: 5,
     },
     dotsContainer: {
-      flexDirection: "row",
+      flexDirection: 'row',
       gap: theme.spacing.xs,
     },
     subContainer: {
@@ -44,13 +44,13 @@ export const createCreditCardStyles = (theme: Theme, width: number) => {
     titleContainer: {
       flex: 1,
       gap: theme.spacing.lg,
-      justifyContent: "space-between",
+      justifyContent: 'space-between',
       paddingLeft: isWideScreen ? FIXED_HORIZONTAL_PADDING : width * 0.1,
       paddingVertical: isWideScreen ? FIXED_VERTICAL_PADDING : width * 0.08,
     },
     wrapper: {
-      alignItems: "center",
-      width: "100%",
+      alignItems: 'center',
+      width: '100%',
     },
   });
 };

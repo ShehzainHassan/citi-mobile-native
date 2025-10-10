@@ -2,7 +2,7 @@ import { Images } from '@/assets/images';
 import {
   Bill,
   Button,
-  CardSelector,
+  CardSelectorModal,
   Header,
   Input,
   SuccessScreen,
@@ -50,7 +50,7 @@ export const CreditCardDetails = () => {
       >
         <Bill />
         <View style={globalStyles.largeSpacedColumn}>
-          <CardSelector value={selectedCard} onChange={setSelectedCard} />
+          <CardSelectorModal value={selectedCard} onChange={setSelectedCard} />
           <View style={[globalStyles.inputRow, globalStyles.noPadding]}>
             <View style={globalStyles.input}>
               <Input

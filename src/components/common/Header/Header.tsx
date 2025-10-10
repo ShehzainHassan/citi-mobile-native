@@ -1,31 +1,39 @@
-import { useTheme } from "@/theme";
-import { Text, TouchableOpacity, View } from "react-native";
-import { BackIcon } from "../../ui";
-import { createHeaderStyles } from "./Header.styles";
-import { HeaderProps } from "./Header.types";
+import { useTheme } from '@/theme';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { BackIcon } from '../../ui';
+import { createHeaderStyles } from './Header.styles';
+import { HeaderProps } from './Header.types';
 
 export const Header = ({
   title,
-  variant = "primary",
+  variant = 'primary',
   onPress,
   style,
 }: HeaderProps) => {
   const { theme } = useTheme();
-  const styles = createHeaderStyles(theme);
+  const styles = createHeaderStyles(theme, variant);
   const textColor =
-    variant === "primary" ? theme.colors.neutral1 : theme.colors.neutral6;
-  const titleStyle = [styles.header, { color: textColor }];
+    variant === 'primary' ? theme.colors.neutral1 : theme.colors.neutral6;
 
   return (
-    <View style={[styles.headerContainer, style]}>
-      {onPress ? (
-        <TouchableOpacity onPress={onPress}>
-          <BackIcon color={textColor} width={9} height={16} />
-        </TouchableOpacity>
-      ) : (
-        <BackIcon color={textColor} width={9} height={16} />
-      )}
-      <Text style={titleStyle}>{title}</Text>
-    </View>
+    <SafeAreaView edges={['top']} style={[styles.safeAreaContainer, style]}>
+      <View style={styles.headerContainer}>
+        {onPress ? (
+          <TouchableOpacity
+            onPress={onPress}
+            style={styles.backButton}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <BackIcon color={textColor} width={9} height={16} />
+          </TouchableOpacity>
+        ) : (
+          <View style={styles.backButton}>
+            <BackIcon color={textColor} width={9} height={16} />
+          </View>
+        )}
+        <Text style={[styles.headerText, { color: textColor }]}>{title}</Text>
+      </View>
+    </SafeAreaView>
   );
 };

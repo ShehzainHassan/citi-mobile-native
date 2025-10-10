@@ -1,14 +1,17 @@
-import { Images } from "@/assets/images";
+import { Images } from '@/assets/images';
 import {
   CreditCard,
   HomeScreenCard,
   ImageWithFallback,
   Tabs,
-} from "@/components";
-import { useGlobalStyles, useHomeScreen, useHomeScreenStyles } from "@/hooks";
-import { TranslationKeys } from "@/i18n";
-import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
+} from '@/components';
+import { useGlobalStyles, useHomeScreen, useHomeScreenStyles } from '@/hooks';
+import { TranslationKeys } from '@/i18n';
+import { AuthStackParamList } from '@/navigation/types';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useTranslation } from 'react-i18next';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 export const HomeScreen = () => {
   const globalStyles = useGlobalStyles();
@@ -16,18 +19,22 @@ export const HomeScreen = () => {
 
   const { t } = useTranslation();
   const { cardGrid, handleCardPress } = useHomeScreen();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
 
   return (
     <View style={homeScreenStyles.mainContainer}>
       <View style={homeScreenStyles.headerContainer}>
         <View style={homeScreenStyles.profilePicContainer}>
-          <ImageWithFallback
-            source={Images.profilePic}
-            style={homeScreenStyles.profilePic}
-            accessibilityLabel={t(TranslationKeys.homeScreen.profilePicAlt)}
-          />
+          <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+            <ImageWithFallback
+              source={Images.profilePic}
+              style={homeScreenStyles.profilePic}
+              accessibilityLabel={t(TranslationKeys.homeScreen.profilePicAlt)}
+            />
+          </TouchableOpacity>
           <Text style={globalStyles.body1}>
-            {t(TranslationKeys.homeScreen.greeting, { name: "John" })}
+            {t(TranslationKeys.homeScreen.greeting, { name: 'John' })}
           </Text>
         </View>
         <ImageWithFallback
@@ -49,7 +56,7 @@ export const HomeScreen = () => {
         <View style={homeScreenStyles.columnContainer}>
           {cardGrid.map((row, rowIndex) => (
             <View key={`row-${rowIndex}`} style={homeScreenStyles.rowContainer}>
-              {row.map((card) => (
+              {row.map(card => (
                 <HomeScreenCard
                   key={card.id}
                   image={card.image}

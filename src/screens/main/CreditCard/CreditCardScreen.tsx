@@ -4,7 +4,7 @@ import { useGlobalStyles, useTransactionReportStyles } from '@/hooks';
 import { MainTabParamList } from '@/navigation/types';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 export const CreditCardScreen = () => {
   const globalStyles = useGlobalStyles();
@@ -18,7 +18,7 @@ export const CreditCardScreen = () => {
         title="Credit Card"
         variant="secondary"
         onPress={() => navigation.navigate('Home')}
-        style={transactionReportStyles.headerContainer}
+        style={styles.header}
       />
       <View style={globalStyles.roundedContainer}>
         <CreditCard
@@ -34,3 +34,9 @@ export const CreditCardScreen = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  header: {
+    paddingBottom: 24,
+  },
+});

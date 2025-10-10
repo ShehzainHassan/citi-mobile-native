@@ -1,28 +1,28 @@
 import { Images } from '@/assets/images';
 import {
   Button,
-  CreditCard,
+  ChooseCard,
   Header,
   ImageWithFallback,
   Input,
   SuccessScreen,
 } from '@/components';
-import { createCardSelectorStyles } from '@/components/common/CardSelector/CardSelector.styles';
+import { createCardSelectorStyles } from '@/components/ui/Modal/CardSelectorModal/CardSelectorModal.styles';
 import { BaseModal } from '@/components/ui/Modal';
-import { useAccountScreenStyles, useGlobalStyles } from '@/hooks';
-import { timeDeposits } from '@/mocks';
+import { useGlobalStyles } from '@/hooks';
+import { cards, timeDeposits } from '@/mocks';
 import { MainTabParamList } from '@/navigation/types';
 import { useTheme } from '@/theme';
+import { prependDollar, sanitizeAmount } from '@/utils';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { prependDollar, sanitizeAmount } from '@/utils';
+import { Card } from '@/components/common/ChooseCard/ChooseCard.types';
 
 export const Add = () => {
   const { theme } = useTheme();
   const globalStyles = useGlobalStyles();
-  const accountScreenStyles = useAccountScreenStyles();
   const cardSelectorStyles = createCardSelectorStyles(theme);
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
@@ -48,41 +48,18 @@ export const Add = () => {
 
   if (showCardScreen) {
     return (
-      <View style={globalStyles.verticalSpread}>
-        <Header title="Choose card" onPress={() => setShowCardScreen(false)} />
-        <View
-          style={[
-            globalStyles.paddedColumn,
-            accountScreenStyles.cardsContainer,
-          ]}
-        >
-          <CreditCard
-            name="John Smith"
-            cardType="Amazon Platinium"
-            cardNumber="475612349018"
-            amount="$3.469.52"
-            backgroundImage={Images.visaCard}
-            style={{ margin: -20 }}
-            onPress={() => {
-              setCard('Account 1900 8988 5456');
-              setShowCardScreen(false);
-            }}
-          />
-          <CreditCard
-            name="John Smith"
-            cardType="Amazon Platinium"
-            cardNumber="475612349018"
-            amount="$3.469.52"
-            backgroundImage={Images.masterCard}
-            style={{ margin: -20 }}
-            onPress={() => {
-              setCard('Account 1900 8988 5456');
-              setShowCardScreen(false);
-            }}
-          />
-          <Button title="Add card" />
-        </View>
-      </View>
+      <ChooseCard
+        headerText="Choose card"
+        onBack={() => setShowCardScreen(false)}
+        cards={cards.map(c => ({
+          ...c,
+          type: c.type as Card['type'],
+        }))}
+        onCardPress={c => {
+          setCard(`Account ${c.cardNumber}`);
+          setShowCardScreen(false);
+        }}
+      />
     );
   }
 

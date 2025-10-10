@@ -4,25 +4,26 @@ import {
   Button,
   CardDetailRow,
   CardDetails,
-  CreditCard,
+  ChooseCard,
   Header,
   ImageWithFallback,
 } from '@/components';
+import { Card } from '@/components/common/ChooseCard/ChooseCard.types';
 import {
   useAccountScreenStyles,
   useCardDetailStyles,
   useGlobalStyles,
 } from '@/hooks';
 import { TranslationKeys } from '@/i18n';
+import { cards } from '@/mocks';
 import { MainTabParamList } from '@/navigation/types';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 type TabType = 'Account' | 'Card';
-type CardType = 'Visa' | 'MasterCard' | null;
 
 export const Accounts = () => {
   const globalStyles = useGlobalStyles();
@@ -30,7 +31,7 @@ export const Accounts = () => {
   const cardDetailStyles = useCardDetailStyles();
 
   const [selectedTab, setSelectedTab] = useState<TabType>('Account');
-  const [selectedCardType, setSelectedCardType] = useState<CardType>(null);
+  const [selectedCardType, setSelectedCardType] = useState<Card | null>(null);
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
   const { t } = useTranslation();
@@ -51,17 +52,9 @@ export const Accounts = () => {
     setSelectedTab(tab);
   }, []);
 
-  const handleCardSelect = useCallback((type: CardType) => {
+  const handleCardSelect = useCallback((type: Card) => {
     setSelectedCardType(type);
   }, []);
-
-  const cardOptions = useMemo(
-    () => [
-      { type: 'Visa', image: Images.visaCard },
-      { type: 'MasterCard', image: Images.masterCard },
-    ],
-    [],
-  );
 
   const cardDetails = useMemo(
     () => [
@@ -90,88 +83,72 @@ export const Accounts = () => {
   );
 
   return (
-    <View style={accountScreenStyles.container}>
-      <Header
-        title={title}
-        onPress={handleHeaderPress}
-        style={globalStyles.noHorizontalPadding}
-      />
+    <View style={globalStyles.verticalSpread}>
+      <Header title={title} onPress={handleHeaderPress} />
 
-      {!selectedCardType && (
-        <View style={accountScreenStyles.buttonsContainer}>
-          {(['Account', 'Card'] as TabType[]).map(tab => (
-            <Button
-              key={tab}
-              title={
-                tab === 'Account'
-                  ? t(TranslationKeys.accounts.tabAccount)
-                  : t(TranslationKeys.accounts.tabCard)
-              }
-              variant={selectedTab === tab ? 'primary' : 'secondary'}
-              style={accountScreenStyles.button}
-              onPress={() => handleTabPress(tab)}
-            />
-          ))}
-        </View>
-      )}
+      <View style={globalStyles.paddedColumn}>
+        {!selectedCardType && (
+          <View style={accountScreenStyles.buttonsContainer}>
+            {(['Account', 'Card'] as TabType[]).map(tab => (
+              <Button
+                key={tab}
+                title={
+                  tab === 'Account'
+                    ? t(TranslationKeys.accounts.tabAccount)
+                    : t(TranslationKeys.accounts.tabCard)
+                }
+                variant={selectedTab === tab ? 'primary' : 'secondary'}
+                style={accountScreenStyles.button}
+                onPress={() => handleTabPress(tab)}
+              />
+            ))}
+          </View>
+        )}
 
-      {selectedTab === 'Account' && !selectedCardType && (
-        <View style={accountScreenStyles.accountSection}>
-          <View style={accountScreenStyles.profilePicContainer}>
-            <ImageWithFallback
-              source={Images.profilePic}
-              style={accountScreenStyles.profilePic}
-              accessibilityLabel={t(TranslationKeys.accounts.profilePicAlt)}
-            />
-            <Text style={globalStyles.title3}>
-              {t(TranslationKeys.accounts.profileName)}
+        {selectedTab === 'Account' && !selectedCardType && (
+          <View style={accountScreenStyles.accountSection}>
+            <View style={accountScreenStyles.profilePicContainer}>
+              <ImageWithFallback
+                source={Images.profilePic}
+                style={accountScreenStyles.profilePic}
+                accessibilityLabel={t(TranslationKeys.accounts.profilePicAlt)}
+              />
+              <Text style={globalStyles.title3}>
+                {t(TranslationKeys.accounts.profileName)}
+              </Text>
+            </View>
+            <View style={globalStyles.spacedColumn}>
+              {Array.from({ length: 3 }).map((_, idx) => (
+                <AccountCard key={idx} />
+              ))}
+            </View>
+          </View>
+        )}
+
+        {selectedTab === 'Card' && !selectedCardType && (
+          <ChooseCard
+            cards={cards.map(card => ({
+              ...card,
+              type: card.type as Card['type'],
+            }))}
+            onAddCard={() => console.log('')}
+            onCardPress={(type: Card) => handleCardSelect(type)}
+          />
+        )}
+
+        {selectedCardType && (
+          <View style={cardDetailStyles.selectedCard}>
+            <CardDetails>
+              {cardDetails.map(({ label, value }, index) => (
+                <CardDetailRow key={index} label={label} value={value} />
+              ))}
+            </CardDetails>
+            <Text style={[globalStyles.body1, accountScreenStyles.deleteCard]}>
+              {t(TranslationKeys.accounts.deleteCard)}
             </Text>
           </View>
-          <View style={globalStyles.spacedColumn}>
-            {Array.from({ length: 3 }).map((_, idx) => (
-              <AccountCard key={idx} />
-            ))}
-          </View>
-        </View>
-      )}
-
-      {selectedTab === 'Card' && !selectedCardType && (
-        <View style={accountScreenStyles.cardSection}>
-          <View style={accountScreenStyles.cardsContainer}>
-            {cardOptions.map(({ type, image }) => (
-              <TouchableOpacity
-                key={type}
-                onPress={() => handleCardSelect(type as CardType)}
-                accessibilityLabel={t(TranslationKeys.accounts.selectCardAlt, {
-                  type,
-                })}
-              >
-                <CreditCard
-                  name="John Smith"
-                  cardType="Amazon Platinium"
-                  cardNumber="475612349018"
-                  amount="$3.469.52"
-                  backgroundImage={image}
-                />
-              </TouchableOpacity>
-            ))}
-          </View>
-          <Button title={t(TranslationKeys.accounts.addCard)} />
-        </View>
-      )}
-
-      {selectedCardType && (
-        <View style={cardDetailStyles.selectedCard}>
-          <CardDetails>
-            {cardDetails.map(({ label, value }, index) => (
-              <CardDetailRow key={index} label={label} value={value} />
-            ))}
-          </CardDetails>
-          <Text style={[globalStyles.body1, accountScreenStyles.deleteCard]}>
-            {t(TranslationKeys.accounts.deleteCard)}
-          </Text>
-        </View>
-      )}
+        )}
+      </View>
     </View>
   );
 };

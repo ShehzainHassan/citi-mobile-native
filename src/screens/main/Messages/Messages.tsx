@@ -17,7 +17,7 @@ export const Messages = () => {
   };
   const { theme } = useTheme();
   return (
-    <View style={styles.container}>
+    <View style={globalStyles.verticalSpread}>
       <Header title="Messages" onPress={() => navigation.navigate('Home')} />
       <View style={[globalStyles.paddedColumn, globalStyles.spacedColumn]}>
         <InfoRowCard
