@@ -4,7 +4,7 @@ import {
   Button,
   CardSelectorModal,
   Header,
-  Input,
+  OtpInput,
   SuccessScreen,
 } from '@/components';
 import { useGlobalStyles } from '@/hooks';
@@ -51,22 +51,12 @@ export const CreditCardDetails = () => {
         <Bill />
         <View style={globalStyles.largeSpacedColumn}>
           <CardSelectorModal value={selectedCard} onChange={setSelectedCard} />
-          <View style={[globalStyles.inputRow, globalStyles.noPadding]}>
-            <View style={globalStyles.input}>
-              <Input
-                value={otp}
-                onChangeText={setOTP}
-                label="Get OTP to verify transaction"
-                placeholder="OTP"
-                keyboardType="phone-pad"
-              />
-            </View>
-            <Button
-              disabled={!selectedCard}
-              title="Get OTP"
-              style={{ marginTop: 16 }}
-            />
-          </View>
+          <OtpInput
+            otp={otp}
+            onChangeOtp={setOTP}
+            disabled={!selectedCard}
+            onGetOtp={() => console.log('OTP requested')}
+          />
         </View>
       </View>
       <Button

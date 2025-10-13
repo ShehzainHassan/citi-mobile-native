@@ -7,10 +7,11 @@ export const createTransactionRowCardStyles = (theme: Theme) =>
       flexShrink: 0,
       textAlign: 'right',
     },
-
-    cardContainer: {
+    border: {
       borderBottomWidth: 1,
       borderColor: theme.colors.line1,
+    },
+    cardContainer: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       paddingBottom: theme.spacing.ms,

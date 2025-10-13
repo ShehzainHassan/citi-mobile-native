@@ -36,6 +36,7 @@ export const HOME_CARD_GRID: HomeCardConfig[][] = [
       id: 'prepaid',
       image: Images.prepaid,
       labelKey: TranslationKeys.homeScreen.mobilePrepaid,
+      route: 'MobilePrepaid',
     },
     {
       id: 'bill',

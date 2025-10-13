@@ -1,27 +1,25 @@
-import React, { useState } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
 import { Button, Header, PaymentHistoryCard } from '@/components';
 import { useGlobalStyles } from '@/hooks';
-import { electricBillData, internetBillData } from '@/mocks/paymentHistory';
+import {
+  electricBillData,
+  electricPayment,
+  internetBillData,
+  internetPayment,
+  mobilePayment,
+  waterPayment,
+} from '@/mocks/paymentHistory';
 import { MainTabWithSearchParamList } from '@/navigation/types';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import React, { useState } from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
 
 export const PaymentHistory = () => {
   const globalStyles = useGlobalStyles();
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabWithSearchParamList>>();
-  const route = useRoute();
-  const initialType =
-    (
-      route.params as {
-        selectedType?: 'Electric' | 'Water' | 'Mobile' | 'Internet';
-      }
-    )?.selectedType ?? 'Electric';
 
-  const [selectedType, setSelectedType] =
-    useState<typeof initialType>(initialType);
-
+  const [selectedType, setSelectedType] = useState('Electric');
   const billData =
     selectedType === 'Internet' ? internetBillData : electricBillData;
 
@@ -62,10 +60,19 @@ export const PaymentHistory = () => {
             date={item.date}
             status={item.status}
             amount={item.amount}
-            company={
-              selectedType === 'Internet'
-                ? (item as (typeof internetBillData)[number]).company
-                : undefined
+            company={item.company}
+            onPress={() =>
+              navigation.navigate('DetailedPaymentCard', {
+                headerText: `${selectedType} payment`,
+                paymentData:
+                  selectedType === 'Electric'
+                    ? electricPayment[0]
+                    : selectedType === 'Water'
+                    ? waterPayment[0]
+                    : selectedType === 'Mobile'
+                    ? mobilePayment[0]
+                    : internetPayment[0],
+              })
             }
           />
         ))}

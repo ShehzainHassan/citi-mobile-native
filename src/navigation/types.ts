@@ -2,6 +2,8 @@
 // Stack param lists for all navigation stacks
 // Screen props types for type-safe navigation
 
+import { PaymentData } from '@/interfaces';
+
 export type AuthStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
@@ -21,15 +23,20 @@ export type MainTabParamList = {
   Settings: undefined;
   Withdraw: undefined;
   PayBill: undefined;
-  PaymentHistory: {
-    selectedType?: 'Electric' | 'Water' | 'Mobile' | 'Internet';
+  DetailedPaymentCard: {
+    headerText: string;
+    paymentData?: PaymentData;
   };
+  PaymentDetails: undefined;
+  PaymentHistory: undefined;
   CreditCard: undefined;
   CreditCardDetails: undefined;
   SaveOnline: undefined;
   Add: undefined;
   ChooseCard: undefined;
   Management: undefined;
+  MobilePrepaid: undefined;
+  BillDetails: undefined;
 };
 
 export type SearchParamList = {

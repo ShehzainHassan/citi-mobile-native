@@ -17,6 +17,7 @@ export const InfoRowCard: React.FC<InfoRowCardProps> = ({
   onPress,
   iconBackgroundColor,
   centeredItems = false,
+  noBorder = false,
 }) => {
   const { theme } = useTheme();
   const globalStyles = useGlobalStyles();
@@ -26,6 +27,7 @@ export const InfoRowCard: React.FC<InfoRowCardProps> = ({
     <View
       style={[
         styles.cardContainer,
+        !noBorder ? styles.border : undefined,
         centeredItems ? { alignItems: 'center' } : undefined,
       ]}
     >

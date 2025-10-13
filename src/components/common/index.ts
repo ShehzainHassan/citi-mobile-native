@@ -11,3 +11,5 @@ export { SettingsRow } from './SettingsRow';
 export { SuccessScreen } from './SuccessScreen';
 export { Bill } from './Bill';
 export { ChooseCard } from './ChooseCard';
+export { DetailedPaymentCard } from './DetailedPaymentCard';
+export { OtpInput } from './OtpInput';

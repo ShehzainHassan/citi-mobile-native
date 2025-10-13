@@ -31,14 +31,15 @@ export const ForgotPassword = () => {
 
   return (
     <View style={globalStyles.verticalSpread}>
-      <View>
-        <Header
-          title={t(TranslationKeys.auth.forgotPasswordTitle)}
-          onPress={handleBack}
-        />
+      <Header
+        title={t(TranslationKeys.auth.forgotPasswordTitle)}
+        onPress={handleBack}
+      />
+
+      <View style={[globalStyles.verticalSpread]}>
         <View style={[authStyles.subContainer, globalStyles.paddedColumn]}>
           {step === 1 && (
-            <View>
+            <View style={globalStyles.cardContainer}>
               <View style={authStyles.phoneContainer}>
                 <Input
                   label={t(TranslationKeys.auth.typePhone)}
@@ -63,7 +64,7 @@ export const ForgotPassword = () => {
           )}
 
           {step === 2 && (
-            <View>
+            <View style={globalStyles.cardContainer}>
               <View style={authStyles.phoneContainer}>
                 <Text style={[globalStyles.caption1, inputStyles.inputLabel]}>
                   {t(TranslationKeys.auth.typeCode)}

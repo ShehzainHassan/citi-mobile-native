@@ -21,7 +21,6 @@ export const Withdraw = () => {
   const styles = createWithdrawStyles(theme);
   const authStyles = useAuthStyles();
   const amounts = ['$10', '$50', '$100', '$150', '$200', 'Other'];
-
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const [selectedAmount, setSelectedAmount] = useState<string | null>(null);
   const [customAmount, setCustomAmount] = useState<string>('$ ');

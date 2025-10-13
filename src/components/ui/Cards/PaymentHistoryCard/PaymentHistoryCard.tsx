@@ -1,6 +1,6 @@
 import { useGlobalStyles } from '@/hooks';
 import { useTheme } from '@/theme';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { createPaymentHistoryCardStyles } from './PaymentHistoryCard.styles';
 import { PaymentCardProps } from './PaymentHistoryCard.types';
 
@@ -10,13 +10,14 @@ export const PaymentHistoryCard = ({
   status,
   company,
   amount = '$0',
+  onPress,
 }: PaymentCardProps) => {
   const globalStyles = useGlobalStyles();
   const { theme } = useTheme();
   const styles = createPaymentHistoryCardStyles(theme);
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity onPress={onPress} style={styles.container}>
       <View style={styles.detailsContainer}>
         <Text style={[globalStyles.title3, globalStyles.neutral1]}>
           {title}
@@ -62,6 +63,6 @@ export const PaymentHistoryCard = ({
           </Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };

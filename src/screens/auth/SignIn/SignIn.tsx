@@ -35,15 +35,15 @@ export const SignIn = () => {
     useNavigation<NativeStackNavigationProp<MainTabWithAuthParamList>>();
 
   return (
-    <SafeAreaView style={globalStyles.container} edges={['bottom']}>
+    <SafeAreaView style={globalStyles.safeArea} edges={['bottom']}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={{ flex: 1 }}
+        style={globalStyles.fillAll}
       >
         <ScrollView
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
-          contentContainerStyle={{ flexGrow: 1 }}
+          contentContainerStyle={globalStyles.scrollContent}
         >
           <Header
             title={t(TranslationKeys.auth.signIn)}

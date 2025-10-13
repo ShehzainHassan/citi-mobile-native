@@ -6,4 +6,6 @@
 // Feature toggles and app settings
 // Security and API configurations
 
-export * from "./homeScreenConfig";
+export * from './homeScreenConfig';
+export * from './messagesCardConfig';
+export * from './billCardsConfig';

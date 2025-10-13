@@ -23,7 +23,7 @@ export const MessageDetails = () => {
         <Message messageType="receiver" />
       </View>
       <View style={globalStyles.inputRow}>
-        <View style={globalStyles.input}>
+        <View style={globalStyles.fillAll}>
           <Input placeholder="Type something" />
         </View>
         <Button title="Send" />

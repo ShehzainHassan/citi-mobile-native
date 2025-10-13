@@ -1,20 +1,23 @@
 import React from 'react';
 import { StatusBar, useColorScheme } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import { i18n } from '@/i18n';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { I18nextProvider } from 'react-i18next';
-import { i18n } from '@/i18n';
 
+import type { RootStackParamList } from '@/navigation/types';
 import {
   Accounts,
   Add,
   AppInformation,
+  BillDetails,
   ChangePassword,
   CreditCardDetails,
   CreditCardScreen,
+  DetailedPayment,
   Exchange,
   ExchangeRate,
   ForgotPassword,
@@ -24,6 +27,7 @@ import {
   Management,
   MessageDetails,
   Messages,
+  PaymentDetails,
   PaymentHistory,
   PayTheBill,
   SaveOnline,
@@ -37,7 +41,6 @@ import {
   Withdraw,
 } from '@/screens';
 import { ThemeProvider } from '@/styles/ThemeProvider';
-import type { RootStackParamList } from '@/navigation/types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -81,6 +84,14 @@ function AppContent() {
           <Stack.Screen name="SaveOnline" component={SaveOnline} />
           <Stack.Screen name="Add" component={Add} />
           <Stack.Screen name="Management" component={Management} />
+          <Stack.Screen
+            name="DetailedPaymentCard"
+            component={DetailedPayment}
+          />
+          <Stack.Screen name="PaymentDetails" component={PaymentDetails} />
+          <Stack.Screen name="BillDetails" component={BillDetails} />
+
+          {/* <Stack.Screen name="MobilePrepaid" component={MobilePrepaid} /> */}
         </Stack.Navigator>
       </NavigationContainer>
     </I18nextProvider>

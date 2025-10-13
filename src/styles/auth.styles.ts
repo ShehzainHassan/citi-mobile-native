@@ -25,6 +25,7 @@ export const createAuthStyles = (theme: Theme) =>
     checkboxContainer: {
       display: 'flex',
       flexDirection: 'row',
+      alignItems: 'flex-start',
       gap: theme.spacing.ms,
     },
     codeContainer: {
@@ -52,11 +53,8 @@ export const createAuthStyles = (theme: Theme) =>
       textAlign: 'right',
     },
     forgotPasswordContainer: {
-      backgroundColor: theme.colors.surface,
-      display: 'flex',
       flex: 1,
       justifyContent: 'space-between',
-      padding: theme.spacing.lg,
     },
     headerContainer: {
       paddingBottom: theme.radius.md,
@@ -89,6 +87,8 @@ export const createAuthStyles = (theme: Theme) =>
     text: {
       fontSize: theme.typography.fontSize.base,
       lineHeight: theme.spacing.md,
+      flexShrink: 1,
+      flexWrap: 'wrap',
     },
     textInfo: {
       color: theme.colors.neutral2,

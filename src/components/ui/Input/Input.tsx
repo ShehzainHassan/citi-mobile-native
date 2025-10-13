@@ -125,7 +125,7 @@ export const Input: React.FC<InputProps> = ({
             onPress={handleRightPress}
             style={[
               inputStyles.rightContainer,
-              !showRightBorder && { borderLeftWidth: 0 },
+              !showRightBorder && inputStyles.noLeftBorder,
             ]}
             activeOpacity={0.7}
           >

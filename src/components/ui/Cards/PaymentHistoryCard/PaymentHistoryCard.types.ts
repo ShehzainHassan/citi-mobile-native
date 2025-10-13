@@ -4,4 +4,5 @@ export interface PaymentCardProps {
   status?: string;
   company?: string;
   amount?: string;
+  onPress?: () => void;
 }

@@ -11,6 +11,13 @@ export {
 export { AppInformation, Language, Settings, ThemeSelector } from './Settings';
 export { TransactionReport } from './TransactionReport';
 export { Withdraw } from './Withdraw';
-export { PayTheBill, PaymentHistory } from './PayTheBill';
+export {
+  PayTheBill,
+  PaymentHistory,
+  DetailedPayment,
+  PaymentDetails,
+  BillDetails,
+} from './PayTheBill';
 export { CreditCardScreen, CreditCardDetails } from './CreditCard';
 export { SaveOnline, Add, Management } from './SaveOnline';
+export { MobilePrepaid } from './MobilePrepaid';

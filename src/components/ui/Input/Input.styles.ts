@@ -52,4 +52,7 @@ export const createInputStyles = (theme: Theme) =>
     errorContainer: {
       marginTop: theme.spacing.xs,
     },
+    noLeftBorder: {
+      borderLeftWidth: 0,
+    },
   });

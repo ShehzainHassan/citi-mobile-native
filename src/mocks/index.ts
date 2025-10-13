@@ -6,3 +6,4 @@ export * from './paymentHistory';
 export * from './bills';
 export * from './timeDeposit';
 export * from './accounts';
+export * from './company';

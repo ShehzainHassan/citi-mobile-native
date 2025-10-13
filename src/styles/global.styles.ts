@@ -47,6 +47,14 @@ export const createGlobalStyles = (theme: Theme) =>
     noPadding: {
       padding: 0,
     },
+    safeArea: {
+      flex: 1,
+      backgroundColor: theme.colors.neutral6,
+    },
+    scrollContent: {
+      flexGrow: 1,
+      backgroundColor: theme.colors.primary1,
+    },
 
     previous: {
       height: 16,
@@ -146,6 +154,10 @@ export const createGlobalStyles = (theme: Theme) =>
       fontWeight: '500',
       lineHeight: theme.spacing.md,
     },
+    marginVerticalMd: {
+      marginTop: theme.spacing.md,
+      marginBottom: theme.spacing.lg,
+    },
     mediumSpacedContainer: {
       marginBottom: theme.spacing.md,
     },
@@ -183,7 +195,7 @@ export const createGlobalStyles = (theme: Theme) =>
     textDefault: {
       color: theme.colors.textdefault,
     },
-    input: {
+    fillAll: {
       flex: 1,
     },
 

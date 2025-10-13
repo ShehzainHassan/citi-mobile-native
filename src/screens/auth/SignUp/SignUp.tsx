@@ -36,14 +36,15 @@ export const SignUp = () => {
     useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
 
   return (
-    <SafeAreaView style={globalStyles.container} edges={['bottom']}>
+    <SafeAreaView style={globalStyles.safeArea} edges={['bottom']}>
       <KeyboardAvoidingView
-        style={{ flex: 1 }}
+        style={globalStyles.fillAll}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
         <ScrollView
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
+          contentContainerStyle={globalStyles.scrollContent}
         >
           <Header
             title={t(TranslationKeys.auth.signUp)}
