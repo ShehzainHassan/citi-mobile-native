@@ -15,6 +15,7 @@ import {
   AppInformation,
   BillDetails,
   ChangePassword,
+  ConfimMobilePrepaid,
   CreditCardDetails,
   CreditCardScreen,
   DetailedPayment,
@@ -27,6 +28,7 @@ import {
   Management,
   MessageDetails,
   Messages,
+  MobilePrepaid,
   PaymentDetails,
   PaymentHistory,
   PayTheBill,
@@ -90,8 +92,11 @@ function AppContent() {
           />
           <Stack.Screen name="PaymentDetails" component={PaymentDetails} />
           <Stack.Screen name="BillDetails" component={BillDetails} />
-
-          {/* <Stack.Screen name="MobilePrepaid" component={MobilePrepaid} /> */}
+          <Stack.Screen name="MobilePrepaid" component={MobilePrepaid} />
+          <Stack.Screen
+            name="MobilePrepaidConfirm"
+            component={ConfimMobilePrepaid}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </I18nextProvider>

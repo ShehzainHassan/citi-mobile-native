@@ -55,3 +55,8 @@ export const prependDollar = (text: string) => {
 export const sanitizeAmount = (amount: string): number => {
   return parseFloat(amount.replace(/[^0-9.]/g, '')) || 0;
 };
+export const maskCardNumber = (card: string): string => {
+  const digits = card.replace(/\D/g, '');
+  const lastFour = digits.slice(-4);
+  return `**** **** **** ${lastFour}`;
+};

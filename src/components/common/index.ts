@@ -13,3 +13,4 @@ export { Bill } from './Bill';
 export { ChooseCard } from './ChooseCard';
 export { DetailedPaymentCard } from './DetailedPaymentCard';
 export { OtpInput } from './OtpInput';
+export { Beneficiary } from './Beneficiary';

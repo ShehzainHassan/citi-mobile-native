@@ -161,6 +161,15 @@ export const createGlobalStyles = (theme: Theme) =>
     mediumSpacedContainer: {
       marginBottom: theme.spacing.md,
     },
+    amountContainer: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'space-between',
+    },
+    amountWrapper: {
+      marginBottom: 12,
+      width: '30%',
+    },
     paddedColumn: {
       flex: 1,
       gap: theme.spacing.sm,
@@ -176,6 +185,20 @@ export const createGlobalStyles = (theme: Theme) =>
       backgroundColor: theme.colors.neutral6,
       flex: 1,
       flexDirection: 'column',
+    },
+    amountBtn: {
+      backgroundColor: theme.colors.neutral6,
+      borderRadius: theme.radius.md,
+      elevation: 2,
+      padding: theme.spacing.md,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.05,
+      shadowRadius: 4,
+    },
+    rowContainer: {
+      alignItems: 'center',
+      flexDirection: 'row',
     },
     primary1: {
       color: theme.colors.primary1,

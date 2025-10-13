@@ -51,12 +51,7 @@ export const CreditCardDetails = () => {
         <Bill />
         <View style={globalStyles.largeSpacedColumn}>
           <CardSelectorModal value={selectedCard} onChange={setSelectedCard} />
-          <OtpInput
-            otp={otp}
-            onChangeOtp={setOTP}
-            disabled={!selectedCard}
-            onGetOtp={() => console.log('OTP requested')}
-          />
+          <OtpInput otp={otp} onChangeOtp={setOTP} disabled={!selectedCard} />
         </View>
       </View>
       <Button

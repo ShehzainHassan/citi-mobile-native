@@ -10,6 +10,7 @@ import AccountIcon from '../icons/account.svg';
 import AlertIcon from '../icons/alert.svg';
 import PaypalIcon from '../icons/paypal.svg';
 import WithdrawIcon from '../icons/withdraw.svg';
+import AddBeneficiaryIcon from '../icons/add-beneficiary.svg';
 
 // PNGs
 export const Images = {
@@ -37,6 +38,8 @@ export const Images = {
   exchange: require('./exchange.png'),
   exchangeRateLogo: require('./exchange-rate-logo.png'),
   withdrawBanner: require('./withdraw-banner.png'),
+  profilePic1: require('./pfp-1.png'),
+  profilePic2: require('./pfp-2.png'),
 
   // SVGs
   back: BackIcon,
@@ -51,4 +54,5 @@ export const Images = {
   alert: AlertIcon,
   paypal: PaypalIcon,
   withdrawIcon: WithdrawIcon,
+  addBeneficiary: AddBeneficiaryIcon,
 };

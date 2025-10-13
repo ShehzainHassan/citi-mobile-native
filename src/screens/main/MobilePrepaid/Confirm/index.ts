@@ -1,2 +1,1 @@
-export { MobilePrepaid } from './MobilePrepaid';
 export { ConfimMobilePrepaid } from './Confirm';

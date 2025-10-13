@@ -36,6 +36,12 @@ export type MainTabParamList = {
   ChooseCard: undefined;
   Management: undefined;
   MobilePrepaid: undefined;
+  MobilePrepaidConfirm: {
+    fromCard: string;
+    toPhone: string;
+    amount: string;
+  };
+
   BillDetails: {
     billType: 'Electric' | 'Water' | 'Mobile' | 'Internet';
     paymentData: PaymentData;

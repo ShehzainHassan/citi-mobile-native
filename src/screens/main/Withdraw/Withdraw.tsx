@@ -105,7 +105,7 @@ export const Withdraw = () => {
             style={[
               globalStyles.caption1,
               globalStyles.textDefault,
-              styles.amountLabel,
+              globalStyles.marginVerticalMd,
             ]}
           >
             Choose amount
@@ -121,14 +121,14 @@ export const Withdraw = () => {
             />
           )}
 
-          <View style={styles.amountContainer}>
+          <View style={globalStyles.amountContainer}>
             {amounts.map((amt, index) => (
-              <View key={index} style={styles.amountWrapper}>
+              <View key={index} style={globalStyles.amountWrapper}>
                 <Button
                   title={amt}
                   variant={selectedAmount === amt ? 'primary' : 'secondary'}
                   onPress={() => handleAmountPress(amt)}
-                  style={selectedAmount !== amt && styles.amountBtn}
+                  style={selectedAmount !== amt && globalStyles.amountBtn}
                   textStyle={selectedAmount !== amt && globalStyles.textDefault}
                 />
               </View>
@@ -148,29 +148,6 @@ export const Withdraw = () => {
 
 const createWithdrawStyles = (theme: Theme) =>
   StyleSheet.create({
-    amountBtn: {
-      backgroundColor: theme.colors.neutral6,
-      borderRadius: theme.radius.md,
-      elevation: 2,
-      padding: theme.spacing.md,
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.05,
-      shadowRadius: 4,
-    },
-    amountContainer: {
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      justifyContent: 'space-between',
-    },
-    amountLabel: {
-      marginBottom: 16,
-      marginTop: 24,
-    },
-    amountWrapper: {
-      marginBottom: 12,
-      width: '30%',
-    },
     balance: {
       marginTop: theme.spacing.sm,
       paddingLeft: theme.spacing.ms,

@@ -20,4 +20,4 @@ export {
 } from './PayTheBill';
 export { CreditCardScreen, CreditCardDetails } from './CreditCard';
 export { SaveOnline, Add, Management } from './SaveOnline';
-export { MobilePrepaid } from './MobilePrepaid';
+export { MobilePrepaid, ConfimMobilePrepaid } from './MobilePrepaid';
