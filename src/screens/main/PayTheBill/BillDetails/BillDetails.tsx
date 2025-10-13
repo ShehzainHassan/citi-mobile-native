@@ -9,13 +9,14 @@ import {
   SuccessScreen,
 } from '@/components';
 import { useGlobalStyles } from '@/hooks';
-import { internetPayment } from '@/mocks';
 import { MainTabWithSearchParamList } from '@/navigation/types';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+
+import { RouteProp, useRoute } from '@react-navigation/native';
 
 export const BillDetails = () => {
   const globalStyles = useGlobalStyles();
@@ -24,22 +25,27 @@ export const BillDetails = () => {
   const [showSuccessScreen, setShowSuccessScreen] = useState(false);
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabWithSearchParamList>>();
+  const { params } =
+    useRoute<RouteProp<MainTabWithSearchParamList, 'BillDetails'>>();
+
+  const { billType, paymentData } = params;
 
   if (showSuccessScreen)
     return (
       <SuccessScreen
         onBack={() => navigation.goBack()}
-        headerText="Internet bill"
+        headerText={`${billType} bill`}
         source={Images.withdrawBanner}
         title="Transaction successfully!"
-        subtitle="You have payed your internet bill!"
-        btnText="Confim"
+        subtitle={`You have paid your ${billType.toLowerCase()} bill!`}
+        btnText="Confirm"
         onPress={() => navigation.navigate('Home')}
       />
     );
+
   return (
     <ScrollView style={globalStyles.verticalSpread}>
-      <Header title="Internet bill" onPress={() => navigation.goBack()} />
+      <Header title={`${billType} bill`} onPress={() => navigation.goBack()} />
       <View style={globalStyles.paddedColumn}>
         <ImageWithFallback
           source={Images.withdrawBanner}
@@ -53,12 +59,12 @@ export const BillDetails = () => {
             globalStyles.marginVerticalMd,
           ]}
         >
-          {internetPayment[0].from} - {internetPayment[0].to}
+          {paymentData.from} - {paymentData.to}
         </Text>
         <View style={styles.container}>
           <DetailedPaymentCard
-            title="All the Bills"
-            paymentData={internetPayment[0]}
+            title={`${billType} Bill`}
+            paymentData={paymentData}
           />
           <View style={globalStyles.largeSpacedColumn}>
             <CardSelectorModal

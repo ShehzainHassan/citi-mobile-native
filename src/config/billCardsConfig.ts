@@ -24,23 +24,27 @@ export const BILL_CARDS_CONFIG: BillCardConfig<
     subtitle: 'Pay electric bill this month',
     route: 'PaymentDetails',
     image: Images.branch,
+    params: { billType: 'Electric' },
   },
   {
     title: 'Water bill',
     subtitle: 'Pay water bill this month',
     route: 'PaymentDetails',
     image: Images.interestRate,
+    params: { billType: 'Water' },
   },
   {
     title: 'Mobile bill',
     subtitle: 'Pay mobile bill this month',
     route: 'PaymentDetails',
     image: Images.exchangeRate,
+    params: { billType: 'Mobile' },
   },
   {
     title: 'Internet bill',
     subtitle: 'Pay internet bill this month',
     image: Images.exchange,
     route: 'PaymentDetails',
+    params: { billType: 'Internet' },
   },
 ];

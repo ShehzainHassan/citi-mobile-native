@@ -27,7 +27,7 @@ export type MainTabParamList = {
     headerText: string;
     paymentData?: PaymentData;
   };
-  PaymentDetails: undefined;
+  PaymentDetails: { billType: 'Electric' | 'Water' | 'Mobile' | 'Internet' };
   PaymentHistory: undefined;
   CreditCard: undefined;
   CreditCardDetails: undefined;
@@ -36,7 +36,10 @@ export type MainTabParamList = {
   ChooseCard: undefined;
   Management: undefined;
   MobilePrepaid: undefined;
-  BillDetails: undefined;
+  BillDetails: {
+    billType: 'Electric' | 'Water' | 'Mobile' | 'Internet';
+    paymentData: PaymentData;
+  };
 };
 
 export type SearchParamList = {
