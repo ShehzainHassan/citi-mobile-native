@@ -9,3 +9,5 @@
 export * from './homeScreenConfig';
 export * from './messagesCardConfig';
 export * from './billCardsConfig';
+export * from './settingsScreenConfig';
+export * from './beneficiaryConfig';

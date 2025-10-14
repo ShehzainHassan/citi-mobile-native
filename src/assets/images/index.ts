@@ -11,6 +11,7 @@ import AlertIcon from '../icons/alert.svg';
 import PaypalIcon from '../icons/paypal.svg';
 import WithdrawIcon from '../icons/withdraw.svg';
 import AddBeneficiaryIcon from '../icons/add-beneficiary.svg';
+import GuestImage from '../icons/guest.svg';
 
 // PNGs
 export const Images = {
@@ -55,4 +56,5 @@ export const Images = {
   paypal: PaypalIcon,
   withdrawIcon: WithdrawIcon,
   addBeneficiary: AddBeneficiaryIcon,
+  guest: GuestImage,
 };

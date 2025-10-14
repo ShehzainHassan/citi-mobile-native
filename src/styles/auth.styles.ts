@@ -57,7 +57,7 @@ export const createAuthStyles = (theme: Theme) =>
       justifyContent: 'space-between',
     },
     headerContainer: {
-      paddingBottom: theme.radius.md,
+      paddingBottom: theme.radius.lg * 2,
     },
     noPadding: {
       padding: 0,

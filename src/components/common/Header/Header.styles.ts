@@ -13,12 +13,20 @@ export const createHeaderStyles = (
     headerContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      gap: theme.spacing.md,
+      justifyContent: 'space-between',
       paddingHorizontal: theme.spacing.lg,
       paddingVertical: theme.spacing.lg,
       paddingBottom: 0,
     },
+    leftGroup: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: theme.spacing.sm,
+    },
     backButton: {
+      padding: theme.spacing.sml,
+    },
+    rightButton: {
       padding: theme.spacing.sml,
     },
     headerText: {

@@ -68,6 +68,7 @@ export const HOME_CARD_GRID: HomeCardConfig[][] = [
       id: 'beneficiary',
       image: Images.beneficiary,
       labelKey: TranslationKeys.homeScreen.beneficiary,
+      route: 'Beneficiary',
     },
   ],
 ];

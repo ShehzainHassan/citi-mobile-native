@@ -1,25 +1,22 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface SettingsState {
-  settings: any | null;
+export interface SettingsState {
+  currency: string;
 }
 
 const initialState: SettingsState = {
-  settings: null,
+  currency: 'USD',
 };
 
-export const settingsSlice = createSlice({
-  name: "settings",
+const settingsSlice = createSlice({
+  name: 'settings',
   initialState,
   reducers: {
-    setSettings: (state, action: PayloadAction<any>) => {
-      state.settings = action.payload;
-    },
-    clearSettings: (state) => {
-      state.settings = null;
+    setCurrency: (state, action: PayloadAction<string>) => {
+      state.currency = action.payload;
     },
   },
 });
 
-export const { setSettings, clearSettings } = settingsSlice.actions;
+export const { setCurrency } = settingsSlice.actions;
 export default settingsSlice.reducer;

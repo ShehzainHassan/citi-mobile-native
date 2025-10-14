@@ -5,13 +5,20 @@ import {
   ImageWithFallback,
   Tabs,
 } from '@/components';
-import { useGlobalStyles, useHomeScreen, useHomeScreenStyles } from '@/hooks';
+import {
+  useGlobalStyles,
+  useHomeScreen,
+  useHomeScreenStyles,
+  useAppSelector,
+} from '@/hooks';
 import { TranslationKeys } from '@/i18n';
 import { AuthStackParamList } from '@/navigation/types';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
 import { Text, TouchableOpacity, View } from 'react-native';
+import { RootState } from '@/store';
+import { currencySymbolsMap } from '@/utils';
 
 export const HomeScreen = () => {
   const globalStyles = useGlobalStyles();
@@ -21,6 +28,11 @@ export const HomeScreen = () => {
   const { cardGrid, handleCardPress } = useHomeScreen();
   const navigation =
     useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
+
+  const selectedCurrency = useAppSelector(
+    (state: RootState) => state.settings.currency,
+  );
+  const symbol = currencySymbolsMap[selectedCurrency] || selectedCurrency;
 
   return (
     <View style={homeScreenStyles.mainContainer}>
@@ -49,7 +61,7 @@ export const HomeScreen = () => {
           name="John Smith"
           cardType="Amazon Platinium"
           cardNumber="475612349018"
-          amount="$3.469.52"
+          amount={`${symbol}3,469.52`}
           backgroundImage={Images.cards}
         />
 

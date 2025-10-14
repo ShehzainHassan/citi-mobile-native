@@ -10,6 +10,8 @@ export const Header = ({
   variant = 'primary',
   onPress,
   style,
+  rightIcon,
+  onRightPress,
 }: HeaderProps) => {
   const { theme } = useTheme();
   const styles = createHeaderStyles(theme, variant);
@@ -19,20 +21,34 @@ export const Header = ({
   return (
     <SafeAreaView edges={['top']} style={[styles.safeAreaContainer, style]}>
       <View style={styles.headerContainer}>
-        {onPress ? (
+        <View style={styles.leftGroup}>
+          {onPress ? (
+            <TouchableOpacity
+              onPress={onPress}
+              style={styles.backButton}
+              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            >
+              <BackIcon color={textColor} width={9} height={16} />
+            </TouchableOpacity>
+          ) : (
+            <View style={styles.backButton}>
+              <BackIcon color={textColor} width={9} height={16} />
+            </View>
+          )}
+          <Text style={[styles.headerText, { color: textColor }]}>{title}</Text>
+        </View>
+
+        {rightIcon ? (
           <TouchableOpacity
-            onPress={onPress}
-            style={styles.backButton}
+            onPress={onRightPress}
+            style={styles.rightButton}
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           >
-            <BackIcon color={textColor} width={9} height={16} />
+            {rightIcon}
           </TouchableOpacity>
         ) : (
-          <View style={styles.backButton}>
-            <BackIcon color={textColor} width={9} height={16} />
-          </View>
+          <View style={styles.rightButton} />
         )}
-        <Text style={[styles.headerText, { color: textColor }]}>{title}</Text>
       </View>
     </SafeAreaView>
   );

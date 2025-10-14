@@ -1,8 +1,11 @@
-import { StyleProp, ViewStyle } from "react-native";
+import { JSX } from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
 
 export interface HeaderProps {
   title: string;
-  variant?: "primary" | "secondary";
+  variant?: 'primary' | 'secondary';
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
+  rightIcon?: JSX.Element;
+  onRightPress?: () => void;
 }

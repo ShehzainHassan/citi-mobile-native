@@ -46,6 +46,11 @@ export type MainTabParamList = {
     billType: 'Electric' | 'Water' | 'Mobile' | 'Internet';
     paymentData: PaymentData;
   };
+  Beneficiary: undefined;
+  AddBeneficiary: undefined;
+  ConfirmBeneficiary: {
+    beneficiaryData: { [key: string]: string };
+  };
 };
 
 export type SearchParamList = {

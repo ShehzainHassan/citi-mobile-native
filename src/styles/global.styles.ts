@@ -181,6 +181,9 @@ export const createGlobalStyles = (theme: Theme) =>
     spacedColumn: {
       gap: theme.spacing.ml,
     },
+    mediumSpacedColumn: {
+      gap: theme.spacing.md,
+    },
     verticalSpread: {
       backgroundColor: theme.colors.neutral6,
       flex: 1,
@@ -291,5 +294,15 @@ export const createGlobalStyles = (theme: Theme) =>
       height: 30,
       marginRight: 8,
       width: 40,
+    },
+    imgWrapper: {
+      position: 'relative',
+      alignItems: 'center',
+      width: '100%',
+      top: -50,
+    },
+    profilePic: {
+      width: 100,
+      height: 100,
     },
   });

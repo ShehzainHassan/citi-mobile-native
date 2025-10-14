@@ -19,6 +19,9 @@ export interface ImageWithFallbackProps extends Omit<ImageProps, 'source'> {
   source: ImageSource;
   fallbackSource?: ImageSourcePropType;
   style?: StyleProp<ImageStyle>;
+  svgWidth?: number;
+  svgHeight?: number;
   contentFit?: ContentFit;
   transition?: number;
+  onPress?: () => void;
 }

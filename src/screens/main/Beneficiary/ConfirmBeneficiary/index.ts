@@ -1,0 +1,1 @@
+export { ConfirmBeneficiary } from './ConfirmBeneficiary';

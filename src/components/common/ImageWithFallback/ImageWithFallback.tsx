@@ -4,6 +4,7 @@ import {
   Animated,
   ImageSourcePropType,
   Platform,
+  Pressable,
   StyleSheet,
   View,
 } from 'react-native';
@@ -16,6 +17,9 @@ export const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
   style,
   contentFit = 'cover',
   transition = 200,
+  svgWidth = 24,
+  svgHeight = 24,
+  onPress,
 }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -44,14 +48,21 @@ export const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
     }
   };
 
-  if (isSvgElement) return <View style={style}>{source}</View>;
+  const Container = onPress ? Pressable : View;
+
+  if (isSvgElement)
+    return (
+      <Container style={style} onPress={onPress}>
+        {source}
+      </Container>
+    );
 
   if (isSvgComponent) {
     const SvgComponent = source as ComponentType<SvgProps>;
     return (
-      <View style={[style, styles.container]}>
-        <SvgComponent width={24} height={24} />
-      </View>
+      <Container style={[style, styles.container]} onPress={onPress}>
+        <SvgComponent width={svgWidth} height={svgHeight} />
+      </Container>
     );
   }
 
@@ -59,7 +70,7 @@ export const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
     error && fallbackSource ? fallbackSource : (source as ImageSourcePropType);
 
   return (
-    <View style={[style, styles.container]}>
+    <Container style={[style, styles.container]} onPress={onPress}>
       {loading && !error && (
         <ActivityIndicator style={StyleSheet.absoluteFill} />
       )}
@@ -83,7 +94,7 @@ export const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
           setError(true);
         }}
       />
-    </View>
+    </Container>
   );
 };
 

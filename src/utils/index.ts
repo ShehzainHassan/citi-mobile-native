@@ -47,3 +47,17 @@ export const maskCardNumber = (card: string): string => {
   const lastFour = digits.slice(-4);
   return `**** **** **** ${lastFour}`;
 };
+
+export const currencySymbolsMap: Record<string, string> = {
+  USD: '$',
+  EUR: '€',
+  GBP: '£',
+  INR: '₹',
+  JPY: '¥',
+  AUD: 'A$',
+  CAD: 'C$',
+  CHF: 'CHF',
+  CNY: '¥',
+  SEK: 'kr',
+  NZD: 'NZ$',
+};

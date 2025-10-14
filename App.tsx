@@ -12,10 +12,13 @@ import type { RootStackParamList } from '@/navigation/types';
 import {
   Accounts,
   Add,
+  AddNewBeneficiary,
   AppInformation,
+  Beneficiary,
   BillDetails,
   ChangePassword,
   ConfimMobilePrepaid,
+  ConfirmBeneficiary,
   CreditCardDetails,
   CreditCardScreen,
   DetailedPayment,
@@ -43,6 +46,8 @@ import {
   Withdraw,
 } from '@/screens';
 import { ThemeProvider } from '@/styles/ThemeProvider';
+import { Provider } from 'react-redux';
+import { store } from '@/store';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -97,6 +102,12 @@ function AppContent() {
             name="MobilePrepaidConfirm"
             component={ConfimMobilePrepaid}
           />
+          <Stack.Screen name="Beneficiary" component={Beneficiary} />
+          <Stack.Screen name="AddBeneficiary" component={AddNewBeneficiary} />
+          <Stack.Screen
+            name="ConfirmBeneficiary"
+            component={ConfirmBeneficiary}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </I18nextProvider>
@@ -107,13 +118,17 @@ export default function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <ThemeProvider>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <SafeAreaProvider>
-          <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-          <AppContent />
-        </SafeAreaProvider>
-      </GestureHandlerRootView>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <SafeAreaProvider>
+            <StatusBar
+              barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+            />
+            <AppContent />
+          </SafeAreaProvider>
+        </GestureHandlerRootView>
+      </ThemeProvider>
+    </Provider>
   );
 }

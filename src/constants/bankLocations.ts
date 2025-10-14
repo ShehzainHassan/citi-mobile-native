@@ -35,3 +35,10 @@ export const BANK_LOCATIONS = [
     distance: '10.5 km',
   },
 ];
+export const BANK_OPTIONS = [
+  'Citi Bank',
+  'Bank 1656',
+  'Bank 1657',
+  'Bank Golden Gate',
+];
+export const BRANCH_OPTIONS = ['Main Branch', 'City Branch', 'Sub Branch'];

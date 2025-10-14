@@ -21,3 +21,8 @@ export {
 export { CreditCardScreen, CreditCardDetails } from './CreditCard';
 export { SaveOnline, Add, Management } from './SaveOnline';
 export { MobilePrepaid, ConfimMobilePrepaid } from './MobilePrepaid';
+export {
+  Beneficiary,
+  AddNewBeneficiary,
+  ConfirmBeneficiary,
+} from './Beneficiary';

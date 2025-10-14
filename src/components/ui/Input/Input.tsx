@@ -29,7 +29,7 @@ export const Input: React.FC<InputProps> = ({
   onRightPress,
   readOnly = false,
   required = true,
-  showRightBorder = true,
+  showRightBorder = false,
   ...props
 }) => {
   const { theme } = useTheme();
