@@ -93,7 +93,7 @@ export const ConfimMobilePrepaid = () => {
 
   const handleConfirm = async () => {
     if (!otp) return;
-
+    setShowSuccessScreen(true);
     // if (!showBiometricView) {
     //   setShowBiometricView(true);
     // } else {

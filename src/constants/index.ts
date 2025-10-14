@@ -4,6 +4,7 @@
 
 // Add more constants as needed...
 
-export * from "./api";
-export * from "./languages";
-export * from "./storage";
+export * from './api';
+export * from './languages';
+export * from './storage';
+export * from './bankLocations';

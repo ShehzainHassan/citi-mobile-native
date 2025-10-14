@@ -36,7 +36,7 @@ export const createSearchBranchStyles = (theme: Theme) =>
     listItem: {
       flexDirection: 'row',
       alignItems: 'center',
-      paddingVertical: theme.spacing.md,
+      padding: theme.spacing.md,
       borderBottomWidth: 0.5,
       borderBottomColor: theme.colors.neutral5,
     },
@@ -61,3 +61,56 @@ export const createSearchBranchStyles = (theme: Theme) =>
       color: theme.colors.textdefault,
     },
   });
+
+export const getGreyMapStyle = (theme: Theme) => [
+  { elementType: 'geometry', stylers: [{ color: theme.colors.neutral4 }] },
+  { elementType: 'labels.icon', stylers: [{ visibility: 'off' }] },
+  {
+    elementType: 'labels.text.fill',
+    stylers: [{ color: theme.colors.neutral1 }],
+  },
+  {
+    elementType: 'labels.text.stroke',
+    stylers: [{ color: theme.colors.neutral4 }],
+  },
+  {
+    featureType: 'administrative.land_parcel',
+    stylers: [{ visibility: 'off' }],
+  },
+  {
+    featureType: 'poi',
+    elementType: 'geometry',
+    stylers: [{ color: theme.colors.neutral4 }],
+  },
+  {
+    featureType: 'poi',
+    elementType: 'labels.text.fill',
+    stylers: [{ color: theme.colors.neutral1 }],
+  },
+  {
+    featureType: 'road',
+    elementType: 'geometry',
+    stylers: [{ color: theme.colors.neutral2 }],
+  },
+  {
+    featureType: 'road.arterial',
+    elementType: 'labels.text.fill',
+    stylers: [{ color: theme.colors.neutral2 }],
+  },
+  {
+    featureType: 'road.highway',
+    elementType: 'geometry',
+    stylers: [{ color: theme.colors.neutral3 }],
+  },
+  { featureType: 'transit.line', stylers: [{ visibility: 'off' }] },
+  {
+    featureType: 'water',
+    elementType: 'geometry',
+    stylers: [{ color: theme.colors.neutral4 }],
+  },
+  {
+    featureType: 'water',
+    elementType: 'labels.text.fill',
+    stylers: [{ color: theme.colors.neutral2 }],
+  },
+];

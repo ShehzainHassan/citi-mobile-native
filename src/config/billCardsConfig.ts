@@ -14,12 +14,6 @@ export const BILL_CARDS_CONFIG: BillCardConfig<
   keyof MainTabWithSearchParamList
 >[] = [
   {
-    title: 'Payment History',
-    subtitle: 'View your payment history',
-    image: Images.branch,
-    route: 'PaymentHistory',
-  },
-  {
     title: 'Electric bill',
     subtitle: 'Pay electric bill this month',
     route: 'PaymentDetails',
@@ -46,5 +40,11 @@ export const BILL_CARDS_CONFIG: BillCardConfig<
     image: Images.exchange,
     route: 'PaymentDetails',
     params: { billType: 'Internet' },
+  },
+  {
+    title: 'Payment History',
+    subtitle: 'View your payment history',
+    image: Images.branch,
+    route: 'PaymentHistory',
   },
 ];
