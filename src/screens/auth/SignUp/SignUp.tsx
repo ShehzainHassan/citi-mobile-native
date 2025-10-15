@@ -77,15 +77,16 @@ export const SignUp = () => {
                 value={password}
                 onChangeText={setPassword}
               />
-              <View style={authStyles.checkboxContainer}>
-                <Checkbox />
-                <Text style={authStyles.text}>
-                  {t(TranslationKeys.auth.termsAgreement)}{' '}
-                  <Text style={globalStyles.heading3}>
-                    {t(TranslationKeys.auth.termsAndConditions)}
+              <Checkbox
+                label={
+                  <Text style={authStyles.text}>
+                    {t(TranslationKeys.auth.termsAgreement)}{' '}
+                    <Text style={globalStyles.heading3}>
+                      {t(TranslationKeys.auth.termsAndConditions)}
+                    </Text>
                   </Text>
-                </Text>
-              </View>
+                }
+              />
             </View>
 
             <Button

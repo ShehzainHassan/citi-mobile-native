@@ -41,6 +41,7 @@ export const Images = {
   withdrawBanner: require('./withdraw-banner.png'),
   profilePic1: require('./pfp-1.png'),
   profilePic2: require('./pfp-2.png'),
+  faceId: require('./face-id.png'),
 
   // SVGs
   back: BackIcon,

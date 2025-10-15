@@ -7,17 +7,25 @@ export type TransferType = (typeof TRANSFER_TYPES)[number];
 export const TRANSFER_OPTIONS: {
   key: TransferType;
   text: string;
+  variant: 'secondary' | 'primary';
   image: any;
 }[] = [
-  { key: 'card', text: 'Transfer via card number', image: Images.citiBank },
+  {
+    key: 'card',
+    text: 'Transfer via card number',
+    variant: 'secondary',
+    image: Images.citiBank,
+  },
   {
     key: 'sameBank',
     text: 'Transfer to the same bank',
+    variant: 'primary',
     image: Images.citiBank,
   },
   {
     key: 'anotherBank',
     text: 'Transfer to another bank',
+    variant: 'secondary',
     image: Images.citiBank,
   },
 ];
@@ -27,20 +35,20 @@ export const TRANSFER_FIELDS: Record<
   { placeholder: string; editable: boolean }[]
 > = {
   card: [
-    { placeholder: 'Enter name', editable: true },
+    { placeholder: 'Name', editable: true },
     { placeholder: 'Card number', editable: true },
     { placeholder: 'Amount', editable: true },
     { placeholder: 'Content', editable: true },
   ],
   sameBank: [
-    { placeholder: 'Enter name', editable: true },
+    { placeholder: 'Name', editable: true },
     { placeholder: 'Choose branch', editable: false },
     { placeholder: 'Card number', editable: true },
     { placeholder: 'Amount', editable: true },
     { placeholder: 'Content', editable: true },
   ],
   anotherBank: [
-    { placeholder: 'Enter name', editable: true },
+    { placeholder: 'Name', editable: true },
     { placeholder: 'Choose bank', editable: false },
     { placeholder: 'Choose branch', editable: false },
     { placeholder: 'Transaction name', editable: true },
@@ -61,3 +69,14 @@ export const MODAL_OPTIONS_MAP: Record<string, string[]> = {
   'Choose bank': BANK_OPTIONS,
   'Choose branch': BRANCH_OPTIONS,
 };
+
+export const isDropdownField = (placeholder: string): boolean =>
+  placeholder === 'Choose branch' || placeholder === 'Choose bank';
+
+export const getKeyboardType = (
+  placeholder: string,
+): 'default' | 'number-pad' | 'decimal-pad' =>
+  KEYBOARD_TYPE_MAP[placeholder] || 'default';
+
+export const getTransferInputs = (transfer: TransferType) =>
+  TRANSFER_FIELDS[transfer];

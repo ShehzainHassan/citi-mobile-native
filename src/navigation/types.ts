@@ -2,6 +2,7 @@
 // Stack param lists for all navigation stacks
 // Screen props types for type-safe navigation
 
+import { TransferType } from '@/config';
 import { PaymentData } from '@/interfaces';
 
 export type AuthStackParamList = {
@@ -15,6 +16,10 @@ export type MainTabParamList = {
   Home: undefined;
   Accounts: { accountId?: string };
   Transfers: undefined;
+  ConfirmTransfers: {
+    transferData: Record<string, string>;
+    transferType: TransferType;
+  };
   Bills: undefined;
   TransactionReport: { accountId?: string; fromDate?: string };
   Search: undefined;
@@ -50,6 +55,7 @@ export type MainTabParamList = {
   AddBeneficiary: undefined;
   ConfirmBeneficiary: {
     beneficiaryData: { [key: string]: string };
+    image: string | null;
   };
 };
 

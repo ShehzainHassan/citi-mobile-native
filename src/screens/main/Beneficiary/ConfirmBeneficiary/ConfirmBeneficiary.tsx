@@ -1,10 +1,10 @@
-import { Images } from '@/assets/images';
 import { Button, Header, ImageWithFallback, Input } from '@/components';
 import { useAuthStyles, useGlobalStyles } from '@/hooks';
 import { MainTabParamList } from '@/navigation/types';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { ScrollView, Text, View } from 'react-native';
+import { Image, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Images } from '@/assets/images';
 
 type Props = NativeStackScreenProps<MainTabParamList, 'ConfirmBeneficiary'>;
 
@@ -12,7 +12,8 @@ export const ConfirmBeneficiary = ({ navigation, route }: Props) => {
   const globalStyles = useGlobalStyles();
   const authStyles = useAuthStyles();
 
-  const { beneficiaryData } = route.params;
+  const { beneficiaryData, image } = route.params;
+
   return (
     <SafeAreaView style={globalStyles.safeArea} edges={['bottom']}>
       <ScrollView
@@ -25,6 +26,7 @@ export const ConfirmBeneficiary = ({ navigation, route }: Props) => {
           variant="secondary"
           style={authStyles.headerContainer}
         />
+
         <View
           style={[
             globalStyles.roundedContainer,
@@ -32,20 +34,26 @@ export const ConfirmBeneficiary = ({ navigation, route }: Props) => {
           ]}
         >
           <View style={globalStyles.imgWrapper}>
-            <ImageWithFallback
-              source={Images.profilePic}
-              style={globalStyles.profilePic}
-            />
+            {image ? (
+              <Image source={{ uri: image }} style={globalStyles.profilePic} />
+            ) : (
+              <ImageWithFallback
+                source={Images.profilePic}
+                style={globalStyles.profilePic}
+              />
+            )}
             <Text style={[globalStyles.centerText, globalStyles.title3]}>
-              {beneficiaryData['Enter name'] || 'N/A'}
+              {beneficiaryData.Name || ''}
             </Text>
           </View>
+
           <View
             style={[globalStyles.cardContainer, globalStyles.largeSpacedColumn]}
           >
             {Object.entries(beneficiaryData).map(([key, value]) => (
               <Input key={key} label={key} value={value} readOnly />
             ))}
+
             <Button
               title="Confirm"
               onPress={() => navigation.navigate('Home')}

@@ -26,3 +26,4 @@ export {
   AddNewBeneficiary,
   ConfirmBeneficiary,
 } from './Beneficiary';
+export { Transfer, ConfirmTransfer } from './Transfer';

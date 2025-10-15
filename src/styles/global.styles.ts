@@ -65,6 +65,13 @@ export const createGlobalStyles = (theme: Theme) =>
       color: theme.colors.semantic1,
     },
 
+    scrollWrapper: {
+      maxHeight: 120,
+      paddingVertical: 8,
+      marginHorizontal: -16,
+    },
+    scrollContainer: { gap: 16, paddingHorizontal: 16, alignItems: 'center' },
+
     // Typography patterns
     heading1: {
       color: theme.colors.neutral6,
@@ -302,7 +309,8 @@ export const createGlobalStyles = (theme: Theme) =>
       top: -50,
     },
     profilePic: {
-      width: 100,
-      height: 100,
+      width: 120,
+      height: 120,
+      borderRadius: 60,
     },
   });

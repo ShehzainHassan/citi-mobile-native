@@ -1,6 +1,6 @@
 import { Images } from '@/assets/images';
 import {
-  BaseModal,
+  BankModal,
   Button,
   ChooseTransfer,
   Header,
@@ -9,7 +9,6 @@ import {
 } from '@/components';
 import {
   KEYBOARD_TYPE_MAP,
-  MODAL_OPTIONS_MAP,
   TRANSFER_FIELDS,
   TRANSFER_OPTIONS,
   TransferType,
@@ -17,17 +16,18 @@ import {
 import { useGlobalStyles } from '@/hooks';
 import { MainTabParamList } from '@/navigation/types';
 import { useTheme } from '@/theme';
+import { handleModalOpen, handleScroll } from '@/utils';
 import MaterialIcons from '@react-native-vector-icons/material-icons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useRef, useState } from 'react';
 import {
+  Image,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  Image,
 } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 
@@ -51,13 +51,6 @@ export const AddNewBeneficiary = () => {
 
   const getInputs = () => TRANSFER_FIELDS[selectedTransfer];
 
-  const handleOpenModal = (placeholder: string) => {
-    const options = MODAL_OPTIONS_MAP[placeholder] || [];
-    setModalOptions(options);
-    setCurrentInput(placeholder);
-    setModalVisible(true);
-  };
-
   const handleSelect = (value: string) => {
     setSelectedValues(prev => ({ ...prev, [currentInput]: value }));
     setModalVisible(false);
@@ -73,19 +66,11 @@ export const AddNewBeneficiary = () => {
   const handleTransferSelect = (transfer: TransferType) => {
     setSelectedTransfer(transfer);
     setSelectedValues({});
-
-    const index = TRANSFER_OPTIONS.findIndex(o => o.key === transfer);
-
-    // 👇 auto-scroll logic
-    if (scrollRef.current) {
-      if (index === 0) {
-        // scroll to start
-        scrollRef.current.scrollTo({ x: 0, animated: true });
-      } else if (index === TRANSFER_OPTIONS.length - 1) {
-        // scroll to end
-        scrollRef.current.scrollToEnd({ animated: true });
-      }
-    }
+    handleScroll(
+      transfer,
+      scrollRef,
+      TRANSFER_OPTIONS.map(o => o.key),
+    );
   };
 
   const handleImagePick = async () => {
@@ -104,14 +89,15 @@ export const AddNewBeneficiary = () => {
 
   return (
     <ScrollView style={globalStyles.verticalSpread}>
-      <Header title="Add new" />
+      <Header title="Add new" onPress={() => navigation.goBack()} />
+
       <View style={globalStyles.paddedColumn}>
         <View style={styles.imgWrapper}>
           <View style={styles.imgContainer}>
             {selectedImage ? (
               <Image
                 source={{ uri: selectedImage }}
-                style={styles.profilePic}
+                style={globalStyles.profilePic}
               />
             ) : (
               <ImageWithFallback
@@ -134,23 +120,23 @@ export const AddNewBeneficiary = () => {
           </View>
 
           <Text style={[globalStyles.title3, globalStyles.primary1]}>
-            {selectedValues['Enter name'] || ''}
+            {selectedValues.Name || ''}
           </Text>
         </View>
 
-        <View style={styles.scrollWrapper}>
+        <View style={globalStyles.scrollWrapper}>
           <ScrollView
             ref={scrollRef}
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.scrollContainer}
+            contentContainerStyle={globalStyles.scrollContainer}
           >
             {TRANSFER_OPTIONS.map(option => (
               <ChooseTransfer
                 key={option.key}
                 image={option.image}
                 text={option.text}
-                variant="secondary"
+                variant={option.variant}
                 selected={selectedTransfer === option.key}
                 onSelect={() => handleTransferSelect(option.key)}
               />
@@ -177,9 +163,10 @@ export const AddNewBeneficiary = () => {
               <Input
                 key={index}
                 placeholder={input.placeholder}
-                editable={input.editable}
                 value={inputValue}
                 keyboardType={keyboardType}
+                editable={!isDropdown && input.editable}
+                showSoftInputOnFocus={!isDropdown}
                 rightIcon={
                   isDropdown ? (
                     <MaterialIcons
@@ -191,11 +178,17 @@ export const AddNewBeneficiary = () => {
                 }
                 onPressIn={
                   isDropdown
-                    ? () => handleOpenModal(input.placeholder)
+                    ? () =>
+                        handleModalOpen(
+                          input.placeholder,
+                          setModalOptions,
+                          setCurrentInput,
+                          setModalVisible,
+                        )
                     : undefined
                 }
                 onChangeText={
-                  input.editable
+                  !isDropdown && input.editable
                     ? text =>
                         setSelectedValues(prev => ({
                           ...prev,
@@ -214,20 +207,26 @@ export const AddNewBeneficiary = () => {
             onPress={() =>
               navigation.navigate('ConfirmBeneficiary', {
                 beneficiaryData: selectedValues,
+                image: selectedImage,
               })
             }
           />
         </View>
       </View>
 
-      <BaseModal
+      <BankModal
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
-        header={`Select ${currentInput}`}
-        contents={modalOptions}
-        selectedItem={selectedValues[currentInput] || ''}
+        title={
+          currentInput === 'Choose bank'
+            ? 'Choose beneficiary bank'
+            : currentInput === 'Choose branch'
+            ? 'Choose beneficiary branch'
+            : undefined
+        }
+        banks={modalOptions}
+        selectedBank={selectedValues[currentInput] || ''}
         onSelect={handleSelect}
-        alignCenter
       />
     </ScrollView>
   );
@@ -239,7 +238,6 @@ const styles = StyleSheet.create({
     marginBottom: 24,
     gap: 12,
   },
-
   imgContainer: {
     width: 120,
     height: 120,
@@ -249,7 +247,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     position: 'relative',
   },
-
   addButton: {
     position: 'absolute',
     bottom: 4,
@@ -264,9 +261,6 @@ const styles = StyleSheet.create({
     borderColor: '#fff',
   },
 
-  scrollWrapper: { maxHeight: 120, paddingVertical: 8, marginHorizontal: -16 },
-  scrollContainer: { gap: 16, paddingHorizontal: 16, alignItems: 'center' },
   button: { marginTop: 8 },
   inputContainer: { paddingHorizontal: 16, paddingVertical: 24 },
-  profilePic: { width: 120, height: 120, borderRadius: 60 },
 });

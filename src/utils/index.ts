@@ -5,6 +5,7 @@
 // Common utility functions
 // Security helpers and data formatting
 // Reusable business logic
+import { MODAL_OPTIONS_MAP } from '@/config';
 
 export const formatPhoneNumber = (input: string) => {
   const digits = input.replace(/\D/g, '');
@@ -60,4 +61,29 @@ export const currencySymbolsMap: Record<string, string> = {
   CNY: '¥',
   SEK: 'kr',
   NZD: 'NZ$',
+};
+
+export const handleModalOpen = (
+  placeholder: string,
+  setOptions: (opts: string[]) => void,
+  setCurrent: (p: string) => void,
+  setVisible: (v: boolean) => void,
+) => {
+  const options = MODAL_OPTIONS_MAP[placeholder] || [];
+  setOptions(options);
+  setCurrent(placeholder);
+  setVisible(true);
+};
+
+export const handleScroll = (
+  transferKey: string,
+  scrollRef: React.RefObject<any>,
+  keys: string[],
+) => {
+  const index = keys.indexOf(transferKey);
+  if (scrollRef.current) {
+    if (index === 0) scrollRef.current.scrollTo({ x: 0, animated: true });
+    else if (index === keys.length - 1)
+      scrollRef.current.scrollToEnd({ animated: true });
+  }
 };

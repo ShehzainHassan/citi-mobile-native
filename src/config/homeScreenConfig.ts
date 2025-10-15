@@ -23,6 +23,7 @@ export const HOME_CARD_GRID: HomeCardConfig[][] = [
       id: 'transfer',
       image: Images.transfer,
       labelKey: TranslationKeys.homeScreen.transfer,
+      route: 'Transfers',
     },
     {
       id: 'withdraw',

@@ -10,6 +10,12 @@ export const createCheckboxStyles = (theme: Theme) =>
       justifyContent: 'center',
       width: 24,
     },
+    checkboxContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'flex-start',
+      gap: theme.spacing.ms,
+    },
     checked: {
       height: 16,
       width: 16,
@@ -22,5 +28,8 @@ export const createCheckboxStyles = (theme: Theme) =>
       flex: 1,
       fontWeight: '400',
       lineHeight: theme.spacing.ml,
+    },
+    text: {
+      flexShrink: 1,
     },
   });

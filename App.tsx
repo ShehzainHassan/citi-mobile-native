@@ -19,6 +19,7 @@ import {
   ChangePassword,
   ConfimMobilePrepaid,
   ConfirmBeneficiary,
+  ConfirmTransfer,
   CreditCardDetails,
   CreditCardScreen,
   DetailedPayment,
@@ -43,6 +44,7 @@ import {
   SignUp,
   ThemeSelector,
   TransactionReport,
+  Transfer,
   Withdraw,
 } from '@/screens';
 import { ThemeProvider } from '@/styles/ThemeProvider';
@@ -65,6 +67,8 @@ function AppContent() {
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Accounts" component={Accounts} />
           <Stack.Screen name="Withdraw" component={Withdraw} />
+          <Stack.Screen name="Transfers" component={Transfer} />
+          <Stack.Screen name="ConfirmTransfers" component={ConfirmTransfer} />
           <Stack.Screen name="Messages" component={Messages} />
           <Stack.Screen name="MessagesDetails" component={MessageDetails} />
           <Stack.Screen name="Settings" component={Settings} />

@@ -25,7 +25,7 @@ export const OtpInput = ({
       <Button
         disabled={disabled}
         title="Get OTP"
-        style={{ marginTop: 16 }}
+        style={{ marginTop: 20 }}
         onPress={onGetOtp}
       />
     </View>

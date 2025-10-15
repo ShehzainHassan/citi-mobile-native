@@ -36,9 +36,13 @@ export const BANK_LOCATIONS = [
   },
 ];
 export const BANK_OPTIONS = [
-  'Citi Bank',
-  'Bank 1656',
-  'Bank 1657',
-  'Bank Golden Gate',
+  'Fifth Third',
+  'Bank of the West',
+  'Wells Fago',
+  'JP Morgan Chae',
+  'US Bank',
+  'HSBS Bank',
+  'Citibank',
+  'Ame Express',
 ];
 export const BRANCH_OPTIONS = ['Main Branch', 'City Branch', 'Sub Branch'];

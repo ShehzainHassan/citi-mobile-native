@@ -13,7 +13,7 @@ export { Bill } from './Bill';
 export { ChooseCard } from './ChooseCard';
 export { DetailedPaymentCard } from './DetailedPaymentCard';
 export { OtpInput } from './OtpInput';
-export { Beneficiary } from './Beneficiary';
+export { Beneficiary, BeneficiaryDirectory } from './Beneficiary';
 export { CardHolderInfo } from './CardHolderInfo';
 export { ChooseTransfer } from './ChooseTransfer';
 export { BiometricAuthView } from './BiometricAuthView';
