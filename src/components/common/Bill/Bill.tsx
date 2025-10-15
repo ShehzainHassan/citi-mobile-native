@@ -15,7 +15,6 @@ export const Bill = () => {
   const selectedCurrency = useAppSelector(
     (state: RootState) => state.settings.currency,
   );
-  console.log('Selected Currency = ', selectedCurrency);
   const symbol = currencySymbolsMap[selectedCurrency] || selectedCurrency;
 
   const total = bills.reduce((sum, t) => {

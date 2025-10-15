@@ -1,0 +1,1 @@
+export { BiometricAuthView } from './BiometricAuthView';

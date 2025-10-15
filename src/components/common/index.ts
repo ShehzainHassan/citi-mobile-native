@@ -16,3 +16,4 @@ export { OtpInput } from './OtpInput';
 export { Beneficiary } from './Beneficiary';
 export { CardHolderInfo } from './CardHolderInfo';
 export { ChooseTransfer } from './ChooseTransfer';
+export { BiometricAuthView } from './BiometricAuthView';

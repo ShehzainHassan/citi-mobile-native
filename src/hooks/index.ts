@@ -20,3 +20,4 @@ export * from './useTabStyles';
 export * from './useThemeColor';
 export * from './useTransactionReportStyles';
 export * from './useCurrencySelector';
+export * from './useDeviceAuthType';

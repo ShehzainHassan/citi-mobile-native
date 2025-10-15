@@ -20,14 +20,16 @@ import { useTheme } from '@/theme';
 import MaterialIcons from '@react-native-vector-icons/material-icons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import {
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
+  Image,
 } from 'react-native';
+import ImagePicker from 'react-native-image-crop-picker';
 
 export const AddNewBeneficiary = () => {
   const { theme } = useTheme();
@@ -43,6 +45,9 @@ export const AddNewBeneficiary = () => {
   const [selectedValues, setSelectedValues] = useState<{
     [key: string]: string;
   }>({});
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const scrollRef = useRef<ScrollView>(null);
 
   const getInputs = () => TRANSFER_FIELDS[selectedTransfer];
 
@@ -59,12 +64,42 @@ export const AddNewBeneficiary = () => {
   };
 
   const allRequiredFilled = () => {
-    return getInputs().every(input => !!selectedValues[input.placeholder]);
+    const allInputsFilled = getInputs().every(
+      input => !!selectedValues[input.placeholder],
+    );
+    return allInputsFilled && !!selectedImage;
   };
 
   const handleTransferSelect = (transfer: TransferType) => {
     setSelectedTransfer(transfer);
     setSelectedValues({});
+
+    const index = TRANSFER_OPTIONS.findIndex(o => o.key === transfer);
+
+    // 👇 auto-scroll logic
+    if (scrollRef.current) {
+      if (index === 0) {
+        // scroll to start
+        scrollRef.current.scrollTo({ x: 0, animated: true });
+      } else if (index === TRANSFER_OPTIONS.length - 1) {
+        // scroll to end
+        scrollRef.current.scrollToEnd({ animated: true });
+      }
+    }
+  };
+
+  const handleImagePick = async () => {
+    try {
+      const image = await ImagePicker.openPicker({
+        width: 300,
+        height: 300,
+        cropping: true,
+        mediaType: 'photo',
+      });
+      setSelectedImage(image.path);
+    } catch (error) {
+      console.log('Image pick cancelled or failed:', error);
+    }
   };
 
   return (
@@ -73,15 +108,31 @@ export const AddNewBeneficiary = () => {
       <View style={globalStyles.paddedColumn}>
         <View style={styles.imgWrapper}>
           <View style={styles.imgContainer}>
-            <ImageWithFallback
-              source={Images.guest}
-              svgWidth={54}
-              svgHeight={54}
-            />
-            <TouchableOpacity style={styles.addButton}>
-              <MaterialIcons name="add" size={20} color="#fff" />
+            {selectedImage ? (
+              <Image
+                source={{ uri: selectedImage }}
+                style={styles.profilePic}
+              />
+            ) : (
+              <ImageWithFallback
+                source={Images.guest}
+                svgWidth={54}
+                svgHeight={54}
+              />
+            )}
+
+            <TouchableOpacity
+              style={styles.addButton}
+              onPress={handleImagePick}
+            >
+              <MaterialIcons
+                name={selectedImage ? 'edit' : 'add'}
+                size={20}
+                color="#fff"
+              />
             </TouchableOpacity>
           </View>
+
           <Text style={[globalStyles.title3, globalStyles.primary1]}>
             {selectedValues['Enter name'] || ''}
           </Text>
@@ -89,6 +140,7 @@ export const AddNewBeneficiary = () => {
 
         <View style={styles.scrollWrapper}>
           <ScrollView
+            ref={scrollRef}
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.scrollContainer}
@@ -182,6 +234,12 @@ export const AddNewBeneficiary = () => {
 };
 
 const styles = StyleSheet.create({
+  imgWrapper: {
+    alignItems: 'center',
+    marginBottom: 24,
+    gap: 12,
+  },
+
   imgContainer: {
     width: 120,
     height: 120,
@@ -191,14 +249,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     position: 'relative',
   },
-  imgWrapper: {
-    alignItems: 'center',
-    marginBottom: 24,
-  },
+
   addButton: {
     position: 'absolute',
-    bottom: 0,
-    right: 0,
+    bottom: 4,
+    right: 4,
     backgroundColor: '#3629B7',
     width: 32,
     height: 32,
@@ -208,8 +263,10 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#fff',
   },
+
   scrollWrapper: { maxHeight: 120, paddingVertical: 8, marginHorizontal: -16 },
   scrollContainer: { gap: 16, paddingHorizontal: 16, alignItems: 'center' },
   button: { marginTop: 8 },
   inputContainer: { paddingHorizontal: 16, paddingVertical: 24 },
+  profilePic: { width: 120, height: 120, borderRadius: 60 },
 });
