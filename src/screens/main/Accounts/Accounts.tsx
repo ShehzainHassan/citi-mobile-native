@@ -11,12 +11,15 @@ import {
 import { Card } from '@/components/common/ChooseCard/ChooseCard.types';
 import {
   useAccountScreenStyles,
+  useAppSelector,
   useCardDetailStyles,
   useGlobalStyles,
 } from '@/hooks';
 import { TranslationKeys } from '@/i18n';
-import { cards } from '@/mocks';
+import { accounts, cards } from '@/mocks';
 import { MainTabParamList } from '@/navigation/types';
+import { RootState } from '@/store';
+import { currencySymbolsMap } from '@/utils';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useCallback, useMemo, useState } from 'react';
@@ -35,6 +38,10 @@ export const Accounts = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
   const { t } = useTranslation();
+  const selectedCurrency = useAppSelector(
+    (state: RootState) => state.settings.currency,
+  );
+  const symbol = currencySymbolsMap[selectedCurrency] || selectedCurrency;
 
   const title = selectedCardType
     ? t(TranslationKeys.accounts.titleCard)
@@ -76,10 +83,10 @@ export const Accounts = () => {
       },
       {
         label: t(TranslationKeys.accounts.cardDetails.availableBalance),
-        value: '$10,000',
+        value: `${symbol}10,000`,
       },
     ],
-    [t],
+    [t, symbol],
   );
 
   return (
@@ -118,8 +125,14 @@ export const Accounts = () => {
               </Text>
             </View>
             <View style={globalStyles.spacedColumn}>
-              {Array.from({ length: 3 }).map((_, idx) => (
-                <AccountCard key={idx} />
+              {accounts.map((account, index) => (
+                <AccountCard
+                  key={index}
+                  accountName={account.title}
+                  accountNumber={account.accNo}
+                  subText1={account.subText1}
+                  subText1Value={`${symbol}${account.balance.toLocaleString()}`}
+                />
               ))}
             </View>
           </View>
@@ -129,6 +142,7 @@ export const Accounts = () => {
           <ChooseCard
             cards={cards.map(card => ({
               ...card,
+              amount: `${symbol}${card.amount.toLocaleString()}`,
               type: card.type as Card['type'],
             }))}
             onAddCard={() => console.log('')}

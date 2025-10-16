@@ -1,54 +1,63 @@
 import {
+  AmountSelector,
+  BeneficiaryDirectory,
   Button,
   CardSelectorModal,
   Header,
-  Input,
-  BeneficiaryDirectory,
+  PhoneNumberInput,
+  SuccessScreen,
 } from '@/components';
-import { useGlobalStyles } from '@/hooks';
+import { useAppSelector, useGlobalStyles } from '@/hooks';
 import { MainTabParamList } from '@/navigation/types';
-import { maskCardNumber } from '@/utils';
+import { currencySymbolsMap, maskCardNumber } from '@/utils';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { useAmountSelector } from '@/hooks/useAmountSelector';
+import { Images } from '@/assets/images';
+import { RootState } from '@/store';
 
 export const MobilePrepaid = () => {
   const globalStyles = useGlobalStyles();
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
-
+  const selectedCurrency = useAppSelector(
+    (state: RootState) => state.settings.currency,
+  );
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const [selectedBeneficiary, setSelectedBeneficiary] = useState<string | null>(
     null,
   );
   const [phone, setPhone] = useState<string>('');
-  const [selectedAmount, setSelectedAmount] = useState<string | null>(null);
-  const [customAmount, setCustomAmount] = useState<string>('$');
+  const [isSuccess, setIsSuccess] = useState(false);
 
-  const amounts = ['$10', '$20', 'Other'];
+  const symbol = currencySymbolsMap[selectedCurrency] || selectedCurrency;
 
-  const handlePhoneChange = (text: string) => {
-    const numericPart = text.replace(/[^0-9]/g, '');
-    setPhone(`+${numericPart}`);
-  };
+  const {
+    selectedAmount,
+    customAmount,
+    handleAmountPress,
+    handleCustomAmountChange,
+    reset: resetAmount,
+  } = useAmountSelector();
 
-  const handleCustomAmountChange = (text: string) => {
-    const numericPart = text.replace(/[^0-9]/g, '');
-    setCustomAmount(`$${numericPart}`);
-  };
-
-  const handleAmountPress = (amt: string) => {
-    setSelectedAmount(amt);
-  };
+  const amounts = [`${symbol}10`, `${symbol}20`, 'Other'];
 
   const handleConfirm = () => {
     navigation.navigate('MobilePrepaidConfirm', {
       fromCard: maskCardNumber(selectedCard!),
       toPhone: phone,
-      amount:
-        selectedAmount === 'Other' ? customAmount : (selectedAmount as string),
+      amount: selectedAmount === 'Other' ? customAmount : selectedAmount!,
     });
+  };
+
+  const resetForm = () => {
+    setSelectedCard(null);
+    setSelectedBeneficiary(null);
+    setPhone('');
+    setIsSuccess(false);
+    resetAmount();
   };
 
   const isConfirmDisabled =
@@ -56,7 +65,22 @@ export const MobilePrepaid = () => {
     !phone ||
     !selectedAmount ||
     !selectedBeneficiary ||
-    (selectedAmount === 'Other' && customAmount === '$');
+    (selectedAmount === 'Other' && customAmount === '$ ');
+
+  if (isSuccess) {
+    return (
+      <SuccessScreen
+        title="Mobile Prepaid Success"
+        subtitle="Your mobile prepaid transaction was successful."
+        btnText="Confirm"
+        source={Images.withdrawBanner}
+        onPress={() => {
+          resetForm();
+          navigation.navigate('Home');
+        }}
+      />
+    );
+  }
 
   return (
     <View style={globalStyles.verticalSpread}>
@@ -80,12 +104,10 @@ export const MobilePrepaid = () => {
             onSelect={setSelectedBeneficiary}
           />
 
-          <Input
-            label="Phone number"
+          <PhoneNumberInput
             placeholder="Phone number"
-            keyboardType="number-pad"
             value={phone}
-            onChangeText={handlePhoneChange}
+            onChangeText={setPhone}
           />
 
           <Text
@@ -98,39 +120,19 @@ export const MobilePrepaid = () => {
             Choose amount
           </Text>
 
-          {selectedAmount === 'Other' && (
-            <Input
-              placeholder="Enter amount"
-              keyboardType="numeric"
-              value={customAmount}
-              onChangeText={handleCustomAmountChange}
-              style={styles.input}
-            />
-          )}
+          <AmountSelector
+            amounts={amounts}
+            selectedAmount={selectedAmount}
+            customAmount={customAmount}
+            onAmountPress={handleAmountPress}
+            onCustomAmountChange={handleCustomAmountChange}
+          />
 
-          <View style={styles.spacedContainer}>
-            <View style={[globalStyles.amountContainer]}>
-              {amounts.map((amt, index) => (
-                <View key={index} style={globalStyles.amountWrapper}>
-                  <Button
-                    title={amt}
-                    onPress={() => handleAmountPress(amt)}
-                    variant={selectedAmount === amt ? 'primary' : 'secondary'}
-                    style={selectedAmount !== amt && globalStyles.amountBtn}
-                    textStyle={
-                      selectedAmount !== amt && globalStyles.textDefault
-                    }
-                  />
-                </View>
-              ))}
-            </View>
-
-            <Button
-              title="Confirm"
-              disabled={isConfirmDisabled}
-              onPress={handleConfirm}
-            />
-          </View>
+          <Button
+            title="Confirm"
+            disabled={isConfirmDisabled}
+            onPress={handleConfirm}
+          />
         </View>
       </View>
     </View>
@@ -140,12 +142,5 @@ export const MobilePrepaid = () => {
 const styles = StyleSheet.create({
   amountContainer: {
     marginVertical: 16,
-  },
-  spacedContainer: {
-    flex: 1,
-    justifyContent: 'space-between',
-  },
-  input: {
-    marginBottom: 16,
   },
 });

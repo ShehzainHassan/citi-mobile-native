@@ -1,3 +1,29 @@
+export const accounts = [
+  {
+    title: 'Account 1',
+    accNo: '1900 8988 5456',
+    subText1: 'Available balance',
+    balance: 20000,
+    subText2: 'Branch',
+    branch: 'New York',
+  },
+  {
+    title: 'Account 2',
+    accNo: '8988 1234',
+    subText1: 'Available balance',
+    balance: 20000,
+    subText2: 'Branch',
+    branch: 'New York',
+  },
+  {
+    title: 'Account 3',
+    accNo: '1900 1234 2222',
+    subText1: 'Available balance',
+    balance: 230000,
+    subText2: 'Branch',
+    branch: 'New York',
+  },
+];
 export const managementAccounts = [
   {
     title: 'Account',

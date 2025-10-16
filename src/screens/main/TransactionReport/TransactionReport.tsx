@@ -5,9 +5,15 @@ import {
   InfoRowCard,
   MonthlyBalanceChart,
 } from '@/components';
-import { useGlobalStyles, useTransactionReportStyles } from '@/hooks';
+import {
+  useAppSelector,
+  useGlobalStyles,
+  useTransactionReportStyles,
+} from '@/hooks';
 import { transactions } from '@/mocks';
 import { MainTabParamList } from '@/navigation/types';
+import { RootState } from '@/store';
+import { currencySymbolsMap } from '@/utils';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { ScrollView, View } from 'react-native';
@@ -17,6 +23,10 @@ export const TransactionReport = () => {
   const transactionReportStyles = useTransactionReportStyles();
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
+  const selectedCurrency = useAppSelector(
+    (state: RootState) => state.settings.currency,
+  );
+  const symbol = currencySymbolsMap[selectedCurrency] || selectedCurrency;
 
   return (
     <View style={transactionReportStyles.container}>
@@ -39,7 +49,7 @@ export const TransactionReport = () => {
               name="John Smith"
               cardType="Amazon Platinium"
               cardNumber="475612349018"
-              amount="$3.469.52"
+              amount={`${symbol}3,469.52`}
               backgroundImage={Images.cards}
             />
             <ScrollView
@@ -51,6 +61,15 @@ export const TransactionReport = () => {
                 const isNegative =
                   typeof t.price === 'string' && t.price.trim().startsWith('-');
 
+                const sign = t.price.startsWith('-')
+                  ? '-'
+                  : t.price.startsWith('+')
+                  ? '+'
+                  : '';
+                const amount = t.price.replace(/[^0-9.]/g, '');
+
+                const formattedPrice = `${sign} ${symbol}${amount}`;
+
                 return (
                   <InfoRowCard
                     key={t.title}
@@ -58,7 +77,7 @@ export const TransactionReport = () => {
                     title={t.title}
                     subtitle={t.subtitle}
                     icon={t.icon}
-                    amount={t.price}
+                    amount={formattedPrice}
                     amountStyle={
                       isNegative ? globalStyles.negativePrice : undefined
                     }

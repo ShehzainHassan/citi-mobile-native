@@ -1,8 +1,7 @@
-import { Button, Header, Input } from '@/components';
+import { Button, Header, Input, PhoneNumberInput } from '@/components';
 import { useAuthStyles, useGlobalStyles, useInputStyles } from '@/hooks';
 import { TranslationKeys } from '@/i18n';
 import { AuthStackParamList } from '@/navigation/types';
-import { formatPhoneNumber } from '@/utils';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
@@ -41,12 +40,11 @@ export const ForgotPassword = () => {
           {step === 1 && (
             <View style={globalStyles.cardContainer}>
               <View style={authStyles.phoneContainer}>
-                <Input
+                <PhoneNumberInput
                   label={t(TranslationKeys.auth.typePhone)}
-                  placeholder={t(TranslationKeys.auth.phonePlaceholder)}
                   value={phone}
-                  onChangeText={text => setPhone(formatPhoneNumber(text))}
-                  keyboardType="phone-pad"
+                  placeholder="(+84)"
+                  onChangeText={setPhone}
                 />
               </View>
 

@@ -13,14 +13,14 @@ export const cards = [
     name: 'John Smith',
     cardText: 'Amazon Platinum',
     cardNumber: '475612349018',
-    amount: '$3,469.52',
+    amount: 3469.52,
     type: 'visa',
   },
   {
     name: 'John Smith',
     cardText: 'Amazon Platinum',
     cardNumber: '475612349018',
-    amount: '$3,469.52',
+    amount: 3469.52,
     type: 'master',
   },
 ];

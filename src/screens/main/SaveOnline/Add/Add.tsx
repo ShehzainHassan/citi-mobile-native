@@ -8,21 +8,27 @@ import {
   SuccessScreen,
 } from '@/components';
 import { createCardSelectorStyles } from '@/components/ui/Modal/CardSelectorModal/CardSelectorModal.styles';
-import { BaseModal } from '@/components/ui/Modal';
-import { useGlobalStyles } from '@/hooks';
+import { BaseModal, CardSelectorModal } from '@/components/ui/Modal';
+import { useAppSelector, useGlobalStyles } from '@/hooks';
 import { cards, timeDeposits } from '@/mocks';
 import { MainTabParamList } from '@/navigation/types';
 import { useTheme } from '@/theme';
-import { prependDollar, sanitizeAmount } from '@/utils';
+import { currencySymbolsMap, sanitizeAmount } from '@/utils';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { Card } from '@/components/common/ChooseCard/ChooseCard.types';
+import { RootState } from '@/store';
 
 export const Add = () => {
   const { theme } = useTheme();
   const globalStyles = useGlobalStyles();
+  const selectedCurrency = useAppSelector(
+    (state: RootState) => state.settings.currency,
+  );
+  const symbol = currencySymbolsMap[selectedCurrency] || selectedCurrency;
+
   const cardSelectorStyles = createCardSelectorStyles(theme);
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
@@ -63,6 +69,15 @@ export const Add = () => {
     );
   }
 
+  const handleAmountChange = (text: string) => {
+    const numericPart = text.replace(/[^0-9]/g, '');
+    if (numericPart) {
+      setAmount(`${symbol}${numericPart}`);
+    } else {
+      setAmount('');
+    }
+  };
+
   return (
     <View style={globalStyles.verticalSpread}>
       <Header title="Add" onPress={() => navigation.navigate('SaveOnline')} />
@@ -74,21 +89,7 @@ export const Add = () => {
         />
         <View style={[globalStyles.cardContainer]}>
           <TouchableOpacity onPress={() => setShowCardScreen(true)}>
-            <View>
-              <Input
-                value={card}
-                placeholder="Choose account / card"
-                readOnly={true}
-                style={!card ? globalStyles.mediumSpacedContainer : undefined}
-              />
-              {card !== '' && (
-                <Text
-                  style={[cardSelectorStyles.balance, globalStyles.primary1]}
-                >
-                  Available balance: 10,000$
-                </Text>
-              )}
-            </View>
+            <CardSelectorModal value={card} onChange={setCard} showBalance />
           </TouchableOpacity>
 
           <TouchableOpacity onPress={() => setModalVisible(true)}>
@@ -114,15 +115,10 @@ export const Add = () => {
           <View>
             <Input
               value={amount}
-              placeholder="Amount (At least $1000)"
+              placeholder={`Amount (At least ${symbol}1000)`}
               style={globalStyles.mediumSpacedContainer}
               keyboardType="number-pad"
-              onFocus={() => {
-                setAmount(prev => (prev ? prev : '$ '));
-              }}
-              onChangeText={text => {
-                setAmount(prependDollar(text));
-              }}
+              onChangeText={handleAmountChange}
             />
           </View>
 
@@ -132,7 +128,7 @@ export const Add = () => {
               !card ||
               !timeDeposit ||
               !amount ||
-              amount === '$ ' ||
+              amount === `${symbol}` ||
               sanitizeAmount(amount) < 1000
             }
             onPress={() => setShowSuccessScreen(true)}

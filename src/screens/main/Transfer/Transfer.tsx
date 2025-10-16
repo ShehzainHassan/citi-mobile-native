@@ -16,11 +16,12 @@ import {
   TRANSFER_TYPES,
   TransferType,
 } from '@/config';
-import { useGlobalStyles } from '@/hooks';
+import { useAppSelector, useGlobalStyles } from '@/hooks';
 import { beneficiaryData } from '@/mocks';
 import { MainTabParamList } from '@/navigation/types';
+import { RootState } from '@/store';
 import { useTheme } from '@/theme';
-import { handleModalOpen, handleScroll } from '@/utils';
+import { currencySymbolsMap, handleModalOpen, handleScroll } from '@/utils';
 import MaterialIcons from '@react-native-vector-icons/material-icons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -32,6 +33,10 @@ export const Transfer = () => {
   const globalStyles = useGlobalStyles();
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
+  const selectedCurrency = useAppSelector(
+    (state: RootState) => state.settings.currency,
+  );
+  const symbol = currencySymbolsMap[selectedCurrency] || selectedCurrency;
 
   const [selectedTransfer, setSelectedTransfer] =
     useState<TransferType>('card');
@@ -153,12 +158,14 @@ export const Transfer = () => {
               (input.placeholder === 'Name' ||
                 input.placeholder === 'Card number');
 
+            const isAmountField = input.placeholder === 'Amount';
+
             return (
               <Input
                 key={index}
                 placeholder={input.placeholder}
                 readOnly={isLocked}
-                value={inputValue}
+                value={isAmountField ? selectedValues.Amount ?? '' : inputValue}
                 keyboardType={keyboardType}
                 rightIcon={
                   isDropdown ? (
@@ -178,11 +185,20 @@ export const Transfer = () => {
                 }
                 onChangeText={
                   !isDropdown && !isLocked && input.editable
-                    ? text =>
-                        setSelectedValues(prev => ({
-                          ...prev,
-                          [input.placeholder]: text,
-                        }))
+                    ? text => {
+                        if (isAmountField) {
+                          const numericPart = text.replace(/[^0-9]/g, '');
+                          setSelectedValues(prev => ({
+                            ...prev,
+                            Amount: `${symbol} ${numericPart}`,
+                          }));
+                        } else {
+                          setSelectedValues(prev => ({
+                            ...prev,
+                            [input.placeholder]: text,
+                          }));
+                        }
+                      }
                     : undefined
                 }
               />

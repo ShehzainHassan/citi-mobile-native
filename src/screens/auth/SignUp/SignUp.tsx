@@ -8,12 +8,11 @@ import {
   Header,
   Input,
 } from '@/components';
-import { useAuthStyles, useGlobalStyles } from '@/hooks';
+import { useAuthStyles, useFormValidation, useGlobalStyles } from '@/hooks';
 import { TranslationKeys } from '@/i18n';
 import { AuthStackParamList } from '@/navigation/types';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   KeyboardAvoidingView,
@@ -23,17 +22,34 @@ import {
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useState } from 'react';
 
 export const SignUp = () => {
   const globalStyles = useGlobalStyles();
   const authStyles = useAuthStyles();
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const isDisabled = !email.trim() || !password.trim() || !name.trim();
   const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
+
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+
+  const { values, errors, handleChange, validateAll } = useFormValidation({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  const handleSignUp = () => {
+    if (!acceptedTerms) {
+      return;
+    }
+
+    if (validateAll()) {
+      console.log('Valid form:', values);
+    } else {
+      console.log('Validation failed:', errors);
+    }
+  };
 
   return (
     <SafeAreaView style={globalStyles.safeArea} edges={['bottom']}>
@@ -63,20 +79,26 @@ export const SignUp = () => {
             <View style={authStyles.inputContainer}>
               <Input
                 placeholder={t(TranslationKeys.auth.namePlaceholder)}
-                value={name}
-                onChangeText={setName}
+                value={values.name}
+                onChangeText={text => handleChange('name', text)}
+                error={errors.name ?? undefined}
               />
+
               <Input
-                placeholder={t(TranslationKeys.auth.textInputPlaceholder)}
-                value={email}
-                onChangeText={setEmail}
+                placeholder={t(TranslationKeys.auth.emailPlaceholder)}
+                value={values.email}
+                onChangeText={text => handleChange('email', text)}
+                error={errors.email ?? undefined}
               />
+
               <Input
                 placeholder={t(TranslationKeys.auth.passwordPlaceholder)}
                 secureTextEntry
-                value={password}
-                onChangeText={setPassword}
+                value={values.password}
+                onChangeText={text => handleChange('password', text)}
+                error={errors.password ?? undefined}
               />
+
               <Checkbox
                 label={
                   <Text style={authStyles.text}>
@@ -86,13 +108,22 @@ export const SignUp = () => {
                     </Text>
                   </Text>
                 }
+                checked={acceptedTerms}
+                onChange={setAcceptedTerms}
               />
             </View>
 
             <Button
               title={t(TranslationKeys.auth.signUpButton)}
               style={authStyles.signUpButton}
-              disabled={isDisabled}
+              onPress={handleSignUp}
+              disabled={
+                !acceptedTerms ||
+                !values.name ||
+                !values.email ||
+                !values.password ||
+                Object.values(errors).some(error => error !== null)
+              }
             />
 
             <AuthFooter

@@ -17,3 +17,5 @@ export { Beneficiary, BeneficiaryDirectory } from './Beneficiary';
 export { CardHolderInfo } from './CardHolderInfo';
 export { ChooseTransfer } from './ChooseTransfer';
 export { BiometricAuthView } from './BiometricAuthView';
+export { PhoneNumberInput } from './PhoneInput';
+export { AmountSelector } from './AmountSelector';

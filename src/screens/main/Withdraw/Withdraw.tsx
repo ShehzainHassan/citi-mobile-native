@@ -1,15 +1,18 @@
 import { Images } from '@/assets/images';
 import {
+  AmountSelector,
   Button,
   CardSelectorModal,
   Header,
   ImageWithFallback,
-  Input,
+  PhoneNumberInput,
   SuccessScreen,
 } from '@/components';
-import { useAuthStyles, useGlobalStyles } from '@/hooks';
+import { useAppSelector, useAuthStyles, useGlobalStyles } from '@/hooks';
+import { useAmountSelector } from '@/hooks/useAmountSelector';
 import { MainTabParamList } from '@/navigation/types';
-import { Theme, useTheme } from '@/theme';
+import { RootState } from '@/store';
+import { currencySymbolsMap } from '@/utils';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
@@ -17,38 +20,45 @@ import { StyleSheet, Text, View } from 'react-native';
 
 export const Withdraw = () => {
   const globalStyles = useGlobalStyles();
-  const { theme } = useTheme();
-  const styles = createWithdrawStyles(theme);
   const authStyles = useAuthStyles();
-  const amounts = ['$10', '$50', '$100', '$150', '$200', 'Other'];
-  const [selectedCard, setSelectedCard] = useState<string | null>(null);
-  const [selectedAmount, setSelectedAmount] = useState<string | null>(null);
-  const [customAmount, setCustomAmount] = useState<string>('$ ');
-  const [phone, setPhone] = useState<string>('');
-  const [isSuccess, setIsSuccess] = useState(false);
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
+  const selectedCurrency = useAppSelector(
+    (state: RootState) => state.settings.currency,
+  );
+  const symbol = currencySymbolsMap[selectedCurrency] || selectedCurrency;
 
-  const handleAmountPress = (amt: string) => {
-    setSelectedAmount(amt);
-    if (amt !== 'Other') setCustomAmount('');
-  };
+  const amounts = [
+    `${symbol}10`,
+    `${symbol}50`,
+    `${symbol}100`,
+    `${symbol}150`,
+    `${symbol}200`,
+    'Other',
+  ];
 
-  const handleCustomAmountChange = (text: string) => {
-    const numericPart = text.replace(/[^0-9]/g, '');
-    setCustomAmount(`$ ${numericPart}`);
-  };
+  const [selectedCard, setSelectedCard] = useState<string | null>(null);
+  const [phone, setPhone] = useState<string>('');
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const {
+    selectedAmount,
+    customAmount,
+    handleAmountPress,
+    handleCustomAmountChange,
+    reset: resetAmount,
+  } = useAmountSelector();
+
   const resetForm = () => {
     setSelectedCard(null);
-    setSelectedAmount(null);
-    setCustomAmount('$ ');
     setPhone('');
     setIsSuccess(false);
+    resetAmount();
   };
+
   const isVerifyDisabled =
     !selectedCard ||
     !phone ||
-    phone === '$ ' ||
     !selectedAmount ||
     (selectedAmount === 'Other' && customAmount === '$ ');
 
@@ -57,10 +67,7 @@ export const Withdraw = () => {
       setIsSuccess(true);
     }
   };
-  const handlePhoneChange = (text: string) => {
-    const numericPart = text.replace(/[^0-9]/g, '');
-    setPhone(`+${numericPart}`);
-  };
+
   if (isSuccess) {
     return (
       <SuccessScreen
@@ -75,6 +82,7 @@ export const Withdraw = () => {
       />
     );
   }
+
   return (
     <View style={globalStyles.verticalSpread}>
       <Header title="Withdraw" onPress={() => navigation.navigate('Home')} />
@@ -90,14 +98,12 @@ export const Withdraw = () => {
             <CardSelectorModal
               value={selectedCard}
               onChange={setSelectedCard}
-              showBalance={true}
+              showBalance
             />
-
-            <Input
+            <PhoneNumberInput
               placeholder="Phone number"
-              keyboardType="phone-pad"
               value={phone}
-              onChangeText={handlePhoneChange}
+              onChangeText={setPhone}
             />
           </View>
 
@@ -111,29 +117,13 @@ export const Withdraw = () => {
             Choose amount
           </Text>
 
-          {selectedAmount === 'Other' && (
-            <Input
-              placeholder="Enter amount"
-              keyboardType="numeric"
-              value={customAmount}
-              onChangeText={handleCustomAmountChange}
-              style={styles.input}
-            />
-          )}
-
-          <View style={globalStyles.amountContainer}>
-            {amounts.map((amt, index) => (
-              <View key={index} style={globalStyles.amountWrapper}>
-                <Button
-                  title={amt}
-                  variant={selectedAmount === amt ? 'primary' : 'secondary'}
-                  onPress={() => handleAmountPress(amt)}
-                  style={selectedAmount !== amt && globalStyles.amountBtn}
-                  textStyle={selectedAmount !== amt && globalStyles.textDefault}
-                />
-              </View>
-            ))}
-          </View>
+          <AmountSelector
+            amounts={amounts}
+            selectedAmount={selectedAmount}
+            customAmount={customAmount}
+            onAmountPress={handleAmountPress}
+            onCustomAmountChange={handleCustomAmountChange}
+          />
         </View>
 
         <Button
@@ -146,32 +136,12 @@ export const Withdraw = () => {
   );
 };
 
-const createWithdrawStyles = (theme: Theme) =>
-  StyleSheet.create({
-    balance: {
-      marginTop: theme.spacing.sm,
-      paddingLeft: theme.spacing.ms,
-    },
-    imageContainer: {
-      marginBottom: 56,
-      marginTop: 40,
-    },
-    input: {
-      marginBottom: theme.spacing.md,
-    },
-    spacedContainer: {
-      justifyContent: 'space-between',
-    },
-    subContainer: {
-      gap: theme.spacing.lg,
-    },
-    centerText: {
-      textAlign: 'center',
-    },
-    successContainer: {
-      alignItems: 'center',
-      backgroundColor: theme.colors.neutral6,
-      flex: 1,
-      padding: theme.spacing.lg,
-    },
-  });
+const styles = StyleSheet.create({
+  imageContainer: {
+    marginBottom: 56,
+    marginTop: 40,
+  },
+  spacedContainer: {
+    justifyContent: 'space-between',
+  },
+});

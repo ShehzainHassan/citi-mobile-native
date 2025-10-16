@@ -8,12 +8,11 @@ import {
   ImageWithFallback,
   Input,
 } from '@/components';
-import { useAuthStyles, useGlobalStyles } from '@/hooks';
+import { useAuthStyles, useFormValidation, useGlobalStyles } from '@/hooks';
 import { TranslationKeys } from '@/i18n';
 import { MainTabWithAuthParamList } from '@/navigation/types';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   KeyboardAvoidingView,
@@ -27,12 +26,22 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 export const SignIn = () => {
   const globalStyles = useGlobalStyles();
   const authStyles = useAuthStyles();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const { t } = useTranslation();
-  const isDisabled = email.trim() === '' || password.trim() === '';
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabWithAuthParamList>>();
+
+  const { values, errors, handleChange, validateAll } = useFormValidation({
+    email: '',
+    password: '',
+  });
+
+  const handleSignIn = () => {
+    if (validateAll()) {
+      console.log('Valid form:', values);
+    } else {
+      console.log('Validation failed:', errors);
+    }
+  };
 
   return (
     <SafeAreaView style={globalStyles.safeArea} edges={['bottom']}>
@@ -51,23 +60,29 @@ export const SignIn = () => {
             onPress={() => navigation.navigate('Home')}
             style={authStyles.headerContainer}
           />
+
           <View style={globalStyles.roundedContainer}>
             <AuthHeader
               title={t(TranslationKeys.auth.welcomeTitle)}
               subTitle={t(TranslationKeys.auth.welcomeSubtitle)}
             />
+
             <AuthImageBlock source={Images.authIcon} />
+
             <View style={authStyles.inputContainer}>
               <Input
                 placeholder={t(TranslationKeys.auth.emailPlaceholder)}
-                value={email}
-                onChangeText={setEmail}
+                value={values.email}
+                onChangeText={text => handleChange('email', text)}
+                error={errors.email ?? undefined}
               />
+
               <Input
                 placeholder={t(TranslationKeys.auth.passwordPlaceholder)}
                 secureTextEntry
-                value={password}
-                onChangeText={setPassword}
+                value={values.password}
+                onChangeText={text => handleChange('password', text)}
+                error={errors.password ?? undefined}
               />
             </View>
 
@@ -80,7 +95,12 @@ export const SignIn = () => {
 
             <Button
               title={t(TranslationKeys.auth.signInButton)}
-              disabled={isDisabled}
+              onPress={handleSignIn}
+              disabled={
+                !values.email ||
+                !values.password ||
+                Object.values(errors).some(error => error !== null)
+              }
             />
 
             <View style={globalStyles.centerContainer}>

@@ -1,7 +1,13 @@
 import { Images } from '@/assets/images';
 import { Bill, CreditCard, Header } from '@/components';
-import { useGlobalStyles, useTransactionReportStyles } from '@/hooks';
+import {
+  useAppSelector,
+  useGlobalStyles,
+  useTransactionReportStyles,
+} from '@/hooks';
 import { MainTabParamList } from '@/navigation/types';
+import { RootState } from '@/store';
+import { currencySymbolsMap } from '@/utils';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StyleSheet, View } from 'react-native';
@@ -9,6 +15,11 @@ import { StyleSheet, View } from 'react-native';
 export const CreditCardScreen = () => {
   const globalStyles = useGlobalStyles();
   const transactionReportStyles = useTransactionReportStyles();
+  const selectedCurrency = useAppSelector(
+    (state: RootState) => state.settings.currency,
+  );
+  const symbol = currencySymbolsMap[selectedCurrency] || selectedCurrency;
+
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
 
@@ -25,7 +36,7 @@ export const CreditCardScreen = () => {
           name="John Smith"
           cardType="Amazon Platinium"
           cardNumber="475612349018"
-          amount="$3.469.52"
+          amount={`${symbol}3,469.52`}
           backgroundImage={Images.cards}
           onPress={() => navigation.navigate('CreditCardDetails')}
         />

@@ -6,19 +6,7 @@
 // Security helpers and data formatting
 // Reusable business logic
 import { MODAL_OPTIONS_MAP } from '@/config';
-
-export const formatPhoneNumber = (input: string) => {
-  const digits = input.replace(/\D/g, '');
-
-  if (digits.length <= 2) {
-    return `(+${digits})`;
-  }
-
-  const countryCode = digits.slice(0, 2);
-  const rest = digits.slice(2);
-
-  return `(+${countryCode}) ${rest}`;
-};
+import { ValidationRule } from '@/interfaces';
 
 export const getFlagUrl = (countryCode: string, size: number = 40) => {
   return `https://flagcdn.com/w${size}/${countryCode.toLowerCase()}.png`;
@@ -30,13 +18,6 @@ export const formatCurrencyLabel = (code: string, name: string) => {
 
 export const formatCards = (cards: string[]) => {
   return cards.map(card => card.replace(/(\d{4})(?=\d)/g, '$1 ').trim());
-};
-
-export const prependDollar = (text: string) => {
-  if (!text.startsWith('$ ')) {
-    return '$ ' + text.replace(/^\$?\s*/, '');
-  }
-  return text;
 };
 
 export const sanitizeAmount = (amount: string): number => {
@@ -85,5 +66,61 @@ export const handleScroll = (
     if (index === 0) scrollRef.current.scrollTo({ x: 0, animated: true });
     else if (index === keys.length - 1)
       scrollRef.current.scrollToEnd({ animated: true });
+  }
+};
+
+export const extractNumbers = (
+  text: string,
+  allowPlus: boolean = false,
+): string => {
+  return allowPlus ? text.replace(/[^\d+]/g, '') : text.replace(/[^0-9]/g, '');
+};
+
+export const validationRules: Record<string, ValidationRule> = {
+  email: {
+    regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+    message: 'Enter a valid email address',
+  },
+  password: {
+    regex: /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/,
+    message:
+      'Password must be at least 8 characters, include one uppercase and one number',
+  },
+  confirmPassword: {
+    matchField: 'password',
+    message: 'Passwords do not match',
+  },
+  phone: {
+    regex: /^\+?\d{10,14}$/,
+    message: 'Enter a valid phone number',
+  },
+  name: {
+    regex: /^[A-Za-z\s]+$/,
+    message: 'Name can only contain letters',
+  },
+  cardNumber: {
+    regex: /^\d{12,19}$/,
+    message: 'Enter a valid card number',
+  },
+  amount: {
+    regex: /^\d+(\.\d{1,2})?$/,
+    message: 'Enter a valid amount',
+  },
+};
+
+export const sanitizeInput = (value: string, type: string) => {
+  switch (type) {
+    case 'name':
+      return value.replace(/[^a-zA-Z\s]/g, '');
+    case 'email':
+      return value.trim();
+    case 'phone':
+      return value.replace(/[^\d+]/g, '');
+    case 'cardNumber':
+      return value.replace(/\D/g, '');
+    case 'amount':
+      return value.replace(/[^0-9.]/g, '');
+    default:
+      return value.trim();
   }
 };
