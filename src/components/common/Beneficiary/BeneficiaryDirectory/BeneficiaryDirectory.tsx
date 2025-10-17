@@ -1,12 +1,14 @@
 import { Beneficiary } from '@/components';
 import { useGlobalStyles } from '@/hooks';
 import { beneficiaryData } from '@/mocks';
-import React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { BeneficiaryDirectoryProps } from './BeneficiaryDirectory.types';
+import { MainTabParamList } from '@/navigation/types';
+import { useTheme } from '@/theme';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { MainTabParamList } from '@/navigation/types';
+import React from 'react';
+import { ScrollView, Text, View } from 'react-native';
+import { createBeneficiaryDirectoryStyles } from './BeneficiaryDirectory.styles';
+import { BeneficiaryDirectoryProps } from './BeneficiaryDirectory.types';
 
 export const BeneficiaryDirectory: React.FC<BeneficiaryDirectoryProps> = ({
   title = 'Directory',
@@ -14,13 +16,14 @@ export const BeneficiaryDirectory: React.FC<BeneficiaryDirectoryProps> = ({
   selectedBeneficiary,
   onSelect,
 }) => {
+  const { theme } = useTheme();
   const globalStyles = useGlobalStyles();
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
-
+  const styles = createBeneficiaryDirectoryStyles(theme);
   return (
     <>
-      <View style={globalStyles.amountContainer}>
+      <View style={globalStyles.rowWrap}>
         <Text style={[globalStyles.caption1, globalStyles.neutral3]}>
           {title}
         </Text>
@@ -52,15 +55,3 @@ export const BeneficiaryDirectory: React.FC<BeneficiaryDirectoryProps> = ({
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  scroll: {
-    maxHeight: 120,
-    marginBottom: 32,
-  },
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-  },
-});

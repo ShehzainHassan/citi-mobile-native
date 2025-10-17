@@ -19,8 +19,11 @@ export const MessageDetails = () => {
         onPress={() => navigation.navigate('Messages')}
       />
       <View style={[globalStyles.paddedColumn, globalStyles.spacedColumn]}>
-        <Message messageType="sender" />
-        <Message messageType="receiver" />
+        <Message
+          messageType="sender"
+          message="Did you attempt transaction on debit card ending in 0000 at Mechan1 inNJ for $1,200? Reply YES or NO"
+        />
+        <Message messageType="receiver" message="YES" />
       </View>
       <View style={globalStyles.inputRow}>
         <View style={globalStyles.fillAll}>

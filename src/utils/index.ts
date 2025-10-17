@@ -124,3 +124,8 @@ export const sanitizeInput = (value: string, type: string) => {
       return value.trim();
   }
 };
+
+export const parseCurrencyAmount = (amount: string): number => {
+  if (!amount) return 0;
+  return parseFloat(amount.replace(/[^0-9.-]+/g, '')) || 0;
+};

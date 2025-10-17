@@ -9,7 +9,7 @@ export const PaymentHistoryCard = ({
   date = 'date',
   status,
   company,
-  amount = '$0',
+  amount,
   onPress,
 }: PaymentCardProps) => {
   const globalStyles = useGlobalStyles();

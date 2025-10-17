@@ -10,15 +10,26 @@ export const useAmountSelector = () => {
   );
   const symbol = currencySymbolsMap[selectedCurrency] || selectedCurrency;
 
-  const [customAmount, setCustomAmount] = useState<string>(`${symbol} `);
+  const [customAmount, setCustomAmount] = useState<string>('');
 
   const handleAmountPress = (amt: string) => {
     setSelectedAmount(amt);
-    if (amt !== 'Other') setCustomAmount(`${symbol} `);
+    if (amt !== 'Other') setCustomAmount('');
   };
 
   const handleCustomAmountChange = (text: string) => {
-    const numericPart = extractNumbers(text);
+    if (text.trim() === '' || text === symbol || text === `${symbol} `) {
+      setCustomAmount('');
+      return;
+    }
+
+    if (!text.startsWith(symbol)) {
+      const numericPart = extractNumbers(text);
+      setCustomAmount(`${symbol} ${numericPart}`);
+      return;
+    }
+
+    const numericPart = extractNumbers(text.slice(symbol.length));
     setCustomAmount(`${symbol} ${numericPart}`);
   };
 
@@ -29,7 +40,7 @@ export const useAmountSelector = () => {
     handleCustomAmountChange,
     reset: () => {
       setSelectedAmount(null);
-      setCustomAmount(`${symbol} `);
+      setCustomAmount('');
     },
   };
 };

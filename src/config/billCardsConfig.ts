@@ -6,7 +6,7 @@ type BillCardConfig<Route extends keyof MainTabWithSearchParamList> = {
   title: string;
   subtitle: string;
   image: ImageSourcePropType;
-  route?: Route;
+  route: Route;
   params?: MainTabWithSearchParamList[Route];
 };
 

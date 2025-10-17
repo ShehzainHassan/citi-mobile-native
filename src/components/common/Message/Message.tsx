@@ -1,13 +1,13 @@
-import { useTheme } from "@/theme";
-import { Text, View } from "react-native";
-import { createMessageStyles } from "./Message.styles";
-import { MessageProps } from "./Message.types";
+import { useTheme } from '@/theme';
+import { Text, View } from 'react-native';
+import { createMessageStyles } from './Message.styles';
+import { MessageProps } from './Message.types';
 
-export const Message = ({ messageType }: MessageProps) => {
+export const Message = ({ message, messageType }: MessageProps) => {
   const { theme } = useTheme();
   const styles = createMessageStyles(theme);
 
-  const isSender = messageType === "sender";
+  const isSender = messageType === 'sender';
 
   return (
     <View
@@ -17,8 +17,7 @@ export const Message = ({ messageType }: MessageProps) => {
         style={[styles.message, isSender ? styles.sender : styles.receiver]}
       >
         <Text style={isSender ? styles.senderText : styles.receiverText}>
-          Did you attempt transaction on debit card ending in 0000 at Mechan1 in
-          NJ for $1,200? Reply YES or NO
+          {message}
         </Text>
       </View>
     </View>

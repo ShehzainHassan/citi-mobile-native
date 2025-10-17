@@ -2,6 +2,8 @@ import { View } from 'react-native';
 import { Input, Button } from '@/components';
 import { useGlobalStyles } from '@/hooks';
 import { OtpInputRowProps } from './OtpInput.types';
+import { useTheme } from '@/theme';
+import { createOtpStyles } from './OtpInput.styles';
 
 export const OtpInput = ({
   otp,
@@ -9,8 +11,9 @@ export const OtpInput = ({
   disabled = false,
   onGetOtp,
 }: OtpInputRowProps) => {
+  const { theme } = useTheme();
   const globalStyles = useGlobalStyles();
-
+  const styles = createOtpStyles(theme);
   return (
     <View style={[globalStyles.inputRow, globalStyles.noPadding]}>
       <View style={globalStyles.fillAll}>
@@ -25,7 +28,7 @@ export const OtpInput = ({
       <Button
         disabled={disabled}
         title="Get OTP"
-        style={{ marginTop: 20 }}
+        style={styles.marginTop}
         onPress={onGetOtp}
       />
     </View>

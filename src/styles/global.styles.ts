@@ -4,7 +4,6 @@ import { Theme } from '../theme/index';
 
 export const createGlobalStyles = (theme: Theme) =>
   StyleSheet.create({
-    // Layout patterns
     centerContainer: {
       alignItems: 'center',
       backgroundColor: theme.colors.neutral6,
@@ -25,8 +24,8 @@ export const createGlobalStyles = (theme: Theme) =>
     },
     roundedContainer: {
       backgroundColor: theme.colors.neutral6,
-      borderTopLeftRadius: 30,
-      borderTopRightRadius: 30,
+      borderTopLeftRadius: theme.radius.lg,
+      borderTopRightRadius: theme.radius.lg,
       display: 'flex',
       flex: 1,
       padding: theme.spacing.lg,
@@ -55,7 +54,6 @@ export const createGlobalStyles = (theme: Theme) =>
       flexGrow: 1,
       backgroundColor: theme.colors.primary1,
     },
-
     previous: {
       height: 16,
       resizeMode: 'contain',
@@ -70,7 +68,11 @@ export const createGlobalStyles = (theme: Theme) =>
       paddingVertical: 8,
       marginHorizontal: -16,
     },
-    scrollContainer: { gap: 16, paddingHorizontal: 16, alignItems: 'center' },
+    scrollContainer: {
+      gap: theme.spacing.md,
+      paddingHorizontal: theme.spacing.md,
+      alignItems: 'center',
+    },
 
     // Typography patterns
     heading1: {
@@ -94,7 +96,6 @@ export const createGlobalStyles = (theme: Theme) =>
       maxHeight: 250,
     },
     titleContainer: {
-      display: 'flex',
       gap: theme.spacing.xs,
     },
     transparentBackground: {
@@ -168,7 +169,7 @@ export const createGlobalStyles = (theme: Theme) =>
     mediumSpacedContainer: {
       marginBottom: theme.spacing.md,
     },
-    amountContainer: {
+    rowWrap: {
       flexDirection: 'row',
       flexWrap: 'wrap',
       justifyContent: 'space-between',
@@ -306,7 +307,7 @@ export const createGlobalStyles = (theme: Theme) =>
       position: 'relative',
       alignItems: 'center',
       width: '100%',
-      top: -50,
+      top: -80,
     },
     profilePic: {
       width: 120,

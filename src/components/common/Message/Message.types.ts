@@ -1,3 +1,4 @@
 export interface MessageProps {
-  messageType: "sender" | "receiver";
+  message: string;
+  messageType: 'sender' | 'receiver';
 }

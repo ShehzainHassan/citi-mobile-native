@@ -30,7 +30,6 @@ export const ChooseCard = ({
             backgroundImage={
               card.type === 'visa' ? Images.visaCard : Images.masterCard
             }
-            style={{ margin: -10 }}
             onPress={() => onCardPress(card)}
           />
         ))}

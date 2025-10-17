@@ -1,7 +1,9 @@
 import { Images } from '@/assets/images';
 import { useGlobalStyles } from '@/hooks';
-import { StyleSheet, Text, View } from 'react-native';
+import { useTheme } from '@/theme';
+import { Text, View } from 'react-native';
 import { ImageWithFallback } from '../ImageWithFallback';
+import { createBeneficiaryStyles } from './Beneficiary.styles';
 import { BeneficiaryProps } from './Beneficiary.types';
 
 export const Beneficiary = ({
@@ -11,7 +13,9 @@ export const Beneficiary = ({
   selected,
   onPress,
 }: BeneficiaryProps) => {
+  const { theme } = useTheme();
   const globalStyles = useGlobalStyles();
+  const styles = createBeneficiaryStyles(theme);
   return (
     <View
       style={[
@@ -40,45 +44,3 @@ export const Beneficiary = ({
     </View>
   );
 };
-const styles = StyleSheet.create({
-  addBeneficiary: {
-    width: 24,
-    height: 24,
-  },
-  profilePic: {
-    borderRadius: 30,
-    width: 60,
-    height: 60,
-  },
-  profilePicContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 12,
-  },
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 100,
-    height: 120,
-  },
-  imageContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#F2F1F9',
-    borderRadius: 30,
-    width: 60,
-    height: 60,
-  },
-  selectedContainer: {
-    backgroundColor: '#3629B7',
-  },
-  selectedText: {
-    color: '#FFFFFF',
-  },
-  touchable: {
-    width: '100%',
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

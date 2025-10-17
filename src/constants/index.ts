@@ -8,4 +8,4 @@ export * from './api';
 export * from './languages';
 export * from './storage';
 export * from './bankLocations';
-export * from './';
+export * from './theme';

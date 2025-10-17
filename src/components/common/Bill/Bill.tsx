@@ -5,7 +5,7 @@ import { useTheme } from '@/theme';
 import { Text, View } from 'react-native';
 import { createBillStyles } from './Bills.styles';
 import { RootState } from '@/store';
-import { currencySymbolsMap } from '@/utils';
+import { currencySymbolsMap, parseCurrencyAmount } from '@/utils';
 
 export const Bill = () => {
   const { theme } = useTheme();
@@ -17,32 +17,32 @@ export const Bill = () => {
   );
   const symbol = currencySymbolsMap[selectedCurrency] || selectedCurrency;
 
-  const total = bills.reduce((sum, t) => {
-    const value = parseFloat(t.amount.replace(/[^0-9.-]+/g, ''));
-    return sum + value;
-  }, 0);
+  const total = bills.reduce(
+    (sum, t) => sum + parseCurrencyAmount(t.amount),
+    0,
+  );
 
   return (
     <View style={styles.billContainer}>
-      {bills.map(item => (
-        <InfoRowCard
-          key={item.id}
-          icon={item.icon}
-          title={item.title}
-          amount={
-            parseFloat(item.amount.replace(/[^0-9.-]+/g, '')) < 0
-              ? `-${symbol}${Math.abs(
-                  parseFloat(item.amount.replace(/[^0-9.-]+/g, '')),
-                )}`
-              : `${symbol}${parseFloat(item.amount.replace(/[^0-9.-]+/g, ''))}`
-          }
-          subtitle={item.subtitle}
-          amountStyle={globalStyles.negativePrice}
-          style={styles.cardContainer}
-          iconBackgroundColor={theme.colors.semantic4}
-          centeredItems={true}
-        />
-      ))}
+      {bills.map(item => {
+        const value = parseCurrencyAmount(item.amount);
+        const formattedAmount =
+          value < 0 ? `-${symbol}${Math.abs(value)}` : `${symbol}${value}`;
+
+        return (
+          <InfoRowCard
+            key={item.id}
+            icon={item.icon}
+            title={item.title}
+            amount={formattedAmount}
+            subtitle={item.subtitle}
+            amountStyle={globalStyles.negativePrice}
+            style={styles.cardContainer}
+            iconBackgroundColor={theme.colors.semantic4}
+            centeredItems={true}
+          />
+        );
+      })}
 
       <View style={styles.textContainer}>
         <Text style={styles.totalText}>TOTAL</Text>

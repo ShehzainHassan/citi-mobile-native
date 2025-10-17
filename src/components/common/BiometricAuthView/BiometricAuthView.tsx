@@ -1,25 +1,21 @@
-import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Platform,
-  Alert,
-} from 'react-native';
 import { Images } from '@/assets/images';
 import { ImageWithFallback } from '@/components';
 import { useAuthStyles, useGlobalStyles } from '@/hooks';
+import { useTheme } from '@/theme';
+import React from 'react';
+import { Alert, Platform, Text, TouchableOpacity, View } from 'react-native';
 import { enableBioMetric } from 'react-native-biometric-check';
+import { createBiometricAuthViewStyles } from './BiometricAuthView.styles';
 import { BiometricAuthViewProps } from './BiometricAuthView.types';
 
 export const BiometricAuthView: React.FC<BiometricAuthViewProps> = ({
   authType,
   onSuccess,
 }) => {
+  const { theme } = useTheme();
   const globalStyles = useGlobalStyles();
   const authStyles = useAuthStyles();
-
+  const styles = createBiometricAuthViewStyles(theme);
   const handleBiometricAuth = async () => {
     try {
       if (Platform.OS === 'ios') {
@@ -82,9 +78,3 @@ export const BiometricAuthView: React.FC<BiometricAuthViewProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  biometric: {
-    marginTop: -24,
-  },
-});

@@ -11,3 +11,4 @@ export * from './messagesCardConfig';
 export * from './billCardsConfig';
 export * from './settingsScreenConfig';
 export * from './beneficiaryConfig';
+export * from './tabsConfig';

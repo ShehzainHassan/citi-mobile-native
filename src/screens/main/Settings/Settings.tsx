@@ -1,6 +1,3 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
 import { Images } from '@/assets/images';
 import {
   CardDetails,
@@ -13,10 +10,13 @@ import {
 import { SETTINGS_OPTIONS } from '@/config';
 import { useAuthStyles, useGlobalStyles } from '@/hooks';
 import { MainTabWithAuthAndSettingsParamList } from '@/navigation/types';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootState } from '@/store';
 import { setCurrency } from '@/store/slices/settings/settingsSlice';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import React from 'react';
+import { ScrollView, Text, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const Settings = () => {
   const navigation =
@@ -34,22 +34,25 @@ export const Settings = () => {
 
   const [isModalVisible, setModalVisible] = React.useState(false);
 
-  const handleSelectCurrency = (label: string) => {
-    const code = label.split(' ')[0];
-    dispatch(setCurrency(code ?? 'USD'));
-    setModalVisible(false);
-  };
+  const handleSelectCurrency = React.useCallback(
+    (label: string) => {
+      const code = label.split(' ')[0] || 'USD';
+      dispatch(setCurrency(code));
+      setModalVisible(false);
+    },
+    [dispatch],
+  );
 
   const handleOptionPress = (id?: string, route?: string, type?: string) => {
     if (id === 'currency' || type === 'currency') {
       setModalVisible(true);
     } else if (route) {
-      navigation.navigate(route as keyof MainTabWithAuthAndSettingsParamList);
+      navigation.navigate(route as never);
     }
   };
 
   return (
-    <View style={authStyles.container}>
+    <ScrollView style={authStyles.container}>
       <Header
         title="Settings"
         variant="secondary"
@@ -58,12 +61,12 @@ export const Settings = () => {
       />
 
       <View style={[globalStyles.roundedContainer]}>
-        <View style={globalStyles.imgWrapper}>
+        <View style={[globalStyles.imgWrapper]}>
           <ImageWithFallback
             source={Images.profilePic}
             style={globalStyles.profilePic}
           />
-          <Text style={styles.nameText}>John Smith</Text>
+          <Text style={[globalStyles.title3]}>John Smith</Text>
         </View>
 
         <CardDetails>
@@ -91,17 +94,8 @@ export const Settings = () => {
         selectedCurrency={selectedCurrency}
         onSelect={handleSelectCurrency}
       />
-    </View>
+    </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  nameText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginTop: 10,
-    textAlign: 'center',
-  },
-});
 
 export default Settings;

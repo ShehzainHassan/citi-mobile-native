@@ -1,10 +1,10 @@
-import { CardDetailRow, CardDetails, Header } from "@/components";
-import { useGlobalStyles } from "@/hooks";
-import { MainTabParamList } from "@/navigation/types";
-import { useNavigation } from "@react-navigation/native";
+import { CardDetailRow, CardDetails, Header } from '@/components';
+import { useGlobalStyles } from '@/hooks';
+import { MainTabParamList } from '@/navigation/types';
+import { useNavigation } from '@react-navigation/native';
 
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Text, View } from "react-native";
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Text, View } from 'react-native';
 
 export const AppInformation = () => {
   const globalStyles = useGlobalStyles();
@@ -15,15 +15,16 @@ export const AppInformation = () => {
     <View style={globalStyles.verticalSpread}>
       <Header
         title="App information"
-        onPress={() => navigation.navigate("Settings")}
+        onPress={() => navigation.navigate('Settings')}
       />
       <View style={globalStyles.paddedColumn}>
         <Text
           style={[
             globalStyles.title2,
-            globalStyles.centerContainer,
+            globalStyles.centerText,
             globalStyles.transparentBackground,
-          ]}>
+          ]}
+        >
           Citibank E-mobile Banking
         </Text>
         <CardDetails>

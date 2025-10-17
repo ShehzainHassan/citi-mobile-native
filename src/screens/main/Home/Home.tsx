@@ -19,6 +19,7 @@ import { useTranslation } from 'react-i18next';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { RootState } from '@/store';
 import { currencySymbolsMap } from '@/utils';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const HomeScreen = () => {
   const globalStyles = useGlobalStyles();
@@ -35,53 +36,60 @@ export const HomeScreen = () => {
   const symbol = currencySymbolsMap[selectedCurrency] || selectedCurrency;
 
   return (
-    <View style={homeScreenStyles.mainContainer}>
-      <View style={homeScreenStyles.headerContainer}>
-        <View style={homeScreenStyles.profilePicContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
-            <ImageWithFallback
-              source={Images.profilePic}
-              style={homeScreenStyles.profilePic}
-              accessibilityLabel={t(TranslationKeys.homeScreen.profilePicAlt)}
-            />
-          </TouchableOpacity>
-          <Text style={globalStyles.body1}>
-            {t(TranslationKeys.homeScreen.greeting, { name: 'John' })}
-          </Text>
+    <SafeAreaView style={globalStyles.safeArea} edges={['bottom']}>
+      <View style={homeScreenStyles.mainContainer}>
+        <View style={homeScreenStyles.headerContainer}>
+          <View style={homeScreenStyles.profilePicContainer}>
+            <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+              <ImageWithFallback
+                source={Images.profilePic}
+                style={homeScreenStyles.profilePic}
+                accessibilityLabel={t(TranslationKeys.homeScreen.profilePicAlt)}
+              />
+            </TouchableOpacity>
+            <Text style={globalStyles.body1}>
+              {t(TranslationKeys.homeScreen.greeting, { name: 'John' })}
+            </Text>
+          </View>
+          <ImageWithFallback
+            source={Images.notification}
+            style={homeScreenStyles.notificationBell}
+            accessibilityLabel={t(TranslationKeys.homeScreen.notificationAlt)}
+          />
         </View>
-        <ImageWithFallback
-          source={Images.notification}
-          style={homeScreenStyles.notificationBell}
-          accessibilityLabel={t(TranslationKeys.homeScreen.notificationAlt)}
-        />
-      </View>
 
-      <View style={[globalStyles.roundedContainer, homeScreenStyles.container]}>
-        <CreditCard
-          name="John Smith"
-          cardType="Amazon Platinium"
-          cardNumber="475612349018"
-          amount={`${symbol}3,469.52`}
-          backgroundImage={Images.cards}
-        />
+        <View
+          style={[globalStyles.roundedContainer, homeScreenStyles.container]}
+        >
+          <CreditCard
+            name="John Smith"
+            cardType="Amazon Platinium"
+            cardNumber="475612349018"
+            amount={`${symbol}3,469.52`}
+            backgroundImage={Images.cards}
+          />
 
-        <View style={homeScreenStyles.columnContainer}>
-          {cardGrid.map((row, rowIndex) => (
-            <View key={`row-${rowIndex}`} style={homeScreenStyles.rowContainer}>
-              {row.map(card => (
-                <HomeScreenCard
-                  key={card.id}
-                  image={card.image}
-                  label={card.label}
-                  onPress={() => handleCardPress(card)}
-                />
-              ))}
-            </View>
-          ))}
+          <View style={homeScreenStyles.columnContainer}>
+            {cardGrid.map((row, rowIndex) => (
+              <View
+                key={`row-${rowIndex}`}
+                style={homeScreenStyles.rowContainer}
+              >
+                {row.map(card => (
+                  <HomeScreenCard
+                    key={card.id}
+                    image={card.image}
+                    label={card.label}
+                    onPress={() => handleCardPress(card)}
+                  />
+                ))}
+              </View>
+            ))}
+          </View>
         </View>
+        <Tabs />
       </View>
-      <Tabs />
-    </View>
+    </SafeAreaView>
   );
 };
 

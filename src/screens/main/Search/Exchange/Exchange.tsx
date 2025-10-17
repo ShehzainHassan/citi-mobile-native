@@ -101,6 +101,7 @@ export const Exchange = () => {
               placeholder="Amount"
               keyboardType="number-pad"
               value={toAmount}
+              required={false}
               onChangeText={setToAmount}
               rightText={toCurrency}
               rightPlaceholder="USD"

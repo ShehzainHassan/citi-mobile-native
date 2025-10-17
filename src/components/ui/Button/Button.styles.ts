@@ -5,7 +5,7 @@ export const createButtonStyles = (theme: Theme) =>
   StyleSheet.create({
     container: {
       alignItems: 'center',
-      borderRadius: theme.radius.sm,
+      borderRadius: theme.radius.md,
       justifyContent: 'center',
     },
     contentContainer: {
