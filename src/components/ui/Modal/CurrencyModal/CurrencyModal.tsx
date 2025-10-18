@@ -1,6 +1,6 @@
 import React from 'react';
 import { BaseModal } from '@/components/ui/Modal';
-import { useCurrencySelector } from '@/hooks/useCurrencySelector';
+import { useCurrencySymbols } from '@/hooks/useCurrencySymbols';
 import { CurrencyModalProps } from './CurrencyModal.types';
 
 export const CurrencyModal: React.FC<CurrencyModalProps> = ({
@@ -10,8 +10,7 @@ export const CurrencyModal: React.FC<CurrencyModalProps> = ({
   onSelect,
 }) => {
   const { currencyOptions, loadingSymbols, getSelectedLabel } =
-    useCurrencySelector();
-
+    useCurrencySymbols();
   return (
     <BaseModal
       visible={visible}

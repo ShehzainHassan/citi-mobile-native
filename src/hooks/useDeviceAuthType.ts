@@ -14,8 +14,6 @@ export const useDeviceAuthType = (): AuthType => {
     }
 
     checkBiometricSupport(result => {
-      console.log('Biometric Support Result:', result);
-
       switch (result) {
         case 'SUCCESS':
           setAuthType('BIOMETRIC');

@@ -18,6 +18,7 @@ import {
 } from './SearchForBranch.styles';
 import { useTheme } from '@/theme';
 import { BANK_LOCATIONS } from '@/constants';
+import { BankLocation } from '@/interfaces';
 
 export const SearchForBranch: React.FC = () => {
   const navigation =
@@ -30,13 +31,13 @@ export const SearchForBranch: React.FC = () => {
   const styles = createSearchBranchStyles(theme);
 
   const [search, setSearch] = useState('');
-  const [selectedBankId, setSelectedBankId] = useState<string | null>(null);
+  const [selectedBankId, setSelectedBankId] = useState<number | null>(null);
 
   const filteredBanks = BANK_LOCATIONS.filter(bank =>
     bank.name.toLowerCase().includes(search.toLowerCase()),
   );
 
-  const handleSelectBank = (bank: any) => {
+  const handleSelectBank = (bank: BankLocation) => {
     setSelectedBankId(bank.id);
 
     const region: Region = {

@@ -88,7 +88,7 @@ export const AddNewBeneficiary = () => {
       });
       setSelectedImage(image.path);
     } catch (error) {
-      console.log('Image pick cancelled or failed:', error);
+      console.error('Image pick cancelled or failed:', error);
     }
   };
 

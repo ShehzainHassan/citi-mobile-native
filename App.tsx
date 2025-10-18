@@ -50,6 +50,7 @@ import {
 import { ThemeProvider } from '@/styles/ThemeProvider';
 import { Provider } from 'react-redux';
 import { store } from '@/store';
+import { ReactQueryProvider } from '@/providers';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -122,17 +123,19 @@ export default function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <Provider store={store}>
-      <ThemeProvider>
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <SafeAreaProvider>
-            <StatusBar
-              barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-            />
-            <AppContent />
-          </SafeAreaProvider>
-        </GestureHandlerRootView>
-      </ThemeProvider>
-    </Provider>
+    <ReactQueryProvider>
+      <Provider store={store}>
+        <ThemeProvider>
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <SafeAreaProvider>
+              <StatusBar
+                barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+              />
+              <AppContent />
+            </SafeAreaProvider>
+          </GestureHandlerRootView>
+        </ThemeProvider>
+      </Provider>
+    </ReactQueryProvider>
   );
 }

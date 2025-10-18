@@ -7,6 +7,8 @@
 // Reusable business logic
 import { MODAL_OPTIONS_MAP } from '@/config';
 import { ValidationRule } from '@/interfaces';
+import { RefObject } from 'react';
+import { ScrollView } from 'react-native';
 
 export const getFlagUrl = (countryCode: string, size: number = 40) => {
   return `https://flagcdn.com/w${size}/${countryCode.toLowerCase()}.png`;
@@ -58,14 +60,16 @@ export const handleModalOpen = (
 
 export const handleScroll = (
   transferKey: string,
-  scrollRef: React.RefObject<any>,
+  scrollRef: RefObject<ScrollView | null>,
   keys: string[],
 ) => {
   const index = keys.indexOf(transferKey);
   if (scrollRef.current) {
-    if (index === 0) scrollRef.current.scrollTo({ x: 0, animated: true });
-    else if (index === keys.length - 1)
+    if (index === 0) {
+      scrollRef.current.scrollTo({ x: 0, animated: true });
+    } else if (index === keys.length - 1) {
       scrollRef.current.scrollToEnd({ animated: true });
+    }
   }
 };
 

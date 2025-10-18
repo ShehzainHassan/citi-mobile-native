@@ -1,5 +1,8 @@
 import { Images } from '@/assets/images';
 import { BANK_OPTIONS, BRANCH_OPTIONS } from '@/constants';
+import { FC } from 'react';
+import { ImageSourcePropType } from 'react-native';
+import { SvgProps } from 'react-native-svg';
 
 export const TRANSFER_TYPES = ['card', 'sameBank', 'anotherBank'] as const;
 export type TransferType = (typeof TRANSFER_TYPES)[number];
@@ -8,7 +11,7 @@ export const TRANSFER_OPTIONS: {
   key: TransferType;
   text: string;
   variant: 'secondary' | 'primary';
-  image: any;
+  image: ImageSourcePropType | FC<SvgProps>;
 }[] = [
   {
     key: 'card',

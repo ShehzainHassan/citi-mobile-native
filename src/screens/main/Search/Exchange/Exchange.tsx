@@ -1,8 +1,7 @@
 import { Images } from '@/assets/images';
 import { Header, ImageWithFallback } from '@/components';
 import { Button, CurrencyModal, Input } from '@/components/ui';
-import { useGlobalStyles } from '@/hooks';
-import { useCurrencySelector } from '@/hooks/useCurrencySelector';
+import { useConversionRate, useGlobalStyles } from '@/hooks';
 import { MainTabParamList } from '@/navigation/types';
 import { Theme, useTheme } from '@/theme';
 import MaterialIcons from '@react-native-vector-icons/material-icons';
@@ -24,35 +23,30 @@ export const Exchange = () => {
   const [toCurrency, setToCurrency] = useState('');
   const [isModalVisible, setModalVisible] = useState(false);
   const [activeField, setActiveField] = useState<'from' | 'to'>('from');
-  const [exchangeRate, setExchangeRate] = useState<number | null>(null);
-  const [loadingExchange, setLoadingExchange] = useState(false);
 
-  const { getRate } = useCurrencySelector();
+  const {
+    data: exchangeRate,
+    isFetching: loadingExchange,
+    refetch: fetchRate,
+  } = useConversionRate(fromCurrency, toCurrency);
 
   const handleSelectCurrency = (label: string) => {
     const code = label.split(' ')[0];
     if (activeField === 'from') setFromCurrency(code ?? '');
     else setToCurrency(code ?? '');
-    setExchangeRate(null);
     setToAmount('');
     setModalVisible(false);
   };
 
   const handleExchange = async () => {
     if (!fromCurrency || !toCurrency || !fromAmount.trim()) return;
-    try {
-      setLoadingExchange(true);
-      const rate = await getRate(fromCurrency, toCurrency);
-      if (rate) {
-        setExchangeRate(rate);
-        const converted = (parseFloat(fromAmount) * rate).toFixed(2);
-        setToAmount(converted);
-      } else {
-        setExchangeRate(null);
-        setToAmount('');
-      }
-    } finally {
-      setLoadingExchange(false);
+
+    const { data: rate } = await fetchRate();
+    if (rate) {
+      const converted = (parseFloat(fromAmount) * rate).toFixed(2);
+      setToAmount(converted);
+    } else {
+      setToAmount('');
     }
   };
 
@@ -118,6 +112,7 @@ export const Exchange = () => {
                 />
               }
             />
+
             {exchangeRate && (
               <View style={styles.currencyContainer}>
                 <Text style={[globalStyles.body3, globalStyles.primary1]}>

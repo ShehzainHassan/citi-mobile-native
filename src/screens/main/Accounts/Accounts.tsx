@@ -145,7 +145,6 @@ export const Accounts = () => {
               amount: `${symbol}${card.amount.toLocaleString()}`,
               type: card.type as Card['type'],
             }))}
-            onAddCard={() => console.log('')}
             onCardPress={(type: Card) => handleCardSelect(type)}
           />
         )}

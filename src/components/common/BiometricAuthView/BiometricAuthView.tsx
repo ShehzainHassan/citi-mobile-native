@@ -23,8 +23,6 @@ export const BiometricAuthView: React.FC<BiometricAuthViewProps> = ({
           'Use Face ID / Touch ID',
           'Authenticate to confirm transaction',
           res => {
-            console.log('iOS Biometric Result:', res);
-
             if (res === 5) {
               onSuccess();
             } else {
@@ -37,7 +35,6 @@ export const BiometricAuthView: React.FC<BiometricAuthViewProps> = ({
           'Authentication Required',
           'Confirm using your biometrics or screen lock (PIN, Pattern, Password)',
           result => {
-            console.log('Android Biometric Result:', result);
             const normalizedResult = String(result).toUpperCase();
 
             if (
