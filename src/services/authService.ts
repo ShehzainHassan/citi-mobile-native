@@ -1,0 +1,37 @@
+import { AuthTokens, UserCredentials } from '@/interfaces';
+
+const FIXED_USER = {
+  email: 'test@example.com',
+  password: 'password123',
+};
+
+export const authService = {
+  async signIn(credentials: UserCredentials): Promise<AuthTokens> {
+    if (
+      credentials.email !== FIXED_USER.email ||
+      credentials.password !== FIXED_USER.password
+    ) {
+      throw new Error('Invalid credentials');
+    }
+
+    const expiresAt = Date.now() + 60 * 60 * 1000;
+
+    return {
+      accessToken: 'MOCK_ACCESS_TOKEN',
+      refreshToken: 'MOCK_REFRESH_TOKEN',
+      expiresAt,
+    };
+  },
+
+  async refreshAccessToken(): Promise<string> {
+    return 'MOCK_ACCESS_TOKEN_REFRESHED';
+  },
+
+  async signOut(): Promise<void> {
+    return;
+  },
+
+  async isAuthenticated(): Promise<boolean> {
+    return false;
+  },
+};

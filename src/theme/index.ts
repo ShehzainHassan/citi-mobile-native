@@ -9,11 +9,10 @@
 // Use theme context: const theme = useTheme(); then theme.colors.primary1
 // This allows proper theme switching and consistent styling
 // ------------------------------------------------------------
-import { darkTheme } from "./dark";
-import { lightTheme } from "./light";
+import { darkTheme } from './dark';
+import { lightTheme } from './light';
 
 export type Theme = typeof lightTheme;
 
-export { createStyledComponent, getThemeValue } from "../styles/styled";
-export { ThemeProvider, useTheme } from "../styles/ThemeProvider";
+export { ThemeProvider, useTheme } from '../styles/ThemeProvider';
 export { darkTheme, lightTheme };

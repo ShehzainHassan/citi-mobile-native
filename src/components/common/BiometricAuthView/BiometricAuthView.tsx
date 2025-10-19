@@ -1,10 +1,10 @@
 import { Images } from '@/assets/images';
 import { ImageWithFallback } from '@/components';
 import { useAuthStyles, useGlobalStyles } from '@/hooks';
+import { useBiometricAuth } from '@/hooks/useBiometricAuth';
 import { useTheme } from '@/theme';
 import React from 'react';
-import { Alert, Platform, Text, TouchableOpacity, View } from 'react-native';
-import { enableBioMetric } from 'react-native-biometric-check';
+import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import { createBiometricAuthViewStyles } from './BiometricAuthView.styles';
 import { BiometricAuthViewProps } from './BiometricAuthView.types';
 
@@ -16,43 +16,15 @@ export const BiometricAuthView: React.FC<BiometricAuthViewProps> = ({
   const globalStyles = useGlobalStyles();
   const authStyles = useAuthStyles();
   const styles = createBiometricAuthViewStyles(theme);
-  const handleBiometricAuth = async () => {
-    try {
-      if (Platform.OS === 'ios') {
-        enableBioMetric(
-          'Use Face ID / Touch ID',
-          'Authenticate to confirm transaction',
-          res => {
-            if (res === 5) {
-              onSuccess();
-            } else {
-              Alert.alert('Authentication Failed', `${res}`);
-            }
-          },
-        );
-      } else {
-        enableBioMetric(
-          'Authentication Required',
-          'Confirm using your biometrics or screen lock (PIN, Pattern, Password)',
-          result => {
-            const normalizedResult = String(result).toUpperCase();
 
-            if (
-              normalizedResult === 'AUTHENTICATION_SUCCESS' ||
-              normalizedResult === 'BIOMETRIC_SUCCESS' ||
-              normalizedResult === 'BIOMETRICS_SUCCESS' ||
-              normalizedResult === 'SUCCESS' ||
-              normalizedResult === '5'
-            ) {
-              onSuccess();
-            } else {
-              Alert.alert('Authentication Failed', `${result}`);
-            }
-          },
-        );
-      }
-    } catch (error) {
-      Alert.alert('Error', 'Biometric authentication failed.');
+  const { authenticateWithBiometrics } = useBiometricAuth();
+
+  const handleBiometricAuth = async () => {
+    const { success, error } = await authenticateWithBiometrics();
+    if (success) {
+      onSuccess();
+    } else {
+      Alert.alert('Authentication Failed', error);
     }
   };
 
