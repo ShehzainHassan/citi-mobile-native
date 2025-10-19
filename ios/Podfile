@@ -15,11 +15,14 @@ if linkage != nil
 end
 
 target 'CitiBank' do
+  # React Native Maps dependencies
+
+  rn_maps_path = '../node_modules/react-native-maps'
+  pod 'react-native-maps/Google', :path => rn_maps_path
+
   config = use_native_modules!
   
   # React Native Maps dependencies - Google Maps
-  rn_maps_path = '../node_modules/react-native-maps'
-  pod 'react-native-google-maps', :path => rn_maps_path
   pod 'GoogleMaps'
   pod 'Google-Maps-iOS-Utils'
 
@@ -37,5 +40,12 @@ target 'CitiBank' do
       :mac_catalyst_enabled => false,
       # :ccache_enabled => true
     )
+    
+    # Disable User Script Sandboxing for all targets
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['ENABLE_USER_SCRIPT_SANDBOXING'] = 'NO'
+      end
+    end
   end
 end
