@@ -1,7 +1,10 @@
-import { secureStorage } from '@/services';
 import { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
-import { enableBioMetric } from 'react-native-biometric-check';
+import {
+  enableBioMetric,
+  checkBiometricSupport,
+} from 'react-native-biometric-check';
+import { secureStorage } from '@/services';
 
 interface BiometricResult {
   success: boolean;
@@ -17,12 +20,15 @@ export const useBiometricAuth = () => {
   const [savedEmail, setSavedEmail] = useState<string | null>(null);
 
   useEffect(() => {
-    checkBiometricAvailability();
+    checkAvailability();
     loadBiometricPreference();
   }, []);
 
-  const checkBiometricAvailability = async () => {
-    setBiometricAvailable(true);
+  const checkAvailability = async () => {
+    checkBiometricSupport(status => {
+      console.log('BIOMETRIC SUPPORT STATUS = ', status);
+      setBiometricAvailable(status === 'SUCCESS');
+    });
   };
 
   const loadBiometricPreference = async () => {
@@ -46,22 +52,43 @@ export const useBiometricAuth = () => {
         );
       });
 
-      const normalized = result.toUpperCase();
+      const normalized = result.trim().toUpperCase();
 
-      const successValues = [
+      const successValues = new Set([
         'AUTHENTICATION_SUCCESS',
         'BIOMETRIC_SUCCESS',
         'BIOMETRICS_SUCCESS',
         'SUCCESS',
         '5',
-      ];
+      ]);
 
-      if (successValues.includes(normalized)) {
+      if (successValues.has(normalized)) {
         return { success: true };
       }
-      return { success: false, error: normalized };
+
+      if (__DEV__) {
+        console.warn('Biometric failed with response:', normalized);
+      }
+
+      return {
+        success: false,
+        error:
+          normalized === 'AUTHENTICATION_FAILED'
+            ? 'Biometric authentication was unsuccessful. Please try again.'
+            : normalized,
+      };
     } catch (e) {
-      return { success: false, error: 'Biometric failed' };
+      if (__DEV__) {
+        console.error('Biometric exception:', e);
+      }
+
+      return {
+        success: false,
+        error:
+          e instanceof Error
+            ? e.message
+            : 'Biometric authentication failed due to an unexpected error.',
+      };
     }
   };
 

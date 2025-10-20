@@ -1,4 +1,4 @@
-import { BillData } from '@/interfaces';
+import { BillData } from "@/types";
 
 export const electricBillData: BillData[] = [
   {

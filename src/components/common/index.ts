@@ -19,3 +19,5 @@ export { ChooseTransfer } from './ChooseTransfer';
 export { BiometricAuthView } from './BiometricAuthView';
 export { PhoneNumberInput } from './PhoneInput';
 export { AmountSelector } from './AmountSelector';
+export { ErrorMessage } from './ErrorMessage';
+export { ErrorBoundary } from './ErrorBoundary';

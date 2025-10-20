@@ -79,17 +79,13 @@ export const AddNewBeneficiary = () => {
   };
 
   const handleImagePick = async () => {
-    try {
-      const image = await ImagePicker.openPicker({
-        width: 300,
-        height: 300,
-        cropping: true,
-        mediaType: 'photo',
-      });
-      setSelectedImage(image.path);
-    } catch (error) {
-      console.error('Image pick cancelled or failed:', error);
-    }
+    const image = await ImagePicker.openPicker({
+      width: 300,
+      height: 300,
+      cropping: true,
+      mediaType: 'photo',
+    });
+    setSelectedImage(image.path);
   };
 
   return (

@@ -1,4 +1,4 @@
-import { BankLocation } from '@/interfaces';
+import { BankLocation } from '@/types';
 
 export const BANK_LOCATIONS: BankLocation[] = [
   {

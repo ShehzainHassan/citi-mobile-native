@@ -3,7 +3,7 @@
 // Screen props types for type-safe navigation
 
 import { TransferType } from '@/config';
-import { PaymentData } from '@/interfaces';
+import { PaymentData } from '@/types';
 
 export type AuthStackParamList = {
   SignIn: undefined;

@@ -6,14 +6,12 @@ export interface AuthState {
   isLoading: boolean;
   error: string | null;
 }
-
 export interface UserPreferences {
   language: string;
   currency: string;
   notificationsEnabled: boolean;
   theme: 'light' | 'dark' | 'system';
 }
-
 export interface UserProfile {
   userId: string;
   email: string;
@@ -31,13 +29,11 @@ export interface UserState {
   isLoading: boolean;
   error: string | null;
 }
-
 export interface AuthTokens {
   accessToken: string;
   refreshToken: string;
   expiresAt: number;
 }
-
 export interface UserCredentials {
   email: string;
   password: string;

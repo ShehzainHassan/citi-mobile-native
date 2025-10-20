@@ -1,8 +1,8 @@
-import { useGlobalStyles } from "@/hooks";
-import { useTheme } from "@/theme";
-import { Text, TouchableOpacity, View } from "react-native";
-import { createAuthFooterStyles } from "./AuthFooter.styles";
-import { AuthFooterProps } from "./AuthFooter.types";
+import { useGlobalStyles } from '@/hooks';
+import { useTheme } from '@/theme';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { createAuthFooterStyles } from './AuthFooter.styles';
+import { AuthFooterProps } from './AuthFooter.types';
 
 export const AuthFooter: React.FC<AuthFooterProps> = ({
   label,

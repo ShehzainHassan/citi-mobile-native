@@ -5,7 +5,7 @@ export const secureStorage = {
     await Keychain.setGenericPassword(key, value, {
       service: key,
       accessible: Keychain.ACCESSIBLE.WHEN_UNLOCKED,
-      accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_ANY_OR_DEVICE_PASSCODE,
+      accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_ANY,
       securityLevel: Keychain.SECURITY_LEVEL.SECURE_HARDWARE,
     });
   },
@@ -22,10 +22,5 @@ export const secureStorage = {
 
   async deleteItem(key: string): Promise<void> {
     await Keychain.resetGenericPassword({ service: key });
-  },
-
-  async isBiometricsAvailable(): Promise<boolean> {
-    const biometry = await Keychain.getSupportedBiometryType();
-    return biometry !== null;
   },
 };

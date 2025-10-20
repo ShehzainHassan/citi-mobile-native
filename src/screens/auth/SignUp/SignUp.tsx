@@ -45,9 +45,7 @@ export const SignUp = () => {
     }
 
     if (validateAll()) {
-      console.log('Valid form:', values);
     } else {
-      console.log('Validation failed:', errors);
     }
   };
 

@@ -1,3 +1,4 @@
+// store/store.ts
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 import {
@@ -15,6 +16,22 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import userReducer from '@/store/slices/user/userSlice';
 import settingsReducer from '@/store/slices/settings/settingsSlice';
 import authReducer from '@/store/slices/authSlice/authSlice';
+import { encryptTransform } from './persistConfig';
+import { loggerMiddleware } from './middleware/logger';
+
+const authPersistConfig = {
+  key: 'auth',
+  storage: AsyncStorage,
+  whitelist: ['accessToken', 'refreshToken', 'expiresAt'],
+  transforms: [encryptTransform],
+};
+
+const userPersistConfig = {
+  key: 'user',
+  storage: AsyncStorage,
+  whitelist: ['profile', 'preferences'],
+  transforms: [encryptTransform],
+};
 
 const settingsPersistConfig = {
   key: 'settings',
@@ -23,8 +40,8 @@ const settingsPersistConfig = {
 };
 
 const rootReducer = combineReducers({
-  auth: authReducer,
-  user: userReducer,
+  auth: persistReducer(authPersistConfig, authReducer),
+  user: persistReducer(userPersistConfig, userReducer),
   settings: persistReducer(settingsPersistConfig, settingsReducer),
 });
 
@@ -35,8 +52,8 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
-  devTools: process.env.NODE_ENV !== 'production',
+    }).concat(__DEV__ ? [loggerMiddleware] : []),
+  devTools: __DEV__,
 });
 
 export const persistor = persistStore(store);

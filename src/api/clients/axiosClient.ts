@@ -2,6 +2,7 @@ import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { store } from '@/store';
 import { authService } from '@/services/authService';
 import { clearAuth, setTokens } from '@/store/slices/authSlice/authSlice';
+import { handleAPIError } from '@/utils';
 
 let isRefreshing = false;
 let failedQueue: {
@@ -75,13 +76,13 @@ export const createAxiosClient = (baseURL: string) => {
         } catch (err) {
           processQueue(err, null);
           store.dispatch(clearAuth());
-          throw err;
+          throw handleAPIError(err);
         } finally {
           isRefreshing = false;
         }
       }
 
-      throw error;
+      throw handleAPIError(error);
     },
   );
 

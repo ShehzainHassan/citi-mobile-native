@@ -18,7 +18,7 @@ import {
 } from './SearchForBranch.styles';
 import { useTheme } from '@/theme';
 import { BANK_LOCATIONS } from '@/constants';
-import { BankLocation } from '@/interfaces';
+import { BankLocation } from '@/types';
 
 export const SearchForBranch: React.FC = () => {
   const navigation =

@@ -97,4 +97,7 @@ export const createAuthStyles = (theme: Theme) =>
       flexDirection: 'column',
       gap: theme.spacing.ms - 2,
     },
+    button: {
+      marginBottom: theme.spacing.lg,
+    },
   });

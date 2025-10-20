@@ -1,4 +1,4 @@
-import { UserPreferences, UserProfile, UserState } from '@/interfaces';
+import { UserPreferences, UserProfile, UserState } from '@/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialPreferences: UserPreferences = {

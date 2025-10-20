@@ -3,16 +3,26 @@ import {
   AuthFooter,
   AuthHeader,
   AuthImageBlock,
+  BiometricAuthView,
   Button,
+  ErrorMessage,
   Header,
-  ImageWithFallback,
   Input,
 } from '@/components';
-import { useAuthStyles, useFormValidation, useGlobalStyles } from '@/hooks';
+import {
+  useAuthStyles,
+  useDeviceAuthType,
+  useFormValidation,
+  useGlobalStyles,
+  useToast,
+} from '@/hooks';
 import { TranslationKeys } from '@/i18n';
 import { MainTabWithAuthParamList } from '@/navigation/types';
+import { authService } from '@/services';
+import { setTokens } from '@/store/slices/authSlice/authSlice';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   KeyboardAvoidingView,
@@ -22,6 +32,7 @@ import {
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useDispatch } from 'react-redux';
 
 export const SignIn = () => {
   const globalStyles = useGlobalStyles();
@@ -29,18 +40,45 @@ export const SignIn = () => {
   const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabWithAuthParamList>>();
+  const dispatch = useDispatch();
 
   const { values, errors, handleChange, validateAll } = useFormValidation({
     email: '',
     password: '',
   });
-
-  const handleSignIn = () => {
-    if (validateAll()) {
-      console.log('Valid form:', values);
-    } else {
-      console.log('Validation failed:', errors);
+  const { success, error } = useToast();
+  const [loginError, setLoginError] = useState<Error | null>(null);
+  const authType = useDeviceAuthType();
+  const handleLogin = async (email: string, password: string) => {
+    try {
+      const tokens = await authService.signIn({ email, password });
+      dispatch(setTokens(tokens));
+      success('Sign in successful', 'Welcome back!');
+      navigation.navigate('Home');
+      setLoginError(null);
+    } catch (err: unknown) {
+      const parsedError =
+        err instanceof Error ? err : new Error('Something went wrong');
+      error('Sign in failed', parsedError.message);
+      setLoginError(parsedError);
     }
+  };
+
+  const handleSignIn = async () => {
+    if (!validateAll()) {
+      error('Validation failed', 'Please check your inputs');
+      return;
+    }
+    await handleLogin(values.email, values.password);
+  };
+  const handleBiometricSuccess = () => {
+    const mockEmail = 'test@example.com';
+    const mockPassword = 'Password123';
+
+    handleChange('email', mockEmail);
+    handleChange('password', mockPassword);
+
+    handleLogin(mockEmail, mockPassword);
   };
 
   return (
@@ -57,7 +95,7 @@ export const SignIn = () => {
           <Header
             title={t(TranslationKeys.auth.signIn)}
             variant="secondary"
-            onPress={() => navigation.navigate('Home')}
+            onPress={() => navigation.navigate('SignUp')}
             style={authStyles.headerContainer}
           />
 
@@ -76,7 +114,6 @@ export const SignIn = () => {
                 onChangeText={text => handleChange('email', text)}
                 error={errors.email ?? undefined}
               />
-
               <Input
                 placeholder={t(TranslationKeys.auth.passwordPlaceholder)}
                 secureTextEntry
@@ -99,22 +136,30 @@ export const SignIn = () => {
               disabled={
                 !values.email ||
                 !values.password ||
-                Object.values(errors).some(error => error !== null)
+                Object.values(errors).some(err => err !== null)
               }
+              style={authStyles.button}
             />
 
-            <View style={globalStyles.centerContainer}>
-              <ImageWithFallback
-                source={Images.fingerprint}
-                style={authStyles.biometricButton}
+            {authType !== 'NONE' && (
+              <BiometricAuthView
+                showText={false}
+                authType={authType}
+                onSuccess={handleBiometricSuccess}
               />
-            </View>
+            )}
 
             <AuthFooter
               label={t(TranslationKeys.auth.noAccount)}
               actionText={t(TranslationKeys.auth.signUp)}
               onActionPress={() => navigation.navigate('SignUp')}
             />
+            {loginError && (
+              <ErrorMessage
+                error={loginError}
+                onRetry={() => handleLogin(values.email, values.password)}
+              />
+            )}
           </View>
         </ScrollView>
       </KeyboardAvoidingView>

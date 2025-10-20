@@ -1,4 +1,4 @@
-import { ValidationRule } from '@/interfaces';
+import { ValidationRule } from '@/types';
 import { sanitizeInput, validationRules } from '@/utils';
 import { useState } from 'react';
 

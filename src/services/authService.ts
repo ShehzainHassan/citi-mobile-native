@@ -1,8 +1,10 @@
-import { AuthTokens, UserCredentials } from '@/interfaces';
+import { store } from '@/store';
+import { clearAuth } from '@/store/slices/authSlice/authSlice';
+import { AuthTokens, UserCredentials } from '@/types';
 
 const FIXED_USER = {
   email: 'test@example.com',
-  password: 'password123',
+  password: 'Password123',
 };
 
 export const authService = {
@@ -28,6 +30,7 @@ export const authService = {
   },
 
   async signOut(): Promise<void> {
+    store.dispatch(clearAuth());
     return;
   },
 

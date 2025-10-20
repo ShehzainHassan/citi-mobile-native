@@ -1,9 +1,11 @@
 import { Images } from '@/assets/images';
-import { Header, ImageWithFallback } from '@/components';
+import { ErrorMessage, Header, ImageWithFallback } from '@/components';
 import { Button, CurrencyModal, Input } from '@/components/ui';
 import { useConversionRate, useGlobalStyles } from '@/hooks';
 import { MainTabParamList } from '@/navigation/types';
 import { Theme, useTheme } from '@/theme';
+import { APIError } from '@/types';
+import { handleAPIError } from '@/utils';
 import MaterialIcons from '@react-native-vector-icons/material-icons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -23,6 +25,7 @@ export const Exchange = () => {
   const [toCurrency, setToCurrency] = useState('');
   const [isModalVisible, setModalVisible] = useState(false);
   const [activeField, setActiveField] = useState<'from' | 'to'>('from');
+  const [exchangeError, setExchangeError] = useState<APIError | null>(null);
 
   const {
     data: exchangeRate,
@@ -41,11 +44,18 @@ export const Exchange = () => {
   const handleExchange = async () => {
     if (!fromCurrency || !toCurrency || !fromAmount.trim()) return;
 
-    const { data: rate } = await fetchRate();
-    if (rate) {
-      const converted = (parseFloat(fromAmount) * rate).toFixed(2);
-      setToAmount(converted);
-    } else {
+    try {
+      const { data: rate } = await fetchRate();
+      if (rate) {
+        const converted = (parseFloat(fromAmount) * rate).toFixed(2);
+        setToAmount(converted);
+        setExchangeError(null);
+      } else {
+        setToAmount('');
+      }
+    } catch (err: unknown) {
+      const parsedError = handleAPIError(err);
+      setExchangeError(parsedError);
       setToAmount('');
     }
   };
@@ -131,6 +141,9 @@ export const Exchange = () => {
             onPress={handleExchange}
             loading={loadingExchange}
           />
+          {exchangeError && (
+            <ErrorMessage error={exchangeError} onRetry={handleExchange} />
+          )}
         </View>
       </View>
 

@@ -1,4 +1,4 @@
-import { PaymentData } from '@/interfaces';
+import { PaymentData } from '@/types';
 
 export type DetailedPaymentCardProps = {
   title?: string;
