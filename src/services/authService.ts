@@ -35,6 +35,16 @@ export const authService = {
   },
 
   async isAuthenticated(): Promise<boolean> {
-    return false;
+    const state = store.getState().auth;
+    if (!state.accessToken) {
+      return false;
+    }
+
+    const now = Date.now();
+    if (!state.expiresAt || state.expiresAt < now) {
+      return false;
+    }
+
+    return true;
   },
 };

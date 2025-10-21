@@ -21,3 +21,4 @@ export { PhoneNumberInput } from './PhoneInput';
 export { AmountSelector } from './AmountSelector';
 export { ErrorMessage } from './ErrorMessage';
 export { ErrorBoundary } from './ErrorBoundary';
+export { ProtectedRoute } from './ProtectedRoute';

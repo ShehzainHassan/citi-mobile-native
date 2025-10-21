@@ -48,6 +48,7 @@ import {
   Withdraw,
 } from '@/screens';
 import { TouchableWithoutFeedback } from 'react-native';
+import { ProtectedRoute } from '@/components';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -87,44 +88,263 @@ function SessionProvider() {
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Accounts" component={Accounts} />
-        <Stack.Screen name="Withdraw" component={Withdraw} />
-        <Stack.Screen name="Transfers" component={Transfer} />
-        <Stack.Screen name="ConfirmTransfers" component={ConfirmTransfer} />
-        <Stack.Screen name="Messages" component={Messages} />
-        <Stack.Screen name="MessagesDetails" component={MessageDetails} />
-        <Stack.Screen name="Settings" component={Settings} />
-        <Stack.Screen name="TransactionReport" component={TransactionReport} />
-        <Stack.Screen name="Search" component={Search} />
-        <Stack.Screen name="InterestRate" component={InterestRate} />
-        <Stack.Screen name="ExchangeRate" component={ExchangeRate} />
-        <Stack.Screen name="Exchange" component={Exchange} />
-        <Stack.Screen name="AppInformation" component={AppInformation} />
         <Stack.Screen name="ChangePassword" component={ChangePassword} />
-        <Stack.Screen name="Language" component={Language} />
-        <Stack.Screen name="SearchForBranch" component={SearchForBranch} />
-        <Stack.Screen name="ThemeSelector" component={ThemeSelector} />
-        <Stack.Screen name="PayBill" component={PayTheBill} />
-        <Stack.Screen name="PaymentHistory" component={PaymentHistory} />
-        <Stack.Screen name="CreditCard" component={CreditCardScreen} />
-        <Stack.Screen name="CreditCardDetails" component={CreditCardDetails} />
-        <Stack.Screen name="SaveOnline" component={SaveOnline} />
-        <Stack.Screen name="Add" component={Add} />
-        <Stack.Screen name="Management" component={Management} />
-        <Stack.Screen name="DetailedPaymentCard" component={DetailedPayment} />
-        <Stack.Screen name="PaymentDetails" component={PaymentDetails} />
-        <Stack.Screen name="BillDetails" component={BillDetails} />
-        <Stack.Screen name="MobilePrepaid" component={MobilePrepaid} />
+
+        <Stack.Screen
+          name="Home"
+          children={() => (
+            <ProtectedRoute>
+              <HomeScreen />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="Accounts"
+          children={() => (
+            <ProtectedRoute>
+              <Accounts />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="Withdraw"
+          children={() => (
+            <ProtectedRoute>
+              <Withdraw />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="Transfers"
+          children={() => (
+            <ProtectedRoute>
+              <Transfer />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="ConfirmTransfers"
+          children={() => (
+            <ProtectedRoute>
+              <ConfirmTransfer />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="Messages"
+          children={() => (
+            <ProtectedRoute>
+              <Messages />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="MessagesDetails"
+          children={() => (
+            <ProtectedRoute>
+              <MessageDetails />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="Settings"
+          children={() => (
+            <ProtectedRoute>
+              <Settings />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="TransactionReport"
+          children={() => (
+            <ProtectedRoute>
+              <TransactionReport />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="Search"
+          children={() => (
+            <ProtectedRoute>
+              <Search />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="InterestRate"
+          children={() => (
+            <ProtectedRoute>
+              <InterestRate />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="ExchangeRate"
+          children={() => (
+            <ProtectedRoute>
+              <ExchangeRate />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="Exchange"
+          children={() => (
+            <ProtectedRoute>
+              <Exchange />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="AppInformation"
+          children={() => (
+            <ProtectedRoute>
+              <AppInformation />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="Language"
+          children={() => (
+            <ProtectedRoute>
+              <Language />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="SearchForBranch"
+          children={() => (
+            <ProtectedRoute>
+              <SearchForBranch />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="ThemeSelector"
+          children={() => (
+            <ProtectedRoute>
+              <ThemeSelector />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="PayBill"
+          children={() => (
+            <ProtectedRoute>
+              <PayTheBill />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="PaymentHistory"
+          children={() => (
+            <ProtectedRoute>
+              <PaymentHistory />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="CreditCard"
+          children={() => (
+            <ProtectedRoute>
+              <CreditCardScreen />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="CreditCardDetails"
+          children={() => (
+            <ProtectedRoute>
+              <CreditCardDetails />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="SaveOnline"
+          children={() => (
+            <ProtectedRoute>
+              <SaveOnline />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="Add"
+          children={() => (
+            <ProtectedRoute>
+              <Add />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="Management"
+          children={() => (
+            <ProtectedRoute>
+              <Management />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="DetailedPaymentCard"
+          children={() => (
+            <ProtectedRoute>
+              <DetailedPayment />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="PaymentDetails"
+          children={() => (
+            <ProtectedRoute>
+              <PaymentDetails />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="BillDetails"
+          children={() => (
+            <ProtectedRoute>
+              <BillDetails />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="MobilePrepaid"
+          children={() => (
+            <ProtectedRoute>
+              <MobilePrepaid />
+            </ProtectedRoute>
+          )}
+        />
         <Stack.Screen
           name="MobilePrepaidConfirm"
-          component={ConfimMobilePrepaid}
+          children={() => (
+            <ProtectedRoute>
+              <ConfimMobilePrepaid />
+            </ProtectedRoute>
+          )}
         />
-        <Stack.Screen name="Beneficiary" component={Beneficiary} />
-        <Stack.Screen name="AddBeneficiary" component={AddNewBeneficiary} />
+        <Stack.Screen
+          name="Beneficiary"
+          children={() => (
+            <ProtectedRoute>
+              <Beneficiary />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="AddBeneficiary"
+          children={() => (
+            <ProtectedRoute>
+              <AddNewBeneficiary />
+            </ProtectedRoute>
+          )}
+        />
         <Stack.Screen
           name="ConfirmBeneficiary"
-          component={ConfirmBeneficiary}
+          children={props => (
+            <ProtectedRoute {...props}>
+              <ConfirmBeneficiary {...props} />
+            </ProtectedRoute>
+          )}
         />
       </Stack.Navigator>
     </TouchableWithoutFeedback>

@@ -60,7 +60,7 @@ export const SignIn = () => {
   };
 
   const handleSignIn = async () => {
-    if (!validateAll()) {
+    if (!validateAll(true)) {
       error('Validation failed', 'Please check your inputs');
       return;
     }
@@ -127,11 +127,7 @@ export const SignIn = () => {
             <Button
               title={t(TranslationKeys.auth.signInButton)}
               onPress={handleSignIn}
-              disabled={
-                !values.email ||
-                !values.password ||
-                Object.values(errors).some(err => err !== null)
-              }
+              disabled={!values.email || !!errors.email || !values.password}
               style={authStyles.button}
             />
 

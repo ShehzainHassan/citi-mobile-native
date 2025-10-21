@@ -33,11 +33,12 @@ export const useFormValidation = (initialValues: FormFields) => {
     return !error;
   };
 
-  const validateAll = () => {
+  const validateAll = (skipPassword = false) => {
     let valid = true;
     const newErrors: FormErrors = {};
 
     Object.keys(values).forEach(field => {
+      if (skipPassword && field === 'password') return;
       const rule = validationRules[field as keyof typeof validationRules] as
         | ValidationRule
         | undefined;
