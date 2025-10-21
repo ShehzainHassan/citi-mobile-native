@@ -26,3 +26,4 @@ export * from './useCurrencySymbols';
 export * from './useConversionRate';
 export * from './useBiometricAuth';
 export * from './useToast';
+export * from './useSessionManager';

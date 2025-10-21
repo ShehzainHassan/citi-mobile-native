@@ -9,3 +9,4 @@ export * from './languages';
 export * from './storage';
 export * from './bankLocations';
 export * from './theme';
+export * from './idleScreens';

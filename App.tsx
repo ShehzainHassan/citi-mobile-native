@@ -11,8 +11,8 @@ import { ReactQueryProvider } from '@/providers';
 import { persistor, store } from '@/store';
 import { ThemeProvider } from '@/styles/ThemeProvider';
 
-import AppContent from './AppContent';
 import { ErrorBoundary } from '@/components';
+import AppContent from './AppContent';
 
 export default function App() {
   const isDarkMode = useColorScheme() === 'dark';

@@ -5,7 +5,6 @@ import {
   AuthImageBlock,
   BiometricAuthView,
   Button,
-  ErrorMessage,
   Header,
   Input,
 } from '@/components';
@@ -22,7 +21,6 @@ import { authService } from '@/services';
 import { setTokens } from '@/store/slices/authSlice/authSlice';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   KeyboardAvoidingView,
@@ -47,7 +45,6 @@ export const SignIn = () => {
     password: '',
   });
   const { success, error } = useToast();
-  const [loginError, setLoginError] = useState<Error | null>(null);
   const authType = useDeviceAuthType();
   const handleLogin = async (email: string, password: string) => {
     try {
@@ -55,12 +52,10 @@ export const SignIn = () => {
       dispatch(setTokens(tokens));
       success('Sign in successful', 'Welcome back!');
       navigation.navigate('Home');
-      setLoginError(null);
     } catch (err: unknown) {
       const parsedError =
         err instanceof Error ? err : new Error('Something went wrong');
       error('Sign in failed', parsedError.message);
-      setLoginError(parsedError);
     }
   };
 
@@ -119,7 +114,6 @@ export const SignIn = () => {
                 secureTextEntry
                 value={values.password}
                 onChangeText={text => handleChange('password', text)}
-                error={errors.password ?? undefined}
               />
             </View>
 
@@ -154,12 +148,6 @@ export const SignIn = () => {
               actionText={t(TranslationKeys.auth.signUp)}
               onActionPress={() => navigation.navigate('SignUp')}
             />
-            {loginError && (
-              <ErrorMessage
-                error={loginError}
-                onRetry={() => handleLogin(values.email, values.password)}
-              />
-            )}
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
