@@ -1,10 +1,10 @@
 import { Images } from '@/assets/images';
 import {
   CreditCard,
-  HomeScreenCard,
-  ImageWithFallback,
-  Tabs,
   ErrorMessage,
+  HomeScreenCard,
+  OptimizedImage,
+  Tabs,
 } from '@/components';
 import {
   useAppSelector,
@@ -17,15 +17,15 @@ import { TranslationKeys } from '@/i18n';
 import { AuthStackParamList } from '@/navigation/types';
 import { authService } from '@/services';
 import { RootState } from '@/store';
+import { clearAuth } from '@/store/slices/authSlice/authSlice';
 import { currencySymbolsMap } from '@/utils';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
-import { clearAuth } from '@/store/slices/authSlice/authSlice';
-import { useState } from 'react';
 
 export const HomeScreen = () => {
   const globalStyles = useGlobalStyles();
@@ -61,12 +61,12 @@ export const HomeScreen = () => {
   };
 
   return (
-    <SafeAreaView style={globalStyles.safeArea} edges={['bottom']}>
+    <SafeAreaView style={globalStyles.safeArea} edges={['top', 'bottom']}>
       <View style={homeScreenStyles.mainContainer}>
         <View style={homeScreenStyles.headerContainer}>
           <View style={homeScreenStyles.profilePicContainer}>
             <TouchableOpacity onPress={handleLogout}>
-              <ImageWithFallback
+              <OptimizedImage
                 source={Images.profilePic}
                 style={homeScreenStyles.profilePic}
                 accessibilityLabel={t(TranslationKeys.homeScreen.profilePicAlt)}
@@ -76,7 +76,7 @@ export const HomeScreen = () => {
               {t(TranslationKeys.homeScreen.greeting, { name: 'John' })}
             </Text>
           </View>
-          <ImageWithFallback
+          <OptimizedImage
             source={Images.notification}
             style={homeScreenStyles.notificationBell}
             accessibilityLabel={t(TranslationKeys.homeScreen.notificationAlt)}

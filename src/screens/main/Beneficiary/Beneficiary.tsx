@@ -13,6 +13,7 @@ import MaterialIcons from '@react-native-vector-icons/material-icons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { MainTabParamList } from '@/navigation/types';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const Beneficiary = () => {
   const globalStyles = useGlobalStyles();
@@ -21,7 +22,7 @@ export const Beneficiary = () => {
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
 
   return (
-    <View style={globalStyles.verticalSpread}>
+    <SafeAreaView style={globalStyles.verticalSpread} edges={['top', 'bottom']}>
       <Header
         title="Beneficiary"
         rightIcon={<MaterialIcons name="search" size={24} />}
@@ -55,7 +56,7 @@ export const Beneficiary = () => {
       >
         <MaterialIcons name="add" size={40} color="#fff" />
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 

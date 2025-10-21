@@ -2,7 +2,7 @@ import { Images } from '@/assets/images';
 import { useGlobalStyles } from '@/hooks';
 import { useTheme } from '@/theme';
 import { Text, View } from 'react-native';
-import { ImageWithFallback } from '../ImageWithFallback';
+import { OptimizedImage } from '../OptimizedImage';
 import { createBeneficiaryStyles } from './Beneficiary.styles';
 import { BeneficiaryProps } from './Beneficiary.types';
 
@@ -27,14 +27,11 @@ export const Beneficiary = ({
       <View style={styles.touchable} onTouchEnd={onPress}>
         {isNew ? (
           <View style={styles.imageContainer}>
-            <ImageWithFallback
-              source={Images.addBeneficiary}
-              style={styles.addBeneficiary}
-            />
+            <Images.addBeneficiary style={styles.addBeneficiary} />
           </View>
         ) : image ? (
           <View style={styles.profilePicContainer}>
-            <ImageWithFallback source={image} style={styles.profilePic} />
+            <OptimizedImage source={image} style={styles.profilePic} />
             <Text style={selected ? styles.selectedText : undefined}>
               {name}
             </Text>

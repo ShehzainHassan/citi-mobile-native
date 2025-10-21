@@ -17,6 +17,7 @@ import { currencySymbolsMap } from '@/utils';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { ScrollView, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const TransactionReport = () => {
   const globalStyles = useGlobalStyles();
@@ -29,7 +30,10 @@ export const TransactionReport = () => {
   const symbol = currencySymbolsMap[selectedCurrency] || selectedCurrency;
 
   return (
-    <View style={transactionReportStyles.container}>
+    <SafeAreaView
+      style={transactionReportStyles.container}
+      edges={['top', 'bottom']}
+    >
       <Header
         title="Transaction report"
         variant="secondary"
@@ -88,6 +92,6 @@ export const TransactionReport = () => {
           </View>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };

@@ -14,6 +14,7 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const ConfirmTransfer = () => {
   const globalStyles = useGlobalStyles();
@@ -51,7 +52,7 @@ export const ConfirmTransfer = () => {
         subtitle={
           <Text>
             You have successfully transferred{' '}
-            <Text style={globalStyles.semantic1}>${transferAmount}</Text> to{' '}
+            <Text style={globalStyles.semantic1}>{transferAmount}</Text> to{' '}
             <Text style={globalStyles.primary1}>{recipientName}</Text>.
           </Text>
         }
@@ -61,49 +62,51 @@ export const ConfirmTransfer = () => {
     );
 
   return (
-    <ScrollView style={globalStyles.verticalSpread}>
-      <Header title="Confirm" onPress={() => navigation.goBack()} />
+    <SafeAreaView style={globalStyles.safeArea} edges={['top', 'bottom']}>
+      <ScrollView style={globalStyles.verticalSpread}>
+        <Header title="Confirm" onPress={() => navigation.goBack()} />
 
-      <View style={globalStyles.paddedColumn}>
-        <Text style={[globalStyles.caption1, globalStyles.neutral3]}>
-          Confirm transaction information
-        </Text>
+        <View style={globalStyles.paddedColumn}>
+          <Text style={[globalStyles.caption1, globalStyles.neutral3]}>
+            Confirm transaction information
+          </Text>
 
-        <View style={globalStyles.largeSpacedColumn}>
-          <Input label="From" value={transferData.fromCard || ''} readOnly />
+          <View style={globalStyles.largeSpacedColumn}>
+            <Input label="From" value={transferData.fromCard || ''} readOnly />
 
-          {inputs.map((input, index) => (
+            {inputs.map((input, index) => (
+              <Input
+                key={index}
+                label={input.placeholder}
+                value={transferData[input.placeholder] || ''}
+                readOnly
+              />
+            ))}
+
             <Input
-              key={index}
-              label={input.placeholder}
-              value={transferData[input.placeholder] || ''}
+              label="Transaction fee"
+              value={transferData.transactionFee || '$10'}
               readOnly
             />
-          ))}
 
-          <Input
-            label="Transaction fee"
-            value={transferData.transactionFee || '$10'}
-            readOnly
-          />
+            {!showBiometricView && <OtpInput otp={otp} onChangeOtp={setOtp} />}
 
-          {!showBiometricView && <OtpInput otp={otp} onChangeOtp={setOtp} />}
+            {showBiometricView && (
+              <BiometricAuthView
+                authType={authType}
+                onSuccess={() => setShowSuccessScreen(true)}
+              />
+            )}
 
-          {showBiometricView && (
-            <BiometricAuthView
-              authType={authType}
-              onSuccess={() => setShowSuccessScreen(true)}
+            <Button
+              title="Confirm"
+              style={globalStyles.marginVerticalMd}
+              disabled={!otp}
+              onPress={handleConfirm}
             />
-          )}
-
-          <Button
-            title="Confirm"
-            style={globalStyles.marginVerticalMd}
-            disabled={!otp}
-            onPress={handleConfirm}
-          />
+          </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 };

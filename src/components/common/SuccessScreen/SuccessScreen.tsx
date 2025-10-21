@@ -1,4 +1,4 @@
-import { Button, Header, ImageWithFallback } from '@/components';
+import { Button, Header, OptimizedImage } from '@/components';
 import { useAuthStyles, useGlobalStyles } from '@/hooks';
 import React from 'react';
 import { Text, View } from 'react-native';
@@ -20,7 +20,7 @@ export const SuccessScreen = ({
     <View style={globalStyles.verticalSpread}>
       {headerText && <Header title={headerText} onPress={onBack} />}
       <View style={[globalStyles.paddedColumn]}>
-        <ImageWithFallback source={source} style={globalStyles.authLogo} />
+        <OptimizedImage source={source} style={globalStyles.successImage} />
         <View style={authStyles.changePasswordContainer}>
           <Text style={globalStyles.title3}>{title}</Text>
           {typeof subtitle === 'string' ? (

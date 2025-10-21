@@ -5,6 +5,7 @@ import { MainTabWithSearchParamList } from '@/navigation/types';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const PayTheBill = () => {
   const globalStyles = useGlobalStyles();
@@ -12,7 +13,10 @@ export const PayTheBill = () => {
     useNavigation<NativeStackNavigationProp<MainTabWithSearchParamList>>();
 
   return (
-    <View style={globalStyles.verticalSpread}>
+    <SafeAreaView
+      style={[globalStyles.safeArea, globalStyles.verticalSpread]}
+      edges={['top', 'bottom']}
+    >
       <Header
         title="Pay the bill"
         onPress={() => navigation.navigate('Home')}
@@ -30,6 +34,6 @@ export const PayTheBill = () => {
           ))}
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };

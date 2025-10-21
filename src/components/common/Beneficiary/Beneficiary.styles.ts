@@ -18,8 +18,6 @@ export const createBeneficiaryStyles = (theme: Theme) =>
       gap: theme.spacing.ms,
     },
     container: {
-      alignItems: 'center',
-      justifyContent: 'center',
       width: 100,
       height: 120,
     },

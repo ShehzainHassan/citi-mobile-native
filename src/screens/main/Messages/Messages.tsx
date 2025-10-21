@@ -6,6 +6,7 @@ import { useTheme } from '@/theme';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StyleSheet, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const Messages = () => {
   const globalStyles = useGlobalStyles();
@@ -18,7 +19,10 @@ export const Messages = () => {
   };
 
   return (
-    <View style={globalStyles.verticalSpread}>
+    <SafeAreaView
+      style={[globalStyles.safeArea, globalStyles.verticalSpread]}
+      edges={['top', 'bottom']}
+    >
       <Header title="Messages" onPress={() => navigation.navigate('Home')} />
       <View style={[globalStyles.paddedColumn, globalStyles.spacedColumn]}>
         {MESSAGES_CARD_CONFIG.map(card => (
@@ -37,7 +41,7 @@ export const Messages = () => {
         ))}
       </View>
       <Tabs />
-    </View>
+    </SafeAreaView>
   );
 };
 

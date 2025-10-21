@@ -4,7 +4,7 @@ import {
   CardSelectorModal,
   DetailedPaymentCard,
   Header,
-  ImageWithFallback,
+  OptimizedImage,
   OtpInput,
   SuccessScreen,
 } from '@/components';
@@ -47,7 +47,7 @@ export const BillDetails = () => {
     <ScrollView style={globalStyles.verticalSpread}>
       <Header title={`${billType} bill`} onPress={() => navigation.goBack()} />
       <View style={globalStyles.paddedColumn}>
-        <ImageWithFallback
+        <OptimizedImage
           source={Images.withdrawBanner}
           style={globalStyles.imgLogo}
         />

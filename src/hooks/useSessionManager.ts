@@ -9,8 +9,8 @@ import { useCallback, useEffect, useRef } from 'react';
 import { AppState, AppStateStatus } from 'react-native';
 import { useDispatch } from 'react-redux';
 
-const SESSION_TIMEOUT = 1 * 60 * 1000;
-const WARNING_TIMEOUT = 30 * 1000;
+const SESSION_TIMEOUT = 5 * 60 * 1000;
+const WARNING_TIMEOUT = 4 * 60 * 1000;
 
 export const useSessionManager = () => {
   const dispatch = useDispatch();

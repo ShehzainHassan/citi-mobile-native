@@ -27,7 +27,7 @@ export const createInputStyles = (theme: Theme) =>
     },
     inputLabel: {
       color: theme.colors.textdefault,
-      marginBottom: 4,
+      marginBottom: 8,
     },
     inputReadOnly: {
       borderColor: theme.colors.line2,

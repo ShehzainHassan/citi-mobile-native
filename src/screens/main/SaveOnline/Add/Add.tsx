@@ -3,23 +3,25 @@ import {
   Button,
   ChooseCard,
   Header,
-  ImageWithFallback,
   Input,
+  OptimizedImage,
   SuccessScreen,
 } from '@/components';
-import { createCardSelectorStyles } from '@/components/ui/Modal/CardSelectorModal/CardSelectorModal.styles';
+import { Card } from '@/components/common/ChooseCard/ChooseCard.types';
 import { BaseModal, CardSelectorModal } from '@/components/ui/Modal';
+import { createCardSelectorStyles } from '@/components/ui/Modal/CardSelectorModal/CardSelectorModal.styles';
 import { useAppSelector, useGlobalStyles } from '@/hooks';
 import { cards, timeDeposits } from '@/mocks';
 import { MainTabParamList } from '@/navigation/types';
+import { RootState } from '@/store';
 import { useTheme } from '@/theme';
 import { currencySymbolsMap, sanitizeAmount } from '@/utils';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { Card } from '@/components/common/ChooseCard/ChooseCard.types';
-import { RootState } from '@/store';
+import { Platform, Text, TouchableOpacity, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const Add = () => {
   const { theme } = useTheme();
@@ -60,6 +62,7 @@ export const Add = () => {
         cards={cards.map(c => ({
           ...c,
           type: c.type as Card['type'],
+          amount: String(c.amount),
         }))}
         onCardPress={c => {
           setCard(`Account ${c.cardNumber}`);
@@ -79,81 +82,93 @@ export const Add = () => {
   };
 
   return (
-    <View style={globalStyles.verticalSpread}>
-      <Header title="Add" onPress={() => navigation.navigate('SaveOnline')} />
-      <View style={globalStyles.paddedColumn}>
-        <ImageWithFallback
-          contentFit="contain"
-          source={Images.withdrawBanner}
-          style={[globalStyles.imgLogo]}
-        />
-        <View style={[globalStyles.cardContainer]}>
-          <TouchableOpacity onPress={() => setShowCardScreen(true)}>
-            <CardSelectorModal value={card} onChange={setCard} showBalance />
-          </TouchableOpacity>
+    <SafeAreaView style={globalStyles.verticalSpread} edges={['top', 'bottom']}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={globalStyles.scrollContentSecondary}
+        keyboardShouldPersistTaps="handled"
+        enableOnAndroid
+        extraScrollHeight={Platform.OS === 'ios' ? 80 : 0}
+        showsVerticalScrollIndicator={false}
+      >
+        <Header title="Add" onPress={() => navigation.navigate('SaveOnline')} />
+        <View style={globalStyles.paddedColumn}>
+          <OptimizedImage
+            source={Images.withdrawBanner}
+            style={[globalStyles.imgLogo]}
+          />
+          <View style={[globalStyles.cardContainer]}>
+            <TouchableOpacity
+              onPress={() => setShowCardScreen(true)}
+              style={!card ? globalStyles.mediumSpacedContainer : undefined}
+            >
+              <CardSelectorModal value={card} onChange={setCard} showBalance />
+            </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => setModalVisible(true)}>
+            <TouchableOpacity onPress={() => setModalVisible(true)}>
+              <View>
+                <Input
+                  value={timeDeposit}
+                  readOnly={true}
+                  placeholder="Choose time deposit"
+                  style={
+                    !timeDeposit
+                      ? globalStyles.mediumSpacedContainer
+                      : undefined
+                  }
+                />
+                {timeDeposit && (
+                  <Text
+                    style={[cardSelectorStyles.balance, globalStyles.primary1]}
+                  >
+                    Interest rate {interestRate} / {timeDeposit}
+                  </Text>
+                )}
+              </View>
+            </TouchableOpacity>
+
             <View>
               <Input
-                value={timeDeposit}
-                readOnly={true}
-                placeholder="Choose time deposit"
-                style={
-                  !timeDeposit ? globalStyles.mediumSpacedContainer : undefined
-                }
+                value={amount}
+                placeholder={`Amount (At least ${symbol}1000)`}
+                style={globalStyles.mediumSpacedContainer}
+                keyboardType="number-pad"
+                onChangeText={handleAmountChange}
               />
-              {timeDeposit && (
-                <Text
-                  style={[cardSelectorStyles.balance, globalStyles.primary1]}
-                >
-                  Interest rate {interestRate} / {timeDeposit}
-                </Text>
-              )}
             </View>
-          </TouchableOpacity>
 
-          <View>
-            <Input
-              value={amount}
-              placeholder={`Amount (At least ${symbol}1000)`}
-              style={globalStyles.mediumSpacedContainer}
-              keyboardType="number-pad"
-              onChangeText={handleAmountChange}
+            <Button
+              title="Verify"
+              disabled={
+                !card ||
+                !timeDeposit ||
+                !amount ||
+                amount === `${symbol}` ||
+                sanitizeAmount(amount) < 1000
+              }
+              onPress={() => setShowSuccessScreen(true)}
             />
           </View>
-
-          <Button
-            title="Verify"
-            disabled={
-              !card ||
-              !timeDeposit ||
-              !amount ||
-              amount === `${symbol}` ||
-              sanitizeAmount(amount) < 1000
-            }
-            onPress={() => setShowSuccessScreen(true)}
-          />
         </View>
-      </View>
 
-      <BaseModal
-        visible={modalVisible}
-        onClose={() => setModalVisible(false)}
-        header="Choose time deposit"
-        contents={timeDeposits}
-        selectedItem={`${timeDeposit} (Interest rate ${interestRate})`}
-        onSelect={value => {
-          const match = value.match(
-            /(\d+\smonths).*\((Interest rate\s[\d.]+%)\)/,
-          );
-          if (match) {
-            setTimeDeposit(match[1]);
-            setInterestRate(match[2].replace('Interest rate ', ''));
-          }
-          setModalVisible(false);
-        }}
-        alignCenter
-      />
-    </View>
+        <BaseModal
+          visible={modalVisible}
+          onClose={() => setModalVisible(false)}
+          header="Choose time deposit"
+          contents={timeDeposits}
+          selectedItem={`${timeDeposit} (Interest rate ${interestRate})`}
+          onSelect={value => {
+            const match = value.match(
+              /(\d+\smonths).*\((Interest rate\s[\d.]+%)\)/,
+            );
+            if (match) {
+              setTimeDeposit(match[1]);
+              setInterestRate(match[2].replace('Interest rate ', ''));
+            }
+            setModalVisible(false);
+          }}
+          alignCenter
+        />
+      </KeyboardAwareScrollView>
+    </SafeAreaView>
   );
 };

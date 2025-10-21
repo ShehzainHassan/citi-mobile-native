@@ -22,7 +22,7 @@ export const BeneficiaryDirectory: React.FC<BeneficiaryDirectoryProps> = ({
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
   const styles = createBeneficiaryDirectoryStyles(theme);
   return (
-    <>
+    <View style={styles.beneficiaryContainer}>
       <View style={globalStyles.rowWrap}>
         <Text style={[globalStyles.caption1, globalStyles.neutral3]}>
           {title}
@@ -52,6 +52,6 @@ export const BeneficiaryDirectory: React.FC<BeneficiaryDirectoryProps> = ({
           />
         ))}
       </ScrollView>
-    </>
+    </View>
   );
 };

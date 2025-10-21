@@ -17,6 +17,7 @@ import { useState } from 'react';
 import { useAmountSelector } from '@/hooks/useAmountSelector';
 import { Images } from '@/assets/images';
 import { RootState } from '@/store';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const MobilePrepaid = () => {
   const globalStyles = useGlobalStyles();
@@ -83,7 +84,10 @@ export const MobilePrepaid = () => {
   }
 
   return (
-    <View style={globalStyles.verticalSpread}>
+    <SafeAreaView
+      style={[globalStyles.safeArea, globalStyles.verticalSpread]}
+      edges={['top', 'bottom']}
+    >
       <Header
         title="Mobile prepaid"
         onPress={() => navigation.navigate('Home')}
@@ -110,37 +114,39 @@ export const MobilePrepaid = () => {
             onChangeText={setPhone}
           />
 
-          <Text
-            style={[
-              globalStyles.caption1,
-              globalStyles.textDefault,
-              styles.amountContainer,
-            ]}
-          >
-            Choose amount
-          </Text>
+          <View style={styles.amount}>
+            <View style={styles.amountContainer}>
+              <Text style={[globalStyles.caption1, globalStyles.textDefault]}>
+                Choose amount
+              </Text>
 
-          <AmountSelector
-            amounts={amounts}
-            selectedAmount={selectedAmount}
-            customAmount={customAmount}
-            onAmountPress={handleAmountPress}
-            onCustomAmountChange={handleCustomAmountChange}
-          />
-
-          <Button
-            title="Confirm"
-            disabled={isConfirmDisabled}
-            onPress={handleConfirm}
-          />
+              <AmountSelector
+                amounts={amounts}
+                selectedAmount={selectedAmount}
+                customAmount={customAmount}
+                onAmountPress={handleAmountPress}
+                onCustomAmountChange={handleCustomAmountChange}
+              />
+            </View>
+            <Button
+              title="Confirm"
+              disabled={isConfirmDisabled}
+              onPress={handleConfirm}
+            />
+          </View>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   amountContainer: {
     marginVertical: 16,
+    gap: 16,
+  },
+  amount: {
+    flex: 1,
+    justifyContent: 'space-between',
   },
 });

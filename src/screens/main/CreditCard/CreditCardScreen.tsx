@@ -11,6 +11,7 @@ import { currencySymbolsMap } from '@/utils';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StyleSheet, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const CreditCardScreen = () => {
   const globalStyles = useGlobalStyles();
@@ -24,7 +25,10 @@ export const CreditCardScreen = () => {
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
 
   return (
-    <View style={transactionReportStyles.container}>
+    <SafeAreaView
+      style={transactionReportStyles.container}
+      edges={['top', 'bottom']}
+    >
       <Header
         title="Credit Card"
         variant="secondary"
@@ -42,7 +46,7 @@ export const CreditCardScreen = () => {
         />
         <Bill />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

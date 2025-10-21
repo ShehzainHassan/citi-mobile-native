@@ -4,7 +4,7 @@ import {
   Button,
   CardSelectorModal,
   Header,
-  ImageWithFallback,
+  OptimizedImage,
   PhoneNumberInput,
   SuccessScreen,
 } from '@/components';
@@ -16,7 +16,9 @@ import { currencySymbolsMap } from '@/utils';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const Withdraw = () => {
   const globalStyles = useGlobalStyles();
@@ -84,55 +86,65 @@ export const Withdraw = () => {
   }
 
   return (
-    <View style={globalStyles.verticalSpread}>
-      <Header title="Withdraw" onPress={() => navigation.navigate('Home')} />
-      <ImageWithFallback
-        contentFit="contain"
-        source={Images.withdrawBanner}
-        style={[globalStyles.imgLogo, styles.imageContainer]}
-      />
+    <SafeAreaView
+      style={[globalStyles.safeArea, globalStyles.verticalSpread]}
+      edges={['top', 'bottom']}
+    >
+      <KeyboardAwareScrollView
+        contentContainerStyle={globalStyles.scrollContentSecondary}
+        keyboardShouldPersistTaps="handled"
+        enableOnAndroid
+        extraScrollHeight={Platform.OS === 'ios' ? 80 : 0}
+        showsVerticalScrollIndicator={false}
+      >
+        <Header title="Withdraw" onPress={() => navigation.navigate('Home')} />
+        <OptimizedImage
+          source={Images.withdrawBanner}
+          style={[globalStyles.imgLogo, styles.imageContainer]}
+        />
 
-      <View style={[globalStyles.paddedColumn, styles.spacedContainer]}>
-        <View>
-          <View style={authStyles.inputContainer}>
-            <CardSelectorModal
-              value={selectedCard}
-              onChange={setSelectedCard}
-              showBalance
-            />
-            <PhoneNumberInput
-              placeholder="Phone number"
-              value={phone}
-              onChangeText={setPhone}
+        <View style={[globalStyles.paddedColumn, styles.spacedContainer]}>
+          <View>
+            <View style={authStyles.inputContainer}>
+              <CardSelectorModal
+                value={selectedCard}
+                onChange={setSelectedCard}
+                showBalance
+              />
+              <PhoneNumberInput
+                placeholder="Phone number"
+                value={phone}
+                onChangeText={setPhone}
+              />
+            </View>
+
+            <Text
+              style={[
+                globalStyles.caption1,
+                globalStyles.textDefault,
+                globalStyles.marginVerticalMd,
+              ]}
+            >
+              Choose amount
+            </Text>
+
+            <AmountSelector
+              amounts={amounts}
+              selectedAmount={selectedAmount}
+              customAmount={customAmount}
+              onAmountPress={handleAmountPress}
+              onCustomAmountChange={handleCustomAmountChange}
             />
           </View>
 
-          <Text
-            style={[
-              globalStyles.caption1,
-              globalStyles.textDefault,
-              globalStyles.marginVerticalMd,
-            ]}
-          >
-            Choose amount
-          </Text>
-
-          <AmountSelector
-            amounts={amounts}
-            selectedAmount={selectedAmount}
-            customAmount={customAmount}
-            onAmountPress={handleAmountPress}
-            onCustomAmountChange={handleCustomAmountChange}
+          <Button
+            title="Verify"
+            disabled={isVerifyDisabled}
+            onPress={handleVerify}
           />
         </View>
-
-        <Button
-          title="Verify"
-          disabled={isVerifyDisabled}
-          onPress={handleVerify}
-        />
-      </View>
-    </View>
+      </KeyboardAwareScrollView>
+    </SafeAreaView>
   );
 };
 

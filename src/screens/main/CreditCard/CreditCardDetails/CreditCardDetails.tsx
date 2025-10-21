@@ -13,6 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
 import { View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const CreditCardDetails = () => {
   const globalStyles = useGlobalStyles();
@@ -36,7 +37,10 @@ export const CreditCardDetails = () => {
   }
 
   return (
-    <View style={[globalStyles.verticalSpread]}>
+    <SafeAreaView
+      style={[globalStyles.verticalSpread]}
+      edges={['top', 'bottom']}
+    >
       <Header
         title="Credit card"
         onPress={() => navigation.navigate('CreditCard')}
@@ -60,6 +64,6 @@ export const CreditCardDetails = () => {
         disabled={!otp || !selectedCard}
         onPress={() => setShowSuccess(true)}
       />
-    </View>
+    </SafeAreaView>
   );
 };

@@ -6,7 +6,7 @@ import {
   CardDetails,
   ChooseCard,
   Header,
-  ImageWithFallback,
+  OptimizedImage,
 } from '@/components';
 import { Card } from '@/components/common/ChooseCard/ChooseCard.types';
 import {
@@ -25,6 +25,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 type TabType = 'Account' | 'Card';
 
@@ -90,7 +91,10 @@ export const Accounts = () => {
   );
 
   return (
-    <View style={globalStyles.verticalSpread}>
+    <SafeAreaView
+      style={[globalStyles.safeArea, globalStyles.verticalSpread]}
+      edges={['top', 'bottom']}
+    >
       <Header title={title} onPress={handleHeaderPress} />
 
       <View style={globalStyles.paddedColumn}>
@@ -115,7 +119,7 @@ export const Accounts = () => {
         {selectedTab === 'Account' && !selectedCardType && (
           <View style={accountScreenStyles.accountSection}>
             <View style={accountScreenStyles.profilePicContainer}>
-              <ImageWithFallback
+              <OptimizedImage
                 source={Images.profilePic}
                 style={accountScreenStyles.profilePic}
                 accessibilityLabel={t(TranslationKeys.accounts.profilePicAlt)}
@@ -162,6 +166,6 @@ export const Accounts = () => {
           </View>
         )}
       </View>
-    </View>
+    </SafeAreaView>
   );
 };

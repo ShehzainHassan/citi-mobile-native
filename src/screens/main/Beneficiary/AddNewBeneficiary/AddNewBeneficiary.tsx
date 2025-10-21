@@ -1,12 +1,5 @@
 import { Images } from '@/assets/images';
-import {
-  BankModal,
-  Button,
-  ChooseTransfer,
-  Header,
-  ImageWithFallback,
-  Input,
-} from '@/components';
+import { BankModal, Button, ChooseTransfer, Header, Input } from '@/components';
 import {
   KEYBOARD_TYPE_MAP,
   TRANSFER_FIELDS,
@@ -31,6 +24,7 @@ import {
   View,
 } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const AddNewBeneficiary = () => {
   const { theme } = useTheme();
@@ -89,158 +83,161 @@ export const AddNewBeneficiary = () => {
   };
 
   return (
-    <ScrollView style={globalStyles.verticalSpread}>
-      <Header title="Add new" onPress={() => navigation.goBack()} />
+    <SafeAreaView style={globalStyles.verticalSpread} edges={['top', 'bottom']}>
+      <ScrollView>
+        <Header title="Add new" onPress={() => navigation.goBack()} />
 
-      <View style={globalStyles.paddedColumn}>
-        <View style={styles.imgWrapper}>
-          <View style={styles.imgContainer}>
-            {selectedImage ? (
-              <Image
-                source={{ uri: selectedImage }}
-                style={globalStyles.profilePic}
-              />
-            ) : (
-              <ImageWithFallback
-                source={Images.guest}
-                svgWidth={54}
-                svgHeight={54}
-              />
-            )}
-
+        <View style={globalStyles.paddedColumn}>
+          <View style={styles.imgWrapper}>
             <TouchableOpacity
-              style={styles.addButton}
+              style={styles.imgContainer}
               onPress={handleImagePick}
             >
-              <MaterialIcons
-                name={selectedImage ? 'edit' : 'add'}
-                size={20}
-                color="#fff"
-              />
+              {selectedImage ? (
+                <Image
+                  source={{ uri: selectedImage }}
+                  style={globalStyles.profilePic}
+                />
+              ) : (
+                <Images.guest width={54} height={54} />
+              )}
+
+              <TouchableOpacity
+                style={styles.addButton}
+                onPress={handleImagePick}
+              >
+                <MaterialIcons
+                  name={selectedImage ? 'edit' : 'add'}
+                  size={20}
+                  color="#fff"
+                />
+              </TouchableOpacity>
             </TouchableOpacity>
+
+            <Text style={[globalStyles.title3, globalStyles.primary1]}>
+              {selectedValues.Name || ''}
+            </Text>
           </View>
 
-          <Text style={[globalStyles.title3, globalStyles.primary1]}>
-            {selectedValues.Name || ''}
-          </Text>
-        </View>
+          <View style={globalStyles.scrollWrapper}>
+            <ScrollView
+              ref={scrollRef}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={globalStyles.scrollContainer}
+            >
+              {TRANSFER_OPTIONS.map(option => (
+                <ChooseTransfer
+                  key={option.key}
+                  image={option.image}
+                  text={option.text}
+                  variant={option.variant}
+                  selected={selectedTransfer === option.key}
+                  onSelect={() => handleTransferSelect(option.key)}
+                />
+              ))}
+            </ScrollView>
+          </View>
 
-        <View style={globalStyles.scrollWrapper}>
-          <ScrollView
-            ref={scrollRef}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={globalStyles.scrollContainer}
+          <View
+            style={[
+              globalStyles.cardContainer,
+              globalStyles.largeSpacedColumn,
+              styles.inputContainer,
+            ]}
           >
-            {TRANSFER_OPTIONS.map(option => (
-              <ChooseTransfer
-                key={option.key}
-                image={option.image}
-                text={option.text}
-                variant={option.variant}
-                selected={selectedTransfer === option.key}
-                onSelect={() => handleTransferSelect(option.key)}
-              />
-            ))}
-          </ScrollView>
-        </View>
+            {getInputs().map((input, index) => {
+              const isDropdown =
+                input.placeholder === 'Choose branch' ||
+                input.placeholder === 'Choose bank';
+              const inputValue = selectedValues[input.placeholder] || '';
+              const keyboardType =
+                KEYBOARD_TYPE_MAP[input.placeholder] || 'default';
 
-        <View
-          style={[
-            globalStyles.cardContainer,
-            globalStyles.largeSpacedColumn,
-            styles.inputContainer,
-          ]}
-        >
-          {getInputs().map((input, index) => {
-            const isDropdown =
-              input.placeholder === 'Choose branch' ||
-              input.placeholder === 'Choose bank';
-            const inputValue = selectedValues[input.placeholder] || '';
-            const keyboardType =
-              KEYBOARD_TYPE_MAP[input.placeholder] || 'default';
+              const isAmountField = input.placeholder === 'Amount';
 
-            const isAmountField = input.placeholder === 'Amount';
-
-            return (
-              <Input
-                key={index}
-                placeholder={input.placeholder}
-                value={isAmountField ? selectedValues.Amount ?? '' : inputValue}
-                keyboardType={keyboardType}
-                editable={!isDropdown && input.editable}
-                showSoftInputOnFocus={!isDropdown}
-                rightIcon={
-                  isDropdown ? (
-                    <MaterialIcons
-                      name="unfold-more"
-                      size={20}
-                      color={theme.colors.neutral2}
-                    />
-                  ) : undefined
-                }
-                onPressIn={
-                  isDropdown
-                    ? () =>
-                        handleModalOpen(
-                          input.placeholder,
-                          setModalOptions,
-                          setCurrentInput,
-                          setModalVisible,
-                        )
-                    : undefined
-                }
-                onChangeText={
-                  !isDropdown && input.editable
-                    ? text => {
-                        if (isAmountField) {
-                          const numericPart = text.replace(/[^0-9]/g, '');
-                          setSelectedValues(prev => ({
-                            ...prev,
-                            Amount: `${symbol} ${numericPart}`,
-                          }));
-                        } else {
-                          setSelectedValues(prev => ({
-                            ...prev,
-                            [input.placeholder]: text,
-                          }));
+              return (
+                <Input
+                  key={index}
+                  placeholder={input.placeholder}
+                  value={
+                    isAmountField ? selectedValues.Amount ?? '' : inputValue
+                  }
+                  keyboardType={keyboardType}
+                  editable={!isDropdown && input.editable}
+                  showSoftInputOnFocus={!isDropdown}
+                  rightIcon={
+                    isDropdown ? (
+                      <MaterialIcons
+                        name="unfold-more"
+                        size={20}
+                        color={theme.colors.neutral2}
+                      />
+                    ) : undefined
+                  }
+                  onPressIn={
+                    isDropdown
+                      ? () =>
+                          handleModalOpen(
+                            input.placeholder,
+                            setModalOptions,
+                            setCurrentInput,
+                            setModalVisible,
+                          )
+                      : undefined
+                  }
+                  onChangeText={
+                    !isDropdown && input.editable
+                      ? text => {
+                          if (isAmountField) {
+                            const numericPart = text.replace(/[^0-9]/g, '');
+                            setSelectedValues(prev => ({
+                              ...prev,
+                              Amount: `${symbol} ${numericPart}`,
+                            }));
+                          } else {
+                            setSelectedValues(prev => ({
+                              ...prev,
+                              [input.placeholder]: text,
+                            }));
+                          }
                         }
-                      }
-                    : undefined
-                }
-              />
-            );
-          })}
+                      : undefined
+                  }
+                />
+              );
+            })}
 
-          <Button
-            title="Save to directory"
-            style={styles.button}
-            disabled={!allRequiredFilled()}
-            onPress={() =>
-              navigation.navigate('ConfirmBeneficiary', {
-                beneficiaryData: selectedValues,
-                image: selectedImage,
-              })
-            }
-          />
+            <Button
+              title="Save to directory"
+              style={styles.button}
+              disabled={!allRequiredFilled()}
+              onPress={() =>
+                navigation.navigate('ConfirmBeneficiary', {
+                  beneficiaryData: selectedValues,
+                  image: selectedImage,
+                })
+              }
+            />
+          </View>
         </View>
-      </View>
 
-      <BankModal
-        visible={modalVisible}
-        onClose={() => setModalVisible(false)}
-        title={
-          currentInput === 'Choose bank'
-            ? 'Choose beneficiary bank'
-            : currentInput === 'Choose branch'
-            ? 'Choose beneficiary branch'
-            : undefined
-        }
-        banks={modalOptions}
-        selectedBank={selectedValues[currentInput] || ''}
-        onSelect={handleSelect}
-      />
-    </ScrollView>
+        <BankModal
+          visible={modalVisible}
+          onClose={() => setModalVisible(false)}
+          title={
+            currentInput === 'Choose bank'
+              ? 'Choose beneficiary bank'
+              : currentInput === 'Choose branch'
+              ? 'Choose beneficiary branch'
+              : undefined
+          }
+          banks={modalOptions}
+          selectedBank={selectedValues[currentInput] || ''}
+          onSelect={handleSelect}
+        />
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

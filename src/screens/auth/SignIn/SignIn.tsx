@@ -22,15 +22,10 @@ import { setTokens } from '@/store/slices/authSlice/authSlice';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
-import {
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
+import { Platform, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export const SignIn = () => {
   const globalStyles = useGlobalStyles();
@@ -44,8 +39,10 @@ export const SignIn = () => {
     email: '',
     password: '',
   });
+
   const { success, error } = useToast();
   const authType = useDeviceAuthType();
+
   const handleLogin = async (email: string, password: string) => {
     try {
       const tokens = await authService.signIn({ email, password });
@@ -66,6 +63,7 @@ export const SignIn = () => {
     }
     await handleLogin(values.email, values.password);
   };
+
   const handleBiometricSuccess = () => {
     const mockEmail = 'test@example.com';
     const mockPassword = 'Password123';
@@ -77,76 +75,73 @@ export const SignIn = () => {
   };
 
   return (
-    <SafeAreaView style={globalStyles.safeArea} edges={['bottom']}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={globalStyles.fillAll}
+    <SafeAreaView style={globalStyles.safeArea} edges={['top', 'bottom']}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={globalStyles.scrollContent}
+        keyboardShouldPersistTaps="handled"
+        enableOnAndroid
+        extraScrollHeight={Platform.OS === 'ios' ? 80 : 0}
+        showsVerticalScrollIndicator={false}
       >
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps="handled"
-          contentContainerStyle={globalStyles.scrollContent}
-        >
-          <Header
-            title={t(TranslationKeys.auth.signIn)}
-            variant="secondary"
-            onPress={() => navigation.navigate('SignUp')}
-            style={authStyles.headerContainer}
+        <Header
+          title={t(TranslationKeys.auth.signIn)}
+          variant="secondary"
+          onPress={() => navigation.navigate('SignUp')}
+          style={authStyles.headerContainer}
+        />
+
+        <View style={globalStyles.roundedContainer}>
+          <AuthHeader
+            title={t(TranslationKeys.auth.welcomeTitle)}
+            subTitle={t(TranslationKeys.auth.welcomeSubtitle)}
           />
 
-          <View style={globalStyles.roundedContainer}>
-            <AuthHeader
-              title={t(TranslationKeys.auth.welcomeTitle)}
-              subTitle={t(TranslationKeys.auth.welcomeSubtitle)}
+          <AuthImageBlock source={Images.authIcon} />
+
+          <View style={authStyles.inputContainer}>
+            <Input
+              placeholder={t(TranslationKeys.auth.emailPlaceholder)}
+              value={values.email}
+              onChangeText={text => handleChange('email', text)}
+              error={errors.email ?? undefined}
             />
-
-            <AuthImageBlock source={Images.authIcon} />
-
-            <View style={authStyles.inputContainer}>
-              <Input
-                placeholder={t(TranslationKeys.auth.emailPlaceholder)}
-                value={values.email}
-                onChangeText={text => handleChange('email', text)}
-                error={errors.email ?? undefined}
-              />
-              <Input
-                placeholder={t(TranslationKeys.auth.passwordPlaceholder)}
-                secureTextEntry
-                value={values.password}
-                onChangeText={text => handleChange('password', text)}
-              />
-            </View>
-
-            <Text
-              style={authStyles.forgotPassword}
-              onPress={() => navigation.navigate('ForgotPassword')}
-            >
-              {t(TranslationKeys.auth.forgotPassword)}
-            </Text>
-
-            <Button
-              title={t(TranslationKeys.auth.signInButton)}
-              onPress={handleSignIn}
-              disabled={!values.email || !!errors.email || !values.password}
-              style={authStyles.button}
-            />
-
-            {authType !== 'NONE' && (
-              <BiometricAuthView
-                showText={false}
-                authType={authType}
-                onSuccess={handleBiometricSuccess}
-              />
-            )}
-
-            <AuthFooter
-              label={t(TranslationKeys.auth.noAccount)}
-              actionText={t(TranslationKeys.auth.signUp)}
-              onActionPress={() => navigation.navigate('SignUp')}
+            <Input
+              placeholder={t(TranslationKeys.auth.passwordPlaceholder)}
+              secureTextEntry
+              value={values.password}
+              onChangeText={text => handleChange('password', text)}
             />
           </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
+
+          <Text
+            style={authStyles.forgotPassword}
+            onPress={() => navigation.navigate('ForgotPassword')}
+          >
+            {t(TranslationKeys.auth.forgotPassword)}
+          </Text>
+
+          <Button
+            title={t(TranslationKeys.auth.signInButton)}
+            onPress={handleSignIn}
+            disabled={!values.email || !!errors.email || !values.password}
+            style={authStyles.button}
+          />
+
+          {authType !== 'NONE' && (
+            <BiometricAuthView
+              showText={false}
+              authType={authType}
+              onSuccess={handleBiometricSuccess}
+            />
+          )}
+
+          <AuthFooter
+            label={t(TranslationKeys.auth.noAccount)}
+            actionText={t(TranslationKeys.auth.signUp)}
+            onActionPress={() => navigation.navigate('SignUp')}
+          />
+        </View>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 };

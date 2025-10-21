@@ -16,6 +16,7 @@ import { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import { RouteProp, useRoute } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const PaymentDetails = () => {
   const globalStyles = useGlobalStyles();
@@ -44,7 +45,7 @@ export const PaymentDetails = () => {
   };
 
   return (
-    <View style={globalStyles.verticalSpread}>
+    <SafeAreaView style={globalStyles.verticalSpread} edges={['top']}>
       <Header title="Pay the bill" onPress={() => navigation.goBack()} />
       <View style={globalStyles.paddedColumn}>
         <View
@@ -108,6 +109,6 @@ export const PaymentDetails = () => {
           alignCenter
         />
       )}
-    </View>
+    </SafeAreaView>
   );
 };

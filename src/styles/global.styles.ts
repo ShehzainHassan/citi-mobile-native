@@ -54,6 +54,11 @@ export const createGlobalStyles = (theme: Theme) =>
       flexGrow: 1,
       backgroundColor: theme.colors.primary1,
     },
+    scrollContentSecondary: {
+      flexGrow: 1,
+      backgroundColor: theme.colors.neutral6,
+    },
+
     previous: {
       height: 16,
       resizeMode: 'contain',
@@ -293,9 +298,13 @@ export const createGlobalStyles = (theme: Theme) =>
     },
 
     authLogo: {
-      maxHeight: 250,
-      marginVertical: theme.spacing.xl,
+      aspectRatio: 1.1,
+      marginVertical: theme.spacing.lg,
+    },
+    successImage: {
       width: '100%',
+      maxHeight: 250,
+      marginBottom: theme.spacing.lg,
     },
     flag: {
       borderRadius: 2,

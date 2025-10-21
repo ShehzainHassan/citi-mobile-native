@@ -14,15 +14,10 @@ import { AuthStackParamList } from '@/navigation/types';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
-import {
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
+import { Platform, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useState } from 'react';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export const SignUp = () => {
   const globalStyles = useGlobalStyles();
@@ -45,93 +40,92 @@ export const SignUp = () => {
     }
 
     if (validateAll()) {
+      // TODO: Implement sign-up logic
     } else {
+      // TODO: Show validation error
     }
   };
 
   return (
-    <SafeAreaView style={globalStyles.safeArea} edges={['bottom']}>
-      <KeyboardAvoidingView
-        style={globalStyles.fillAll}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    <SafeAreaView style={globalStyles.safeArea} edges={['top', 'bottom']}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={globalStyles.scrollContent}
+        keyboardShouldPersistTaps="handled"
+        enableOnAndroid
+        extraScrollHeight={Platform.OS === 'ios' ? 80 : 0}
+        showsVerticalScrollIndicator={false}
       >
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps="handled"
-          contentContainerStyle={globalStyles.scrollContent}
-        >
-          <Header
-            title={t(TranslationKeys.auth.signUp)}
-            variant="secondary"
-            onPress={() => navigation.navigate('SignIn')}
-            style={authStyles.headerContainer}
+        <Header
+          title={t(TranslationKeys.auth.signUp)}
+          variant="secondary"
+          onPress={() => navigation.navigate('SignIn')}
+          style={authStyles.headerContainer}
+        />
+
+        <View style={globalStyles.roundedContainer}>
+          <AuthHeader
+            title={t(TranslationKeys.auth.welcomeTitle)}
+            subTitle={t(TranslationKeys.auth.welcomeSubtitleSignUp)}
           />
+          <AuthImageBlock source={Images.signUp} />
 
-          <View style={globalStyles.roundedContainer}>
-            <AuthHeader
-              title={t(TranslationKeys.auth.welcomeTitle)}
-              subTitle={t(TranslationKeys.auth.welcomeSubtitleSignUp)}
+          <View style={authStyles.inputContainer}>
+            <Input
+              placeholder={t(TranslationKeys.auth.namePlaceholder)}
+              value={values.name}
+              onChangeText={text => handleChange('name', text)}
+              error={errors.name ?? undefined}
             />
-            <AuthImageBlock source={Images.signUp} />
 
-            <View style={authStyles.inputContainer}>
-              <Input
-                placeholder={t(TranslationKeys.auth.namePlaceholder)}
-                value={values.name}
-                onChangeText={text => handleChange('name', text)}
-                error={errors.name ?? undefined}
-              />
+            <Input
+              placeholder={t(TranslationKeys.auth.emailPlaceholder)}
+              value={values.email}
+              onChangeText={text => handleChange('email', text)}
+              error={errors.email ?? undefined}
+            />
 
-              <Input
-                placeholder={t(TranslationKeys.auth.emailPlaceholder)}
-                value={values.email}
-                onChangeText={text => handleChange('email', text)}
-                error={errors.email ?? undefined}
-              />
+            <Input
+              placeholder={t(TranslationKeys.auth.passwordPlaceholder)}
+              secureTextEntry
+              value={values.password}
+              onChangeText={text => handleChange('password', text)}
+              error={errors.password ?? undefined}
+            />
 
-              <Input
-                placeholder={t(TranslationKeys.auth.passwordPlaceholder)}
-                secureTextEntry
-                value={values.password}
-                onChangeText={text => handleChange('password', text)}
-                error={errors.password ?? undefined}
-              />
-
-              <Checkbox
-                label={
-                  <Text style={authStyles.text}>
-                    {t(TranslationKeys.auth.termsAgreement)}{' '}
-                    <Text style={globalStyles.heading3}>
-                      {t(TranslationKeys.auth.termsAndConditions)}
-                    </Text>
+            <Checkbox
+              label={
+                <Text style={authStyles.text}>
+                  {t(TranslationKeys.auth.termsAgreement)}{' '}
+                  <Text style={globalStyles.heading3}>
+                    {t(TranslationKeys.auth.termsAndConditions)}
                   </Text>
-                }
-                checked={acceptedTerms}
-                onChange={setAcceptedTerms}
-              />
-            </View>
-
-            <Button
-              title={t(TranslationKeys.auth.signUpButton)}
-              style={authStyles.signUpButton}
-              onPress={handleSignUp}
-              disabled={
-                !acceptedTerms ||
-                !values.name ||
-                !values.email ||
-                !values.password ||
-                Object.values(errors).some(error => error !== null)
+                </Text>
               }
-            />
-
-            <AuthFooter
-              label={t(TranslationKeys.auth.haveAccount)}
-              actionText={t(TranslationKeys.auth.signIn)}
-              onActionPress={() => navigation.navigate('SignIn')}
+              checked={acceptedTerms}
+              onChange={setAcceptedTerms}
             />
           </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
+
+          <Button
+            title={t(TranslationKeys.auth.signUpButton)}
+            style={authStyles.signUpButton}
+            onPress={handleSignUp}
+            disabled={
+              !acceptedTerms ||
+              !values.name ||
+              !values.email ||
+              !values.password ||
+              Object.values(errors).some(error => error !== null)
+            }
+          />
+
+          <AuthFooter
+            label={t(TranslationKeys.auth.haveAccount)}
+            actionText={t(TranslationKeys.auth.signIn)}
+            onActionPress={() => navigation.navigate('SignIn')}
+          />
+        </View>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 };

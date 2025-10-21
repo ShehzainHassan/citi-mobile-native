@@ -1,4 +1,4 @@
-import { ImageWithFallback } from '@/components/common';
+import { OptimizedImage } from '@/components';
 import { useGlobalStyles } from '@/hooks';
 import { useTheme } from '@/theme';
 import React from 'react';
@@ -30,7 +30,7 @@ export const SearchScreenCard: React.FC<SearchScreenCardProps> = ({
         </Text>
         <Text style={globalStyles.caption2}>{subtitle}</Text>
       </View>
-      <ImageWithFallback source={imageSource} style={styles.img} />
+      <OptimizedImage source={imageSource} style={styles.img} />
     </Pressable>
   );
 };

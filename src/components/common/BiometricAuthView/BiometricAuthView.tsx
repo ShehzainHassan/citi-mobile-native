@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
 import { Images } from '@/assets/images';
-import { ImageWithFallback, ErrorMessage } from '@/components';
+import { ErrorMessage, OptimizedImage } from '@/components';
 import { useAuthStyles, useGlobalStyles, useToast } from '@/hooks';
 import { useBiometricAuth } from '@/hooks/useBiometricAuth';
 import { useTheme } from '@/theme';
+import React, { useState } from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { createBiometricAuthViewStyles } from './BiometricAuthView.styles';
 import { BiometricAuthViewProps } from './BiometricAuthView.types';
 
@@ -46,7 +46,7 @@ export const BiometricAuthView: React.FC<BiometricAuthViewProps> = ({
 
       <View style={[globalStyles.centerContainer, styles.biometric]}>
         <TouchableOpacity onPress={handleBiometricAuth}>
-          <ImageWithFallback
+          <OptimizedImage
             source={Images.fingerprint}
             style={authStyles.biometricButton}
           />

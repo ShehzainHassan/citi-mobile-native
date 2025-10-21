@@ -1,4 +1,4 @@
-import { ImageWithFallback } from '@/components/common';
+import { OptimizedImage } from '@/components';
 import { useGlobalStyles } from '@/hooks';
 import { useTheme } from '@/theme';
 import React from 'react';
@@ -40,7 +40,11 @@ export const InfoRowCard: React.FC<InfoRowCardProps> = ({
               : undefined,
           ]}
         >
-          <ImageWithFallback source={icon} style={styles.iconImg} />
+          {typeof icon === 'function' ? (
+            React.createElement(icon, { width: 24, height: 24 })
+          ) : (
+            <OptimizedImage source={icon} style={styles.iconImg} />
+          )}
         </View>
         <View style={styles.textContainer}>
           <Text style={[globalStyles.body1, globalStyles.neutral1]}>

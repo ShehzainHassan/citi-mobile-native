@@ -7,6 +7,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const ForgotPassword = () => {
   const globalStyles = useGlobalStyles();
@@ -29,7 +30,10 @@ export const ForgotPassword = () => {
   };
 
   return (
-    <View style={globalStyles.verticalSpread}>
+    <SafeAreaView
+      style={[globalStyles.safeArea, globalStyles.verticalSpread]}
+      edges={['top']}
+    >
       <Header
         title={t(TranslationKeys.auth.forgotPasswordTitle)}
         onPress={handleBack}
@@ -115,6 +119,6 @@ export const ForgotPassword = () => {
           {t(TranslationKeys.auth.changePhone)}
         </Text>
       )}
-    </View>
+    </SafeAreaView>
   );
 };

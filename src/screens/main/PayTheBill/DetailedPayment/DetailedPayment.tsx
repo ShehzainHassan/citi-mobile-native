@@ -7,6 +7,7 @@ import {
 import { View } from 'react-native';
 import { useGlobalStyles } from '@/hooks';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const DetailedPayment = () => {
   const globalStyles = useGlobalStyles();
@@ -19,11 +20,11 @@ export const DetailedPayment = () => {
   const paymentData = params?.paymentData;
 
   return (
-    <View style={globalStyles.verticalSpread}>
+    <SafeAreaView style={globalStyles.verticalSpread} edges={['top']}>
       <Header title={headerText} onPress={() => navigation.goBack()} />
       <View style={globalStyles.paddedColumn}>
         {paymentData && <DetailedPaymentCard paymentData={paymentData} />}
       </View>
-    </View>
+    </SafeAreaView>
   );
 };

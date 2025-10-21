@@ -35,7 +35,11 @@ export const CreditCard: React.FC<CreditCardProps> = ({
   );
 
   return (
-    <TouchableOpacity onPress={onPress} style={styles.wrapper}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={styles.wrapper}
+      activeOpacity={onPress ? 0.8 : 1}
+    >
       <ImageBackground
         source={backgroundImage}
         style={[styles.container, style]}

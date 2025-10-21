@@ -11,6 +11,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 type ChangePasswordRouteProp = RouteProp<AuthStackParamList, 'ChangePassword'>;
 
@@ -44,13 +45,15 @@ export const ChangePassword = () => {
     : !password.trim() || password !== confirmPassword;
 
   return (
-    <View style={globalStyles.verticalSpread}>
+    <SafeAreaView
+      style={[globalStyles.safeArea, globalStyles.verticalSpread]}
+      edges={['top']}
+    >
       <Header
         title={
           passwordChanged ? '' : t(TranslationKeys.auth.changePasswordTitle)
         }
         onPress={() => navigation.goBack()}
-        style={authStyles.headerContainer}
       />
       <View style={globalStyles.paddedColumn}>
         {!passwordChanged ? (
@@ -114,6 +117,6 @@ export const ChangePassword = () => {
           />
         )}
       </View>
-    </View>
+    </SafeAreaView>
   );
 };

@@ -5,6 +5,7 @@ import { managementAccounts } from '@/mocks';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { MainTabParamList } from '@/navigation/types';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const Management = () => {
   const globalStyles = useGlobalStyles();
@@ -12,7 +13,7 @@ export const Management = () => {
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
 
   return (
-    <View style={globalStyles.verticalSpread}>
+    <SafeAreaView style={globalStyles.verticalSpread} edges={['top', 'bottom']}>
       <Header
         title="Management"
         onPress={() => navigation.navigate('SaveOnline')}
@@ -34,6 +35,6 @@ export const Management = () => {
           />
         ))}
       </View>
-    </View>
+    </SafeAreaView>
   );
 };

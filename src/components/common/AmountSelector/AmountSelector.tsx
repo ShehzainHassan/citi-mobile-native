@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { Button, Input } from '@/components';
 import { useGlobalStyles } from '@/hooks';
 import { AmountSelectorProps } from './AmountSelector.types';
+import { styles } from './AmountSelector.styles';
 
 export const AmountSelector: React.FC<AmountSelectorProps> = ({
   amounts,
@@ -36,7 +37,10 @@ export const AmountSelector: React.FC<AmountSelectorProps> = ({
                 title={amt}
                 variant={isSelected ? 'primary' : 'secondary'}
                 onPress={() => onAmountPress(amt)}
-                style={!isSelected ? globalStyles.amountBtn : undefined}
+                style={[
+                  !isSelected ? globalStyles.amountBtn : undefined,
+                  styles.fixedHeight,
+                ]}
                 textStyle={!isSelected ? globalStyles.textDefault : undefined}
               />
             </View>

@@ -12,7 +12,8 @@ import { MainTabWithSearchParamList } from '@/navigation/types';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const PaymentHistory = () => {
   const globalStyles = useGlobalStyles();
@@ -24,7 +25,7 @@ export const PaymentHistory = () => {
     selectedType === 'Internet' ? internetBillData : electricBillData;
 
   return (
-    <View style={globalStyles.verticalSpread}>
+    <SafeAreaView style={globalStyles.verticalSpread} edges={['top', 'bottom']}>
       <Header
         title="Payment history"
         onPress={() => navigation.navigate('PayBill')}
@@ -77,7 +78,7 @@ export const PaymentHistory = () => {
           />
         ))}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

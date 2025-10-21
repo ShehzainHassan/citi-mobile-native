@@ -1,25 +1,24 @@
-import { CardDetailRow, CardDetails, Header, ImageWithFallback } from "@/components";
-import { LANGUAGES } from "@/constants";
-import { useGlobalStyles } from "@/hooks";
-import { MainTabParamList } from "@/navigation/types";
-import { useTheme } from "@/theme";
-import { getFlagUrl } from "@/utils";
-import MaterialIcons from "@react-native-vector-icons/material-icons";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useState } from "react";
 import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View
-} from "react-native";
+  CardDetailRow,
+  CardDetails,
+  Header,
+  OptimizedImage,
+} from '@/components';
+import { LANGUAGES } from '@/constants';
+import { useGlobalStyles } from '@/hooks';
+import { MainTabParamList } from '@/navigation/types';
+import { useTheme } from '@/theme';
+import { getFlagUrl } from '@/utils';
+import MaterialIcons from '@react-native-vector-icons/material-icons';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useState } from 'react';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 export const Language = () => {
   const globalStyles = useGlobalStyles();
   const { theme } = useTheme();
-  const [selectedLang, setSelectedLang] = useState("us");
+  const [selectedLang, setSelectedLang] = useState('us');
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
 
@@ -27,11 +26,11 @@ export const Language = () => {
     <SafeAreaView style={globalStyles.verticalSpread}>
       <Header
         title="Language"
-        onPress={() => navigation.navigate("Settings")}
+        onPress={() => navigation.navigate('Settings')}
       />
       <ScrollView style={globalStyles.paddedColumn}>
         <CardDetails>
-          {LANGUAGES.map((lang) => {
+          {LANGUAGES.map(lang => {
             const isSelected = lang.code === selectedLang;
             return (
               <CardDetailRow
@@ -39,7 +38,7 @@ export const Language = () => {
                 onPress={() => setSelectedLang(lang.code)}
                 label={
                   <View style={styles.rowContainer}>
-                    <ImageWithFallback
+                    <OptimizedImage
                       source={{ uri: getFlagUrl(lang.code) }}
                       style={globalStyles.flag}
                       resizeMode="contain"
@@ -64,7 +63,7 @@ export const Language = () => {
                       color={theme.colors.primary1}
                     />
                   ) : (
-                    ""
+                    ''
                   )
                 }
               />
@@ -77,8 +76,8 @@ export const Language = () => {
 };
 const styles = StyleSheet.create({
   rowContainer: {
-    alignItems: "center",
-    flexDirection: "row",
+    alignItems: 'center',
+    flexDirection: 'row',
     gap: 12,
   },
 });

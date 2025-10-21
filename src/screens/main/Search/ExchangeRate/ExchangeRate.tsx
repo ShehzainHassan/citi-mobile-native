@@ -1,4 +1,4 @@
-import { DataTable, Header, ImageWithFallback } from '@/components';
+import { DataTable, Header, OptimizedImage } from '@/components';
 import { useGlobalStyles } from '@/hooks';
 import { exchangeRateTable } from '@/mocks';
 import { MainTabParamList } from '@/navigation/types';
@@ -21,7 +21,7 @@ export const ExchangeRate = () => {
         columns={exchangeRateTable.columns}
         rows={exchangeRateTable.rows.map(row => [
           <View key={row.countryCode} style={globalStyles.rowContainer}>
-            <ImageWithFallback
+            <OptimizedImage
               source={{ uri: getFlagUrl(row.countryCode) }}
               style={globalStyles.flag}
               resizeMode="contain"

@@ -1,10 +1,10 @@
-import { Button, Header, ImageWithFallback, Input } from '@/components';
+import { Images } from '@/assets/images';
+import { Button, Header, Input } from '@/components';
 import { useAuthStyles, useGlobalStyles } from '@/hooks';
 import { MainTabParamList } from '@/navigation/types';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Image, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Images } from '@/assets/images';
 
 type Props = NativeStackScreenProps<MainTabParamList, 'ConfirmBeneficiary'>;
 
@@ -15,7 +15,7 @@ export const ConfirmBeneficiary = ({ navigation, route }: Props) => {
   const { beneficiaryData, image } = route.params;
 
   return (
-    <SafeAreaView style={globalStyles.safeArea} edges={['bottom']}>
+    <SafeAreaView style={globalStyles.safeArea} edges={['top', 'bottom']}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={[authStyles.container]}
@@ -37,7 +37,7 @@ export const ConfirmBeneficiary = ({ navigation, route }: Props) => {
             {image ? (
               <Image source={{ uri: image }} style={globalStyles.profilePic} />
             ) : (
-              <ImageWithFallback
+              <Image
                 source={Images.profilePic}
                 style={globalStyles.profilePic}
               />

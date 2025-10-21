@@ -3,7 +3,7 @@ import {
   CardDetails,
   CurrencyModal,
   Header,
-  ImageWithFallback,
+  OptimizedImage,
   SettingsRow,
   Tabs,
 } from '@/components';
@@ -15,7 +15,8 @@ import { setCurrency } from '@/store/slices/settings/settingsSlice';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const Settings = () => {
@@ -52,7 +53,14 @@ export const Settings = () => {
   };
 
   return (
-    <ScrollView style={authStyles.container}>
+    <KeyboardAwareScrollView
+      style={authStyles.container}
+      contentContainerStyle={globalStyles.scrollContent}
+      keyboardShouldPersistTaps="handled"
+      enableOnAndroid
+      extraScrollHeight={Platform.OS === 'ios' ? 80 : 0}
+      showsVerticalScrollIndicator={false}
+    >
       <Header
         title="Settings"
         variant="secondary"
@@ -62,7 +70,7 @@ export const Settings = () => {
 
       <View style={[globalStyles.roundedContainer]}>
         <View style={[globalStyles.imgWrapper]}>
-          <ImageWithFallback
+          <OptimizedImage
             source={Images.profilePic}
             style={globalStyles.profilePic}
           />
@@ -94,7 +102,7 @@ export const Settings = () => {
         selectedCurrency={selectedCurrency}
         onSelect={handleSelectCurrency}
       />
-    </ScrollView>
+    </KeyboardAwareScrollView>
   );
 };
 

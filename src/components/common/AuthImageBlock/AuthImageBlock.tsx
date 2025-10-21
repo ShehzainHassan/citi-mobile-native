@@ -1,20 +1,14 @@
 import { useGlobalStyles } from '@/hooks';
-import { useTheme } from '@/theme';
-import { View } from 'react-native';
-import { createAuthImageStyles } from './AuthImageBlock.styles';
+import { OptimizedImage } from '../OptimizedImage';
 import { AuthImageBlockProps } from './AuthImageBlock.types';
-import { ImageWithFallback } from '../ImageWithFallback';
+import { View } from 'react-native';
 
 export const AuthImageBlock = ({ source }: AuthImageBlockProps) => {
-  const globalStyles = useGlobalStyles();
-  const { theme } = useTheme();
-  const styles = createAuthImageStyles(theme);
-
   const imageSource = typeof source === 'string' ? { uri: source } : source;
-
+  const globalStyles = useGlobalStyles();
   return (
-    <View style={globalStyles.centerContainer}>
-      <ImageWithFallback source={imageSource} style={styles.authLogo} />
+    <View>
+      <OptimizedImage source={imageSource} style={globalStyles.authLogo} />
     </View>
   );
 };

@@ -1,5 +1,5 @@
 import { Images } from '@/assets/images';
-import { ErrorMessage, Header, ImageWithFallback } from '@/components';
+import { ErrorMessage, Header, OptimizedImage } from '@/components';
 import { Button, CurrencyModal, Input } from '@/components/ui';
 import { useConversionRate, useGlobalStyles } from '@/hooks';
 import { MainTabParamList } from '@/navigation/types';
@@ -66,7 +66,7 @@ export const Exchange = () => {
   return (
     <View style={globalStyles.verticalSpread}>
       <Header title="Exchange" onPress={() => navigation.navigate('Search')} />
-      <ImageWithFallback
+      <OptimizedImage
         source={Images.exchangeRateLogo}
         style={[globalStyles.paddedColumn, globalStyles.imgLogo]}
       />

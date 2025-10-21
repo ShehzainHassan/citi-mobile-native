@@ -1,7 +1,7 @@
 import { useGlobalStyles } from '@/hooks';
 import { useTheme } from '@/theme';
 import { Text, View } from 'react-native';
-import { ImageWithFallback } from '../ImageWithFallback';
+import { OptimizedImage } from '../OptimizedImage';
 import { createCardHolderInfoStyles } from './CardHolderInfo.styles';
 import { CardHolderInfoProps } from './CardHolderInfo.types';
 
@@ -18,7 +18,7 @@ export const CardHolderInfo = ({ data }: CardHolderInfoProps) => {
             key={index}
             style={[styles.subContainer, !isLast && styles.subContainerBorder]}
           >
-            <ImageWithFallback
+            <OptimizedImage
               source={item.profilePic}
               style={styles.profilePic}
             />
