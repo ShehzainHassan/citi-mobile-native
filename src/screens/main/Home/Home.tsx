@@ -11,6 +11,7 @@ import {
   useGlobalStyles,
   useHomeScreen,
   useHomeScreenStyles,
+  usePrimaryCard,
   useToast,
 } from '@/hooks';
 import { TranslationKeys } from '@/i18n';
@@ -24,6 +25,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
 
@@ -42,7 +44,7 @@ export const HomeScreen = () => {
     (state: RootState) => state.settings.currency,
   );
   const symbol = currencySymbolsMap[selectedCurrency] || selectedCurrency;
-
+  const { data } = usePrimaryCard();
   const [logoutError, setLogoutError] = useState<Error | null>(null);
 
   const handleLogout = async () => {
@@ -59,10 +61,9 @@ export const HomeScreen = () => {
       setLogoutError(parsedError);
     }
   };
-
   return (
     <SafeAreaView style={globalStyles.safeArea} edges={['top', 'bottom']}>
-      <View style={homeScreenStyles.mainContainer}>
+      <ScrollView style={homeScreenStyles.mainContainer}>
         <View style={homeScreenStyles.headerContainer}>
           <View style={homeScreenStyles.profilePicContainer}>
             <TouchableOpacity onPress={handleLogout}>
@@ -86,13 +87,15 @@ export const HomeScreen = () => {
         <View
           style={[globalStyles.roundedContainer, homeScreenStyles.container]}
         >
-          <CreditCard
-            name="John Smith"
-            cardType="Amazon Platinium"
-            cardNumber="475612349018"
-            amount={`${symbol}3,469.52`}
-            backgroundImage={Images.cards}
-          />
+          {data && (
+            <CreditCard
+              name={data.cardholderName}
+              cardType={data.cardLabel ?? ''}
+              cardNumber={data.cardNumber}
+              amount={`${symbol}${data.balance}`}
+              backgroundImage={Images.cards}
+            />
+          )}
 
           <View style={homeScreenStyles.columnContainer}>
             {cardGrid.map((row, rowIndex) => (
@@ -118,7 +121,7 @@ export const HomeScreen = () => {
         </View>
 
         <Tabs />
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

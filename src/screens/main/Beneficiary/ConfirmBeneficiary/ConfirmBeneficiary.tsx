@@ -1,5 +1,5 @@
 import { Images } from '@/assets/images';
-import { Button, Header, Input } from '@/components';
+import { Button, Header, Input, OptimizedImage } from '@/components';
 import { useAuthStyles, useGlobalStyles } from '@/hooks';
 import { MainTabParamList } from '@/navigation/types';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -15,11 +15,8 @@ export const ConfirmBeneficiary = ({ navigation, route }: Props) => {
   const { beneficiaryData, image } = route.params;
 
   return (
-    <SafeAreaView style={globalStyles.safeArea} edges={['top', 'bottom']}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={[authStyles.container]}
-      >
+    <SafeAreaView style={globalStyles.verticalSpread} edges={['top', 'bottom']}>
+      <ScrollView>
         <Header
           title="Beneficiary"
           onPress={() => navigation.goBack()}
@@ -27,17 +24,12 @@ export const ConfirmBeneficiary = ({ navigation, route }: Props) => {
           style={authStyles.headerContainer}
         />
 
-        <View
-          style={[
-            globalStyles.roundedContainer,
-            globalStyles.noVerticalPadding,
-          ]}
-        >
-          <View style={globalStyles.imgWrapper}>
+        <View style={[globalStyles.roundedContainer]}>
+          <View style={[globalStyles.imgWrapper]}>
             {image ? (
               <Image source={{ uri: image }} style={globalStyles.profilePic} />
             ) : (
-              <Image
+              <OptimizedImage
                 source={Images.profilePic}
                 style={globalStyles.profilePic}
               />

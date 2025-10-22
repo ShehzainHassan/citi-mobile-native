@@ -1,29 +1,58 @@
-export const accounts = [
+import { Card, UserAccount } from '@/types';
+
+export const userCards: Card[] = [
+  {
+    cardType: 'VISA',
+    cardholderName: 'John Smith',
+    cardLabel: 'Amazon Platinium',
+    cardNumber: 4756123412341234,
+    balance: 3469.252,
+    currency: '$',
+    validFrom: '10/15',
+    goodThru: '10/20',
+  },
+  {
+    cardType: 'MASTERCARD',
+    cardholderName: 'John Smith',
+    cardLabel: 'Amazon Platinium',
+    cardNumber: 4756123412341234,
+    balance: 5000.0,
+    currency: '$',
+    validFrom: '10/15',
+    goodThru: '10/20',
+  },
+];
+
+export const userAccounts: UserAccount[] = [
   {
     title: 'Account 1',
-    accNo: '1900 8988 5456',
+    accNo: 190089885456,
     subText1: 'Available balance',
     balance: 20000,
+    currency: '$',
     subText2: 'Branch',
     branch: 'New York',
   },
   {
     title: 'Account 2',
-    accNo: '8988 1234',
+    accNo: 190089885457,
     subText1: 'Available balance',
-    balance: 20000,
+    balance: 12000,
+    currency: '$',
     subText2: 'Branch',
     branch: 'New York',
   },
   {
     title: 'Account 3',
-    accNo: '1900 1234 2222',
+    accNo: 190089885458,
     subText1: 'Available balance',
     balance: 230000,
+    currency: '$',
     subText2: 'Branch',
     branch: 'New York',
   },
 ];
+
 export const managementAccounts = [
   {
     title: 'Account',

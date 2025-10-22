@@ -8,6 +8,7 @@ import {
 import {
   useAppSelector,
   useGlobalStyles,
+  usePrimaryCard,
   useTransactionReportStyles,
 } from '@/hooks';
 import { transactions } from '@/mocks';
@@ -22,6 +23,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 export const TransactionReport = () => {
   const globalStyles = useGlobalStyles();
   const transactionReportStyles = useTransactionReportStyles();
+  const { data } = usePrimaryCard();
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
   const selectedCurrency = useAppSelector(
@@ -49,13 +51,15 @@ export const TransactionReport = () => {
       >
         <View style={transactionReportStyles.transactionContainer}>
           <View style={transactionReportStyles.cardChartContainer}>
-            <CreditCard
-              name="John Smith"
-              cardType="Amazon Platinium"
-              cardNumber="475612349018"
-              amount={`${symbol}3,469.52`}
-              backgroundImage={Images.cards}
-            />
+            {data && (
+              <CreditCard
+                name={data.cardholderName}
+                cardType={data.cardLabel ?? ''}
+                cardNumber={data.cardNumber}
+                amount={`${symbol}${data.balance}`}
+                backgroundImage={Images.cards}
+              />
+            )}
             <ScrollView
               style={transactionReportStyles.scrollable}
               showsVerticalScrollIndicator={false}

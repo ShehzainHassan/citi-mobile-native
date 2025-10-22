@@ -18,7 +18,11 @@ import {
 import { TranslationKeys } from '@/i18n';
 import { MainTabWithAuthParamList } from '@/navigation/types';
 import { authService } from '@/services';
-import { setTokens } from '@/store/slices/authSlice/authSlice';
+import {
+  setAuthError,
+  setAuthLoading,
+  setTokens,
+} from '@/store/slices/authSlice/authSlice';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
@@ -45,6 +49,7 @@ export const SignIn = () => {
 
   const handleLogin = async (email: string, password: string) => {
     try {
+      dispatch(setAuthLoading(true));
       const tokens = await authService.signIn({ email, password });
       dispatch(setTokens(tokens));
       success('Sign in successful', 'Welcome back!');
@@ -52,7 +57,10 @@ export const SignIn = () => {
     } catch (err: unknown) {
       const parsedError =
         err instanceof Error ? err : new Error('Something went wrong');
+      dispatch(setAuthError(parsedError.message));
       error('Sign in failed', parsedError.message);
+    } finally {
+      dispatch(setAuthLoading(false));
     }
   };
 

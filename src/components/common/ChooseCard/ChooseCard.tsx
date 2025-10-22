@@ -1,34 +1,46 @@
 import { Images } from '@/assets/images';
 import { Button, CreditCard, Header } from '@/components';
-import { useAccountScreenStyles, useGlobalStyles } from '@/hooks';
+import {
+  useAccountScreenStyles,
+  useAppSelector,
+  useGlobalStyles,
+  useUserCards,
+} from '@/hooks';
+import { RootState } from '@/store';
+import { currencySymbolsMap } from '@/utils';
 import { View } from 'react-native';
 import { ChooseCardProps } from './ChooseCard.types';
 
 export const ChooseCard = ({
   headerText,
   onBack,
-  cards,
   onCardPress,
   onAddCard,
 }: ChooseCardProps) => {
   const globalStyles = useGlobalStyles();
   const accountScreenStyles = useAccountScreenStyles();
+  const selectedCurrency = useAppSelector(
+    (state: RootState) => state.settings.currency,
+  );
+  const symbol = currencySymbolsMap[selectedCurrency] || selectedCurrency;
 
+  const { data } = useUserCards();
+  if (!data) return;
   return (
     <View style={globalStyles.verticalSpread}>
       {(headerText || onBack) && (
         <Header title={headerText ?? ''} onPress={onBack} />
       )}
       <View style={[accountScreenStyles.cardsContainer]}>
-        {cards.map((card, index) => (
+        {data.map((card, index) => (
           <CreditCard
             key={index}
-            name={card.name}
-            cardType={card.cardText}
+            name={card.cardholderName}
+            cardType={card.cardLabel ?? ''}
             cardNumber={card.cardNumber}
-            amount={card.amount}
+            amount={`${symbol}${card.balance}`}
             backgroundImage={
-              card.type === 'visa' ? Images.visaCard : Images.masterCard
+              card.cardType === 'VISA' ? Images.visaCard : Images.masterCard
             }
             onPress={() => onCardPress(card)}
           />

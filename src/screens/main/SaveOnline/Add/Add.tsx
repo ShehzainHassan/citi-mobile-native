@@ -7,11 +7,10 @@ import {
   OptimizedImage,
   SuccessScreen,
 } from '@/components';
-import { Card } from '@/components/common/ChooseCard/ChooseCard.types';
-import { BaseModal, CardSelectorModal } from '@/components/ui/Modal';
+import { BaseModal } from '@/components/ui/Modal';
 import { createCardSelectorStyles } from '@/components/ui/Modal/CardSelectorModal/CardSelectorModal.styles';
 import { useAppSelector, useGlobalStyles } from '@/hooks';
-import { cards, timeDeposits } from '@/mocks';
+import { timeDeposits } from '@/mocks';
 import { MainTabParamList } from '@/navigation/types';
 import { RootState } from '@/store';
 import { useTheme } from '@/theme';
@@ -59,11 +58,6 @@ export const Add = () => {
       <ChooseCard
         headerText="Choose card"
         onBack={() => setShowCardScreen(false)}
-        cards={cards.map(c => ({
-          ...c,
-          type: c.type as Card['type'],
-          amount: String(c.amount),
-        }))}
         onCardPress={c => {
           setCard(`Account ${c.cardNumber}`);
           setShowCardScreen(false);
@@ -99,9 +93,13 @@ export const Add = () => {
           <View style={[globalStyles.cardContainer]}>
             <TouchableOpacity
               onPress={() => setShowCardScreen(true)}
-              style={!card ? globalStyles.mediumSpacedContainer : undefined}
+              style={globalStyles.mediumSpacedContainer}
             >
-              <CardSelectorModal value={card} onChange={setCard} showBalance />
+              <Input
+                value={card}
+                readOnly
+                placeholder="Choose account / card"
+              />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => setModalVisible(true)}>

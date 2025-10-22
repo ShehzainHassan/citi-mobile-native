@@ -1,10 +1,11 @@
 import { fixerAPI } from '@/api';
 import { formatCurrencyLabel } from '@/utils';
 import { useQuery } from '@tanstack/react-query';
+import { QUERY_KEYS } from '.';
 
 export const useCurrencySymbols = () => {
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ['currency-symbols'],
+    queryKey: QUERY_KEYS.FIXER.CURRENCY_SYMBOLS,
     queryFn: fixerAPI.getCurrencySymbols,
     staleTime: 24 * 60 * 60 * 1000,
   });

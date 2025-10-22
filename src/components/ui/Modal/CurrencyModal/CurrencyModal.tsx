@@ -1,6 +1,6 @@
 import React from 'react';
 import { BaseModal } from '@/components/ui/Modal';
-import { useCurrencySymbols } from '@/hooks/useCurrencySymbols';
+import { useCurrencySymbols } from '@/hooks/queries/useCurrencySymbols';
 import { CurrencyModalProps } from './CurrencyModal.types';
 
 export const CurrencyModal: React.FC<CurrencyModalProps> = ({

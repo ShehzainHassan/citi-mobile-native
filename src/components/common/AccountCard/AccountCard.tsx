@@ -30,7 +30,7 @@ export const AccountCard = ({
   if (!accountName && !accountNumber && subTextPairs.length === 0) return null;
 
   return (
-    <View style={globalStyles.cardContainer}>
+    <View style={[globalStyles.cardContainer]}>
       <View style={globalStyles.rowWrap}>
         {!!accountName && (
           <Text style={[globalStyles.title3, globalStyles.neutral1]}>

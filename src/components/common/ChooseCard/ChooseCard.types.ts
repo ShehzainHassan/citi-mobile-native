@@ -1,17 +1,10 @@
-export type CardType = 'visa' | 'master';
+import { Card } from '@/types';
 
-export interface Card {
-  name: string;
-  cardText: string;
-  cardNumber: string;
-  amount: string;
-  type: CardType;
-}
+export type CardType = 'visa' | 'master';
 
 export interface ChooseCardProps {
   headerText?: string;
   onBack?: () => void;
-  cards: Card[];
   onCardPress: (card: Card) => void;
   onAddCard?: () => void;
 }

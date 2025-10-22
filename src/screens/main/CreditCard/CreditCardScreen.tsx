@@ -3,6 +3,7 @@ import { Bill, CreditCard, Header } from '@/components';
 import {
   useAppSelector,
   useGlobalStyles,
+  usePrimaryCard,
   useTransactionReportStyles,
 } from '@/hooks';
 import { MainTabParamList } from '@/navigation/types';
@@ -23,7 +24,7 @@ export const CreditCardScreen = () => {
 
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
-
+  const { data } = usePrimaryCard();
   return (
     <SafeAreaView
       style={transactionReportStyles.container}
@@ -36,14 +37,16 @@ export const CreditCardScreen = () => {
         style={styles.header}
       />
       <View style={globalStyles.roundedContainer}>
-        <CreditCard
-          name="John Smith"
-          cardType="Amazon Platinium"
-          cardNumber="475612349018"
-          amount={`${symbol}3,469.52`}
-          backgroundImage={Images.cards}
-          onPress={() => navigation.navigate('CreditCardDetails')}
-        />
+        {data && (
+          <CreditCard
+            name={data.cardholderName}
+            cardType={data.cardLabel ?? ''}
+            cardNumber={data.cardNumber}
+            amount={`${symbol}${data.balance}`}
+            backgroundImage={Images.cards}
+            onPress={() => navigation.navigate('CreditCardDetails')}
+          />
+        )}
         <Bill />
       </View>
     </SafeAreaView>

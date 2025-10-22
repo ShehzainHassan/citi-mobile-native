@@ -60,14 +60,14 @@ export const CreditCard: React.FC<CreditCardProps> = ({
               <Text
                 style={isSmallScreen ? globalStyles.body3 : globalStyles.body2}
               >
-                {cardNumber.slice(0, 4)}
+                {cardNumber.toString().slice(0, 4)}
               </Text>
               {renderDots()}
               {renderDots()}
               <Text
                 style={isSmallScreen ? globalStyles.body3 : globalStyles.body2}
               >
-                {cardNumber.slice(-4)}
+                {cardNumber.toString().slice(-4)}
               </Text>
             </View>
           </View>
