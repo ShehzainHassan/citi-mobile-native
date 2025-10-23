@@ -32,7 +32,7 @@ export const Beneficiary = ({
         ) : image ? (
           <View style={styles.profilePicContainer}>
             <OptimizedImage source={image} style={styles.profilePic} />
-            <Text style={selected ? styles.selectedText : undefined}>
+            <Text style={selected ? styles.selectedText : styles.defaultText}>
               {name}
             </Text>
           </View>

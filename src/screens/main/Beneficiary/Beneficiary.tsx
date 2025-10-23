@@ -1,18 +1,12 @@
 import { CardHolderInfo, Header } from '@/components';
-import { useGlobalStyles } from '@/hooks';
+import { useBeneficiaryStyles, useGlobalStyles } from '@/hooks';
 import { cardInfos } from '@/mocks';
-import {
-  Text,
-  View,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
+import { MainTabParamList } from '@/navigation/types';
 import { useTheme } from '@/theme';
 import MaterialIcons from '@react-native-vector-icons/material-icons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { MainTabParamList } from '@/navigation/types';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const Beneficiary = () => {
@@ -20,7 +14,7 @@ export const Beneficiary = () => {
   const { theme } = useTheme();
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabParamList>>();
-
+  const styles = useBeneficiaryStyles();
   return (
     <SafeAreaView style={globalStyles.verticalSpread} edges={['top', 'bottom']}>
       <Header
@@ -54,34 +48,8 @@ export const Beneficiary = () => {
         style={[styles.fab, { backgroundColor: theme.colors.primary1 }]}
         onPress={() => navigation.navigate('AddBeneficiary')}
       >
-        <MaterialIcons name="add" size={40} color="#fff" />
+        <MaterialIcons name="add" size={40} color={theme.colors.neutral6} />
       </TouchableOpacity>
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-  },
-  section: {
-    gap: 12,
-    marginBottom: 24,
-  },
-  fab: {
-    position: 'absolute',
-    bottom: 24,
-    right: 24,
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-  },
-});

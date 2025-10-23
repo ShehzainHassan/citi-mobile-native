@@ -1,9 +1,4 @@
-import {
-  CardDetailRow,
-  CardDetails,
-  Header,
-  OptimizedImage,
-} from '@/components';
+import { CardDetailRow, CardDetails, Header } from '@/components';
 import { LANGUAGES } from '@/constants';
 import { useGlobalStyles } from '@/hooks';
 import { MainTabParamList } from '@/navigation/types';
@@ -13,7 +8,14 @@ import MaterialIcons from '@react-native-vector-icons/material-icons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  Image,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 
 export const Language = () => {
   const globalStyles = useGlobalStyles();
@@ -38,7 +40,7 @@ export const Language = () => {
                 onPress={() => setSelectedLang(lang.code)}
                 label={
                   <View style={styles.rowContainer}>
-                    <OptimizedImage
+                    <Image
                       source={{ uri: getFlagUrl(lang.code) }}
                       style={globalStyles.flag}
                       resizeMode="contain"

@@ -51,12 +51,12 @@ export const createButtonStyles = (theme: Theme) =>
     },
 
     text_large: {
-      color: theme.colors.neutral6,
+      color: theme.colors.textOnPrimary,
       fontSize: 18,
       fontWeight: '600',
     },
     text_medium: {
-      color: theme.colors.neutral6,
+      color: theme.colors.textOnPrimary,
       fontSize: 16,
       fontWeight: '600',
     },
@@ -65,7 +65,7 @@ export const createButtonStyles = (theme: Theme) =>
     },
 
     text_small: {
-      color: theme.colors.neutral6,
+      color: theme.colors.textOnPrimary,
       fontSize: 14,
       fontWeight: '600',
     },

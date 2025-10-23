@@ -10,9 +10,8 @@ export const createCreditCardStyles = (theme: Theme, width: number) => {
 
   return StyleSheet.create({
     amount: {
-      color: theme.colors.neutral6,
+      color: theme.colors.textOnPrimary,
       paddingLeft: isWideScreen ? FIXED_HORIZONTAL_PADDING : width * 0.1,
-
       paddingVertical: isWideScreen ? FIXED_VERTICAL_PADDING : width * 0.08,
     },
     cardNumberContainer: {
@@ -29,7 +28,7 @@ export const createCreditCardStyles = (theme: Theme, width: number) => {
       width: '100%',
     },
     dot: {
-      backgroundColor: theme.colors.neutral6,
+      backgroundColor: theme.colors.textOnPrimary,
       borderRadius: theme.radius.xs,
       height: 5,
       width: 5,

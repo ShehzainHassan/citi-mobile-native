@@ -46,26 +46,32 @@ export const CreditCard: React.FC<CreditCardProps> = ({
       >
         <View style={styles.titleContainer}>
           <Text
-            style={
-              isSmallScreen
-                ? [globalStyles.heading2, globalStyles.neutral6]
-                : globalStyles.heading1
-            }
+            style={[
+              isSmallScreen ? globalStyles.heading2 : globalStyles.heading1,
+              globalStyles.textOnPrimary,
+            ]}
           >
             {name}
           </Text>
+
           <View style={styles.subContainer}>
             <Text style={globalStyles.sublineMedium14}>{cardType}</Text>
             <View style={styles.cardNumberContainer}>
               <Text
-                style={isSmallScreen ? globalStyles.body3 : globalStyles.body2}
+                style={[
+                  isSmallScreen ? globalStyles.body3 : globalStyles.body2,
+                  globalStyles.textOnPrimary,
+                ]}
               >
                 {cardNumber.toString().slice(0, 4)}
               </Text>
               {renderDots()}
               {renderDots()}
               <Text
-                style={isSmallScreen ? globalStyles.body3 : globalStyles.body2}
+                style={[
+                  isSmallScreen ? globalStyles.body3 : globalStyles.body2,
+                  globalStyles.textOnPrimary,
+                ]}
               >
                 {cardNumber.toString().slice(-4)}
               </Text>

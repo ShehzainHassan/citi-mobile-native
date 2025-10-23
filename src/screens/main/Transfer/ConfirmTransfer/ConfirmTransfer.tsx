@@ -50,7 +50,7 @@ export const ConfirmTransfer = () => {
         source={Images.withdrawBanner}
         title="Transfer successful!"
         subtitle={
-          <Text>
+          <Text style={globalStyles.neutral1}>
             You have successfully transferred{' '}
             <Text style={globalStyles.semantic1}>{transferAmount}</Text> to{' '}
             <Text style={globalStyles.primary1}>{recipientName}</Text>.

@@ -15,6 +15,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import userReducer from '@/store/slices/user/userSlice';
 import settingsReducer from '@/store/slices/settings/settingsSlice';
 import authReducer from '@/store/slices/authSlice/authSlice';
+import themeReducer from '@/store/slices/theme/themeSlice';
 import { encryptTransform } from './persistConfig';
 import { loggerMiddleware } from './middleware/logger';
 
@@ -38,10 +39,17 @@ const settingsPersistConfig = {
   whitelist: ['currency'],
 };
 
+const themePersistConfig = {
+  key: 'theme',
+  storage: AsyncStorage,
+  whitelist: ['themeMode'],
+};
+
 const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
   user: persistReducer(userPersistConfig, userReducer),
   settings: persistReducer(settingsPersistConfig, settingsReducer),
+  theme: persistReducer(themePersistConfig, themeReducer),
 });
 
 export const store = configureStore({

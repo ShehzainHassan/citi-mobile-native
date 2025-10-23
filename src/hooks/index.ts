@@ -30,3 +30,4 @@ export * from './queries/useConversionRate';
 export * from './queries/usePrimaryCard';
 export * from './queries/useUserCards';
 export * from './queries/useUserAccounts';
+export * from './useBeneficiaryStyles';

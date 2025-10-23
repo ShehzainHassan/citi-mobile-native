@@ -33,8 +33,12 @@ export const createBeneficiaryStyles = (theme: Theme) =>
       backgroundColor: theme.colors.primary1,
     },
     selectedText: {
-      color: theme.colors.neutral6,
+      color: theme.colors.textOnPrimary,
     },
+    defaultText: {
+      color: theme.colors.neutral1,
+    },
+
     touchable: {
       width: '100%',
       height: '100%',

@@ -73,7 +73,7 @@ export const HomeScreen = () => {
                 accessibilityLabel={t(TranslationKeys.homeScreen.profilePicAlt)}
               />
             </TouchableOpacity>
-            <Text style={globalStyles.body1}>
+            <Text style={[globalStyles.body1, globalStyles.textOnPrimary]}>
               {t(TranslationKeys.homeScreen.greeting, { name: 'John' })}
             </Text>
           </View>

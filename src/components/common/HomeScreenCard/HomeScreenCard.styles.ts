@@ -1,8 +1,8 @@
-import { Theme } from "@/theme";
-import { Dimensions, StyleSheet } from "react-native";
+import { Theme } from '@/theme';
+import { Dimensions, StyleSheet } from 'react-native';
 
 export const createHomeScreenCardStyles = (theme: Theme) => {
-  const { width: screenWidth } = Dimensions.get("window");
+  const { width: screenWidth } = Dimensions.get('window');
   const cardSize = screenWidth < 600 ? 100 : screenWidth * 0.15;
 
   return StyleSheet.create({
@@ -12,20 +12,20 @@ export const createHomeScreenCardStyles = (theme: Theme) => {
     },
     cardText: {
       color: theme.colors.textdefault,
-      textAlign: "center",
+      textAlign: 'center',
     },
     container: {
-      alignItems: "center",
+      alignItems: 'center',
       backgroundColor: theme.colors.neutral6,
       borderRadius: theme.radius.md,
       elevation: 3,
       flex: 1,
-      flexDirection: "column",
+      flexDirection: 'column',
       gap: theme.spacing.ms,
       height: cardSize,
-      justifyContent: "center",
+      justifyContent: 'center',
       padding: theme.spacing.ms,
-      shadowColor: "#000",
+      shadowColor: theme.colors.neutral1,
       shadowOffset: { width: 0, height: 5 },
       shadowOpacity: 0.05,
       shadowRadius: 6,

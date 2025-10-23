@@ -16,8 +16,7 @@ export const Header = ({
   const { theme } = useTheme();
   const styles = createHeaderStyles(theme, variant);
   const textColor =
-    variant === 'primary' ? theme.colors.neutral1 : theme.colors.neutral6;
-
+    variant === 'primary' ? theme.colors.neutral1 : theme.colors.textOnPrimary;
   return (
     <SafeAreaView edges={['top']} style={[styles.safeAreaContainer, style]}>
       <View style={styles.headerContainer}>

@@ -1,34 +1,34 @@
-import { Theme } from "@/theme";
-import { StyleSheet } from "react-native";
+import { Theme } from '@/theme';
+import { StyleSheet } from 'react-native';
 
 export const createTabStyles = (theme: Theme) =>
   StyleSheet.create({
     container: {
-      alignItems: "center",
+      alignItems: 'center',
       backgroundColor: theme.colors.neutral6,
-      flexDirection: "row",
+      flexDirection: 'row',
       height: 90,
-      justifyContent: "space-between",
+      justifyContent: 'space-between',
       paddingHorizontal: theme.spacing.lg,
       shadowColor: theme.colors.primary1,
       shadowOffset: { width: 0, height: -5 },
       shadowOpacity: 0.12,
       shadowRadius: 15,
-      width: "100%",
+      width: '100%',
     },
     icon: {
       height: 28,
-      resizeMode: "contain",
+      resizeMode: 'contain',
       width: 28,
     },
     label: {
-      color: theme.colors.neutral6,
+      color: theme.colors.textOnPrimary,
       fontSize: 14,
-      fontWeight: "600",
+      fontWeight: '600',
     },
     tab: {
-      alignItems: "center",
-      flexDirection: "row",
+      alignItems: 'center',
+      flexDirection: 'row',
       gap: 8,
       padding: theme.spacing.md,
     },

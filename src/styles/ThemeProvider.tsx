@@ -1,15 +1,12 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { useColorScheme } from "react-native";
-import { darkTheme, lightTheme, Theme } from "../theme";
-
-export type ThemeMode = "light" | "dark" | "system";
+import React, { ReactNode, createContext } from 'react';
+import { useColorScheme } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '@/store';
+import { darkTheme, lightTheme, Theme } from '../theme';
+import {
+  setThemeMode as setThemeModeAction,
+  ThemeMode,
+} from '@/store/slices/theme/themeSlice';
 
 interface ThemeContextType {
   theme: Theme;
@@ -19,62 +16,52 @@ interface ThemeContextType {
   setThemeMode: (mode: ThemeMode) => void;
 }
 
-const STORAGE_KEY = "THEME_PREFERENCE";
-
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+export const ThemeContext = createContext<ThemeContextType | undefined>(
+  undefined,
+);
 
 interface ThemeProviderProps {
   children: ReactNode;
-  initialThemeMode?: ThemeMode;
 }
 
-export const ThemeProvider: React.FC<ThemeProviderProps> = ({
-  children,
-  initialThemeMode = "system",
-}) => {
+export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const systemColorScheme = useColorScheme();
-  const [themeMode, setThemeModeState] = useState<ThemeMode>(initialThemeMode);
-
-  useEffect(() => {
-    AsyncStorage.getItem(STORAGE_KEY).then((saved) => {
-      if (saved) setThemeModeState(saved as ThemeMode);
-    });
-  }, []);
+  const themeMode = useSelector((state: RootState) => state.theme.themeMode);
+  const dispatch = useDispatch();
 
   const isDark =
-    themeMode === "system"
-      ? systemColorScheme === "dark"
-      : themeMode === "dark";
-
-  const theme = isDark ? darkTheme : lightTheme;
+    themeMode === 'system'
+      ? systemColorScheme === 'dark'
+      : themeMode === 'dark';
+  const theme: Theme = isDark ? darkTheme : lightTheme;
 
   const toggleTheme = () => {
-    const nextMode =
-      themeMode === "light"
-        ? "dark"
-        : themeMode === "dark"
-          ? "system"
-          : "light";
-    setThemeMode(nextMode);
+    const nextMode: ThemeMode =
+      themeMode === 'light'
+        ? 'dark'
+        : themeMode === 'dark'
+        ? 'system'
+        : 'light';
+    dispatch(setThemeModeAction(nextMode));
   };
 
-  const setThemeMode = (mode: ThemeMode) => {
-    setThemeModeState(mode);
-    AsyncStorage.setItem(STORAGE_KEY, mode);
+  const setMode = (mode: ThemeMode) => {
+    dispatch(setThemeModeAction(mode));
   };
 
   return (
     <ThemeContext.Provider
-      value={{ theme, isDark, themeMode, toggleTheme, setThemeMode }}>
+      value={{ theme, isDark, themeMode, toggleTheme, setThemeMode: setMode }}
+    >
       {children}
     </ThemeContext.Provider>
   );
 };
 
 export const useTheme = (): ThemeContextType => {
-  const context = useContext(ThemeContext);
+  const context = React.useContext(ThemeContext);
   if (!context) {
-    throw new Error("useTheme must be used within a ThemeProvider");
+    throw new Error('useTheme must be used within a ThemeProvider');
   }
   return context;
 };

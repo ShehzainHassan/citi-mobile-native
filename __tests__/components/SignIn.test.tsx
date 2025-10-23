@@ -1,4 +1,4 @@
-import { fireEvent, waitFor } from '@testing-library/react-native';
+import { fireEvent, render, waitFor } from '@testing-library/react-native';
 import { SignIn } from '@/screens/auth/SignIn';
 import { useToast } from '@/hooks/useToast';
 import { useDeviceAuthType } from '@/hooks/useDeviceAuthType';
@@ -6,7 +6,7 @@ import { useFormValidation } from '@/hooks/useFormValidation';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import { authService } from '@/services';
-import { renderWithProviders } from '@/providers';
+import { ThemeProvider } from '@/theme';
 
 jest.mock('@/hooks/useToast');
 jest.mock('@/hooks/useDeviceAuthType');
@@ -17,6 +17,9 @@ jest.mock('@/services', () => ({
   },
 }));
 
+const renderWithProviders = (ui: React.ReactNode) => {
+  return render(<ThemeProvider>{ui}</ThemeProvider>);
+};
 describe('SignIn Screen', () => {
   const mockDispatch = jest.fn();
   const mockNavigate = jest.fn();

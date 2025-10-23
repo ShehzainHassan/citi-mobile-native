@@ -89,6 +89,7 @@ export const createAuthStyles = (theme: Theme) =>
       lineHeight: theme.spacing.md,
       flexShrink: 1,
       flexWrap: 'wrap',
+      color: theme.colors.neutral1,
     },
     textInfo: {
       color: theme.colors.neutral2,

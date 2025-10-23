@@ -17,8 +17,27 @@ export const lightColors = {
   semantic3: '#FFAF2A',
   semantic4: '#52D5BA',
   error: '#FF3B30',
+  textOnPrimary: '#FFFFFF',
 };
 
 export const darkColors = {
-  ...lightColors,
+  primary1: '#3629B7',
+  primary4: '#2C2A3A',
+  textdefault: '#E0E0E0',
+  surface: '#1E1E1E',
+  border: '#3A3A3A',
+  neutral1: '#FFFFFF',
+  neutral2: '#C0C0C0',
+  neutral3: '#A0A0A0',
+  neutral4: '#5A5A5A',
+  neutral5: '#2E2E2E',
+  neutral6: '#121212',
+  line1: '#333333',
+  line2: '#555555',
+  semantic1: '#FF5B7F',
+  semantic2: '#4AB6FF',
+  semantic3: '#FFC75A',
+  semantic4: '#6EE0CA',
+  error: '#FF6B61',
+  textOnPrimary: '#FFFFFF',
 };

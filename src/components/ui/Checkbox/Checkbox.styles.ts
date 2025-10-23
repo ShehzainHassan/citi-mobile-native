@@ -31,5 +31,6 @@ export const createCheckboxStyles = (theme: Theme) =>
     },
     text: {
       flexShrink: 1,
+      color: theme.colors.textdefault,
     },
   });

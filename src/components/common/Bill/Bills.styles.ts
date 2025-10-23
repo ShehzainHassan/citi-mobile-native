@@ -30,6 +30,7 @@ export const createBillStyles = (theme: Theme) =>
       fontSize: 16,
       fontWeight: '600',
       lineHeight: 24,
+      color: theme.colors.neutral1,
     },
     totalAmount: {
       fontSize: 24,

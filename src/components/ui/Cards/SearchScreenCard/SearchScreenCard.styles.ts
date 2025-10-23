@@ -12,7 +12,7 @@ export const createSearchScreenCardStyles = (theme: Theme) =>
       height: 110,
       justifyContent: 'space-between',
       padding: theme.spacing.md,
-      shadowColor: '#000',
+      shadowColor: theme.colors.neutral1,
       shadowOffset: { width: 0, height: 5 },
       shadowOpacity: 0.05,
       shadowRadius: 30,

@@ -18,9 +18,9 @@ export default function App() {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <ReactQueryProvider>
-      <ThemeProvider>
-        <ErrorBoundary>
-          <Provider store={store}>
+      <Provider store={store}>
+        <ThemeProvider>
+          <ErrorBoundary>
             <PersistGate loading={null} persistor={persistor}>
               <GestureHandlerRootView style={{ flex: 1 }}>
                 <SafeAreaProvider>
@@ -32,9 +32,9 @@ export default function App() {
                 </SafeAreaProvider>
               </GestureHandlerRootView>
             </PersistGate>
-          </Provider>
-        </ErrorBoundary>
-      </ThemeProvider>
+          </ErrorBoundary>
+        </ThemeProvider>
+      </Provider>
     </ReactQueryProvider>
   );
 }

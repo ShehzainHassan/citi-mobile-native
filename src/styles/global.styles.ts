@@ -28,6 +28,7 @@ export const createGlobalStyles = (theme: Theme) =>
       borderTopRightRadius: theme.radius.lg,
       display: 'flex',
       padding: theme.spacing.lg,
+      flex: 1,
     },
     header: {
       color: theme.colors.neutral6,
@@ -149,7 +150,7 @@ export const createGlobalStyles = (theme: Theme) =>
       lineHeight: theme.spacing.ml,
     },
     sublineMedium14: {
-      color: theme.colors.neutral6,
+      color: theme.colors.textOnPrimary,
       fontSize: theme.typography.fontSize.base,
       fontWeight: '500',
       lineHeight: theme.spacing.md,
@@ -206,7 +207,7 @@ export const createGlobalStyles = (theme: Theme) =>
       borderRadius: theme.radius.md,
       elevation: 2,
       padding: theme.spacing.md,
-      shadowColor: '#000',
+      shadowColor: theme.colors.neutral1,
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.05,
       shadowRadius: 4,
@@ -233,6 +234,9 @@ export const createGlobalStyles = (theme: Theme) =>
     textDefault: {
       color: theme.colors.textdefault,
     },
+    textOnPrimary: {
+      color: theme.colors.textOnPrimary,
+    },
     fillAll: {
       flex: 1,
     },
@@ -248,7 +252,6 @@ export const createGlobalStyles = (theme: Theme) =>
       textAlign: 'center',
     },
 
-    // Card patterns
     cardContainer: {
       backgroundColor: theme.colors.neutral6,
       borderRadius: theme.radius.md,
@@ -270,7 +273,7 @@ export const createGlobalStyles = (theme: Theme) =>
 
     // Form patterns
     errorText: {
-      color: '#FF3B30',
+      color: theme.colors.error,
       fontSize: theme.typography.fontSize.sm,
       marginTop: theme.spacing.xs,
     },
@@ -283,7 +286,7 @@ export const createGlobalStyles = (theme: Theme) =>
       padding: theme.spacing.lg,
     },
     balanceAmount: {
-      color: '#FFFFFF',
+      color: theme.colors.neutral6,
       fontSize: 32,
       fontWeight: 'bold',
     },
@@ -296,8 +299,17 @@ export const createGlobalStyles = (theme: Theme) =>
       paddingVertical: theme.spacing.md,
     },
 
+    authLogoContainer: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '100%',
+      maxHeight: 250,
+    },
+
     authLogo: {
-      aspectRatio: 1,
+      maxWidth: '75%',
+      maxHeight: 200,
+      aspectRatio: 213 / 165,
       marginVertical: theme.spacing.lg,
     },
     successImage: {
