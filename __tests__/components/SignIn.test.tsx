@@ -4,9 +4,14 @@ import { useToast } from '@/hooks/useToast';
 import { useDeviceAuthType } from '@/hooks/useDeviceAuthType';
 import { useFormValidation } from '@/hooks/useFormValidation';
 import { useNavigation } from '@react-navigation/native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { authService } from '@/services';
 import { ThemeProvider } from '@/theme';
+
+jest.mock('react-redux', () => ({
+  useDispatch: jest.fn(),
+  useSelector: jest.fn(),
+}));
 
 jest.mock('@/hooks/useToast');
 jest.mock('@/hooks/useDeviceAuthType');
@@ -20,6 +25,7 @@ jest.mock('@/services', () => ({
 const renderWithProviders = (ui: React.ReactNode) => {
   return render(<ThemeProvider>{ui}</ThemeProvider>);
 };
+
 describe('SignIn Screen', () => {
   const mockDispatch = jest.fn();
   const mockNavigate = jest.fn();
@@ -27,7 +33,11 @@ describe('SignIn Screen', () => {
   const mockError = jest.fn();
 
   beforeEach(() => {
+    jest.clearAllMocks();
+
     (useDispatch as unknown as jest.Mock).mockReturnValue(mockDispatch);
+    (useSelector as unknown as jest.Mock).mockReturnValue('light'); // themeMode
+
     (useNavigation as jest.Mock).mockReturnValue({ navigate: mockNavigate });
     (useToast as jest.Mock).mockReturnValue({
       success: mockSuccess,
@@ -40,7 +50,6 @@ describe('SignIn Screen', () => {
       handleChange: jest.fn(),
       validateAll: jest.fn(() => true),
     });
-    jest.clearAllMocks();
   });
 
   test('renders correctly', () => {
