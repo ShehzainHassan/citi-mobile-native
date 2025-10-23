@@ -52,7 +52,7 @@ export const SignUp = () => {
         contentContainerStyle={globalStyles.scrollContent}
         keyboardShouldPersistTaps="handled"
         enableOnAndroid
-        extraScrollHeight={Platform.OS === 'ios' ? 80 : 0}
+        extraScrollHeight={Platform.OS === 'ios' ? 80 : 240}
         showsVerticalScrollIndicator={false}
       >
         <Header

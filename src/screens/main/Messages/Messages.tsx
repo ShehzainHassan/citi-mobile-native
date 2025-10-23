@@ -20,7 +20,7 @@ export const Messages = () => {
 
   return (
     <SafeAreaView
-      style={[globalStyles.safeArea, globalStyles.verticalSpread]}
+      style={[globalStyles.verticalSpread]}
       edges={['top', 'bottom']}
     >
       <Header title="Messages" onPress={() => navigation.navigate('Home')} />

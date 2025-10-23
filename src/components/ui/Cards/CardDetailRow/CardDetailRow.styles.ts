@@ -12,6 +12,7 @@ export const createCardDetailRowStyles = (theme: Theme) =>
       borderColor: theme.colors.line1,
       flexDirection: 'row',
       justifyContent: 'space-between',
+      paddingTop: theme.spacing.md,
       paddingBottom: theme.spacing.ms,
     },
   });

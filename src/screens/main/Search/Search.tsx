@@ -14,7 +14,7 @@ export const Search = () => {
 
   return (
     <SafeAreaView
-      style={[globalStyles.safeArea, globalStyles.verticalSpread]}
+      style={[globalStyles.verticalSpread]}
       edges={['top', 'bottom']}
     >
       <Header title="Search" onPress={() => navigation.navigate('Home')} />

@@ -10,12 +10,14 @@ import { IDLE_SCREENS } from '@/constants';
 import { useSessionManager } from '@/hooks';
 import { getCurrentRouteName, navigationRef } from '@/navigation';
 import {
-  Accounts,
+  AccountsScreen,
   Add,
   AddNewBeneficiary,
   AppInformation,
   Beneficiary,
   BillDetails,
+  CardDetailsScreen,
+  CardsScreen,
   ChangePassword,
   ConfimMobilePrepaid,
   ConfirmBeneficiary,
@@ -102,7 +104,23 @@ function SessionProvider() {
           name="Accounts"
           children={() => (
             <ProtectedRoute>
-              <Accounts />
+              <AccountsScreen />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="Cards"
+          children={() => (
+            <ProtectedRoute>
+              <CardsScreen />
+            </ProtectedRoute>
+          )}
+        />
+        <Stack.Screen
+          name="CardDetails"
+          children={() => (
+            <ProtectedRoute>
+              <CardDetailsScreen />
             </ProtectedRoute>
           )}
         />

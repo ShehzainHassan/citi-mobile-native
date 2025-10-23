@@ -27,7 +27,6 @@ export const createGlobalStyles = (theme: Theme) =>
       borderTopLeftRadius: theme.radius.lg,
       borderTopRightRadius: theme.radius.lg,
       display: 'flex',
-      flex: 1,
       padding: theme.spacing.lg,
     },
     header: {
@@ -48,7 +47,7 @@ export const createGlobalStyles = (theme: Theme) =>
     },
     safeArea: {
       flex: 1,
-      backgroundColor: theme.colors.neutral6,
+      backgroundColor: theme.colors.primary1,
     },
     scrollContent: {
       flexGrow: 1,
@@ -298,7 +297,7 @@ export const createGlobalStyles = (theme: Theme) =>
     },
 
     authLogo: {
-      aspectRatio: 1.1,
+      aspectRatio: 1,
       marginVertical: theme.spacing.lg,
     },
     successImage: {

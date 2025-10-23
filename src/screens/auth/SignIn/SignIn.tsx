@@ -88,7 +88,8 @@ export const SignIn = () => {
         contentContainerStyle={globalStyles.scrollContent}
         keyboardShouldPersistTaps="handled"
         enableOnAndroid
-        extraScrollHeight={Platform.OS === 'ios' ? 80 : 0}
+        enableAutomaticScroll
+        extraScrollHeight={Platform.OS === 'ios' ? 80 : 160}
         showsVerticalScrollIndicator={false}
       >
         <Header
@@ -129,6 +130,7 @@ export const SignIn = () => {
           </Text>
 
           <Button
+            testID="sign-in-button"
             title={t(TranslationKeys.auth.signInButton)}
             onPress={handleSignIn}
             disabled={!values.email || !!errors.email || !values.password}

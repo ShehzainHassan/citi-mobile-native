@@ -15,8 +15,8 @@ import { setCurrency } from '@/store/slices/settings/settingsSlice';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
-import { Platform, Text, View } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { ScrollView, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const Settings = () => {
@@ -53,56 +53,49 @@ export const Settings = () => {
   };
 
   return (
-    <KeyboardAwareScrollView
-      style={authStyles.container}
-      contentContainerStyle={globalStyles.scrollContent}
-      keyboardShouldPersistTaps="handled"
-      enableOnAndroid
-      extraScrollHeight={Platform.OS === 'ios' ? 80 : 0}
-      showsVerticalScrollIndicator={false}
-    >
-      <Header
-        title="Settings"
-        variant="secondary"
-        onPress={() => navigation.navigate('Home')}
-        style={authStyles.headerContainer}
-      />
+    <SafeAreaView style={globalStyles.safeArea} edges={['top', 'bottom']}>
+      <ScrollView>
+        <Header
+          title="Settings"
+          variant="secondary"
+          onPress={() => navigation.navigate('Home')}
+          style={authStyles.headerContainer}
+        />
 
-      <View style={[globalStyles.roundedContainer]}>
-        <View style={[globalStyles.imgWrapper]}>
-          <OptimizedImage
-            source={Images.profilePic}
-            style={globalStyles.profilePic}
-          />
-          <Text style={[globalStyles.title3]}>John Smith</Text>
+        <View style={[globalStyles.roundedContainer, globalStyles.fillAll]}>
+          <View style={[globalStyles.imgWrapper]}>
+            <OptimizedImage
+              source={Images.profilePic}
+              style={globalStyles.profilePic}
+            />
+            <Text style={[globalStyles.title3]}>John Smith</Text>
+          </View>
+          <CardDetails>
+            {SETTINGS_OPTIONS.map(option => (
+              <SettingsRow
+                key={option.id}
+                label={
+                  option.id === 'currency'
+                    ? `Change Currency (${selectedCurrency})`
+                    : option.labelKey
+                }
+                onPress={() =>
+                  handleOptionPress(option.id, option.route, option.type)
+                }
+              />
+            ))}
+          </CardDetails>
         </View>
 
-        <CardDetails>
-          {SETTINGS_OPTIONS.map(option => (
-            <SettingsRow
-              key={option.id}
-              label={
-                option.id === 'currency'
-                  ? `Change Currency (${selectedCurrency})`
-                  : option.labelKey
-              }
-              onPress={() =>
-                handleOptionPress(option.id, option.route, option.type)
-              }
-            />
-          ))}
-        </CardDetails>
-      </View>
-
+        <CurrencyModal
+          visible={isModalVisible}
+          onClose={() => setModalVisible(false)}
+          selectedCurrency={selectedCurrency}
+          onSelect={handleSelectCurrency}
+        />
+      </ScrollView>
       <Tabs />
-
-      <CurrencyModal
-        visible={isModalVisible}
-        onClose={() => setModalVisible(false)}
-        selectedCurrency={selectedCurrency}
-        onSelect={handleSelectCurrency}
-      />
-    </KeyboardAwareScrollView>
+    </SafeAreaView>
   );
 };
 

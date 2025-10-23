@@ -1,8 +1,9 @@
-import React from "react";
-import { useTheme } from "@/theme";
-import { CardDetailRow } from "@/components/ui";
-import { SettingsRowProps } from "./SettingsRow.types";
-import MaterialIcons from "@react-native-vector-icons/material-icons";
+import React from 'react';
+import { useTheme } from '@/theme';
+import { CardDetailRow } from '@/components/ui';
+import { SettingsRowProps } from './SettingsRow.types';
+import MaterialIcons from '@react-native-vector-icons/material-icons';
+import { useGlobalStyles } from '@/hooks';
 
 export const SettingsRow: React.FC<SettingsRowProps> = ({
   label,
@@ -10,7 +11,7 @@ export const SettingsRow: React.FC<SettingsRowProps> = ({
   showChevron = true,
 }) => {
   const { theme } = useTheme();
-
+  const globalStyles = useGlobalStyles();
   return (
     <CardDetailRow
       label={label}
@@ -23,6 +24,7 @@ export const SettingsRow: React.FC<SettingsRowProps> = ({
           />
         )
       }
+      labelStyle={globalStyles.neutral1}
       {...(onPress ? { onPress } : {})}
     />
   );

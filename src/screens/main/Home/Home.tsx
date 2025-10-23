@@ -119,9 +119,8 @@ export const HomeScreen = () => {
             <ErrorMessage error={logoutError} onRetry={handleLogout} />
           )}
         </View>
-
-        <Tabs />
       </ScrollView>
+      <Tabs />
     </SafeAreaView>
   );
 };

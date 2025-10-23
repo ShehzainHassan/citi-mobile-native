@@ -3,7 +3,7 @@
 // Screen props types for type-safe navigation
 
 import { TransferType } from '@/config';
-import { PaymentData } from '@/types';
+import { Card, PaymentData } from '@/types';
 
 export type AuthStackParamList = {
   SignIn: undefined;
@@ -14,7 +14,10 @@ export type AuthStackParamList = {
 
 export type MainTabParamList = {
   Home: undefined;
-  Accounts: { accountId?: string };
+  Accounts: undefined;
+  Cards: undefined;
+  CardDetails: { card: Card };
+
   Transfers: undefined;
   ConfirmTransfers: {
     transferData: Record<string, string>;
