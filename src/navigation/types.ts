@@ -17,7 +17,6 @@ export type MainTabParamList = {
   Accounts: undefined;
   Cards: undefined;
   CardDetails: { card: Card };
-
   Transfers: undefined;
   ConfirmTransfers: {
     transferData: Record<string, string>;

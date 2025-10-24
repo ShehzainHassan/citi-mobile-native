@@ -16,3 +16,5 @@ export function getCurrentRouteName() {
   const name = route?.name;
   return name || '';
 }
+
+export * from './linking';

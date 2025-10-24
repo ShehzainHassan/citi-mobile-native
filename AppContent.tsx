@@ -8,7 +8,7 @@ import type { RootStackParamList } from '@/navigation/types';
 
 import { IDLE_SCREENS } from '@/constants';
 import { useSessionManager } from '@/hooks';
-import { getCurrentRouteName, navigationRef } from '@/navigation';
+import { getCurrentRouteName, linking, navigationRef } from '@/navigation';
 import {
   AccountsScreen,
   Add,
@@ -58,6 +58,7 @@ export default function AppContent() {
   return (
     <I18nextProvider i18n={i18n}>
       <NavigationContainer
+        linking={linking}
         ref={navigationRef}
         onReady={() => {
           console.log(
