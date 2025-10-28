@@ -9,10 +9,13 @@ export const useFormValidation = (initialValues: FormFields) => {
   const [values, setValues] = useState<FormFields>(initialValues);
   const [errors, setErrors] = useState<FormErrors>({});
 
+  const isEmail = (value: string) => value.includes('@');
   const handleChange = (field: string, text: string) => {
     const sanitized = sanitizeInput(text, field);
     setValues(prev => ({ ...prev, [field]: sanitized }));
-    validateField(field, sanitized);
+    if (field !== 'emailOrPhone') {
+      validateField(field, sanitized);
+    }
   };
 
   const validateField = (field: string, value: string) => {
@@ -33,29 +36,33 @@ export const useFormValidation = (initialValues: FormFields) => {
     return !error;
   };
 
-  const validateAll = (skipPassword = false) => {
+  const validateAll = () => {
     let valid = true;
     const newErrors: FormErrors = {};
 
     Object.keys(values).forEach(field => {
-      if (skipPassword && field === 'password') return;
-      const rule = validationRules[field as keyof typeof validationRules] as
-        | ValidationRule
-        | undefined;
-      if (!rule) return;
-
+      let rule: ValidationRule | undefined;
       const value = values[field];
-      let isValid = true;
 
-      if ('regex' in rule) {
-        isValid = rule.regex.test(value);
-      } else if ('matchField' in rule) {
-        isValid = value === values[rule.matchField];
+      if (field === 'emailOrPhone') {
+        rule = isEmail(value) ? validationRules.email : validationRules.phone;
+      } else {
+        rule = validationRules[field as keyof typeof validationRules];
       }
 
-      if (!isValid) {
-        newErrors[field] = rule.message;
-        valid = false;
+      if (rule) {
+        let isValid = true;
+
+        if ('regex' in rule) {
+          isValid = rule.regex.test(value);
+        } else if ('matchField' in rule) {
+          isValid = value === values[rule.matchField];
+        }
+
+        if (!isValid) {
+          newErrors[field] = rule.message;
+          valid = false;
+        }
       }
     });
 
@@ -68,6 +75,7 @@ export const useFormValidation = (initialValues: FormFields) => {
     errors,
     handleChange,
     validateAll,
+    validateField,
     setValues,
   };
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Animated, {
   useSharedValue,
@@ -42,18 +42,16 @@ export const Input: React.FC<InputProps> = ({
 
   const shakeValue = useSharedValue(0);
 
-  useEffect(() => {
-    if (error) {
-      shakeValue.value = withSequence(
-        withTiming(-8, { duration: 50 }),
-        withTiming(8, { duration: 50 }),
-        withTiming(-8, { duration: 50 }),
-        withTiming(8, { duration: 50 }),
-        withTiming(0, { duration: 50 }),
-      );
-      ReactNativeHapticFeedback.trigger('notificationError', hapticOptions);
-    }
-  }, [error]);
+  const shake = () => {
+    shakeValue.value = withSequence(
+      withTiming(-8, { duration: 50 }),
+      withTiming(8, { duration: 50 }),
+      withTiming(-8, { duration: 50 }),
+      withTiming(8, { duration: 50 }),
+      withTiming(0, { duration: 50 }),
+    );
+    ReactNativeHapticFeedback.trigger('notificationError', hapticOptions);
+  };
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: shakeValue.value }],
@@ -108,14 +106,11 @@ export const Input: React.FC<InputProps> = ({
           editable={!readOnly}
           pointerEvents={readOnly ? 'none' : 'auto'}
           secureTextEntry={isPasswordField && !isPasswordVisible}
-          onFocus={() => {
-            if (readOnly) {
-              handleRightPress();
-            } else {
-              setIsFocused(true);
-            }
+          onFocus={() => !readOnly && setIsFocused(true)}
+          onBlur={() => {
+            if (!readOnly) setIsFocused(false);
+            if (error) shake();
           }}
-          onBlur={() => !readOnly && setIsFocused(false)}
           style={inputStyle}
           placeholderTextColor={theme.colors.neutral4}
         />

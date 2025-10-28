@@ -3,6 +3,8 @@ export const QUERY_KEYS = {
     PRIMARY_CARD: ['user', 'primary-card'] as const,
     ALL_CARDS: ['user', 'all-cards'] as const,
     ACCOUNTS: ['user', 'accounts'] as const,
+    SIGNUP: ['user', 'signup'] as const,
+    SIGNIN: ['user', 'signin'] as const,
   },
   FIXER: {
     CURRENCY_SYMBOLS: ['fixer', 'currency-symbols'] as const,

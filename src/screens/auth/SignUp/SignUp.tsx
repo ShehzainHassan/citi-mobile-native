@@ -7,24 +7,33 @@ import {
   Checkbox,
   Header,
   Input,
+  PhoneNumberInput,
 } from '@/components';
-import { useAuthStyles, useFormValidation, useGlobalStyles } from '@/hooks';
+import {
+  useAuth,
+  useAuthStyles,
+  useFormValidation,
+  useGlobalStyles,
+} from '@/hooks';
 import { TranslationKeys } from '@/i18n';
-import { AuthStackParamList } from '@/navigation/types';
+import { MainTabWithAuthParamList } from '@/navigation/types';
+import { RootState } from '@/store';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useState } from 'react';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSelector } from 'react-redux';
 
 export const SignUp = () => {
   const globalStyles = useGlobalStyles();
   const authStyles = useAuthStyles();
   const { t } = useTranslation();
+
   const navigation =
-    useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
+    useNavigation<NativeStackNavigationProp<MainTabWithAuthParamList>>();
 
   const [acceptedTerms, setAcceptedTerms] = useState(false);
 
@@ -32,18 +41,21 @@ export const SignUp = () => {
     name: '',
     email: '',
     password: '',
+    phoneNo: '',
   });
 
-  const handleSignUp = () => {
-    if (!acceptedTerms) {
-      return;
-    }
+  const { signUp } = useAuth();
+  const loading = useSelector((state: RootState) => state.auth.isLoading);
+  const handleSignUp = async () => {
+    if (!acceptedTerms || !validateAll()) return;
 
-    if (validateAll()) {
-      // TODO: Implement sign-up logic
-    } else {
-      // TODO: Show validation error
-    }
+    await signUp({
+      fullName: values.name,
+      email: values.email,
+      password: values.password,
+      phoneNumber: values.phoneNo,
+      acceptTerms: acceptedTerms,
+    });
   };
 
   return (
@@ -92,10 +104,16 @@ export const SignUp = () => {
               error={errors.password ?? undefined}
             />
 
+            <PhoneNumberInput
+              value={values.phoneNo}
+              placeholder="Phone Number"
+              onChangeText={text => handleChange('phoneNo', text)}
+              error={errors.phoneNo ?? undefined}
+            />
             <Checkbox
               label={
                 <Text style={authStyles.text}>
-                  {t(TranslationKeys.auth.termsAgreement)}{' '}
+                  {t(TranslationKeys.auth.termsAgreement)}
                   <Text style={globalStyles.heading3}>
                     {t(TranslationKeys.auth.termsAndConditions)}
                   </Text>
@@ -110,12 +128,14 @@ export const SignUp = () => {
             title={t(TranslationKeys.auth.signUpButton)}
             style={authStyles.signUpButton}
             onPress={handleSignUp}
+            loading={loading}
             disabled={
+              loading ||
               !acceptedTerms ||
               !values.name ||
               !values.email ||
               !values.password ||
-              Object.values(errors).some(error => error !== null)
+              Object.values(errors).some(error => !!error)
             }
           />
 

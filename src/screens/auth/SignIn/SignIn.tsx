@@ -9,6 +9,7 @@ import {
   Input,
 } from '@/components';
 import {
+  useAuth,
   useAuthStyles,
   useDeviceAuthType,
   useFormValidation,
@@ -17,19 +18,12 @@ import {
 } from '@/hooks';
 import { TranslationKeys } from '@/i18n';
 import { MainTabWithAuthParamList } from '@/navigation/types';
-import { authService } from '@/services';
-import {
-  setAuthError,
-  setAuthLoading,
-  setTokens,
-} from '@/store/slices/authSlice/authSlice';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
 import { Platform, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useDispatch } from 'react-redux';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const SignIn = () => {
   const globalStyles = useGlobalStyles();
@@ -37,39 +31,23 @@ export const SignIn = () => {
   const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabWithAuthParamList>>();
-  const dispatch = useDispatch();
 
-  const { values, errors, handleChange, validateAll } = useFormValidation({
+  const { values, errors, handleChange } = useFormValidation({
     email: '',
     password: '',
   });
 
-  const { success, error } = useToast();
+  const { error } = useToast();
+  const { signIn } = useAuth();
   const authType = useDeviceAuthType();
 
-  const handleLogin = async (email: string, password: string) => {
-    try {
-      dispatch(setAuthLoading(true));
-      const tokens = await authService.signIn({ email, password });
-      dispatch(setTokens(tokens));
-      success('Sign in successful', 'Welcome back!');
-      navigation.navigate('Home');
-    } catch (err: unknown) {
-      const parsedError =
-        err instanceof Error ? err : new Error('Something went wrong');
-      dispatch(setAuthError(parsedError.message));
-      error('Sign in failed', parsedError.message);
-    } finally {
-      dispatch(setAuthLoading(false));
-    }
-  };
-
   const handleSignIn = async () => {
-    if (!validateAll(true)) {
-      error('Validation failed', 'Please check your inputs');
+    if (!values.email || errors.email) {
+      error('Invalid email', 'Please enter a valid email address');
       return;
     }
-    await handleLogin(values.email, values.password);
+
+    await signIn({ email: values.email, password: values.password });
   };
 
   const handleBiometricSuccess = () => {
@@ -79,7 +57,7 @@ export const SignIn = () => {
     handleChange('email', mockEmail);
     handleChange('password', mockPassword);
 
-    handleLogin(mockEmail, mockPassword);
+    // handleLogin(mockEmail, mockPassword);
   };
 
   return (

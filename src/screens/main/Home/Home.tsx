@@ -1,65 +1,43 @@
 import { Images } from '@/assets/images';
-import {
-  CreditCard,
-  ErrorMessage,
-  HomeScreenCard,
-  OptimizedImage,
-  Tabs,
-} from '@/components';
+import { CreditCard, HomeScreenCard, OptimizedImage, Tabs } from '@/components';
 import {
   useAppSelector,
+  useAuth,
   useGlobalStyles,
   useHomeScreen,
   useHomeScreenStyles,
   usePrimaryCard,
-  useToast,
 } from '@/hooks';
 import { TranslationKeys } from '@/i18n';
 import { AuthStackParamList } from '@/navigation/types';
-import { authService } from '@/services';
 import { RootState } from '@/store';
-import { clearAuth } from '@/store/slices/authSlice/authSlice';
 import { currencySymbolsMap } from '@/utils';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useDispatch } from 'react-redux';
 
 export const HomeScreen = () => {
   const globalStyles = useGlobalStyles();
   const homeScreenStyles = useHomeScreenStyles();
-  const { success, error: showToastError } = useToast();
 
   const { t } = useTranslation();
   const { cardGrid, handleCardPress } = useHomeScreen();
   const navigation =
     useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
-  const dispatch = useDispatch();
 
   const selectedCurrency = useAppSelector(
     (state: RootState) => state.settings.currency,
   );
   const symbol = currencySymbolsMap[selectedCurrency] || selectedCurrency;
   const { data } = usePrimaryCard();
-  const [logoutError, setLogoutError] = useState<Error | null>(null);
+  const { signOut } = useAuth();
 
   const handleLogout = async () => {
-    try {
-      await authService.signOut();
-      dispatch(clearAuth());
-      success('Signed out', 'Hope to see you again!');
-      navigation.navigate('SignIn');
-      setLogoutError(null);
-    } catch (err: unknown) {
-      const parsedError =
-        err instanceof Error ? err : new Error('Unexpected error');
-      showToastError('Logout Failed', parsedError.message);
-      setLogoutError(parsedError);
-    }
+    await signOut();
+    navigation.navigate('SignIn');
   };
   return (
     <SafeAreaView style={globalStyles.safeArea} edges={['top', 'bottom']}>
@@ -114,10 +92,6 @@ export const HomeScreen = () => {
               </View>
             ))}
           </View>
-
-          {logoutError && (
-            <ErrorMessage error={logoutError} onRetry={handleLogout} />
-          )}
         </View>
       </ScrollView>
       <Tabs />

@@ -7,4 +7,5 @@ export interface PhoneNumberInputProps {
   defaultCountry?: CountryCode;
   placeholder?: string;
   keyboardType?: 'default' | 'numeric' | 'phone-pad' | 'number-pad';
+  error?: string;
 }

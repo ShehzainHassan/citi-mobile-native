@@ -9,7 +9,9 @@ import { MODAL_OPTIONS_MAP } from '@/config';
 import { RefObject } from 'react';
 import { ScrollView } from 'react-native';
 import axios from 'axios';
-import { APIError, ValidationRule } from '@/types';
+import { APIError, AuthTokens, ValidationRule } from '@/types';
+import { store } from '@/store';
+import { setTokens } from '@/store/slices/authSlice/authSlice';
 
 export const getFlagUrl = (countryCode: string, size: number = 40) => {
   return `https://flagcdn.com/w${size}/${countryCode.toLowerCase()}.png`;
@@ -142,26 +144,27 @@ export const handleAPIError = (error: unknown): APIError => {
   let details = null;
 
   if (axios.isAxiosError(error)) {
-    const err = error;
-    status = err.response?.status;
-    details = err.response?.data;
+    status = error.response?.status;
+    details = error.response?.data;
 
-    if (err.code === 'ECONNABORTED') code = 'NETWORK_ERROR';
-    else if (err.code === 'ECONNREFUSED') code = 'TIMEOUT';
+    if (details?.message) message = details.message;
+    else if (error.message) message = error.message;
+
+    if (error.code === 'ECONNABORTED') code = 'NETWORK_ERROR';
+    else if (error.code === 'ECONNREFUSED') code = 'TIMEOUT';
     else if (status === 401) code = 'UNAUTHORIZED';
     else if (status === 403) code = 'FORBIDDEN';
     else if (status === 404) code = 'NOT_FOUND';
     else if (status && status >= 500) code = 'SERVER_ERROR';
-
-    message = err.message || message;
   }
 
   if (__DEV__) {
     console.error('API Error:', { code, message, status, details });
-  } else {
-    // TODO:
-    // Send error to Sentry or Bugsnag
   }
 
   return { code, message, status, details };
+};
+
+export const applyAuthTokens = (tokens: AuthTokens) => {
+  store.dispatch(setTokens(tokens));
 };

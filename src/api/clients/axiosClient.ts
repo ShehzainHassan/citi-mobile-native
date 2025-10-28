@@ -24,6 +24,15 @@ export const createAxiosClient = (baseURL: string) => {
     headers: { 'Content-Type': 'application/json' },
   });
 
+  client.interceptors.request.use(config => {
+    console.log(
+      'AXIOS REQUEST:',
+      config.method?.toUpperCase(),
+      `${config.baseURL ?? ''}${config.url ?? ''}`,
+    );
+    return config;
+  });
+
   client.interceptors.request.use(async config => {
     const token = store.getState().auth.accessToken;
     if (token) {
@@ -38,9 +47,15 @@ export const createAxiosClient = (baseURL: string) => {
       const originalRequest = error.config as AxiosRequestConfig & {
         _retry?: boolean;
       };
-      const state = store.getState();
 
       if (error.response?.status === 401 && !originalRequest._retry) {
+        const refreshToken = store.getState().auth.refreshToken;
+
+        if (!refreshToken) {
+          store.dispatch(clearAuth());
+          throw handleAPIError(error);
+        }
+
         if (isRefreshing) {
           return new Promise<string>((resolve, reject) => {
             failedQueue.push({ resolve, reject });
@@ -57,20 +72,20 @@ export const createAxiosClient = (baseURL: string) => {
         isRefreshing = true;
 
         try {
-          const newToken = await authService.refreshAccessToken();
+          const newToken = await authService.refreshAccessToken(refreshToken);
 
           store.dispatch(
             setTokens({
-              accessToken: newToken,
-              refreshToken: state.auth.refreshToken ?? '',
-              expiresAt: Date.now() + 60 * 60 * 1000,
+              accessToken: newToken.accessToken,
+              refreshToken: newToken.refreshToken,
+              expiresAt: newToken.expiresAt,
             }),
           );
 
-          processQueue(null, newToken);
+          processQueue(null, newToken.accessToken);
           originalRequest.headers = {
             ...originalRequest.headers,
-            Authorization: `Bearer ${newToken}`,
+            Authorization: `Bearer ${newToken.accessToken}`,
           };
           return client(originalRequest);
         } catch (err) {

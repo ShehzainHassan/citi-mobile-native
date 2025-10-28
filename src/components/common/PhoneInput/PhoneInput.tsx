@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
 import { Input } from '@/components';
-import { parsePhoneNumberFromString, CountryCode } from 'libphonenumber-js';
-import { sanitizeInput, validationRules } from '@/utils';
+import { sanitizeInput } from '@/utils';
+import { CountryCode, parsePhoneNumberFromString } from 'libphonenumber-js';
+import React from 'react';
 import { PhoneNumberInputProps } from './PhoneInput.types';
 
 export const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({
@@ -11,10 +11,9 @@ export const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({
   defaultCountry = 'VN',
   placeholder = 'Enter phone number',
   keyboardType = 'phone-pad',
+  error,
   ...props
 }) => {
-  const [error, setError] = useState<string | undefined>(undefined);
-
   const handleChange = (text: string) => {
     const sanitized = sanitizeInput(text, 'phone');
 
@@ -28,15 +27,6 @@ export const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({
       formatted = phoneNumber.formatInternational();
       const countryCode = `+${phoneNumber.countryCallingCode}`;
       formatted = formatted.replace(countryCode, `(${countryCode})`);
-    }
-
-    const rule = validationRules.phone;
-    if ('regex' in rule) {
-      if (!rule.regex.test(sanitized)) {
-        setError(rule.message);
-      } else {
-        setError(undefined);
-      }
     }
 
     onChangeText(formatted);
