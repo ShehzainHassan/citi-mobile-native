@@ -2,11 +2,11 @@ import { Images } from '@/assets/images';
 import { CreditCard, HomeScreenCard, OptimizedImage, Tabs } from '@/components';
 import {
   useAppSelector,
-  useAuth,
   useGlobalStyles,
   useHomeScreen,
   useHomeScreenStyles,
   usePrimaryCard,
+  useSignOutMutation,
 } from '@/hooks';
 import { TranslationKeys } from '@/i18n';
 import { AuthStackParamList } from '@/navigation/types';
@@ -33,7 +33,7 @@ export const HomeScreen = () => {
   );
   const symbol = currencySymbolsMap[selectedCurrency] || selectedCurrency;
   const { data } = usePrimaryCard();
-  const { signOut } = useAuth();
+  const { mutateAsync: signOut } = useSignOutMutation();
 
   const handleLogout = async () => {
     await signOut();

@@ -11,7 +11,7 @@ import { ScrollView } from 'react-native';
 import axios from 'axios';
 import { APIError, AuthTokens, ValidationRule } from '@/types';
 import { store } from '@/store';
-import { setTokens } from '@/store/slices/authSlice/authSlice';
+import { setTokens } from '@/store/slices/auth/authSlice';
 
 export const getFlagUrl = (countryCode: string, size: number = 40) => {
   return `https://flagcdn.com/w${size}/${countryCode.toLowerCase()}.png`;
@@ -167,4 +167,30 @@ export const handleAPIError = (error: unknown): APIError => {
 
 export const applyAuthTokens = (tokens: AuthTokens) => {
   store.dispatch(setTokens(tokens));
+};
+
+export const normalizeError = (err: unknown): APIError => {
+  if (err && typeof err === 'object' && 'code' in err && 'message' in err) {
+    return err as APIError;
+  }
+
+  const axiosError = err as any;
+  const status = axiosError?.response?.status;
+  const message =
+    axiosError?.response?.data?.message ||
+    axiosError?.message ||
+    'Unexpected error occurred';
+
+  const details =
+    axiosError?.response?.data ||
+    axiosError?.response ||
+    axiosError?.toString?.() ||
+    null;
+
+  return {
+    code: 'UNKNOWN_ERROR',
+    message,
+    status,
+    details,
+  };
 };

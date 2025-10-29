@@ -38,3 +38,20 @@ export interface UserCredentials {
   email: string;
   password: string;
 }
+
+export interface ForgotPasswordRequest {
+  email: string;
+  phoneNo?: string;
+}
+
+export interface ResetPasswordRequest {
+  email: string;
+  verificationToken: string;
+  newPassword: string;
+}
+
+export interface ChangePasswordRequest {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}

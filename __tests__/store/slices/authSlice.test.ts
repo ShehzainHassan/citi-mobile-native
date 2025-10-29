@@ -3,7 +3,7 @@ import authReducer, {
   setAuthError,
   setAuthLoading,
   setTokens,
-} from '@/store/slices/authSlice/authSlice';
+} from '@/store/slices/auth/authSlice';
 import { AuthState } from '@/types';
 
 describe('authSlice', () => {

@@ -3,7 +3,7 @@ import { useToast } from '@/hooks';
 import { getCurrentRouteName } from '@/navigation';
 import { authService } from '@/services';
 import { secureStorage } from '@/services/secureStorage';
-import { clearAuth } from '@/store/slices/authSlice/authSlice';
+import { clearAuth } from '@/store/slices/auth/authSlice';
 import { useNavigation } from '@react-navigation/native';
 import { useCallback, useEffect, useRef } from 'react';
 import { AppState, AppStateStatus } from 'react-native';

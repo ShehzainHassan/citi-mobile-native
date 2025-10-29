@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { store } from '@/store';
 import { authService } from '@/services/authService';
-import { clearAuth, setTokens } from '@/store/slices/authSlice/authSlice';
+import { clearAuth, setTokens } from '@/store/slices/auth/authSlice';
 import { handleAPIError } from '@/utils';
 
 let isRefreshing = false;

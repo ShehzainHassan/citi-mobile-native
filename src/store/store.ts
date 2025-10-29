@@ -14,7 +14,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import userReducer from '@/store/slices/user/userSlice';
 import settingsReducer from '@/store/slices/settings/settingsSlice';
-import authReducer from '@/store/slices/authSlice/authSlice';
+import authReducer from '@/store/slices/auth/authSlice';
 import themeReducer from '@/store/slices/theme/themeSlice';
 import { encryptTransform } from './persistConfig';
 import { loggerMiddleware } from './middleware/logger';

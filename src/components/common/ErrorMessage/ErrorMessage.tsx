@@ -28,10 +28,13 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({
           return 'Requested resource not found';
         case 'SERVER_ERROR':
           return 'Server error occurred';
+        case 'UNKNOWN_ERROR':
+          return error.message || 'Something went wrong';
         default:
-          return 'Something went wrong';
+          return error.message || 'Something went wrong';
       }
     }
+
     return error.message || 'Something went wrong';
   };
 

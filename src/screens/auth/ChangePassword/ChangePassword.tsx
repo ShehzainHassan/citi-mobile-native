@@ -1,11 +1,24 @@
 import { Images } from '@/assets/images';
-import { Button, Header, Input, SuccessScreen } from '@/components';
-import { useAuthStyles, useGlobalStyles } from '@/hooks';
+import {
+  Button,
+  Header,
+  Input,
+  SuccessScreen,
+  ErrorMessage,
+} from '@/components';
+import {
+  useAuthStyles,
+  useChangePasswordMutation,
+  useGlobalStyles,
+} from '@/hooks';
+import { useResetPasswordMutation } from '@/hooks/mutations/useResetPasswordMutation';
 import { TranslationKeys } from '@/i18n';
 import {
   AuthStackParamList,
   MainTabWithAuthParamList,
 } from '@/navigation/types';
+import { APIError } from '@/types';
+import { normalizeError } from '@/utils';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
@@ -22,12 +35,17 @@ export const ChangePassword = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<MainTabWithAuthParamList>>();
   const route = useRoute<ChangePasswordRouteProp>();
-  const from = route.params?.from;
+  const { from, email, verificationToken } = route.params ?? {};
 
   const [recentPassword, setRecentPassword] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordChanged, setPasswordChanged] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [changeError, setChangeError] = useState<APIError | null>(null);
+
+  const { mutateAsync: resetPassword } = useResetPasswordMutation();
+  const { mutateAsync: changePassword } = useChangePasswordMutation();
 
   const handleSuccess = () => {
     if (from === 'Security') {
@@ -36,6 +54,31 @@ export const ChangePassword = () => {
       navigation.navigate('Settings');
     } else {
       navigation.goBack();
+    }
+  };
+
+  const handleChangePassword = async () => {
+    setIsSubmitting(true);
+    try {
+      if (from === 'Security' && email && verificationToken) {
+        await resetPassword({
+          email,
+          verificationToken,
+          newPassword: password,
+        });
+      } else {
+        await changePassword({
+          currentPassword: recentPassword,
+          newPassword: password,
+          confirmPassword,
+        });
+      }
+      setChangeError(null);
+      setPasswordChanged(true);
+    } catch (err) {
+      setChangeError(normalizeError(err));
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -101,9 +144,11 @@ export const ChangePassword = () => {
             </View>
             <Button
               title={t(TranslationKeys.auth.changePasswordButton)}
-              disabled={isButtonDisabled}
-              onPress={() => setPasswordChanged(true)}
+              disabled={isButtonDisabled || isSubmitting}
+              loading={isSubmitting}
+              onPress={handleChangePassword}
             />
+            {changeError && <ErrorMessage error={changeError} />}
           </View>
         ) : (
           <SuccessScreen

@@ -9,7 +9,11 @@ export type AuthStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
   ForgotPassword: undefined;
-  ChangePassword: { from?: 'Security' | 'Settings' };
+  ChangePassword: {
+    from?: 'Security' | 'Settings';
+    email?: string;
+    verificationToken?: string;
+  };
 };
 
 export type MainTabParamList = {

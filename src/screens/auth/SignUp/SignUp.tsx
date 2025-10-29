@@ -5,19 +5,21 @@ import {
   AuthImageBlock,
   Button,
   Checkbox,
+  ErrorMessage,
   Header,
   Input,
   PhoneNumberInput,
 } from '@/components';
 import {
-  useAuth,
   useAuthStyles,
   useFormValidation,
   useGlobalStyles,
+  useSignUpMutation,
 } from '@/hooks';
 import { TranslationKeys } from '@/i18n';
 import { MainTabWithAuthParamList } from '@/navigation/types';
-import { RootState } from '@/store';
+import { APIError } from '@/types';
+import { normalizeError } from '@/utils';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
@@ -25,7 +27,6 @@ import { useTranslation } from 'react-i18next';
 import { Platform, Text, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useSelector } from 'react-redux';
 
 export const SignUp = () => {
   const globalStyles = useGlobalStyles();
@@ -36,6 +37,7 @@ export const SignUp = () => {
     useNavigation<NativeStackNavigationProp<MainTabWithAuthParamList>>();
 
   const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [signUpError, setSignUpError] = useState<APIError | null>(null);
 
   const { values, errors, handleChange, validateAll } = useFormValidation({
     name: '',
@@ -44,18 +46,24 @@ export const SignUp = () => {
     phoneNo: '',
   });
 
-  const { signUp } = useAuth();
-  const loading = useSelector((state: RootState) => state.auth.isLoading);
+  const { mutateAsync: signUp, isPending } = useSignUpMutation();
+
   const handleSignUp = async () => {
     if (!acceptedTerms || !validateAll()) return;
 
-    await signUp({
-      fullName: values.name,
-      email: values.email,
-      password: values.password,
-      phoneNumber: values.phoneNo,
-      acceptTerms: acceptedTerms,
-    });
+    try {
+      await signUp({
+        fullName: values.name,
+        email: values.email,
+        password: values.password,
+        phoneNumber: values.phoneNo,
+        acceptTerms: acceptedTerms,
+      });
+      setSignUpError(null);
+    } catch (err) {
+      const normalized = normalizeError(err);
+      setSignUpError(normalized);
+    }
   };
 
   return (
@@ -110,6 +118,7 @@ export const SignUp = () => {
               onChangeText={text => handleChange('phoneNo', text)}
               error={errors.phoneNo ?? undefined}
             />
+
             <Checkbox
               label={
                 <Text style={authStyles.text}>
@@ -128,9 +137,9 @@ export const SignUp = () => {
             title={t(TranslationKeys.auth.signUpButton)}
             style={authStyles.signUpButton}
             onPress={handleSignUp}
-            loading={loading}
+            loading={isPending}
             disabled={
-              loading ||
+              isPending ||
               !acceptedTerms ||
               !values.name ||
               !values.email ||
@@ -138,6 +147,8 @@ export const SignUp = () => {
               Object.values(errors).some(error => !!error)
             }
           />
+
+          {signUpError && <ErrorMessage error={signUpError} />}
 
           <AuthFooter
             label={t(TranslationKeys.auth.haveAccount)}

@@ -8,7 +8,12 @@ import {
   Tabs,
 } from '@/components';
 import { SETTINGS_OPTIONS } from '@/config';
-import { useAuthStyles, useGlobalStyles } from '@/hooks';
+import {
+  useAuthStyles,
+  useDisableBiometricMutation,
+  useEnableBiometricMutation,
+  useGlobalStyles,
+} from '@/hooks';
 import { MainTabWithAuthAndSettingsParamList } from '@/navigation/types';
 import { RootState } from '@/store';
 import { setCurrency } from '@/store/slices/settings/settingsSlice';
@@ -24,7 +29,6 @@ export const Settings = () => {
     useNavigation<
       NativeStackNavigationProp<MainTabWithAuthAndSettingsParamList>
     >();
-
   const globalStyles = useGlobalStyles();
   const authStyles = useAuthStyles();
   const dispatch = useDispatch();
@@ -34,6 +38,8 @@ export const Settings = () => {
   );
 
   const [isModalVisible, setModalVisible] = React.useState(false);
+  const { mutateAsync: enableBiometric } = useEnableBiometricMutation();
+  const { mutateAsync: disableBiometric } = useDisableBiometricMutation();
 
   const handleSelectCurrency = React.useCallback(
     (label: string) => {
@@ -49,6 +55,14 @@ export const Settings = () => {
       setModalVisible(true);
     } else if (route) {
       navigation.navigate(route as never);
+    }
+  };
+
+  const handleBiometricToggle = async (enabled: boolean) => {
+    if (enabled) {
+      await enableBiometric();
+    } else {
+      await disableBiometric();
     }
   };
 
@@ -70,6 +84,7 @@ export const Settings = () => {
             />
             <Text style={[globalStyles.title3]}>John Smith</Text>
           </View>
+
           <CardDetails>
             {SETTINGS_OPTIONS.map(option => (
               <SettingsRow
@@ -79,9 +94,16 @@ export const Settings = () => {
                     ? `Change Currency (${selectedCurrency})`
                     : option.labelKey
                 }
-                onPress={() =>
-                  handleOptionPress(option.id, option.route, option.type)
+                onPress={
+                  option.id !== 'touchId'
+                    ? () =>
+                        handleOptionPress(option.id, option.route, option.type)
+                    : undefined
                 }
+                showChevron={option.id !== 'touchId'}
+                showToggle={option.id === 'touchId'}
+                initialToggleValue={false}
+                onToggleChange={handleBiometricToggle}
               />
             ))}
           </CardDetails>

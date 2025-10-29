@@ -1,8 +1,16 @@
 import { userAccounts, userCards } from '@/mocks';
-import { handleAPIError } from '@/utils';
+import {
+  AuthTokens,
+  ChangePasswordRequest,
+  ForgotPasswordRequest,
+  ResendOTPRequest,
+  ResetPasswordRequest,
+  SignInRequest,
+  SignUpRequest,
+  VerifyOTPRequest,
+} from '@/types';
 import { USE_MOCK } from '@env';
 import { userClient } from './clients/userClient';
-import { AuthTokens, SignInRequest, SignUpRequest } from '@/types';
 
 export const userAPI = {
   loginUser: async (formData: SignInRequest) => {
@@ -12,6 +20,7 @@ export const userAPI = {
     });
     return response.data;
   },
+
   addUser: async (formData: SignUpRequest) => {
     const response = await userClient.post('/auth/signup', {
       email: formData.email,
@@ -22,9 +31,56 @@ export const userAPI = {
     });
     return response.data;
   },
+
   refreshToken: async (refreshToken: string) => {
     const response = await userClient.post<AuthTokens>('/auth/refresh', {
       refreshToken,
+    });
+    return response.data;
+  },
+
+  forgotPassword: async (formData: ForgotPasswordRequest) => {
+    const response = await userClient.post('/auth/forgot-password', {
+      email: formData.email,
+      phoneNumber: formData.phoneNo,
+    });
+    return response.data;
+  },
+
+  verifyOTP: async (formData: VerifyOTPRequest) => {
+    const response = await userClient.post<{ verificationToken: string }>(
+      '/auth/verify-otp',
+      {
+        email: formData.email,
+        phoneNumber: formData.phoneNo,
+        code: formData.code,
+      },
+    );
+    return response.data.verificationToken;
+  },
+
+  resendOTP: async (formData: ResendOTPRequest) => {
+    const response = await userClient.post<string>('/auth/resend-otp', {
+      email: formData.email,
+      phoneNumber: formData.phoneNo,
+    });
+    return response.data;
+  },
+
+  resetPassword: async (formData: ResetPasswordRequest) => {
+    const response = await userClient.post<string>('/auth/reset-password', {
+      email: formData.email,
+      verificationToken: formData.verificationToken,
+      newPassword: formData.newPassword,
+    });
+    return response.data;
+  },
+
+  changePassword: async (formData: ChangePasswordRequest) => {
+    const response = await userClient.post<string>('/auth/change-password', {
+      currentPassword: formData.currentPassword,
+      newPassword: formData.newPassword,
+      confirmPassword: formData.confirmPassword,
     });
     return response.data;
   },
@@ -34,37 +90,38 @@ export const userAPI = {
       refreshToken,
     });
   },
+
+  enableBiometric: async () => {
+    const response = await userClient.post('/auth/enable-biometric');
+    return response.data;
+  },
+
+  disableBiometric: async () => {
+    const response = await userClient.post('/auth/disable-biometric');
+    return response.data;
+  },
+
   getPrimaryCard: () => {
-    try {
-      if (USE_MOCK) {
-        return userCards[0];
-      } else {
-        return null;
-      }
-    } catch (error) {
-      throw handleAPIError(error);
+    if (USE_MOCK) {
+      return userCards[0];
+    } else {
+      return null;
     }
   },
+
   getUserCards: () => {
-    try {
-      if (USE_MOCK) {
-        return userCards;
-      } else {
-        return null;
-      }
-    } catch (error) {
-      throw handleAPIError(error);
+    if (USE_MOCK) {
+      return userCards;
+    } else {
+      return null;
     }
   },
+
   getUserAccounts: () => {
-    try {
-      if (USE_MOCK) {
-        return userAccounts;
-      } else {
-        return null;
-      }
-    } catch (error) {
-      throw handleAPIError(error);
+    if (USE_MOCK) {
+      return userAccounts;
+    } else {
+      return null;
     }
   },
 };

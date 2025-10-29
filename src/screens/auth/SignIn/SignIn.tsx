@@ -5,21 +5,25 @@ import {
   AuthImageBlock,
   BiometricAuthView,
   Button,
+  ErrorMessage,
   Header,
   Input,
 } from '@/components';
 import {
-  useAuth,
   useAuthStyles,
   useDeviceAuthType,
   useFormValidation,
   useGlobalStyles,
+  useSignInMutation,
   useToast,
 } from '@/hooks';
 import { TranslationKeys } from '@/i18n';
 import { MainTabWithAuthParamList } from '@/navigation/types';
+import { APIError } from '@/types';
+import { normalizeError } from '@/utils';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform, Text, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -38,16 +42,26 @@ export const SignIn = () => {
   });
 
   const { error } = useToast();
-  const { signIn } = useAuth();
+  const { mutateAsync: signIn, isPending } = useSignInMutation();
   const authType = useDeviceAuthType();
-
+  const [signInError, setSignInError] = useState<APIError | null>(null);
   const handleSignIn = async () => {
     if (!values.email || errors.email) {
       error('Invalid email', 'Please enter a valid email address');
       return;
     }
 
-    await signIn({ email: values.email, password: values.password });
+    try {
+      await signIn({ email: values.email, password: values.password });
+      setSignInError(null);
+    } catch (err) {
+      const normalized = normalizeError(err);
+      setSignInError(normalized);
+
+      if (normalized.code === 'UNKNOWN_ERROR') {
+        error('Sign-in failed', normalized.message);
+      }
+    }
   };
 
   const handleBiometricSuccess = () => {
@@ -110,8 +124,11 @@ export const SignIn = () => {
           <Button
             testID="sign-in-button"
             title={t(TranslationKeys.auth.signInButton)}
+            loading={isPending}
             onPress={handleSignIn}
-            disabled={!values.email || !!errors.email || !values.password}
+            disabled={
+              isPending || !values.email || !!errors.email || !values.password
+            }
             style={authStyles.button}
           />
 
@@ -122,6 +139,7 @@ export const SignIn = () => {
               onSuccess={handleBiometricSuccess}
             />
           )}
+          {signInError && <ErrorMessage error={signInError} />}
 
           <AuthFooter
             label={t(TranslationKeys.auth.noAccount)}

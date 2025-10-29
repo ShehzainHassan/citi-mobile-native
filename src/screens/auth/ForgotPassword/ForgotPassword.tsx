@@ -1,7 +1,17 @@
-import { Button, Header, Input, PhoneNumberInput } from '@/components';
-import { useAuthStyles, useGlobalStyles, useInputStyles } from '@/hooks';
+import { Button, ErrorMessage, Header, Input } from '@/components';
+import {
+  useAuthStyles,
+  useForgotPasswordMutation,
+  useFormValidation,
+  useGlobalStyles,
+  useInputStyles,
+  useResendOTPMutation,
+  useVerifyOTPMutation,
+} from '@/hooks';
 import { TranslationKeys } from '@/i18n';
 import { AuthStackParamList } from '@/navigation/types';
+import { APIError } from '@/types';
+import { normalizeError } from '@/utils';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
@@ -16,7 +26,7 @@ export const ForgotPassword = () => {
   const { t } = useTranslation('auth');
 
   const [step, setStep] = useState<number>(1);
-  const [phone, setPhone] = useState('');
+  // const [phone, setPhone] = useState('');
   const [code, setCode] = useState('');
   const navigation =
     useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
@@ -29,6 +39,63 @@ export const ForgotPassword = () => {
     }
   };
 
+  const { values, errors, handleChange } = useFormValidation({
+    email: '',
+    password: '',
+  });
+  const { mutateAsync: forgotPassword } = useForgotPasswordMutation();
+  const { mutateAsync: verifyOTP } = useVerifyOTPMutation();
+  const { mutateAsync: resendOTP } = useResendOTPMutation();
+
+  const [isSendingCode, setIsSendingCode] = useState(false);
+  const [isVerifyingCode, setIsVerifyingCode] = useState(false);
+  const [isResendingCode, setIsResendingCode] = useState(false);
+  const [otpError, setOtpError] = useState<APIError | null>(null);
+  const handleSendCode = async () => {
+    setIsSendingCode(true);
+    try {
+      await forgotPassword({ email: values.email });
+      setStep(2);
+      setOtpError(null);
+    } catch (err) {
+      setOtpError(normalizeError(err));
+    } finally {
+      setIsSendingCode(false);
+    }
+  };
+
+  const handleVerifyCode = async () => {
+    if (!code.trim()) return;
+
+    setIsVerifyingCode(true);
+    try {
+      const token = await verifyOTP({ email: values.email, code });
+      setOtpError(null);
+      navigation.navigate('ChangePassword', {
+        from: 'Security',
+        email: values.email,
+        verificationToken: token,
+      });
+    } catch (err) {
+      setOtpError(normalizeError(err));
+    } finally {
+      setIsVerifyingCode(false);
+    }
+  };
+
+  const handleResendCode = async () => {
+    if (!values.email || !!errors.email) return;
+
+    setIsResendingCode(true);
+    try {
+      await resendOTP({ email: values.email });
+      setOtpError(null);
+    } catch (err) {
+      setOtpError(normalizeError(err));
+    } finally {
+      setIsResendingCode(false);
+    }
+  };
   return (
     <SafeAreaView
       style={[globalStyles.safeArea, globalStyles.verticalSpread]}
@@ -44,12 +111,18 @@ export const ForgotPassword = () => {
           {step === 1 && (
             <View style={globalStyles.cardContainer}>
               <View style={authStyles.phoneContainer}>
-                <PhoneNumberInput
+                <Input
+                  placeholder={t(TranslationKeys.auth.emailPlaceholder)}
+                  value={values.email}
+                  onChangeText={text => handleChange('email', text)}
+                  error={errors.email ?? undefined}
+                />
+                {/* <PhoneNumberInput
                   label={t(TranslationKeys.auth.typePhone)}
                   value={phone}
                   placeholder="(+84)"
                   onChangeText={setPhone}
-                />
+                /> */}
               </View>
 
               <View style={authStyles.sendContainer}>
@@ -58,9 +131,11 @@ export const ForgotPassword = () => {
                 </Text>
                 <Button
                   title={t(TranslationKeys.auth.sendCode)}
-                  disabled={!phone.trim()}
-                  onPress={() => setStep(2)}
+                  loading={isSendingCode}
+                  disabled={isSendingCode || !values.email || !!errors.email}
+                  onPress={handleSendCode}
                 />
+                {otpError && <ErrorMessage error={otpError} />}
               </View>
             </View>
           )}
@@ -80,14 +155,25 @@ export const ForgotPassword = () => {
                       keyboardType="number-pad"
                     />
                   </View>
-                  <Button title={t(TranslationKeys.auth.resend)} />
+                  <Button
+                    title={t(TranslationKeys.auth.resend)}
+                    loading={isResendingCode}
+                    disabled={
+                      isResendingCode || !values.email || !!errors.email
+                    }
+                    onPress={handleResendCode}
+                  />
+                  {otpError && <ErrorMessage error={otpError} />}
                 </View>
               </View>
 
               <View style={authStyles.sendContainer}>
                 <View style={authStyles.textInfoContainer}>
                   <Text style={[globalStyles.body3, authStyles.textInfo]}>
-                    {t(TranslationKeys.auth.verifyInfo, { phone })}
+                    {/* {t(TranslationKeys.auth.verifyInfo, { phone })} */}
+                    {t(TranslationKeys.auth.verifyInfo, {
+                      phone: values.email,
+                    })}
                   </Text>
                   <Text style={[globalStyles.body3, authStyles.textInfo]}>
                     {t(TranslationKeys.auth.expireInfo)}
@@ -95,13 +181,11 @@ export const ForgotPassword = () => {
                 </View>
                 <Button
                   title={t(TranslationKeys.auth.changePasswordTitle)}
-                  disabled={!code.trim()}
-                  onPress={() =>
-                    navigation.navigate('ChangePassword', {
-                      from: 'Security',
-                    })
-                  }
+                  loading={isVerifyingCode}
+                  disabled={!code.trim() || isVerifyingCode}
+                  onPress={handleVerifyCode}
                 />
+                {otpError && <ErrorMessage error={otpError} />}
               </View>
             </View>
           )}
